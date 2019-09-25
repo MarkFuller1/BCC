@@ -1,0 +1,42 @@
+Team Time Logger
+
+Mark Fuller
+    09/10 - 1 Hour Use Case && Requirements List
+    09/11 - 1 Hour Use Case 
+    09/12 - 1 Hour Use Case 
+    09/13 - 1 Hour Use Case 
+    09/14 - 1 Hour Use Case 
+    09/15 - 1 Hour Use Case 
+    09/16 - 1 Hour Use Case 
+    09/17 - 1 Hour Use Case 
+    09/18 - 1 Hour Use Case 
+    09/19 - 1 Hour Use Case 
+    09/20 - Domain Model
+
+Connor Woodahl
+    09/10 - 1 Requirements List
+    09/11 - 1 Wireframes
+    09/12 - 1 Wireframes
+    09/13 - 1 Wireframes
+    09/14 - 1 Wireframes
+    09/15 - 1 Wireframes
+    09/16 - 1 Wireframes
+    09/17 - 1 Wireframes
+    09/18 - 1 Wireframes
+    09/19 - 1 Use Case Diagram && Traceability Matrix
+    09/20 - 1 Use Case Diagram && Domain Model
+    09/21 - 1 Use Case Diagram
+
+Kevin Kulda
+    09/10 - 1 Requirements List
+    09/11 - 
+    09/12 - 
+    09/13 - 
+    09/14 - 
+    09/15 - 
+    09/16 - 
+    09/17 - 
+    09/18 - 
+    09/19 - 6 SSD
+    09/20 - 6 Domain Model && System Operations
+    09/21 - 
