@@ -1,4 +1,4 @@
-package com.BNU.pages;
+package com.BNU.pages.login;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
