@@ -1,9 +1,13 @@
-package com.BNU.pages;
+package com.BNU.pages.login;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import com.BNU.pages.PageController;
+import com.BNU.pages.main.MainController;
+import com.BNU.windowbuilder.WindowBuilder;
 
 public class LoginController extends PageController{
 	static LoginView view;
@@ -22,34 +26,35 @@ public class LoginController extends PageController{
 		LoginView.BuildLoginView(mainFrame, this);
 	}
 	
-	public static JPanel getPanel() {
+	public JPanel getPanel() {
 		return panel;
 	}
 
-	public static void setPanel(JPanel panel) {
+	public void setPanel(JPanel panel) {
 		LoginController.panel = panel;
 	}
 	
-	public static LoginView getView() {
+	public LoginView getView() {
 		return view;
 	}
 
-	public static void setView(LoginView view) {
+	public void setView(LoginView view) {
 		LoginController.view = view;
 	}
 
-	public static LoginModel getModel() {
+	public LoginModel getModel() {
 		return model;
 	}
 
-	public static void setModel(LoginModel model) {
+	public void setModel(LoginModel model) {
 		LoginController.model = model;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().contentEquals("login:butNavigation")){
-			System.out.println("Login Button Pressed");
+		if(e.getActionCommand() == "login:butNavigation"){
+			System.out.println("login Button Pressed");
+			WindowBuilder.loadPage(new MainController());
 		}else {
 			System.out.println("Something else happened");
 		}

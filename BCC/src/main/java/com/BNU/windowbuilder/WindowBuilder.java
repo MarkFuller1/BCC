@@ -2,8 +2,8 @@ package com.BNU.windowbuilder;
 
 import javax.swing.JFrame;
 
-import com.BNU.pages.LoginController;
 import com.BNU.pages.PageController;
+import com.BNU.pages.login.LoginController;
 
 public class WindowBuilder {
 	
@@ -23,7 +23,7 @@ public class WindowBuilder {
 		this.loadPage(new LoginController());
 	}
 	
-	private void loadPage(PageController pageName) {
+	public static void loadPage(PageController pageName) {
 		pageName.dispatchBuilder(mainFrame);
 	}
 }
