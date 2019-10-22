@@ -1,0 +1,20 @@
+LOG:  database system was shut down at 2019-10-21 22:43:28 CDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  role "manisha" does not exist
+FATAL:  database "testdb" does not exist
+FATAL:  database "Mark Fuller" does not exist
+FATAL:  database "Mark Fuller" does not exist
+ERROR:  canceling statement due to user request
+LOG:  received fast shutdown request
+LOG:  aborting any active transactions
+LOG:  autovacuum launcher shutting down
+LOG:  shutting down
+LOG:  database system is shut down
+LOG:  database system was shut down at 2019-10-21 22:47:50 CDT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "Mark Fuller" does not exist
+FATAL:  database "testdb" does not exist
