@@ -5,25 +5,38 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.BNU.database.DatabaseMock;
+import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
 import com.BNU.pages.login.LoginController;
 import com.BNU.pages.main.MainController;
 import com.BNU.windowbuilder.WindowBuilder;
 
 public class MainController extends PageController{
+
 	static MainView view;
 	static MainModel model = new MainModel();
 	static JPanel panel;
+	static dbWrapper db;
 	
 	public MainController(){
 		model = new MainModel();
 		panel = new JPanel();
 		view = new MainView();
+		db = new DatabaseMock();
 	}
 	
 	@Override
-	public void dispatchBuilder(JFrame mainFrame) {
+	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
 		MainView.BuildLoginView(mainFrame, this);
+	}
+	
+	public static dbWrapper getDb() {
+		return db;
+	}
+
+	public static void setDb(DatabaseMock db) {
+		MainController.db = db;
 	}
 	
 	public JPanel getPanel() {
@@ -52,13 +65,16 @@ public class MainController extends PageController{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "main:butNavigation"){
-			System.out.println("main Button Pressed");
+		if(e.getActionCommand() == "main:searchProfessor"){
+			System.out.println("main:searchProfessor Button Pressed");
 			WindowBuilder.loadPage(new LoginController());
-		}else {
-			System.out.println("Something else happened");
+		}else if(e.getActionCommand() == "main:searchClass"){
+			System.out.println("main:searchClass Button Pressed");
+			WindowBuilder.loadPage(new LoginController());
 		}
 		
 	}
+
+	
 
 }
