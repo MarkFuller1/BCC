@@ -18,25 +18,6 @@ public class LoginView {
 
 	public static void BuildLoginView(JFrame mainFrame, LoginController controller) {
 		
-		/*
-		controller.setPanel(new JPanel());
-		
-		butNavigation = new JButton("goto -> main");
-		controller.getPanel().setLayout(null);
-		controller.getModel().setButNavigation(butNavigation);
-		controller.getModel().getButNavigation().setBounds(10, 10, 100, 100);
-		controller.getModel().getButNavigation().setActionCommand("login:butNavigation");
-		controller.getModel().getButNavigation().addActionListener(controller);
-		
-		labTitle = new JLabel("Login Page");
-		controller.getModel().setLabTitle(labTitle);
-		controller.getModel().getLabTitle().setBounds(50, 50, 100, 100);
-		
-		
-		controller.getPanel().add(controller.getModel().getButNavigation());
-		controller.getPanel().add(controller.getModel().getLabTitle());
-		*/
-		
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(new MigLayout("", "[][][][][][][][][][][][][][-18.00][237.00][][][331.00,grow]", "[][][][70.00][][][][][][][][]"));
 		
