@@ -26,7 +26,7 @@ public class WindowBuilder {
 		//TODO: change this to SaveDatabase() on close 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null); //all components determine position absolutely
-		mainFrame.setSize(1100, 700);
+		mainFrame.setSize(1000, 800);
 		mainFrame.setResizable(false);
 		try {
 			addFavicon();
