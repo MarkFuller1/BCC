@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 import java.awt.Color;
 import javax.swing.JButton;
 
