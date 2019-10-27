@@ -1,5 +1,7 @@
 package com.BNU.startmain;
 
+import java.io.IOException;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -14,6 +16,11 @@ public class Main
     {
         System.out.println( "Hello World!" );
         //we need this but not THIS -> UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-        WindowBuilder window = new WindowBuilder();
+        try {
+			WindowBuilder window = new WindowBuilder();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

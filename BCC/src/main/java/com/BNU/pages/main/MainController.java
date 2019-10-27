@@ -1,6 +1,10 @@
 package com.BNU.pages.main;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,25 +16,30 @@ import com.BNU.pages.login.LoginController;
 import com.BNU.pages.main.MainController;
 import com.BNU.windowbuilder.WindowBuilder;
 
-public class MainController extends PageController{
+public class MainController extends PageController {
 
 	static MainView view;
 	static MainModel model = new MainModel();
 	static JPanel panel;
 	static dbWrapper db;
-	
-	public MainController(){
+	private static final Logger LOGGER = Logger.getLogger(MainController.class.getName());
+
+	public MainController() {
 		model = new MainModel();
 		panel = new JPanel();
 		view = new MainView();
 		db = new DatabaseMock();
 	}
-	
+
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) throws SecurityException, IOException {
 		MainView.BuildLoginView(mainFrame, this);
+
+		FileHandler fileHandler = new FileHandler("BCC.log", true);
+		LOGGER.addHandler(fileHandler);
+		LOGGER.setLevel(Level.FINEST);
 	}
-	
+
 	public static dbWrapper getDb() {
 		return db;
 	}
@@ -38,7 +47,7 @@ public class MainController extends PageController{
 	public static void setDb(DatabaseMock db) {
 		MainController.db = db;
 	}
-	
+
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -46,7 +55,7 @@ public class MainController extends PageController{
 	public void setPanel(JPanel panel) {
 		MainController.panel = panel;
 	}
-	
+
 	public MainView getView() {
 		return view;
 	}
@@ -65,16 +74,22 @@ public class MainController extends PageController{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "main:searchProfessor"){
-			System.out.println("main:searchProfessor Button Pressed");
-			WindowBuilder.loadPage(new LoginController());
-		}else if(e.getActionCommand() == "main:searchClass"){
-			System.out.println("main:searchClass Button Pressed");
-			WindowBuilder.loadPage(new LoginController());
+		if (e.getActionCommand() == "main:searchProfessor") {
+			LOGGER.info("main:searchProfessor Button Pressed");
+			try {
+				WindowBuilder.loadPage(new LoginController());
+			} catch (Exception e1) {
+				LOGGER.severe("Failed to load main:searchProfessor");
+			}
+		} else if (e.getActionCommand() == "main:searchClass") {
+			LOGGER.info("main:searchClass Button Pressed");
+			try {
+				WindowBuilder.loadPage(new LoginController());
+			} catch (Exception e1) {
+				LOGGER.severe("Failed to load main:searchProfessor");
+			}
 		}
-		
-	}
 
-	
+	}
 
 }

@@ -1,11 +1,14 @@
 package com.BNU.pages.login;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
 import com.BNU.pages.main.MainController;
@@ -16,7 +19,7 @@ public class LoginController extends PageController{
 	static LoginModel model = new LoginModel();
 	static JPanel panel;
 	static dbWrapper db;
-	
+	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
 	public LoginController(){
 		model = new LoginModel();
 		panel = new JPanel();
@@ -24,10 +27,13 @@ public class LoginController extends PageController{
 	}
 	
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+	public void dispatchBuilder(JFrame mainFrame, dbWrapper dbW) throws SecurityException, IOException {
 		if(db == null) {
-			this.db = db;
+			db = dbW;
 		}
+		FileHandler fileHandler = new FileHandler("BCC.log", true);
+		LOGGER.addHandler(fileHandler);
+		LOGGER.setLevel(Level.INFO);
 		LoginView.BuildLoginView(mainFrame, this);
 	}
 	
@@ -58,13 +64,19 @@ public class LoginController extends PageController{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "login:createAccount"){
-			System.out.println("login:createAccount Button Pressed");
-			WindowBuilder.loadPage(new MainController());
+			LOGGER.info("login:createAccount Button Pressed");
+			try {
+				WindowBuilder.loadPage(new MainController());
+			} catch (Exception e1) {
+				LOGGER.severe("Failed to load login:createAccount");
+			}
 		}else if(e.getActionCommand() == "login:Authorize"){
-			System.out.println("login:Authorize Button Pressed");
-			WindowBuilder.loadPage(new MainController());
+			LOGGER.info("login:Authorize Button Pressed");
+			try {
+				WindowBuilder.loadPage(new MainController());
+			} catch (Exception e1) {
+				LOGGER.severe("Failed to load login:Authorize");
+			}
 		}
-		
 	}
-
 }
