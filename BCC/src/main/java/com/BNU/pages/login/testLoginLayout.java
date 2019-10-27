@@ -42,6 +42,7 @@ public class testLoginLayout extends JFrame {
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1100, 700);
+		//setSize(1000,800);
 		contentPane = new JPanel();
 		contentPane.setForeground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,9 +65,6 @@ public class testLoginLayout extends JFrame {
 		textField_1 = new JTextField();
 		contentPane.add(textField_1, "cell 14 7,growx");
 		textField_1.setColumns(10);
-		
-		JButton btnCreateAnAccount = new JButton("Login");
-		contentPane.add(btnCreateAnAccount, "cell 14 9,alignx center");
 		
 		JButton btnCreateAnAccount_1 = new JButton("Create an account");
 		contentPane.add(btnCreateAnAccount_1, "cell 14 11,growx");
