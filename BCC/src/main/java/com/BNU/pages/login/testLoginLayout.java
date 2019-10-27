@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.Color;
 import javax.swing.JButton;
 
