@@ -21,7 +21,7 @@ public class LoginView {
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(new MigLayout("", "[][][][][][][][][][][][][][-18.00][237.00][][][331.00,grow]", "[][][][70.00][][][][][][][][]"));
 		
-		///create account button
+		//create account button
 		controller.getModel().setBut_Create(new JButton("Create an account!"));
 		controller.getPanel().add(controller.getModel().getBut_Create(),"cell 14 11,growx");
 		controller.getModel().getBut_Create().setActionCommand("login:createAccount");
