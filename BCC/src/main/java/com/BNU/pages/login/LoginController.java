@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
+import com.BNU.message_board.MessageBoardController;
 import com.BNU.pages.PageController;
 import com.BNU.pages.main.MainController;
 import com.BNU.pages.register.RegisterController;
@@ -72,7 +73,8 @@ public class LoginController extends PageController{
 			WindowBuilder.loadPage(new RegisterController());
 		}else if(e.getActionCommand() == "login:Authorize"){
 			System.out.println("login:Authorize Button Pressed");
-			WindowBuilder.loadPage(new MainController());
+			//WindowBuilder.loadPage(new MainController());
+			WindowBuilder.loadPage(new MessageBoardController());
 		}
 		
 	}
