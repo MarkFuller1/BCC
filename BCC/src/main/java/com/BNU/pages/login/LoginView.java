@@ -30,7 +30,7 @@ public class LoginView {
 		
 		//title label
 		controller.getModel().setLab_Title(new JLabel("Welcome to Baylor Class Connect"));
-		controller.getPanel().add(controller.getModel().getLab_Title()).setBounds(359, 184, 275, 41);
+		controller.getPanel().add(controller.getModel().getLab_Title()).setBounds(344, 184, 300, 80);
 		controller.getPanel().add(controller.getModel().getLab_Title()).setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		//username label

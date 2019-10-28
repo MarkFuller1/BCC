@@ -67,19 +67,19 @@ public class TeachersByClassView {
 		//build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Teachers().setBounds(380, 265, 143, 33);
+		controller.getModel().getLab_Teachers().setBounds(400, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Teachers());
 
 		//build ratings table
 		controller.getModel().setLab_Ratings(new JLabel("Ratings"));
 		controller.getModel().getLab_Ratings().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Ratings().setBounds(600, 265, 65, 33);
+		controller.getModel().getLab_Ratings().setBounds(640, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Ratings());
 		
 		//build number of reviews
 		controller.getModel().setLab_NumOfReviews(new JLabel("Number Of Reviews"));
 		controller.getModel().getLab_NumOfReviews().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_NumOfReviews().setBounds(715, 265, 185, 33);
+		controller.getModel().getLab_NumOfReviews().setBounds(770, 265, 185, 33);
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector

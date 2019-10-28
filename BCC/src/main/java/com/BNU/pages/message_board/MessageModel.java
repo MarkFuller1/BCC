@@ -14,6 +14,7 @@ public class MessageModel {
 	
 	private JButton btnUp;
 	private JButton btnDown;
+	private JButton log_out;
 	private JLabel UserId;
 	private JScrollPane MessageScrollPane;
 	private JLabel studentMessage;
@@ -23,6 +24,13 @@ public class MessageModel {
 	private JTextPane textPane;
 	
 	
+	
+	public JButton getLog_out() {
+		return log_out;
+	}
+	public void setLog_out(JButton log_out) {
+		this.log_out = log_out;
+	}
 	public JButton getBtnUp() {
 		return btnUp;
 	}
@@ -126,20 +134,6 @@ public class MessageModel {
 				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
 				+ "Write a comment to another user here please. Write a comment to another user here please.\n");
 		getMessageScrollPane().setViewportView(getTextPane());
-		
-		/*
-		// Messageer label
-		setMessageerID(new JLabel("GreatMessageer4444"));
-		getMessageerID().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		//getMessageerID().setBounds(111, 11, 499, 14);
-		panel.add(getMessageerID());
-		
-		// down button
-		setBtnMessageMessageer(new JButton("Message Messageer"));
-		getBtnMessageMessageer().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		//getBtnMessageMessageer().setBounds(657, 7, 129, 23);		
-		panel.add(getBtnMessageMessageer());
-		*/
 
 		setPanel(panel);
 	
