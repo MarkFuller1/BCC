@@ -1,26 +1,56 @@
 package com.BNU.pages.register;
 
+import java.awt.Dimension;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class RegisterModel {
+	
 	private JButton but_Register;
 	private JLabel lab_Title;
 	private JLabel lab_Username;
 	private JLabel lab_Password;
-	private JList classes_possible;
+	private JLabel new_info;
+	public JLabel getNew_info() {
+		return new_info;
+	}
+	public void setNew_info(JLabel new_info) {
+		this.new_info = new_info;
+	}
+	private JLabel classes_possible;
 	private JTextField txt_classes;
 	private JTextField txt_username;
 	private JTextField txt_password;
+	private JList classes_taken;
+	private JScrollPane menuScrollPane;
 	
 	
-	public JList getClasses_possible() {
+	public JScrollPane getMenuScrollPane() {
+		return menuScrollPane;
+	}
+	public void setMenuScrollPane(JList list) {
+		this.menuScrollPane = new JScrollPane(list);
+		//this.menuScrollPane.menuScrollPane;
+	}
+	public JList getClasses_taken() {
+		return classes_taken;
+	}
+	public void setClasses_taken(JList classes_taken) {
+		this.classes_taken = classes_taken;
+		this.classes_taken.setVisibleRowCount(4);
+	}
+	public JLabel getClasses_possible() {
 		return classes_possible;
 	}
-	public void setClasses_possible(JList classes_possible) {
+	public void setClasses_possible(JLabel classes_possible) {
 		this.classes_possible = classes_possible;
 	}
 	public JTextField getTxt_classes() {

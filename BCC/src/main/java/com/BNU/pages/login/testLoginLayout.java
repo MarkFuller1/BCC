@@ -71,11 +71,7 @@ public class testLoginLayout extends JFrame {
 		txtEnterPassword.setColumns(10);
 		txtEnterPassword.setBounds(453, 320, 186, 20);
 		getContentPane().add(txtEnterPassword);
-		
-<<<<<<< HEAD
-		JButton btnCreateAnAccount_1 = new JButton("Create an account");
-		contentPane.add(btnCreateAnAccount_1, "cell 14 11,growx");
-=======
+
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		btnNewButton.setBounds(342, 383, 297, 23);
@@ -85,6 +81,5 @@ public class testLoginLayout extends JFrame {
 		btnCreateAccount.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		btnCreateAccount.setBounds(342, 439, 297, 23);
 		getContentPane().add(btnCreateAccount);
->>>>>>> master
 	}
 }
