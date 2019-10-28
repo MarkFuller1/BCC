@@ -32,14 +32,30 @@ public class MainView {
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(new BorderLayout(10, 10));
 		
+		//build message button
+		controller.getModel().setNorth_east_Panel(new JPanel(null));
+		controller.getModel().getNorth_east_Panel().setPreferredSize(new Dimension(120, 100));
+		controller.getModel().setBtn_Message(new JButton("Message"));
+		controller.getModel().getBtn_Message().setActionCommand("main:message");
+		controller.getModel().getBtn_Message().addActionListener(controller);
+		controller.getModel().getBtn_Message().setFont(new Font("Segoe UI", Font.PLAIN, 15));;
+		controller.getModel().getBtn_Message().setBounds(10,  10, 100,  30);
+		controller.getModel().getNorth_east_Panel().add(controller.getModel().getBtn_Message());
+		
+		
+		
 		//build North panel
 		controller.getModel().setNorth_Panel(new JPanel(new BorderLayout()));
 		controller.getModel().getNorth_Panel().setPreferredSize(new Dimension(150, 150));
 		controller.getModel().setTxt_Title(new JLabel("Baylor Class Connect"));
 		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 35));
 		controller.getModel().getTxt_Title().setHorizontalAlignment(SwingConstants.CENTER);
-		controller.getModel().getNorth_Panel().add(controller.getModel().getTxt_Title(), BorderLayout.CENTER);
+		controller.getModel().setNorth_center_Panel(new JPanel(null));
+		controller.getModel().getTxt_Title().setBounds(250,  50,  500,  100);
+		controller.getModel().getNorth_center_Panel().add(controller.getModel().getTxt_Title());
+		controller.getModel().getNorth_Panel().add(controller.getModel().getNorth_center_Panel(), BorderLayout.CENTER);
 		controller.getPanel().add(controller.getModel().getNorth_Panel(), BorderLayout.NORTH);
+		controller.getModel().getNorth_Panel().add(controller.getModel().getNorth_east_Panel(), BorderLayout.EAST);
 		
 		//build west panel
 		controller.getModel().setWest_Panel(new JPanel(null));

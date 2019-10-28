@@ -9,6 +9,7 @@ public class MainModel {
 	// North Layout
 	private JPanel north_Panel;
 	private JLabel txt_Title;
+	private JPanel north_center_Panel;
 
 	// west panel
 	private JPanel west_Panel;
@@ -26,6 +27,49 @@ public class MainModel {
 	private JLabel txt_SearchProfessor;
 	private JComboBox cb_SearchProfessor;
 	public String[] east_cb_data;
+	
+	private JButton btn_Message;
+	private JPanel north_east_Panel;
+
+	public JPanel getNorth_center_Panel() {
+		return north_center_Panel;
+	}
+
+	public void setNorth_center_Panel(JPanel north_center_Panel) {
+		this.north_center_Panel = north_center_Panel;
+	}
+
+	public JPanel getNorth_east_Panel() {
+		return north_east_Panel;
+	}
+
+	public void setNorth_east_Panel(JPanel north_east_Panel) {
+		this.north_east_Panel = north_east_Panel;
+	}
+
+	public String[] getWest_cb_data() {
+		return west_cb_data;
+	}
+
+	public void setWest_cb_data(String[] west_cb_data) {
+		this.west_cb_data = west_cb_data;
+	}
+
+	public String[] getEast_cb_data() {
+		return east_cb_data;
+	}
+
+	public void setEast_cb_data(String[] east_cb_data) {
+		this.east_cb_data = east_cb_data;
+	}
+
+	public JButton getBtn_Message() {
+		return btn_Message;
+	}
+
+	public void setBtn_Message(JButton btn_Message) {
+		this.btn_Message = btn_Message;
+	}
 
 	public JPanel getNorth_Panel() {
 		return north_Panel;
