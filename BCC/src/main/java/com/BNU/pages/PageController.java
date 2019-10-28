@@ -5,13 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class PageController implements ActionListener{
-	public enum PageType{
-		Login,
-		Main;
+import com.BNU.database.dbWrapper;
 
-	}
-	
-	public abstract void dispatchBuilder(JFrame mainFrame);
+public abstract class PageController implements ActionListener{
+	public abstract void dispatchBuilder(JFrame mainFrame, dbWrapper db);
 	
 }
