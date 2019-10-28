@@ -6,4 +6,7 @@ public interface dbWrapper {
 	String[] getAllClasses();
 	
 	String[] getPossibleClasses();
+	
+	String[] getAllProfessorsForClass(String className);
+
 }

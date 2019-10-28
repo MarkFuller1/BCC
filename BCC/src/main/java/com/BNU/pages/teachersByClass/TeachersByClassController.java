@@ -33,7 +33,7 @@ public class TeachersByClassController extends PageController{
 		view = new TeachsersByClassView();
 		db = new DatabaseMock();
 		
-		model.setProfessors(new ArrayList<String>(Arrays.asList(db.getAllProfessors())));
+		model.setProfessors(new ArrayList<String>(Arrays.asList(db.getAllProfessorsForClass(selectedClass))));
 		
 		FileHandler fileHandler = null;
 		try {

@@ -1,6 +1,10 @@
 package com.BNU.pages.main;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,25 +17,38 @@ import com.BNU.pages.main.MainController;
 import com.BNU.pages.teachersByClass.TeachersByClassController;
 import com.BNU.windowbuilder.WindowBuilder;
 
-public class MainController extends PageController{
+public class MainController extends PageController {
 
 	static MainView view;
 	static MainModel model = new MainModel();
 	static JPanel panel;
 	static dbWrapper db;
-	
-	public MainController(){
+	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+
+	public MainController() {
 		model = new MainModel();
 		panel = new JPanel();
 		view = new MainView();
 		db = new DatabaseMock();
 	}
-	
+
 	@Override
 	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+		FileHandler fileHandler = null;
+		try {
+			fileHandler = new FileHandler("BCC.log", true);
+		} catch (SecurityException | IOException e) {
+			System.out.println("Logger Failed");
+			e.printStackTrace();
+		}
+		LOGGER.addHandler(fileHandler);
+		LOGGER.setLevel(Level.FINEST);
+		LOGGER.info("Login page loaded correctly");
+
+		
 		MainView.BuildLoginView(mainFrame, this);
 	}
-	
+
 	public static dbWrapper getDb() {
 		return db;
 	}
@@ -39,7 +56,7 @@ public class MainController extends PageController{
 	public static void setDb(DatabaseMock db) {
 		MainController.db = db;
 	}
-	
+
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -47,7 +64,7 @@ public class MainController extends PageController{
 	public void setPanel(JPanel panel) {
 		MainController.panel = panel;
 	}
-	
+
 	public MainView getView() {
 		return view;
 	}
@@ -66,17 +83,16 @@ public class MainController extends PageController{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "main:searchProfessor"){
-			System.out.println("main:searchProfessr Button Pressed");
-			WindowBuilder.loadPage(new LoginController());
-		}else if(e.getActionCommand() == "main:searchClass"){
+		if (e.getActionCommand() == "main:searchProfessor") {
+			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
+			LOGGER.info("main:searchProfessor Button Pressed + Selected:" + selected);
+			WindowBuilder.loadPage(new TeachersByClassController(selected));
+		} else if (e.getActionCommand() == "main:searchClass") {
 			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
 			System.out.println("main:searchProfessor Button Pressed + Selected:" + selected);
-			WindowBuilder.loadPage(new LoginController());
+			WindowBuilder.loadPage(new TeachersByClassController(selected));
 		}
-		
-	}
 
-	
+	}
 
 }

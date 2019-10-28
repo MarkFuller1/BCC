@@ -43,4 +43,20 @@ public class DatabaseMock implements dbWrapper{
 		classes[15] = "CSI 4330";
 		return classes;
 	}
+
+	public String[] getAllProfessorsForClass(String className) {
+		String [] a = {"class one", "class two", "class three"};
+		String [] b = { "class two", "class three", "clsas four"};
+		String [] c = { "clss five", "class six", "class seven"};
+		
+		switch(className) {
+		case "class one":
+			return a;
+		case "class two":
+			return b;
+		case "class three":
+			return c;
+		}
+		return null;
+	}
 }
