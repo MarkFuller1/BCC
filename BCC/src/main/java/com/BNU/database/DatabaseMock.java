@@ -1,5 +1,10 @@
 package com.BNU.database;
 
+import java.awt.LayoutManager;
+import java.util.ArrayList;
+
+import com.BNU.pages.teachersByClass.Professor;
+
 public class DatabaseMock implements dbWrapper{
 	
 	@Override
@@ -42,5 +47,42 @@ public class DatabaseMock implements dbWrapper{
 		classes[14] = "CSI 43C9";
 		classes[15] = "CSI 4330";
 		return classes;
+	}
+
+	public String[] getAllProfessorsForClass(String className) {
+		String [] a = {"Professor one", "Professor two", "Professor three"};
+		String [] b = {"Professor one", "Professor two", "Professor three"};
+		String [] c = {"Professor one", "Professor two", "Professor three"};
+		
+		switch(className) {
+		case "class one":
+			return a;
+		case "class two":
+			return b;
+		case "class three":
+			return c;
+		}
+		return null;
+	}
+
+	@Override
+	public Professor getProfessor(String prof) {
+		ArrayList<Professor> profs = new ArrayList<>();
+		String [] courses = {"class one", "class two", "class three"};
+		
+		profs.add(new Professor("Professor one",  "99", "4", courses));
+		profs.add(new Professor("Professor two",  "99", "4", courses));
+		profs.add(new Professor("Professor three",  "99", "4", courses));
+		
+		switch(prof) {
+		case "Professor one":
+			return profs.get(0);
+		case "Professor two":
+			return profs.get(1);
+		case "Professor three":
+			return profs.get(2);
+			
+		}
+		return null;
 	}
 }
