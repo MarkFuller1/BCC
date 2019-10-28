@@ -43,14 +43,9 @@ public class MessageBoardView {
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(null);
 		
-		//User label
-		controller.getModel().setUser(new JLabel("User:"));
-		controller.getPanel().add(controller.getModel().getUser()).setBounds(234, 9, 130, 41);
-		controller.getPanel().add(controller.getModel().getUser()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
-		
 		//User name label
-		controller.getModel().setUserName(new JLabel("GreatReviewer4444"));
-		controller.getPanel().add(controller.getModel().getUserName()).setBounds(362, 9, 515, 41);
+		controller.getModel().setUserName(new JLabel("MessageBoard"));
+		controller.getPanel().add(controller.getModel().getUserName()).setBounds(427, 9, 515, 41);
 		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		//back button
@@ -59,6 +54,12 @@ public class MessageBoardView {
 		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getBtnBack().setActionCommand("MessageBoard:back");
 		controller.getModel().getBtnBack().addActionListener(controller);
+		//log out button
+		controller.getModel().setLog_out(new JButton("Log Out"));
+		controller.getPanel().add(controller.getModel().getLog_out()).setBounds(825, 11, 170, 41);
+		controller.getPanel().add(controller.getModel().getLog_out()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getLog_out().setActionCommand("MessageBoard:Logout");
+		controller.getModel().getLog_out().addActionListener(controller);
 		
 		//message button
 		controller.getModel().setBtnMessage(new JButton("Message User"));
@@ -145,21 +146,6 @@ public class MessageBoardView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		//controller.getModel().getScrollPane().getVerticalScrollBar().setValue(controller.getModel().getScrollPane().getHeight());
-
-		//Trying to get the scroll pane to default to the bottom.
-		controller.getModel().getScrollPane().getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
-				public void adjustmentValueChanged(AdjustmentEvent e) {  
-					e.getAdjustable().setValue(e.getAdjustable().getMaximum()); 
-				
-				}
-				});
-
-
-		
-		
-//JScrollBar vertical = controller.getModel().getScrollPane().getVerticalScrollBar();
-//vertical.setValue( vertical.getMaximum() );
-
 
 		
 		for(int i = 0; i < 10; i++) {

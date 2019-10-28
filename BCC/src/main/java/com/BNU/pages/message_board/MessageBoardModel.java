@@ -16,6 +16,7 @@ public class MessageBoardModel {
 	private JLabel helpfulness;
 	private JButton btnBack;
 	private JButton btnMessage;
+	private JButton log_out;
 
 
 	private JLabel teachingAbility;
@@ -30,6 +31,14 @@ public class MessageBoardModel {
 		
 	
 	
+	public JButton getLog_out() {
+		return log_out;
+	}
+
+	public void setLog_out(JButton log_out) {
+		this.log_out = log_out;
+	}
+
 	public JLabel getUser() {
 		return User;
 	}

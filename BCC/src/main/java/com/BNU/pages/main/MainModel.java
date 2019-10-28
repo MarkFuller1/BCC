@@ -10,6 +10,7 @@ public class MainModel {
 	private JPanel north_Panel;
 	private JLabel txt_Title;
 	private JPanel north_center_Panel;
+	private JButton log_out;
 
 	// west panel
 	private JPanel west_Panel;
@@ -159,4 +160,14 @@ public class MainModel {
 		this.center_Panel = center_Panel;
 	}
 
+	public JButton getLog_out() {
+		return log_out;
+	}
+
+	public void setLog_out(JButton log_out) {
+		this.log_out = log_out;
+	}
+
+	
+	
 }

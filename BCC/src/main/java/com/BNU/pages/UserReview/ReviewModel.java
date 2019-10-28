@@ -20,6 +20,7 @@ public class ReviewModel {
 	private JLabel studentReview;
 	private JLabel reviewerID;
 	private JButton btnMessageReviewer;
+	private JButton log_out;
 	private JPanel panel;
 	private JTextPane textPane;
 	
@@ -81,6 +82,13 @@ public class ReviewModel {
 	
 	
 	
+	
+	public JButton getLog_out() {
+		return log_out;
+	}
+	public void setLog_out(JButton log_out) {
+		this.log_out = log_out;
+	}
 	public void createReviewItem() {  //Should take a database object as a parameter and populate this info using a record.
 		//ReviewModel rm = new ReviewModel();
 		panel = new JPanel();

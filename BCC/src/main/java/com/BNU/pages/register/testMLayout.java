@@ -1,20 +1,15 @@
 package com.BNU.pages.register;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JList;
 
 public class testMLayout extends JFrame {
 
