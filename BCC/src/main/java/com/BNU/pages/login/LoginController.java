@@ -6,9 +6,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
-import com.BNU.message_board.MessageBoardController;
 import com.BNU.pages.PageController;
 import com.BNU.pages.main.MainController;
 import com.BNU.pages.register.RegisterController;

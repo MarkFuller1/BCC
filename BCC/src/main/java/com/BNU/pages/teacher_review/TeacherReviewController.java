@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
 import com.BNU.pages.login.LoginController;
+import com.BNU.pages.main.MainController;
 import com.BNU.windowbuilder.WindowBuilder;
 
 public class TeacherReviewController extends PageController{
@@ -91,7 +92,7 @@ public class TeacherReviewController extends PageController{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "teacher_review:back"){
 			System.out.println("teacher_review:back button pressed");
-			WindowBuilder.loadPage(new LoginController());
+			WindowBuilder.loadPage(new MainController());
 		
 	}
 }

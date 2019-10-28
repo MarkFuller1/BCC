@@ -1,4 +1,4 @@
-package com.BNU.message_board;
+package com.BNU.pages.message_board;
 
 import java.awt.Color;
 import java.awt.Component;
