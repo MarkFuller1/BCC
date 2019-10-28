@@ -19,12 +19,6 @@ public class RegisterModel {
 	private JLabel lab_Username;
 	private JLabel lab_Password;
 	private JLabel new_info;
-	public JLabel getNew_info() {
-		return new_info;
-	}
-	public void setNew_info(JLabel new_info) {
-		this.new_info = new_info;
-	}
 	private JLabel classes_possible;
 	private JTextField txt_classes;
 	private JTextField txt_username;
@@ -32,7 +26,13 @@ public class RegisterModel {
 	private JList classes_taken;
 	private JScrollPane menuScrollPane;
 	
-	
+	public JLabel getNew_info() {
+		return new_info;
+	}
+	public void setNew_info(JLabel new_info) {
+		this.new_info = new_info;
+	}
+
 	public JScrollPane getMenuScrollPane() {
 		return menuScrollPane;
 	}
