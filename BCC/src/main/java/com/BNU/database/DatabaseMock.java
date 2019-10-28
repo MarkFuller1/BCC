@@ -94,7 +94,7 @@ public class DatabaseMock implements dbWrapper{
 		String [] c = {"class one", "class two", "class three"};
 		System.out.println(professorName);
 		switch(professorName) {
-		case "class one":
+		case "Professor one":
 			return a;
 		case "Professor two":
 			return b;
