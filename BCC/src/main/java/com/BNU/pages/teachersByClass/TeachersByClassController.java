@@ -25,6 +25,8 @@ public class TeachersByClassController extends PageController{
 	static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(TeachersByClassController.class.getName());
 	
+	public String className;
+	
 	public TeachersByClassController(String selectedClass) {
 		/*make database request to get the professors who teach that class */
 		
@@ -32,8 +34,7 @@ public class TeachersByClassController extends PageController{
 		panel = new JPanel();
 		view = new TeachsersByClassView();
 		db = new DatabaseMock();
-		
-		model.setProfessors(new ArrayList<String>(Arrays.asList(db.getAllProfessorsForClass(selectedClass))));
+		this.className = selectedClass;
 		
 		FileHandler fileHandler = null;
 		try {
@@ -83,8 +84,9 @@ public class TeachersByClassController extends PageController{
 	public void setDb(dbWrapper db) {
 		TeachersByClassController.db = db;
 	}
-
-	
+	public String getClassName() {
+		return className;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
