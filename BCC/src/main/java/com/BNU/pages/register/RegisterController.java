@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
+import com.BNU.pages.register.RegisterModel;
 
 public class RegisterController extends PageController{
 
@@ -33,6 +34,29 @@ public class RegisterController extends PageController{
 		//MainView.BuildLoginView(mainFrame, this);
 		
 	}
-	
-	
+	public static RegisterView getView() {
+		return view;
+	}
+	public static void setView(RegisterView view) {
+		RegisterController.view = view;
+	}
+	public static RegisterModel getModel() {
+		return model;
+	}
+	public static void setModel(RegisterModel model) {
+		RegisterController.model = model;
+	}
+	public static JPanel getPanel() {
+		return panel;
+	}
+	public static void setPanel(JPanel panel) {
+		RegisterController.panel = panel;
+	}
+	public static dbWrapper getDb() {
+		return db;
+	}
+	public static void setDb(dbWrapper db) {
+		RegisterController.db = db;
+	}
+
 }

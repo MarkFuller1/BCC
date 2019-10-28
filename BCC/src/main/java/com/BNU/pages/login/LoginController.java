@@ -1,6 +1,7 @@
 package com.BNU.pages.login;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,7 +29,15 @@ public class LoginController extends PageController{
 		if(db == null) {
 			this.db = db;
 		}
-		LoginView.BuildLoginView(mainFrame, this);
+		try {
+			LoginView.BuildLoginView(mainFrame, this);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public JPanel getPanel() {
