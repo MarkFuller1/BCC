@@ -10,7 +10,8 @@ import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
 import com.BNU.pages.main.MainController;
-import com.BNU.pages.teacher_review.TeacherReviewController;
+//import com.BNU.pages.teacher_review.TeacherReviewController;
+import com.BNU.pages.register.RegisterController;
 import com.BNU.windowbuilder.WindowBuilder;
 
 public class LoginController extends PageController{
@@ -69,7 +70,8 @@ public class LoginController extends PageController{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "login:createAccount"){
 			System.out.println("login:createAccount Button Pressed");
-			WindowBuilder.loadPage(new TeacherReviewController());
+			//WindowBuilder.loadPage(new TeacherReviewController());
+			WindowBuilder.loadPage(new RegisterController());
 		}else if(e.getActionCommand() == "login:Authorize"){
 			System.out.println("login:Authorize Button Pressed");
 			WindowBuilder.loadPage(new TeacherReviewController());

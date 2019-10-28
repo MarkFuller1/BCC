@@ -40,10 +40,11 @@ public class testLoginLayout extends JFrame {
 	public testLoginLayout() {
 		setForeground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		//setBounds(100, 100, 1000, 800);
 		setSize(1000,800);
 		getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Welcome to Baylor Class Connect");
 		lblNewLabel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		lblNewLabel.setBounds(359, 184, 275, 41);
@@ -70,7 +71,7 @@ public class testLoginLayout extends JFrame {
 		txtEnterPassword.setColumns(10);
 		txtEnterPassword.setBounds(453, 320, 186, 20);
 		getContentPane().add(txtEnterPassword);
-		
+
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		btnNewButton.setBounds(342, 383, 297, 23);

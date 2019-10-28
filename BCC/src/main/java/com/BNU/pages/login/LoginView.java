@@ -25,10 +25,8 @@ public class LoginView {
 		LOGGER.info("Login page loaded correctly");
 
 		controller.setPanel(new JPanel());
-		//controller.getPanel().setLayout(new MigLayout("","[][][]","[][][]"));
-		controller.getPanel().setLayout(null);
-		//controller.getPanel().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
 
+		controller.getPanel().setLayout(null);
 		
 		//title label
 		controller.getModel().setLab_Title(new JLabel("Welcome to Baylor Class Connect"));
