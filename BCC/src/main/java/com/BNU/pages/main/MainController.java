@@ -11,11 +11,10 @@ import javax.swing.JPanel;
 
 import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
-import com.BNU.message_board.MessageBoardController;
 import com.BNU.pages.PageController;
 import com.BNU.pages.classesByTeacher.ClassByTeacherController;
 import com.BNU.pages.login.LoginController;
-import com.BNU.pages.main.MainController;
+import com.BNU.pages.message_board.MessageBoardController;
 import com.BNU.pages.teachersByClass.TeachersByClassController;
 import com.BNU.windowbuilder.WindowBuilder;
 

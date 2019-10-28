@@ -1,4 +1,4 @@
-package com.BNU.message_board;
+package com.BNU.pages.message_board;
 
 
 
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
 import com.BNU.pages.login.LoginController;
+import com.BNU.pages.main.MainController;
 import com.BNU.windowbuilder.WindowBuilder;
 
 public class MessageBoardController extends PageController{
@@ -66,7 +67,7 @@ public class MessageBoardController extends PageController{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "MessageBoard:back"){
 			System.out.println("MessageBoard:back button pressed");
-			WindowBuilder.loadPage(new LoginController());
+			WindowBuilder.loadPage(new MainController());
 		
 		}else if(e.getActionCommand() == "MessageBoard:message") {
 			im = new InputMessage("plug");
