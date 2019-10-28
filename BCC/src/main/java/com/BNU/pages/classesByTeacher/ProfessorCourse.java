@@ -1,4 +1,4 @@
-package com.BNU.pages.teachersByClass;
+package com.BNU.pages.classesByTeacher;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -7,25 +7,25 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CourseProfessor extends JPanel {
+public class ProfessorCourse extends JPanel {
 	JLabel professor;
 	JLabel rating;
 	JLabel numOfReviews;
 	public JButton select;
 
 	
-	public CourseProfessor(Professor professor) {
-		this.professor = new JLabel(professor.getProfessor());
+	public ProfessorCourse(Course course) {
+		this.professor = new JLabel(course.getProfessor());
 		this.professor.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		this.professor.setBounds(70, 265, 143, 33);
-		this.rating = new JLabel(professor.getRating());
+		this.rating = new JLabel(course.getRating());
 		this.rating.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		this.rating.setBounds(70, 265, 143, 33);
-		this.numOfReviews = new JLabel(professor.getNumberOfReviews());
+		this.numOfReviews = new JLabel(course.getNumberOfReviews());
 		this.numOfReviews.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		this.numOfReviews.setBounds(70, 265, 143, 33);
 		this.select = new JButton("Select");
-		this.select.setActionCommand("teacherList:" + professor.getProfessor());
+		this.select.setActionCommand("professor:" + course.getProfessor());
 
 		this.compilePanel();
 	}
