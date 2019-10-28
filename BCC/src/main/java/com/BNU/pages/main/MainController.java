@@ -87,11 +87,11 @@ public class MainController extends PageController {
 		if (e.getActionCommand() == "main:searchProfessor") {
 			String selected = (String) this.getModel().getCb_SearchProfessor().getSelectedItem();
 			LOGGER.info("main:searchProfessor Button Pressed + Selected:" + selected);
-			WindowBuilder.loadPage(new TeachersByClassController(selected));
+			WindowBuilder.loadPage(new ClassByTeacherController(selected));
 		} else if (e.getActionCommand() == "main:searchClass") {
 			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
 			System.out.println("main:searchClass Button Pressed + Selected:" + selected);
-			WindowBuilder.loadPage(new ClassByTeacherController(selected));
+			WindowBuilder.loadPage(new TeachersByClassController(selected));
 		}
 
 	}
