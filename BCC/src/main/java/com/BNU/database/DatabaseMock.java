@@ -3,6 +3,7 @@ package com.BNU.database;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 
+import com.BNU.pages.classesByTeacher.Course;
 import com.BNU.pages.teachersByClass.Professor;
 
 public class DatabaseMock implements dbWrapper{
@@ -81,6 +82,44 @@ public class DatabaseMock implements dbWrapper{
 			return profs.get(1);
 		case "Professor three":
 			return profs.get(2);
+			
+		}
+		return null;
+	}
+
+	@Override
+	public String[] getAllClassesForProfessor(String professorName) {
+		String [] a = {"class one", "class two", "class three"};
+		String [] b = {"class one", "class two", "class three"};
+		String [] c = {"class one", "class two", "class three"};
+		System.out.println(professorName);
+		switch(professorName) {
+		case "class one":
+			return a;
+		case "Professor two":
+			return b;
+		case "Professor three":
+			return c;
+		}
+		return null;
+	}
+	
+	@Override
+	public Course getCourse(String course) {
+		ArrayList<Course> courses = new ArrayList<>();
+		String [] profs = {"Professor one", "Professor two", "Professor three"};
+		
+		courses.add(new Course("class one",  "99", "4", profs));
+		courses.add(new Course("class two",  "99", "4", profs));
+		courses.add(new Course("class three",  "99", "4", profs));
+		
+		switch(course) {
+		case "class one":
+			return courses.get(0);
+		case "class two":
+			return courses.get(1);
+		case "class three":
+			return courses.get(2);
 			
 		}
 		return null;

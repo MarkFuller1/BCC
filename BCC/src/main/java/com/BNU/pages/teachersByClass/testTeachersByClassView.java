@@ -87,12 +87,12 @@ public class testTeachersByClassView extends JFrame {
 		
 		JLabel lblClassesTaught = new JLabel("Classes Taught");
 		lblClassesTaught.setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		lblClassesTaught.setBounds(70, 265, 143, 33);
+		lblClassesTaught.setBounds(213, 265, 143, 33);
 		contentPane.add(lblClassesTaught);
 		
 		JLabel lblRating = new JLabel("Rating");
 		lblRating.setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		lblRating.setBounds(437, 265, 65, 33);
+		lblRating.setBounds(505, 265, 65, 33);
 		contentPane.add(lblRating);
 		
 		JLabel lblNumberOfReviews = new JLabel("Number Of Reviews");

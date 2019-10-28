@@ -15,27 +15,28 @@ import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
 import com.BNU.pages.login.LoginController;
+import com.BNU.pages.teacher_review.TeacherReviewController;
 import com.BNU.windowbuilder.WindowBuilder;
 
-public class TeachersByClassController extends PageController{
+public class TeachersByClassController extends PageController {
 
-	static TeachsersByClassView view;
-	static TeachsersByClassModel model = new TeachsersByClassModel();
+	static TeachersByClassView view;
+	static TeachersByClassModel model = new TeachersByClassModel();
 	static JPanel panel;
 	static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(TeachersByClassController.class.getName());
-	
+
 	public String className;
-	
+
 	public TeachersByClassController(String selectedClass) {
-		/*make database request to get the professors who teach that class */
-		
-		model = new TeachsersByClassModel();
+		/* make database request to get the professors who teach that class */
+
+		model = new TeachersByClassModel();
 		panel = new JPanel();
-		view = new TeachsersByClassView();
+		view = new TeachersByClassView();
 		db = new DatabaseMock();
 		this.className = selectedClass;
-		
+
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
@@ -47,25 +48,25 @@ public class TeachersByClassController extends PageController{
 		LOGGER.setLevel(Level.FINEST);
 
 	}
-	
+
 	@Override
 	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		TeachsersByClassView.BuildTeachsersByClassView(mainFrame, this);
+		TeachersByClassView.BuildTeachsersByClassView(mainFrame, this);
 	}
-	
-	public TeachsersByClassView getView() {
+
+	public TeachersByClassView getView() {
 		return view;
 	}
 
-	public void setView(TeachsersByClassView view) {
+	public void setView(TeachersByClassView view) {
 		TeachersByClassController.view = view;
 	}
 
-	public TeachsersByClassModel getModel() {
+	public TeachersByClassModel getModel() {
 		return model;
 	}
 
-	public void setModel(TeachsersByClassModel model) {
+	public void setModel(TeachersByClassModel model) {
 		TeachersByClassController.model = model;
 	}
 
@@ -84,18 +85,19 @@ public class TeachersByClassController extends PageController{
 	public void setDb(dbWrapper db) {
 		TeachersByClassController.db = db;
 	}
+
 	public String getClassName() {
 		return className;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "teacherList:selectProfessor"){
+		if (e.getActionCommand().contains("teacherList:")) {
 			LOGGER.info("main:searchProfessor Button Pressed");
-			WindowBuilder.loadPage(new LoginController());
-		}else if(e.getActionCommand() == "teacherList:selectProfessor"){
-			LOGGER.info("main:searchClass Button Pressed");
-			WindowBuilder.loadPage(new LoginController());
+			String teacherSelected = e.getActionCommand();
+			teacherSelected = teacherSelected.substring(12);
+			LOGGER.info("The teacher selected was: " + teacherSelected);
+			WindowBuilder.loadPage(new TeacherReviewController(teacherSelected, this.className));
 		}
 	}
 }

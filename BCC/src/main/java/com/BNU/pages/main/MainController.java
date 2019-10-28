@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
+import com.BNU.pages.classesByTeacher.ClassByTeacherController;
 import com.BNU.pages.login.LoginController;
 import com.BNU.pages.main.MainController;
 import com.BNU.pages.teachersByClass.TeachersByClassController;
@@ -84,13 +85,13 @@ public class MainController extends PageController {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "main:searchProfessor") {
-			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
+			String selected = (String) this.getModel().getCb_SearchProfessor().getSelectedItem();
 			LOGGER.info("main:searchProfessor Button Pressed + Selected:" + selected);
 			WindowBuilder.loadPage(new TeachersByClassController(selected));
 		} else if (e.getActionCommand() == "main:searchClass") {
 			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
-			System.out.println("main:searchProfessor Button Pressed + Selected:" + selected);
-			WindowBuilder.loadPage(new TeachersByClassController(selected));
+			System.out.println("main:searchClass Button Pressed + Selected:" + selected);
+			WindowBuilder.loadPage(new ClassByTeacherController(selected));
 		}
 
 	}
