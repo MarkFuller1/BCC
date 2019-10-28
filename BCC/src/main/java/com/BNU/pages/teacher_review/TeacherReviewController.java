@@ -15,11 +15,15 @@ public class TeacherReviewController extends PageController{
 	static TeacherReviewModel model = new TeacherReviewModel();
 	static JPanel panel;
 	static dbWrapper db;
+	String teacherName;
+	String className;
 	
-	public TeacherReviewController(){
+	public TeacherReviewController(String teacherName, String className){
 		model = new TeacherReviewModel();
 		panel = new JPanel();
 		view = new TeacherReviewView();
+		this.teacherName = teacherName;
+		this.className = className;
 	}
 	
 	@Override
@@ -35,6 +39,30 @@ public class TeacherReviewController extends PageController{
 		}
 	}
 	
+	public static dbWrapper getDb() {
+		return db;
+	}
+
+	public static void setDb(dbWrapper db) {
+		TeacherReviewController.db = db;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
 	public JPanel getPanel() {
 		return panel;
 	}

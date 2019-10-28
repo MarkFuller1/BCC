@@ -3,12 +3,13 @@ package com.BNU.pages.teachersByClass;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-public class TeachsersByClassModel {
+public class TeachersByClassModel {
 	
 	//title
 	private JLabel txt_Title;
@@ -21,7 +22,7 @@ public class TeachsersByClassModel {
 	//Scroll panel window
 	private JScrollPane scrollPane;
 	private JPanel scrollPanePanel;
-	private List<JPanel> classes;
+	private List<JComponent> classes;
 	
 	//top pane extras
 	private JButton back;
@@ -62,11 +63,11 @@ public class TeachsersByClassModel {
 	public void setScrollPanePanel(JPanel scrollPanel) {
 		this.scrollPanePanel = scrollPanel;
 	}
-	public List<JPanel> getClasses() {
+	public List<JComponent> getClasses() {
 		return classes;
 	}
-	public void setClasses(List<JPanel> classes) {
-		this.classes = classes;
+	public void setClasses(List<JComponent> list) {
+		this.classes = list;
 	}
 	public JButton getBack() {
 		return back;

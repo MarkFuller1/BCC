@@ -51,7 +51,7 @@ public class TeacherReviewView {
 		controller.getPanel().add(controller.getModel().getProfessor()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		//professor name label
-		controller.getModel().setProfessorName(new JLabel("Dr. Nikola Tesla"));
+		controller.getModel().setProfessorName(new JLabel(controller.getTeacherName()));
 		controller.getPanel().add(controller.getModel().getProfessorName()).setBounds(362, 9, 515, 41);
 		controller.getPanel().add(controller.getModel().getProfessorName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 
@@ -61,7 +61,7 @@ public class TeacherReviewView {
 		controller.getPanel().add(controller.getModel().getLblClass()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		//class name label
-		controller.getModel().setLblClassName(new JLabel("Advnaced Physics (PHS 4477)"));
+		controller.getModel().setLblClassName(new JLabel(controller.getClassName()));
 		controller.getPanel().add(controller.getModel().getLblClassName()).setBounds(362, 57, 515, 41);
 		controller.getPanel().add(controller.getModel().getLblClassName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
