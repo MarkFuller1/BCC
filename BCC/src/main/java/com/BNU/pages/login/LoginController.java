@@ -73,8 +73,7 @@ public class LoginController extends PageController{
 			WindowBuilder.loadPage(new RegisterController());
 		}else if(e.getActionCommand() == "login:Authorize"){
 			System.out.println("login:Authorize Button Pressed");
-			//WindowBuilder.loadPage(new MainController());
-			WindowBuilder.loadPage(new MessageBoardController());
+			WindowBuilder.loadPage(new MainController());
 		}
 		
 	}
