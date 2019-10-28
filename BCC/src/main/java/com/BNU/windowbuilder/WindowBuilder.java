@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 import com.BNU.database.DatabaseMock;
@@ -18,6 +19,8 @@ public class WindowBuilder {
 	
 	public static JFrame mainFrame;
 	private static dbWrapper db;
+	public static Clip clip; 
+	public static File deck; 
 	
 	public WindowBuilder() {
 		db = new DatabaseMock();

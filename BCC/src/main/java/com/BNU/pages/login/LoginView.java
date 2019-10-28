@@ -1,11 +1,16 @@
 package com.BNU.pages.login;
 
 import java.awt.Font;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,10 +18,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.BNU.windowbuilder.WindowBuilder;
+
+
 public class LoginView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+
 
 	public static void BuildLoginView(JFrame mainFrame, LoginController controller) throws SecurityException, IOException {
 		FileHandler fileHandler = new FileHandler("BCC.log", true);
@@ -67,7 +76,22 @@ public class LoginView {
 		controller.getPanel().add(controller.getModel().getBut_Create()).setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		controller.getModel().getBut_Create().setActionCommand("login:createAccount");
 		controller.getModel().getBut_Create().addActionListener(controller);
-
+		
+		
+	    //String songFile = "resources" + File.separator + "DeckTheHalls_wav (2019_01_14 02_55_16 UTC).AU";
+	    WindowBuilder.deck = new File("resources" + File.separator + "DeckTheHalls_wav (2019_01_14 02_55_16 UTC).AU");
+		
+		try{
+			WindowBuilder.clip = AudioSystem.getClip();
+			WindowBuilder.clip.open(AudioSystem.getAudioInputStream( WindowBuilder.deck));
+			WindowBuilder.clip.start();
+				
+				//Thread.sleep(clip.getMicrosecondLength()/1000);
+				
+		}catch(Exception e){//log here
+			}
+		//}
+		
 		mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
