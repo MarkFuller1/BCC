@@ -28,7 +28,7 @@ public class MainController extends PageController{
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		MainView.BuildLoginView(mainFrame, this);
+		MainView.BuildMainView(mainFrame, this);
 	}
 	
 	public static dbWrapper getDb() {

@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import java.awt.Font;
+import javax.swing.JButton;
 
 public class testMainLayout extends JFrame {
 
@@ -35,32 +37,49 @@ public class testMainLayout extends JFrame {
 	 */
 	public testMainLayout() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		//setBounds(100, 100, 450, 300);
+		setSize(1000,800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[][][][100.00,grow][][][][][][][][][14.00,grow][][][][]", "[][][][][]"));
+		contentPane.setLayout(null);
 		
 		JLabel lblBcc = new JLabel("BCC");
-		contentPane.add(lblBcc, "cell 8 0");
-		
-		JLabel lblMesages = new JLabel("Mesages");
-		contentPane.add(lblMesages, "cell 16 0");
+		lblBcc.setFont(new Font("Segoe UI", Font.PLAIN, 50));
+		lblBcc.setBounds(436, 11, 96, 50);
+		contentPane.add(lblBcc);
 		
 		JLabel lblSearchByClass = new JLabel("Search By Class");
-		contentPane.add(lblSearchByClass, "cell 4 3");
+		lblSearchByClass.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblSearchByClass.setBounds(59, 244, 143, 50);
+		contentPane.add(lblSearchByClass);
 		
 		JLabel lblSearchByProcessor = new JLabel("Search by Professor");
-		contentPane.add(lblSearchByProcessor, "cell 13 3");
+		lblSearchByProcessor.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblSearchByProcessor.setBounds(762, 251, 185, 37);
+		contentPane.add(lblSearchByProcessor);
 		
 		JComboBox comboBox = new JComboBox();
-		contentPane.add(comboBox, "cell 4 4,growx");
+		comboBox.setBounds(59, 298, 163, 22);
+		contentPane.add(comboBox);
 		
 		JLabel lblImage = new JLabel("Image");
-		contentPane.add(lblImage, "cell 8 4");
+		lblImage.setBounds(448, 266, 31, 14);
+		contentPane.add(lblImage);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		contentPane.add(comboBox_1, "cell 13 4,growx");
+		comboBox_1.setBounds(762, 298, 163, 22);
+		contentPane.add(comboBox_1);
+		
+		JLabel lblBaylorComputerScience = new JLabel("Baylor Computer Science Reviews by Students");
+		lblBaylorComputerScience.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblBaylorComputerScience.setBounds(288, 117, 436, 50);
+		contentPane.add(lblBaylorComputerScience);
+		
+		JButton btnNewButton = new JButton("Messages");
+		btnNewButton.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		btnNewButton.setBounds(25, 23, 126, 38);
+		contentPane.add(btnNewButton);
 	}
 
 }

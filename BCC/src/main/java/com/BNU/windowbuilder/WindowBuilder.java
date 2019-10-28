@@ -37,7 +37,7 @@ public class WindowBuilder {
 		mainFrame.setVisible(true);
 		
 		//now that the frame has been built, show the first pane.
-		this.loadPage(new LoginController());
+		WindowBuilder.loadPage(new LoginController());
 	}
 	
 	private void addFavicon() throws IOException {

@@ -1,13 +1,15 @@
 package com.BNU.pages.main;
 
-import java.awt.Button;
-import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -17,50 +19,76 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import net.miginfocom.swing.MigLayout;
-
 public class MainView {
 	static JButton butNavigation;
 	static JLabel labTitle;
-
-	public static void BuildLoginView(JFrame mainFrame, MainController controller) {
-
+    private static final Logger LOGGER = Logger.getLogger(MainController.class.getName());
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void BuildMainView(JFrame mainFrame, MainController controller) {
+				
 		controller.setPanel(new JPanel());
-		controller.getPanel()
-				.setLayout(new MigLayout("", "[][][][100.00,grow][][][][][][][][][14.00,grow][][][][]", "[][][][][]"));
+		controller.getPanel().setLayout(null);
+		
+		FileHandler fileHandler = null;
+		try {
+			fileHandler = new FileHandler("BCC.log", true);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		LOGGER.addHandler(fileHandler);
+		LOGGER.setLevel(Level.FINEST);
+		LOGGER.info("Main page loaded successfully");
+
 
 		// title
 		controller.getModel().setTxt_Title(new JLabel("BCC"));
-		controller.getPanel().add(controller.getModel().getTxt_Title(), "cell 8 0");
+		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 50));
+		controller.getModel().getTxt_Title().setBounds(436, 11, 96, 50);
 
-		// professor label
-		controller.getModel().setTxt_SearchProfessor(new JLabel("Search by Professor"));
-		controller.getPanel().add(controller.getModel().getTxt_SearchProfessor(), "cell 13 3");
-
-		// professor combobox
-		controller.getModel().setCb_SearchProfessor(new JComboBox(controller.getDb().getAllProfessors()));
-		controller.getPanel().add(controller.getModel().getCb_SearchProfessor(), "cell 13 4,growx");
-		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
-		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
-
+		// page label
+		controller.getModel().setTxt_Slogan(new JLabel("Baylor Computer Science Reviews by Students"));
+		controller.getModel().getTxt_Slogan().setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		controller.getModel().getTxt_Slogan().setBounds(288, 117, 436, 50);
+		
 		// class label
 		controller.getModel().setTxt_SearchClass(new JLabel("Search by Class"));
-		controller.getPanel().add(controller.getModel().getTxt_SearchClass(), "cell 4 3");
+		controller.getModel().getTxt_SearchClass().setBounds(59, 244, 143, 50);
+		controller.getModel().getTxt_SearchClass().setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		// class combobox
-		controller.getModel().setCb_SearchClass(new JComboBox<String>(controller.getDb().getAllClasses()));
-		controller.getPanel().add(controller.getModel().getCb_SearchClass(), "cell 4 4,growx");
+		controller.getModel().setCb_SearchClass(new JComboBox<String>(MainController.getDb().getAllClasses()));
+		controller.getModel().getCb_SearchClass().setBounds(59, 298, 163, 22);
 		controller.getModel().getCb_SearchClass().setActionCommand("main:searchClass");
 		controller.getModel().getCb_SearchClass().addActionListener(controller);
 
+		// professor label
+		controller.getModel().setTxt_SearchProfessor(new JLabel("Search by Professor"));
+		controller.getModel().getTxt_SearchProfessor().setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		controller.getModel().getTxt_SearchProfessor().setBounds(762, 251, 185, 37);
+
+		// professor combobox
+		controller.getModel().setCb_SearchProfessor(new JComboBox(MainController.getDb().getAllProfessors()));
+		controller.getModel().getCb_SearchProfessor().setBounds(762, 298, 163, 22);
+		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
+		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
+
 		// messages label
-		controller.getModel().setTxt_Messages(new JLabel("Messages"));
-		controller.getPanel().add(controller.getModel().getTxt_Messages(), "cell 16 0");
+		controller.getModel().setBtn_Messages(new JButton("Messages"));
+		controller.getModel().getBtn_Messages().setBounds(25, 23, 126, 38);
+		controller.getModel().getBtn_Messages().setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		addImage(mainFrame, controller);
-
+		//mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
+		
 	}
 
 	private static void addImage(JFrame mainFrame, MainController controller) {
@@ -69,11 +97,15 @@ public class MainView {
 			image = ImageIO.read(new File("resources" + File.separator + "mainImage.png"));
 		} catch (IOException e) {
 			System.out.println("image not loaded");
+			LOGGER.info("Image not loaded!");
 			e.printStackTrace();
 		}
+		//controller.getPanel().setLayout(null);
+		//controller.getModel().getTxt_Image().setIcon(new ImageIcon("resources" + File.separator + "mainImage.png"));
+
 		controller.getModel()
 				.setTxt_Image(new JLabel(new ImageIcon(getScaledImage(new ImageIcon(image).getImage(), 100, 100))));
-		controller.getPanel().add(controller.getModel().getTxt_Image(), "cell 8 4");
+		controller.getModel().getTxt_Image().setBounds(448, 266, 100, 100);
 	}
 
 	private static Image getScaledImage(Image srcImg, int w, int h) {
