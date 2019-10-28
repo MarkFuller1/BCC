@@ -1,58 +1,29 @@
 package com.BNU.pages.teachersByClass;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class TeachsersByClassModel {
 	
 	//title
 	private JLabel txt_Title;
 	
-	//
-	private JLabel txt_TeacherTitle;
-	private JLabel txt_RatingTitle;
-	private JLabel txt_ReviewsTitle;
-	private ArrayList<TeacherListEntry> entries;
-	private ArrayList<String> professors;
+	//Sub titles
+	private JLabel lab_TaughtTitle;
+	private JLabel lab_RatingTitle;
+	private JLabel lab_NumOfReviews;
 	
-	public ArrayList<String> getProfessors() {
-		return professors;
-	}
-	public void setProfessors(ArrayList<String> professors) {
-		this.professors = professors;
-	}
-	public JLabel getTxt_Title() {
-		return txt_Title;
-	}
-	public void setTxt_Title(JLabel txt_Title) {
-		this.txt_Title = txt_Title;
-	}
-	public JLabel getTxt_TeacherTitle() {
-		return txt_TeacherTitle;
-	}
-	public void setTxt_TeacherTitle(JLabel txt_TeacherTitle) {
-		this.txt_TeacherTitle = txt_TeacherTitle;
-	}
-	public JLabel getTxt_RatingTitle() {
-		return txt_RatingTitle;
-	}
-	public void setTxt_RatingTitle(JLabel txt_RatingTitle) {
-		this.txt_RatingTitle = txt_RatingTitle;
-	}
-	public JLabel getTxt_ReviewsTitle() {
-		return txt_ReviewsTitle;
-	}
-	public void setTxt_ReviewsTitle(JLabel txt_ReviewsTitle) {
-		this.txt_ReviewsTitle = txt_ReviewsTitle;
-	}	
-	public ArrayList<TeacherListEntry> getEntries() {
-		return entries;
-	}
-	public void setEntries(ArrayList<TeacherListEntry> entries) {
-		this.entries = entries;
-	}
-	public void addEntry(TeacherListEntry entry) {
-		entries.add(entry);
-	}
+	//Scroll panel window
+	private JScrollPane scrollPane;
+	private List<JPanel> classes;
+	
+	//top pane extras
+	private JButton back;
+	private JTextField txt_Email;
 }

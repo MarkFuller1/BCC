@@ -45,7 +45,6 @@ public class TeachsersByClassView {
 		
 		LOGGER.addHandler(fileHandler);
 		LOGGER.setLevel(Level.FINEST);
-		LOGGER.info("Professor Selection page loaded correctly");
 		
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(null);
@@ -54,6 +53,8 @@ public class TeachsersByClassView {
 		
 		
 		
+		
+		LOGGER.info("Professor Selection page loaded correctly");
 		
 		mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
