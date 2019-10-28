@@ -2,6 +2,7 @@ package com.BNU.pages.login;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LoginModel {
@@ -10,7 +11,7 @@ public class LoginModel {
 	private JLabel lab_Username;
 	private JLabel lab_Password;
 	private JTextField txt_username;
-	private JTextField txt_password;
+	private JPasswordField txt_password;
 	private JButton but_Create;
 	
 	public JButton getBut_Submit() {
@@ -43,10 +44,10 @@ public class LoginModel {
 	public void setTxt_username(JTextField txt_username) {
 		this.txt_username = txt_username;
 	}
-	public JTextField getTxt_password() {
+	public JPasswordField getTxt_password() {
 		return txt_password;
 	}
-	public void setTxt_password(JTextField txt_password) {
+	public void setTxt_password(JPasswordField txt_password) {
 		this.txt_password = txt_password;
 	}
 	public JButton getBut_Create() {

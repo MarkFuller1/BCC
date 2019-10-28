@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-10-27T23:48:42.380336400Z</date>
+  <millis>1572220122380</millis>
+  <nanos>336400</nanos>
+  <sequence>0</sequence>
+  <logger>com.BNU.pages.login.LoginController</logger>
+  <level>INFO</level>
+  <class>com.BNU.pages.login.LoginView</class>
+  <method>BuildLoginView</method>
+  <thread>1</thread>
+  <message>Login page loaded correctly</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-10-27T23:54:12.231637300Z</date>
+  <millis>1572220452231</millis>
+  <nanos>637300</nanos>
+  <sequence>0</sequence>
+  <logger>com.BNU.pages.login.LoginController</logger>
+  <level>INFO</level>
+  <class>com.BNU.pages.login.LoginView</class>
+  <method>BuildLoginView</method>
+  <thread>1</thread>
+  <message>Login page loaded correctly</message>
+</record>
+</log>
