@@ -1,7 +1,10 @@
 package com.BNU.pages.main;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -16,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -26,36 +30,69 @@ public class MainView {
 	public static void BuildLoginView(JFrame mainFrame, MainController controller) {
 
 		controller.setPanel(new JPanel());
-		controller.getPanel()
-				.setLayout(new MigLayout("", "[][][][100.00,grow][][][][][][][][][14.00,grow][][][][]", "[][][][][]"));
-
-		// title
-		controller.getModel().setTxt_Title(new JLabel("BCC"));
-		controller.getPanel().add(controller.getModel().getTxt_Title(), "cell 8 0");
-
-		// professor label
-		controller.getModel().setTxt_SearchProfessor(new JLabel("Search by Professor"));
-		controller.getPanel().add(controller.getModel().getTxt_SearchProfessor(), "cell 13 3");
-
-		// professor combobox
-		controller.getModel().setCb_SearchProfessor(new JComboBox(controller.getDb().getAllProfessors()));
-		controller.getPanel().add(controller.getModel().getCb_SearchProfessor(), "cell 13 4,growx");
-		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
-		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
-
-		// class label
-		controller.getModel().setTxt_SearchClass(new JLabel("Search by Class"));
-		controller.getPanel().add(controller.getModel().getTxt_SearchClass(), "cell 4 3");
-
-		// class combobox
-		controller.getModel().setCb_SearchClass(new JComboBox<String>(controller.getDb().getAllClasses()));
-		controller.getPanel().add(controller.getModel().getCb_SearchClass(), "cell 4 4,growx");
+		controller.getPanel().setLayout(new BorderLayout(10, 10));
+		
+		//build message button
+		controller.getModel().setNorth_east_Panel(new JPanel(null));
+		controller.getModel().getNorth_east_Panel().setPreferredSize(new Dimension(120, 100));
+		controller.getModel().setBtn_Message(new JButton("Message"));
+		controller.getModel().getBtn_Message().setActionCommand("main:message");
+		controller.getModel().getBtn_Message().addActionListener(controller);
+		controller.getModel().getBtn_Message().setFont(new Font("Segoe UI", Font.PLAIN, 15));;
+		controller.getModel().getBtn_Message().setBounds(10,  10, 100,  30);
+		controller.getModel().getNorth_east_Panel().add(controller.getModel().getBtn_Message());
+		
+		
+		
+		//build North panel
+		controller.getModel().setNorth_Panel(new JPanel(new BorderLayout()));
+		controller.getModel().getNorth_Panel().setPreferredSize(new Dimension(150, 150));
+		controller.getModel().setTxt_Title(new JLabel("Baylor Class Connect"));
+		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 35));
+		controller.getModel().getTxt_Title().setHorizontalAlignment(SwingConstants.CENTER);
+		controller.getModel().setNorth_center_Panel(new JPanel(null));
+		controller.getModel().getTxt_Title().setBounds(250,  50,  500,  100);
+		controller.getModel().getNorth_center_Panel().add(controller.getModel().getTxt_Title());
+		controller.getModel().getNorth_Panel().add(controller.getModel().getNorth_center_Panel(), BorderLayout.CENTER);
+		controller.getPanel().add(controller.getModel().getNorth_Panel(), BorderLayout.NORTH);
+		controller.getModel().getNorth_Panel().add(controller.getModel().getNorth_east_Panel(), BorderLayout.EAST);
+		
+		//build west panel
+		controller.getModel().setWest_Panel(new JPanel(null));
+		controller.getModel().getWest_Panel().setPreferredSize(new Dimension(300, 400));
+		
+		controller.getModel().setTxt_SearchClass(new JLabel("Search By Class"));
+		controller.getModel().getTxt_SearchClass().setHorizontalAlignment(SwingConstants.CENTER);
+		controller.getModel().getTxt_SearchClass().setBounds(41, 164, 205, 43);
+		controller.getModel().getWest_Panel().add(controller.getModel().getTxt_SearchClass());
+		
+		controller.getModel().setCb_SearchClass(new JComboBox(controller.getDb().getAllClasses()));
 		controller.getModel().getCb_SearchClass().setActionCommand("main:searchClass");
 		controller.getModel().getCb_SearchClass().addActionListener(controller);
-
-		// messages label
-		controller.getModel().setTxt_Messages(new JLabel("Messages"));
-		controller.getPanel().add(controller.getModel().getTxt_Messages(), "cell 16 0");
+		controller.getModel().getCb_SearchClass().setBounds(41, 218, 205, 43);
+		controller.getModel().getWest_Panel().add(controller.getModel().getCb_SearchClass());
+		
+		controller.getPanel().add(controller.getModel().getWest_Panel(), BorderLayout.WEST);
+		
+		//build east panel
+		controller.getModel().setEast_Panel(new JPanel(null));
+		controller.getModel().getEast_Panel().setPreferredSize(new Dimension(300, 400));
+		
+		controller.getModel().setTxt_SearchProfessor(new JLabel("Search By Professor"));
+		controller.getModel().getTxt_SearchProfessor().setHorizontalAlignment(SwingConstants.CENTER);
+		controller.getModel().getTxt_SearchProfessor().setBounds(41, 164, 205, 43);
+		controller.getModel().getEast_Panel().add(controller.getModel().getTxt_SearchProfessor());
+		
+		controller.getModel().setCb_SearchProfessor(new JComboBox(controller.getDb().getAllProfessors()));
+		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
+		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
+		controller.getModel().getCb_SearchProfessor().setBounds(41, 218, 205, 43);
+		controller.getModel().getEast_Panel().add(controller.getModel().getCb_SearchProfessor());
+		
+		controller.getPanel().add(controller.getModel().getEast_Panel(), BorderLayout.EAST);
+		
+		//build center panel
+		
 
 		addImage(mainFrame, controller);
 
@@ -72,8 +109,10 @@ public class MainView {
 			e.printStackTrace();
 		}
 		controller.getModel()
-				.setTxt_Image(new JLabel(new ImageIcon(getScaledImage(new ImageIcon(image).getImage(), 100, 100))));
-		controller.getPanel().add(controller.getModel().getTxt_Image(), "cell 8 4");
+				.setTxt_Image(new JLabel(new ImageIcon(getScaledImage(new ImageIcon(image).getImage(), 300, 300))));
+		controller.getModel().setCenter_Panel(new JPanel());
+		controller.getModel().getCenter_Panel().add(controller.getModel().getTxt_Image(), BorderLayout.CENTER);
+		controller.getPanel().add(controller.getModel().getCenter_Panel(), BorderLayout.CENTER);
 	}
 
 	private static Image getScaledImage(Image srcImg, int w, int h) {
