@@ -99,5 +99,19 @@ public class testTeachersByClassView extends JFrame {
 		lblNumberOfReviews.setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		lblNumberOfReviews.setBounds(698, 265, 185, 33);
 		contentPane.add(lblNumberOfReviews);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(133, 108, 672, 106);
+		contentPane.add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JLabel lblNewLabel_3 = new JLabel("a");
+		panel_3.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_2 = new JLabel("b");
+		panel_3.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1 = new JLabel("c");
+		panel_3.add(lblNewLabel_1);
 	}
 }
