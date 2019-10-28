@@ -72,5 +72,7 @@ public class LoginView {
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
 		
+		LOGGER.info("Login page loaded correctly");
+		
 	}
 }
