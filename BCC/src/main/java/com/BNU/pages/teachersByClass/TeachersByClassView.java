@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,7 +38,7 @@ import com.BNU.pages.login.LoginController;
 
 import net.miginfocom.swing.MigLayout;
 
-public class TeachsersByClassView {
+public class TeachersByClassView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
@@ -59,39 +60,39 @@ public class TeachsersByClassView {
 
 		//build test title
 		controller.getModel().setTxt_Title(new JLabel(controller.getClassName()));
-		controller.getModel().getTxt_Title().setBounds(450, 11, 243, 57);
+		controller.getModel().getTxt_Title().setBounds(450, 40, 243, 57);
 		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 33));
 		controller.getPanel().add(controller.getModel().getTxt_Title());
 
 		//build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Teachers().setBounds(70, 265, 143, 33);
+		controller.getModel().getLab_Teachers().setBounds(380, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Teachers());
 
 		//build ratings table
 		controller.getModel().setLab_Ratings(new JLabel("Ratings"));
 		controller.getModel().getLab_Ratings().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Ratings().setBounds(437, 265, 65, 33);
+		controller.getModel().getLab_Ratings().setBounds(600, 265, 65, 33);
 		controller.getPanel().add(controller.getModel().getLab_Ratings());
 		
 		//build number of reviews
 		controller.getModel().setLab_NumOfReviews(new JLabel("Number Of Reviews"));
 		controller.getModel().getLab_NumOfReviews().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_NumOfReviews().setBounds(698, 265, 185, 33);
+		controller.getModel().getLab_NumOfReviews().setBounds(715, 265, 185, 33);
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector
-		controller.getModel().setClasses(buildTeacherPanels(Arrays.asList(controller.getDb().getAllProfessorsForClass(controller.getClassName()))));
+		controller.getModel().setClasses(buildTeacherPanels(Arrays.asList(controller.getDb().getAllProfessorsForClass(controller.getClassName())), controller));
 		
 		controller.getModel().setScrollPane(new JScrollPane());
-		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		controller.getModel().getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.BLACK));
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
-		for (JPanel panel : controller.getModel().getClasses()) {
+		for (JComponent panel : controller.getModel().getClasses()) {
 			controller.getModel().getScrollPanePanel().add(panel);
 		}
 		
@@ -106,12 +107,14 @@ public class TeachsersByClassView {
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JPanel> buildTeacherPanels(List<String> asList) {
-		List<JPanel> panels = new ArrayList<>();
+	private static List<JComponent> buildTeacherPanels(List<String> asList, TeachersByClassController controller) {
+		List<JComponent> panels = new ArrayList<>();
 		dbWrapper db = new DatabaseMock();
 		for(String prof: asList) {
 			System.out.println(prof);
-			panels.add(new CourseProfessor(db.getProfessor(prof)));
+ 			CourseProfessor obj = new CourseProfessor(db.getProfessor(prof));
+ 			obj.getSelect().addActionListener(controller);
+			panels.add(obj);
 		}
 
 		return panels;
