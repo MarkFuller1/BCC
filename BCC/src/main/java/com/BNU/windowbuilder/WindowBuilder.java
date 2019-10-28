@@ -16,7 +16,7 @@ import com.BNU.pages.login.LoginController;
 
 public class WindowBuilder {
 	
-	private static JFrame mainFrame;
+	public static JFrame mainFrame;
 	private static dbWrapper db;
 	
 	public WindowBuilder() {
