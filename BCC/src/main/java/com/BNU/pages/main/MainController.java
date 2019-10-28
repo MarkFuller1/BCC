@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import com.BNU.database.DatabaseMock;
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
+import com.BNU.pages.UserReview.UserReviewController;
 import com.BNU.pages.classesByTeacher.ClassByTeacherController;
 import com.BNU.pages.login.LoginController;
 import com.BNU.pages.message_board.MessageBoardController;
@@ -92,9 +93,13 @@ public class MainController extends PageController {
 			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
 			System.out.println("main:searchClass Button Pressed + Selected:" + selected);
 			WindowBuilder.loadPage(new TeachersByClassController(selected));
-		}else if (e.getActionCommand() == "main:message" ) {
-			LOGGER.info("main:message");
-			WindowBuilder.loadPage(new MessageBoardController());
+		}else if (e.getActionCommand() == "main:profile" ) {
+			LOGGER.info("main:profile");
+			WindowBuilder.loadPage(new UserReviewController());
+		}
+		else if(e.getActionCommand() == "main:logout"){
+			System.out.println("main:logout button pressed");
+			WindowBuilder.loadPage(new LoginController());
 		}
 
 	}
