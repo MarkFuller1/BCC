@@ -35,12 +35,19 @@ public class MainView {
 		//build message button
 		controller.getModel().setNorth_east_Panel(new JPanel(null));
 		controller.getModel().getNorth_east_Panel().setPreferredSize(new Dimension(120, 100));
-		controller.getModel().setBtn_Message(new JButton("Message"));
-		controller.getModel().getBtn_Message().setActionCommand("main:message");
+		controller.getModel().setBtn_Message(new JButton("Profile"));
+		controller.getModel().getBtn_Message().setActionCommand("main:profile");
 		controller.getModel().getBtn_Message().addActionListener(controller);
-		controller.getModel().getBtn_Message().setFont(new Font("Segoe UI", Font.PLAIN, 15));;
-		controller.getModel().getBtn_Message().setBounds(10,  10, 100,  30);
+		controller.getModel().getBtn_Message().setFont(new Font("Segoe UI", Font.BOLD, 18));;
+		controller.getModel().getBtn_Message().setBounds(10, 11, 106, 41);
 		controller.getModel().getNorth_east_Panel().add(controller.getModel().getBtn_Message());
+		
+		// build log out button
+		controller.getModel().setLog_out(new JButton("Log Out"));
+		controller.getPanel().add(controller.getModel().getLog_out()).setBounds(10, 11, 106, 41);
+		controller.getPanel().add(controller.getModel().getLog_out()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getLog_out().setActionCommand("main:logout");
+		controller.getModel().getLog_out().addActionListener(controller);
 		
 		
 		

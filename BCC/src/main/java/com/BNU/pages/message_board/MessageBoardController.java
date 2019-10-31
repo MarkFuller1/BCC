@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import com.BNU.database.dbWrapper;
 import com.BNU.pages.PageController;
+import com.BNU.pages.UserReview.UserReviewController;
 import com.BNU.pages.login.LoginController;
 import com.BNU.pages.main.MainController;
 import com.BNU.windowbuilder.WindowBuilder;
@@ -67,10 +68,11 @@ public class MessageBoardController extends PageController{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "MessageBoard:back"){
 			System.out.println("MessageBoard:back button pressed");
-			WindowBuilder.loadPage(new MainController());
+			WindowBuilder.loadPage(new UserReviewController());
 		
-		}else if(e.getActionCommand() == "MessageBoard:message") {
-			im = new InputMessage("plug");
+		}else if(e.getActionCommand() == "MessageBoard:Logout") {
+			System.out.println("MessageBoard:logout button pressed");
+			WindowBuilder.loadPage(new LoginController());
 		}
 	}
 
