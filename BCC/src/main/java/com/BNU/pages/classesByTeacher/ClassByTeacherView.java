@@ -60,7 +60,7 @@ public class ClassByTeacherView {
 
 		//build test title
 		controller.getModel().setTxt_Title(new JLabel(controller.getProfessorName()));
-		controller.getModel().getTxt_Title().setBounds(450, 40, 243, 57);
+		controller.getModel().getTxt_Title().setBounds(450, 40, 300, 57);
 		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 33));
 		controller.getPanel().add(controller.getModel().getTxt_Title());
 
