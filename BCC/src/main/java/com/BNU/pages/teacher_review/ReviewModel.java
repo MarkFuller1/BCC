@@ -119,6 +119,7 @@ public class ReviewModel {
 		setTextPane(new JTextPane());
 		getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		getTextPane().setEditable(false);
+		/*
 		getTextPane().setText("Write a professional review about your professor here please\n"
 				+ "Write a professional review about your professor here please\n"
 				+ "Write a professional review about your professor here please\n"
@@ -128,10 +129,21 @@ public class ReviewModel {
 				+ "Write a professional review about your professor here please\n"
 				+ "Write a professional review about your professor here please\n"
 				+ "Write a professional review about your professor here please\n");
+				*/
+		
+		getTextPane().setText("Perpetual motion, the action of a device that, once set in motion,\n"
+				+ " would continue in motion forever, with no additional energy required to maintain it.\n"
+				+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 
+				"Perpetual motion, although impossible to produce, has fascinated both inventors and the general\n"
+				+ " public for hundreds of years. The enormous appeal of perpetual motion resides in the promise of a\n"
+				+ " virtually free and limitless source of power. The fact that perpetual-motion machines cannot work\n"
+				+ " because they violate the laws of thermodynamics has not discouraged inventors and hucksters from\n"
+				+ " attempting to break, circumvent, or ignore those laws.");
+		
 		getReviewScrollPane().setViewportView(getTextPane());
 		
 		// reviewer label
-		setReviewerID(new JLabel("GreatReviewer4444"));
+		setReviewerID(new JLabel("Steven Jobs"));
 		getReviewerID().setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		//getReviewerID().setBounds(111, 11, 499, 14);
 		panel.add(getReviewerID());
