@@ -11,9 +11,9 @@ public class DatabaseMock implements dbWrapper{
 	@Override
 	public String[] getAllProfessors() {
 		String [] professors = new String[3];
-		professors[0] = "Professor one";
-		professors[1] = "Professor two";
-		professors[2] = "Professor three";
+		professors[0] = "Dr. Nikola Tesla";
+		professors[1] = "Dr. Thomas Edison";
+		professors[2] = "Dr. Alexander Grahm-Bell";
 		
 		return professors;
 	}
@@ -21,9 +21,9 @@ public class DatabaseMock implements dbWrapper{
 	@Override
 	public String[] getAllClasses() {
 		String [] classes = new String[3];
-		classes[0] = "class one";
-		classes[1] = "class two";
-		classes[2] = "class three";
+		classes[0] = "Adventures in Multi-Threading";
+		classes[1] = "Quantum Computing for Beginners";
+		classes[2] = "Intro to GoLang";
 		
 		return classes;
 	}
@@ -51,16 +51,16 @@ public class DatabaseMock implements dbWrapper{
 	}
 
 	public String[] getAllProfessorsForClass(String className) {
-		String [] a = {"Professor one", "Professor two", "Professor three"};
-		String [] b = {"Professor one", "Professor two", "Professor three"};
-		String [] c = {"Professor one", "Professor two", "Professor three"};
+		String [] a = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
+		String [] b = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
+		String [] c = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
 		
 		switch(className) {
-		case "class one":
+		case "Adventures in Multi-Threading":
 			return a;
-		case "class two":
+		case "Quantum Computing for Beginners":
 			return b;
-		case "class three":
+		case "Intro to GoLang":
 			return c;
 		}
 		return null;
@@ -69,18 +69,18 @@ public class DatabaseMock implements dbWrapper{
 	@Override
 	public Professor getProfessor(String prof) {
 		ArrayList<Professor> profs = new ArrayList<>();
-		String [] courses = {"class one", "class two", "class three"};
+		String [] courses = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
 		
-		profs.add(new Professor("Professor one",  "99", "4", courses));
-		profs.add(new Professor("Professor two",  "99", "4", courses));
-		profs.add(new Professor("Professor three",  "99", "4", courses));
+		profs.add(new Professor("Dr. Nikola Tesla",  "99", "4", courses));
+		profs.add(new Professor("Dr. Thomas Edison",  "99", "4", courses));
+		profs.add(new Professor("Dr. Alexander Grahm-Bell",  "99", "4", courses));
 		
 		switch(prof) {
-		case "Professor one":
+		case "Dr. Nikola Tesla":
 			return profs.get(0);
-		case "Professor two":
+		case "Dr. Thomas Edison":
 			return profs.get(1);
-		case "Professor three":
+		case "Dr. Alexander Grahm-Bell":
 			return profs.get(2);
 			
 		}
@@ -89,16 +89,16 @@ public class DatabaseMock implements dbWrapper{
 
 	@Override
 	public String[] getAllClassesForProfessor(String professorName) {
-		String [] a = {"class one", "class two", "class three"};
-		String [] b = {"class one", "class two", "class three"};
-		String [] c = {"class one", "class two", "class three"};
+		String [] a = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
+		String [] b = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
+		String [] c = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
 		System.out.println(professorName);
 		switch(professorName) {
-		case "Professor one":
+		case "Dr. Nikola Tesla":
 			return a;
-		case "Professor two":
+		case "Dr. Thomas Edison":
 			return b;
-		case "Professor three":
+		case "Dr. Alexander Grahm-Bell":
 			return c;
 		}
 		return null;
@@ -107,18 +107,18 @@ public class DatabaseMock implements dbWrapper{
 	@Override
 	public Course getCourse(String course) {
 		ArrayList<Course> courses = new ArrayList<>();
-		String [] profs = {"Professor one", "Professor two", "Professor three"};
+		String [] profs = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
 		
-		courses.add(new Course("class one",  "99", "4", profs));
-		courses.add(new Course("class two",  "99", "4", profs));
-		courses.add(new Course("class three",  "99", "4", profs));
+		courses.add(new Course("Adventures in Multi-Threading",  "99", "4", profs));
+		courses.add(new Course("Quantum Computing for Beginners",  "99", "4", profs));
+		courses.add(new Course("Intro to GoLang",  "99", "4", profs));
 		
 		switch(course) {
-		case "class one":
+		case "Adventures in Multi-Threading":
 			return courses.get(0);
-		case "class two":
+		case "Quantum Computing for Beginners":
 			return courses.get(1);
-		case "class three":
+		case "Intro to GoLang":
 			return courses.get(2);
 			
 		}
