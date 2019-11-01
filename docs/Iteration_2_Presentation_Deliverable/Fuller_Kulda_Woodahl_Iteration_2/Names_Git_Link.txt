@@ -1,0 +1,9 @@
+CSI 3471 "Software Engineering I"
+Dr. Cerny
+
+Team: BNU
+Mark Fuller
+Kevin Kulda
+Connor Woodahl
+
+Git Repository: https://github.com/MarkFuller1/BNU
