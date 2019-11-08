@@ -1,6 +1,6 @@
 package com.BNU.startmain;
 
-import javax.swing.UIManager;
+
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.BNU.windowbuilder.WindowBuilder;
@@ -12,7 +12,8 @@ public class Main
 {
     public static void main( String[] args ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
     {
-        System.out.println( "In Main.Java!" );
+
+        //System.out.println( "In Main.Java!" );
         //we need this but not THIS -> UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         WindowBuilder window = new WindowBuilder();
     }
