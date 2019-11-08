@@ -3,6 +3,9 @@ package refactor.these;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -84,36 +87,45 @@ public class ReviewModel2 {
 	public void createReviewItem() {  //Should take a database object as a parameter and populate this info using a record.
 		//ReviewModel rm = new ReviewModel();
 		panel = new JPanel();
-		panel.setLayout(new FlowLayout());
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints g = new GridBagConstraints();
 		panel.setSize(804,200);
 		panel.setVisible(true);
 		
+		g.insets = new Insets(5,5,5,5);
+		
 		// up button
-		setBtnUp(new JButton("U"));
-		getBtnUp().setForeground(Color.BLUE);
+		setBtnUp(new JButton("+"));
+		getBtnUp().setForeground(Color.GREEN);
 		getBtnUp().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		//getBtnUp().setBounds(0, 45, 55, 38);
-		panel.add(getBtnUp());
+		g.gridx = 0;
+		g.gridy = 1;
+		panel.add(getBtnUp(), g);
 
 
 		// down button
-		setBtnDown(new JButton("D"));
+		setBtnDown(new JButton("-"));
 		getBtnDown().setForeground(Color.RED);
 		getBtnDown().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		//getBtnDown().setBounds(0, 83, 55, 38);		
-		panel.add(getBtnDown());
+		g.gridx = 0;
+		g.gridy = 3;
+		panel.add(getBtnDown(), g);
 
 		// review score label
 		setReviewScore(new JLabel("4"));
 		getReviewScore().setHorizontalAlignment(SwingConstants.CENTER);
 		getReviewScore().setFont(new Font("Segoe UI", Font.PLAIN, 30));
-		//getReviewScore().setBounds(52, 55, 61, 48);
-		panel.add(getReviewScore());
+		g.gridx = 0;
+		g.gridy = 2;
+		panel.add(getReviewScore(), g);
 
 		// scroll pane
 		setReviewScrollPane(new JScrollPane());
-		//getReviewScrollPane().setBounds(111, 30, 675, 129);
-		panel.add(getReviewScrollPane());
+		g.gridx = 1;
+		g.gridy = 1;
+		g.gridwidth = 3;
+		g.gridheight = 3;
+		panel.add(getReviewScrollPane(), g);
 		
 		// text pane
 		setTextPane(new JTextPane());
@@ -144,15 +156,21 @@ public class ReviewModel2 {
 		
 		// reviewer label
 		setReviewerID(new JLabel("Steven Jobs"));
-		getReviewerID().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		//getReviewerID().setBounds(111, 11, 499, 14);
-		panel.add(getReviewerID());
+		getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		g.gridx = 0;
+		g.gridy = 0;
+		g.gridwidth = 2;
+		g.gridheight = 1;
+		panel.add(getReviewerID(), g);
 		
-		// down button
+		// message button
 		setBtnMessageReviewer(new JButton("Message Reviewer"));
 		getBtnMessageReviewer().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		//getBtnMessageReviewer().setBounds(657, 7, 129, 23);		
-		panel.add(getBtnMessageReviewer());
+		g.gridx = 2;
+		g.gridy = 0;
+		g.gridwidth = 2;
+		g.fill = g.HORIZONTAL;
+		panel.add(getBtnMessageReviewer(), g);
 		
 
 		setPanel(panel);
