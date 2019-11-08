@@ -2,12 +2,14 @@ package BNU.presentation;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -135,14 +137,15 @@ public class TeacherReviewView {
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
-				rm1.getPanel().setBounds(0,i*200,804,200);
+				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
+				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
 			}
 
 		}
 
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
-		controller.getPanel().add(controller.getModel().getScrollPane()).setBounds(85, 257, 804, 450);
+		controller.getPanel().add(controller.getModel().getScrollPane()).setBounds(40, 257, 900, 450);
 		
 		mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
