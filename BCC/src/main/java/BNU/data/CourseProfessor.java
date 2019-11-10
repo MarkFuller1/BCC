@@ -1,5 +1,6 @@
 package BNU.data;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -63,12 +64,25 @@ public class CourseProfessor extends JPanel {
 	}
 
 	public JPanel compilePanel() {
-		this.setLayout(new FlowLayout(FlowLayout.CENTER, 150, 10));
-		this.add(this.select);
-		this.add(this.getProfessor());
-		this.add(this.getRating());
-		this.add(this.getNumOfReviews());
+		this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+		JPanel b = new JPanel();
+		b.setPreferredSize(new Dimension(200, 100));
+		b.add(this.select);
+		JPanel p = new JPanel();
+		p.setPreferredSize(new Dimension(280, 100));
+		p.add(this.getProfessor());
+		JPanel r = new JPanel();
+		r.setPreferredSize(new Dimension(200, 100));
+		r.add(this.getRating());
+		JPanel n = new JPanel();
+		n.setPreferredSize(new Dimension(200, 100));
+		n.add(this.getNumOfReviews());
+		this.add(b);
+		this.add(p);
+		this.add(r);
+		this.add(n);
 
 		return this;
 	}
+
 }

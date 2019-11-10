@@ -23,10 +23,20 @@ public class TeachersByClassModel {
 	private JScrollPane scrollPane;
 	private JPanel scrollPanePanel;
 	private List<JComponent> classes;
+	private JPanel TeacherP;
 	
 	//top pane extras
 	private JButton back;
 	private JTextField txt_Email;
+	
+	
+	
+	public JPanel getTeacherP() {
+		return TeacherP;
+	}
+	public void setTeacherP(JPanel teacherP) {
+		TeacherP = teacherP;
+	}
 	public JLabel getTxt_Title() {
 		return txt_Title;
 	}
