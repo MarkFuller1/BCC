@@ -22,11 +22,22 @@ public class ClassByTeacherModel {
 	//Scroll panel window
 	private JScrollPane scrollPane;
 	private JPanel scrollPanePanel;
+	private JPanel TeacherP;
 	private List<JComponent> classes;
 	
 	//top pane extras
 	private JButton back;
 	private JTextField txt_Email;
+	
+	
+	
+	
+	public JPanel getTeacherP() {
+		return TeacherP;
+	}
+	public void setTeacherP(JPanel teacherP) {
+		TeacherP = teacherP;
+	}
 	public JLabel getTxt_Title() {
 		return txt_Title;
 	}
