@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -60,15 +61,19 @@ public class ClassByTeacherView {
 		controller.getPanel().setLayout(null);
 
 		//build test title
+		controller.getModel().setTeacherP(new JPanel());
+		controller.getModel().getTeacherP().setPreferredSize(new Dimension(1000, 100));
+		controller.getModel().getTeacherP().setBounds(0,0,1000, 100);
+		controller.getModel().getTeacherP().setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		controller.getModel().setTxt_Title(new JLabel(controller.getProfessorName()));
-		controller.getModel().getTxt_Title().setBounds(450, 40, 300, 57);
-		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 33));
-		controller.getPanel().add(controller.getModel().getTxt_Title());
+		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.BOLD, 33));
+		controller.getModel().getTeacherP().add(controller.getModel().getTxt_Title());
+		controller.getPanel().add(controller.getModel().getTeacherP());
 
 		//build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Teachers().setBounds(400, 265, 143, 33);
+		controller.getModel().getLab_Teachers().setBounds(350, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Teachers());
 
 		//build ratings table

@@ -64,15 +64,15 @@ public class UserReviewController extends PageController{
 		if(e.getActionCommand() == "UserReview:messages"){
 			System.out.println("UserReview:messages button pressed");
 			WindowBuilder.loadPage(new MessageBoardController());
+		}
+		else if(e.getActionCommand() == "UserReview:back"){
+			System.out.println("UserReview:back button pressed");
+			WindowBuilder.loadPage(new MainController());
+		}
+		else if(e.getActionCommand() == "UserReview:logout"){
+			System.out.println("UserReview:logout button pressed");
+			WindowBuilder.loadPage(new LoginController());
+		}
 	}
-	else if(e.getActionCommand() == "UserReview:back"){
-		System.out.println("UserReview:back button pressed");
-		WindowBuilder.loadPage(new MainController());
-	}
-	else if(e.getActionCommand() == "UserReview:logout"){
-		System.out.println("UserReview:logout button pressed");
-		WindowBuilder.loadPage(new LoginController());
-	}
-}
 
 }

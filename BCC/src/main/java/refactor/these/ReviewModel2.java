@@ -85,7 +85,7 @@ public class ReviewModel2 {
 	
 	
 	public void createReviewItem() {  //Should take a database object as a parameter and populate this info using a record.
-		//ReviewModel rm = new ReviewModel();
+		
 		panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
@@ -121,6 +121,7 @@ public class ReviewModel2 {
 
 		// scroll pane
 		setReviewScrollPane(new JScrollPane());
+		reviewScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		g.gridx = 1;
 		g.gridy = 1;
 		g.gridwidth = 3;
@@ -131,18 +132,7 @@ public class ReviewModel2 {
 		setTextPane(new JTextPane());
 		getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		getTextPane().setEditable(false);
-		/*
-		getTextPane().setText("Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n"
-				+ "Write a professional review about your professor here please\n");
-				*/
-		
+				
 		getTextPane().setText("Perpetual motion, the action of a device that, once set in motion,\n"
 				+ " would continue in motion forever, with no additional energy required to maintain it.\n"
 				+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 
@@ -155,24 +145,22 @@ public class ReviewModel2 {
 		getReviewScrollPane().setViewportView(getTextPane());
 		
 		// reviewer label
-		setReviewerID(new JLabel("Steven Jobs"));
+		setReviewerID(new JLabel("CSI 1430"));
 		getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
-		g.gridx = 0;
+		g.gridx = 1;
 		g.gridy = 0;
 		g.gridwidth = 2;
 		g.gridheight = 1;
 		panel.add(getReviewerID(), g);
 		
-		// message button
-		setBtnMessageReviewer(new JButton("Message Reviewer"));
-		getBtnMessageReviewer().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		g.gridx = 2;
+		JLabel Professor = new JLabel("Dr. Fry");
+		Professor.setFont(new Font("Segoe UI", Font.BOLD, 14));
+		g.gridx = 3;
 		g.gridy = 0;
-		g.gridwidth = 2;
-		g.fill = g.HORIZONTAL;
-		panel.add(getBtnMessageReviewer(), g);
+		g.gridwidth = 1;
+		g.gridheight = 1;
+		panel.add(Professor, g);
 		
-
 		setPanel(panel);
 	
 		
