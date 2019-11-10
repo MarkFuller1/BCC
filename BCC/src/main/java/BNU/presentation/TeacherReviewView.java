@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 
 import BNU.logic.LoginController;
 import BNU.logic.TeacherReviewController;
+import refactor.these.ReviewController;
 import refactor.these.ReviewModel2;
 
 public class TeacherReviewView {
@@ -51,22 +52,22 @@ public class TeacherReviewView {
 		
 		//professor label
 		controller.getModel().setProfessor(new JLabel("Professor:"));
-		controller.getPanel().add(controller.getModel().getProfessor()).setBounds(234, 9, 130, 41);
+		controller.getPanel().add(controller.getModel().getProfessor()).setBounds(300, 9, 130, 41);
 		controller.getPanel().add(controller.getModel().getProfessor()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		//professor name label
 		controller.getModel().setProfessorName(new JLabel(controller.getTeacherName()));
-		controller.getPanel().add(controller.getModel().getProfessorName()).setBounds(362, 9, 515, 41);
+		controller.getPanel().add(controller.getModel().getProfessorName()).setBounds(442, 9, 515, 41);
 		controller.getPanel().add(controller.getModel().getProfessorName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 
 		//class label
 		controller.getModel().setLblClass(new JLabel("Class:"));
-		controller.getPanel().add(controller.getModel().getLblClass()).setBounds(234, 57, 118, 41);
+		controller.getPanel().add(controller.getModel().getLblClass()).setBounds(300, 57, 118, 41);
 		controller.getPanel().add(controller.getModel().getLblClass()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		//class name label
 		controller.getModel().setLblClassName(new JLabel(controller.getClassName()));
-		controller.getPanel().add(controller.getModel().getLblClassName()).setBounds(362, 57, 515, 41);
+		controller.getPanel().add(controller.getModel().getLblClassName()).setBounds(380, 57, 600, 41);
 		controller.getPanel().add(controller.getModel().getLblClassName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
 		
 		//score label
@@ -98,28 +99,28 @@ public class TeacherReviewView {
 		
 		// score score label
 		controller.getModel().setScoreScore(new JLabel("83"));
-		controller.getPanel().add(controller.getModel().getScoreScore()).setBounds(146, 173, 56, 41);
+		controller.getPanel().add(controller.getModel().getScoreScore()).setBounds(159, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getScoreScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getPanel().add(controller.getModel().getScoreScore()).setBackground(Color.YELLOW);
-		controller.getPanel().add(controller.getModel().getScoreScore()).setForeground(Color.DARK_GRAY);
+		controller.getPanel().add(controller.getModel().getScoreScore()).setForeground(Color.GREEN);
 		
 		// helpfulness score label
 		controller.getModel().setHelpfulnessScore(new JLabel("50"));
-		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setBounds(327, 173, 56, 41);
+		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setBounds(367, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setForeground(Color.DARK_GRAY);
+		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setForeground(Color.RED);
 		
 		// teaching ability score label
 		controller.getModel().setTeachingAbilityScore(new JLabel("99"));
-		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setBounds(527, 173, 56, 41);
+		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setBounds(580, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setForeground(Color.DARK_GRAY);
+		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setForeground(Color.GREEN);
 		
 		// workload score label
 		controller.getModel().setWorkloadScore(new JLabel("45"));
-		controller.getPanel().add(controller.getModel().getWorkloadScore()).setBounds(729, 173, 56, 41);
+		controller.getPanel().add(controller.getModel().getWorkloadScore()).setBounds(760, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getWorkloadScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getWorkloadScore()).setForeground(Color.DARK_GRAY);
+		controller.getPanel().add(controller.getModel().getWorkloadScore()).setForeground(Color.RED);
 		
 		//main scroll pane 
 		controller.getModel().setScrollPane(new JScrollPane());
@@ -132,11 +133,12 @@ public class TeacherReviewView {
 		
 		
 		for(int i = 0; i < 10; i++) {
-			ReviewModel2 rm1 = new ReviewModel2();
-			rm1.createReviewItem();
+			ReviewController rm1 = new ReviewController();
+			
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
+				rm1.dispatchBuilder();
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
