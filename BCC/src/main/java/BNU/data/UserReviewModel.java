@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 
 public class UserReviewModel {
 	private JLabel User;
+	private JLabel reviewH;
 	private JLabel UserName;
 	private JLabel lblClass;
 	private JLabel lblClassName;
@@ -31,6 +32,14 @@ public class UserReviewModel {
 		
 	
 	
+	public JLabel getReviewH() {
+		return reviewH;
+	}
+
+	public void setReviewH(JLabel reviewH) {
+		this.reviewH = reviewH;
+	}
+
 	public JButton getLog_out() {
 		return log_out;
 	}

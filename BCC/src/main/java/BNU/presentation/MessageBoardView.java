@@ -59,7 +59,7 @@ public class MessageBoardView {
 		controller.getModel().getBtnBack().addActionListener(controller);
 		//log out button
 		controller.getModel().setLog_out(new JButton("Log Out"));
-		controller.getPanel().add(controller.getModel().getLog_out()).setBounds(825, 11, 170, 41);
+		controller.getPanel().add(controller.getModel().getLog_out()).setBounds(825, 11, 150, 41);
 		controller.getPanel().add(controller.getModel().getLog_out()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getLog_out().setActionCommand("MessageBoard:Logout");
 		controller.getModel().getLog_out().addActionListener(controller);

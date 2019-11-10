@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -60,27 +61,32 @@ public class TeachersByClassView {
 		controller.getPanel().setLayout(null);
 
 		//build test title
+		controller.getModel().setTeacherP(new JPanel());
+		controller.getModel().getTeacherP().setPreferredSize(new Dimension(1000, 100));
+		controller.getModel().getTeacherP().setBounds(0,0,1000, 100);
+		controller.getModel().getTeacherP().setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		controller.getModel().setTxt_Title(new JLabel(controller.getClassName()));
-		controller.getModel().getTxt_Title().setBounds(450, 40, 243, 57);
-		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.PLAIN, 33));
-		controller.getPanel().add(controller.getModel().getTxt_Title());
+		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.BOLD, 33));
+		controller.getModel().getTeacherP().add(controller.getModel().getTxt_Title());
+		controller.getPanel().add(controller.getModel().getTeacherP());
+		
 
 		//build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Teachers().setBounds(400, 265, 143, 33);
+		controller.getModel().getLab_Teachers().setBounds(340, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Teachers());
 
 		//build ratings table
 		controller.getModel().setLab_Ratings(new JLabel("Ratings"));
 		controller.getModel().getLab_Ratings().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_Ratings().setBounds(640, 265, 143, 33);
+		controller.getModel().getLab_Ratings().setBounds(600, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Ratings());
 		
 		//build number of reviews
 		controller.getModel().setLab_NumOfReviews(new JLabel("Number Of Reviews"));
 		controller.getModel().getLab_NumOfReviews().setFont(new Font("Segoe UI", Font.PLAIN, 19));
-		controller.getModel().getLab_NumOfReviews().setBounds(770, 265, 185, 33);
+		controller.getModel().getLab_NumOfReviews().setBounds(760, 265, 185, 33);
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector
@@ -98,7 +104,7 @@ public class TeachersByClassView {
 		}
 		
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel());
-		controller.getModel().getScrollPane().setBounds(10, 321, 964, 429);
+		controller.getModel().getScrollPane().setBounds(10, 321, 970, 429);
 		controller.getPanel().add(controller.getModel().getScrollPane());
 
 		LOGGER.info("Professor Selection page loaded correctly");
