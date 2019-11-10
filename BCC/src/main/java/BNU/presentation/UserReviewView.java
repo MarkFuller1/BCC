@@ -92,7 +92,7 @@ public class UserReviewView {
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
-				rm1.getPanel().setBounds(0,i*200,804,200);
+				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
 			}
 
