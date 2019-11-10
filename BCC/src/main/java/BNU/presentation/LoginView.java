@@ -2,15 +2,12 @@ package BNU.presentation;
 
 import java.awt.Font;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,18 +18,22 @@ import javax.swing.JTextField;
 import BNU.logic.LoginController;
 import BNU.logic.WindowBuilder;
 
-
 public class LoginView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
 
+	public static void BuildLoginView(JFrame mainFrame, LoginController controller) {// } throws SecurityException,
+																						// IOException {
+		FileHandler fileHandler = null;
+		try {
+			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+		} catch (SecurityException | IOException e1) {
+			System.out.println("Logger Failed in" + LoginView.class.getName() );
+		}
 
-	public static void BuildLoginView(JFrame mainFrame, LoginController controller) throws SecurityException, IOException {
-		FileHandler fileHandler = new FileHandler("BCC.log", true);
-		LOGGER.addHandler(fileHandler);
 		LOGGER.setLevel(Level.FINEST);
-		LOGGER.info("Login page loaded correctly");
 
 		controller.setPanel(new JPanel());
 
@@ -87,11 +88,9 @@ public class LoginView {
 			WindowBuilder.clip.open(AudioSystem.getAudioInputStream( WindowBuilder.deck));
 			WindowBuilder.clip.start();
 				
-				//Thread.sleep(clip.getMicrosecondLength()/1000);
-				
-		}catch(Exception e){//log here
-			}
-		//}
+		}catch(Exception e){
+			LOGGER.warning("Failed to load audio in " + LoginView.class.getName());
+		}
 		
 		mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
