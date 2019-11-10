@@ -101,7 +101,7 @@ public class ReviewModel1 {
 		setBtnUp(new JButton("U"));
 		getBtnUp().setForeground(Color.BLUE);
 		getBtnUp().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		//getBtnUp().setBounds(0, 45, 55, 38);
+		
 		panel.add(getBtnUp());
 
 
@@ -109,19 +109,18 @@ public class ReviewModel1 {
 		setBtnDown(new JButton("D"));
 		getBtnDown().setForeground(Color.RED);
 		getBtnDown().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		//getBtnDown().setBounds(0, 83, 55, 38);		
+		
 		panel.add(getBtnDown());
 
 		// review score label
 		setReviewScore(new JLabel("4"));
 		getReviewScore().setHorizontalAlignment(SwingConstants.CENTER);
 		getReviewScore().setFont(new Font("Segoe UI", Font.PLAIN, 30));
-		//getReviewScore().setBounds(52, 55, 61, 48);
+		
 		panel.add(getReviewScore());
 
 		// scroll pane
 		setReviewScrollPane(new JScrollPane());
-		//getReviewScrollPane().setBounds(111, 30, 675, 129);
 		panel.add(getReviewScrollPane());
 		
 		// text pane
