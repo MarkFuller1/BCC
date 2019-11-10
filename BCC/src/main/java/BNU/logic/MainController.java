@@ -27,30 +27,30 @@ public class MainController extends PageController {
 		panel = new JPanel();
 		view = new MainView();
 		db = new DatabaseMock();
-	}
 
-	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
 		} catch (SecurityException | IOException e) {
-			System.out.println("Logger Failed");
+			System.out.println("Logger Failed to load in " + MainController.class.getName());
 			e.printStackTrace();
 		}
 		LOGGER.addHandler(fileHandler);
 		LOGGER.setLevel(Level.FINEST);
-		LOGGER.info("Login page loaded correctly");
-
-		
-		MainView.BuildLoginView(mainFrame, this);
 	}
 
-	public static dbWrapper getDb() {
+	@Override
+	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+		
+		LOGGER.info("Loading Main Page");
+		MainView.BuildMainView(mainFrame, this);
+	}
+
+	public dbWrapper getDb() {
 		return db;
 	}
 
-	public static void setDb(DatabaseMock db) {
+	public void setDb(DatabaseMock db) {
 		MainController.db = db;
 	}
 

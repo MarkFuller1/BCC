@@ -1,5 +1,7 @@
 package BNU.data;
 
+import java.sql.ResultSet;
+
 public class Professor {
 	String professor;
 	String rating;
@@ -12,6 +14,10 @@ public class Professor {
 		this.rating = rating;
 		this.numberOfReviews = numberOfReviews;
 		this.courses = courses;
+	}
+	
+	public Professor(ResultSet entry) {
+		//TODO: work this out
 	}
 	
 	public String getProfessor() {
