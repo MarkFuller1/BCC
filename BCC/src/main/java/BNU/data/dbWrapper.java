@@ -1,7 +1,5 @@
 package BNU.data;
 
-import java.awt.LayoutManager;
-
 public interface dbWrapper {
 	String[] getAllProfessors();
 	
