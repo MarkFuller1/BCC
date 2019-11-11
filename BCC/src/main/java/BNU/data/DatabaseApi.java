@@ -10,8 +10,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class database implements dbWrapper {
-	private static final Logger LOGGER = Logger.getLogger(database.class.getName());
+public class DatabaseApi implements dbWrapper {
+	private static final Logger LOGGER = Logger.getLogger(DatabaseApi.class.getName());
 
 	static {
 
@@ -200,7 +200,31 @@ public class database implements dbWrapper {
 
 	@Override
 	public Course getCourse(String course) {
-		// TODO Auto-generated method stub
-		return null;
+		String[] courses = null;
+		// establish connection
+		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
+
+			// Query
+			String sql = "SELECT * FROM courses "; // the SQl here is logically correct but the names of tables and rows and
+										// columns need to change
+			ResultSet result = stmt.executeQuery(sql);
+
+			// Parse Query into string array
+			while (result.next()) {
+				String entry = result.getString("courses");
+				courses = entry.split("\n");
+				for (int i = 0; i < courses.length; i++) {
+					System.out.println(courses[i]);
+				}
+			}
+
+			stmt.close();
+			con.close();
+		} catch (SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+
+		return courses;
 	}
 }
