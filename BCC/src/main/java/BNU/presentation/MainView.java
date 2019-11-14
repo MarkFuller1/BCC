@@ -1,8 +1,6 @@
 package BNU.presentation;
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -22,13 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import BNU.logic.MainController;
-import net.miginfocom.swing.MigLayout;
 
 public class MainView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 
-	public static void BuildLoginView(JFrame mainFrame, MainController controller) {
+	public static void BuildMainView(JFrame mainFrame, MainController controller) {
 
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(new BorderLayout(10, 10));
@@ -49,8 +46,6 @@ public class MainView {
 		controller.getPanel().add(controller.getModel().getLog_out()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getLog_out().setActionCommand("main:logout");
 		controller.getModel().getLog_out().addActionListener(controller);
-		
-		
 		
 		//build North panel
 		controller.getModel().setNorth_Panel(new JPanel(new BorderLayout()));
@@ -91,7 +86,7 @@ public class MainView {
 		controller.getModel().getTxt_SearchProfessor().setBounds(41, 164, 205, 43);
 		controller.getModel().getEast_Panel().add(controller.getModel().getTxt_SearchProfessor());
 		
-		controller.getModel().setCb_SearchProfessor(new JComboBox(controller.getDb().getAllProfessors()));
+		controller.getModel().setCb_SearchProfessor(new JComboBox<String>(controller.getDb().getAllProfessors()));
 		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
 		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
 		controller.getModel().getCb_SearchProfessor().setBounds(41, 218, 205, 43);
