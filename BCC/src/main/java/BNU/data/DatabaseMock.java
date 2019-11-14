@@ -6,21 +6,21 @@ import java.util.ArrayList;
 public class DatabaseMock implements dbWrapper{
 	
 	@Override
-	public String[] getAllProfessors() {
-		String [] professors = new String[3];
-		professors[0] = "Dr. Nikola Tesla";
-		professors[1] = "Dr. Thomas Edison";
-		professors[2] = "Dr. Alexander Grahm-Bell";
+	public Professor[] getAllProfessors() {
+		Professor [] professors = new Professor[3];
+		professors[0] = new Professor("Dr. Nikola Tesla");
+		professors[1] = new Professor("Dr. Thomas Edison");
+		professors[2] = new Professor("Dr. Alexander Grahm-Bell");
 		
 		return professors;
 	}
 
 	@Override
-	public String[] getAllClasses() {
-		String [] classes = new String[3];
-		classes[0] = "Adventures in Multi-Threading";
-		classes[1] = "Quantum Computing for Beginners";
-		classes[2] = "Intro to GoLang";
+	public Course[] getAllClasses() {
+		Course [] classes = new Course[3];
+		classes[0] = new Course("Adventures in Multi-Threading");
+		classes[1] = new Course("Quantum Computing for Beginners");
+		classes[2] = new Course("Intro to GoLang");
 		
 		return classes;
 	}
@@ -47,10 +47,10 @@ public class DatabaseMock implements dbWrapper{
 //		return classes;
 //	}
 
-	public String[] getAllProfessorsForClass(String className) {
-		String [] a = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
-		String [] b = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
-		String [] c = {"Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell"};
+	public Professor[] getAllProfessorsForClass(String className) {
+		Professor [] a = {new Professor("Dr. Nikola Tesla"), new Professor("Dr. Thomas Edison"), new Professor("Dr. Alexander Grahm-Bell")};
+		Professor [] b = {new Professor("Dr. Nikola Tesla"), new Professor("Dr. Thomas Edison"), new Professor("Dr. Alexander Grahm-Bell")};
+		Professor [] c = {new Professor("Dr. Nikola Tesla"), new Professor("Dr. Thomas Edison"), new Professor("Dr. Alexander Grahm-Bell")};
 		
 		switch(className) {
 		case "Adventures in Multi-Threading":
@@ -85,10 +85,10 @@ public class DatabaseMock implements dbWrapper{
 	}
 
 	@Override
-	public String[] getAllClassesForProfessor(String professorName) {
-		String [] a = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
-		String [] b = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
-		String [] c = {"Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang"};
+	public Course[] getAllClassesForProfessor(String professorName) {
+		Course [] a = {new Course("Adventures in Multi-Threading"), new Course("Quantum Computing for Beginners"), new Course("Intro to GoLang")};
+		Course [] b = {new Course("Adventures in Multi-Threading"), new Course("Quantum Computing for Beginners"), new Course("Intro to GoLang")};
+		Course [] c = {new Course("Adventures in Multi-Threading"), new Course("Quantum Computing for Beginners"), new Course("Intro to GoLang")};
 		System.out.println(professorName);
 		switch(professorName) {
 		case "Dr. Nikola Tesla":

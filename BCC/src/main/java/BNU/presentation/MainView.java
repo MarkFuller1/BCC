@@ -1,6 +1,7 @@
 package BNU.presentation;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -9,6 +10,9 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -19,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import BNU.data.Course;
+import BNU.data.Professor;
 import BNU.logic.MainController;
 
 public class MainView {
@@ -69,7 +75,9 @@ public class MainView {
 		controller.getModel().getTxt_SearchClass().setBounds(41, 164, 205, 43);
 		controller.getModel().getWest_Panel().add(controller.getModel().getTxt_SearchClass());
 		
-		controller.getModel().setCb_SearchClass(new JComboBox(controller.getDb().getAllClasses()));
+		List<String> classes = Arrays.asList(controller.getDb().getAllClasses()).stream().map(Course::getTitle).collect(Collectors.toList());
+		
+		controller.getModel().setCb_SearchClass(new JComboBox<String>(classes.toArray(new String[0])));
 		controller.getModel().getCb_SearchClass().setActionCommand("main:searchClass");
 		controller.getModel().getCb_SearchClass().addActionListener(controller);
 		controller.getModel().getCb_SearchClass().setBounds(41, 218, 205, 43);
@@ -86,7 +94,9 @@ public class MainView {
 		controller.getModel().getTxt_SearchProfessor().setBounds(41, 164, 205, 43);
 		controller.getModel().getEast_Panel().add(controller.getModel().getTxt_SearchProfessor());
 		
-		controller.getModel().setCb_SearchProfessor(new JComboBox<String>(controller.getDb().getAllProfessors()));
+		List<String> profs = Arrays.asList(controller.getDb().getAllProfessors()).stream().map(Professor::getProfessor).collect(Collectors.toList());
+		
+		controller.getModel().setCb_SearchProfessor(new JComboBox<String>(profs.toArray(new String[0])));
 		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
 		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
 		controller.getModel().getCb_SearchProfessor().setBounds(41, 218, 205, 43);

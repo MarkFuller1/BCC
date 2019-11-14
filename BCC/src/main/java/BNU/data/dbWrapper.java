@@ -8,6 +8,8 @@ public interface dbWrapper {
 	Professor[] getAllProfessorsForClass(String className);
 
 	Professor getProfessor(String Prof);
+	
+	//Professor getProfessorById(String id);
 
 	Course[] getAllClassesForProfessor(String professorName);
 

@@ -35,6 +35,7 @@ import javax.swing.border.LineBorder;
 
 import BNU.data.CourseProfessor;
 import BNU.data.DatabaseMock;
+import BNU.data.Professor;
 import BNU.data.dbWrapper;
 import BNU.logic.LoginController;
 import BNU.logic.TeachersByClassController;
@@ -114,12 +115,12 @@ public class TeachersByClassView {
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JComponent> buildTeacherPanels(List<String> asList, TeachersByClassController controller) {
+	private static List<JComponent> buildTeacherPanels(List<Professor> asList, TeachersByClassController controller) {
 		List<JComponent> panels = new ArrayList<>();
 		dbWrapper db = new DatabaseMock();
-		for(String prof: asList) {
+		for(Professor prof: asList) {
 			System.out.println(prof);
- 			CourseProfessor obj = new CourseProfessor(db.getProfessor(prof));
+ 			CourseProfessor obj = new CourseProfessor(db.getProfessor(prof.getProfessor()));
  			obj.getSelect().addActionListener(controller);
 			panels.add(obj);
 		}

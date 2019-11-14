@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,26 +54,26 @@ public class DatabaseApi implements dbWrapper {
 
 	@Override
 	public Professor[] getAllProfessors() {
-		String[] prof = null;
+		List<Professor> proflist = new ArrayList<>();
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT name FROM professors";
+			String sql = "SELECT * FROM professors";
 			ResultSet result = stmt.executeQuery(sql);
 
 			// A result set is an object that holds the 2d array of info, but not in a 2d
 			// array
+
 			while (result.next()) {
 				int rsmd = result.getMetaData().getColumnCount();
-				
-				String name = result.getNString(result.findColumn("name"));
-				String name = result.getNString(result.findColumn(""));
+
+				String first = result.getNString(result.findColumn("first_name"));
+				String last = result.getNString(result.findColumn("last_name"));
+
+				proflist.add(new Professor(first + " " + last));
 
 			}
-
-			stmt.close();
-			con.close();
 		} catch (
 
 		SQLException e) {
@@ -78,72 +81,73 @@ public class DatabaseApi implements dbWrapper {
 			System.exit(0);
 		}
 
-		return prof;
+		return proflist.toArray(new Professor[0]);
 	}
 
 	@Override
-	public String[] getAllClasses() {
-		String[] courses = null;
+	public Course[] getAllClasses() {
+		List<Course> courlist = new ArrayList<>();
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT title FROM courses";
+			String sql = "SELECT * FROM courses";
 			ResultSet result = stmt.executeQuery(sql);
 
 			// Parse Query into string array
 			while (result.next()) {
-				String entry = result.getString("title");
-				courses = entry.split("\n");
-				for (int i = 0; i < courses.length; i++) {
-					System.out.println(courses[i]);
-				}
+				int rsmd = result.getMetaData().getColumnCount();
+
+				// tl;dr get the string at the column number(get the index of the column
+				// named("title"))
+				String title = result.getNString(result.findColumn("title"));
+
+				courlist.add(new Course(title));
+
 			}
 
-			stmt.close();
-			con.close();
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 
-		return courses;
+		return courlist.toArray(new Course[0]);
 	}
 
 	@Override
-	public String[] getAllProfessorsForClass(String className) {
-		String[] professors = null;
+	public Professor[] getAllProfessorsForClass(String className) {
+		List<Professor> proflist = new ArrayList<>();
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT professor_course.idc FROM courses, professor_course WHERE course.idc = professor_course.idc AND course.name = "
+			String sql = "SELECT professor_course.professor_id FROM course, professor_course WHERE course.course_id_pk = professor_course.course_id AND course.title = "
 					+ className; // the SQl here is logically correct but the names of tables and rows and
-									// columns need to change
+			// columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			// Parse Query into string array
 			while (result.next()) {
-				String entry = result.getString("name");
-				professors = entry.split("\n");
-				for (int i = 0; i < professors.length; i++) {
-					System.out.println(professors[i]);
-				}
+				int rsmd = result.getMetaData().getColumnCount();
+
+				String professorid = result.getNString(result.findColumn("professor_id"));
+
+				Professor prof = this.getProfessor(professorid);
+
+				proflist.add(prof);
+
 			}
 
-			stmt.close();
-			con.close();
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 
-		return professors;
+		return proflist.toArray(new Professor[0]);
 	}
 
 	@Override
 	public Professor getProfessor(String Prof) {
-		String professorData = null;
+		Professor prof = null;
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
@@ -153,83 +157,122 @@ public class DatabaseApi implements dbWrapper {
 																					// and columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			// Parse Query into string array
-			String entry = result.getString("name");
-			professorData = entry.split("\n")[0]; // this probably can be improved
-			System.out.println(professorData);
-			Professor retrieved = new Professor(result);
+			String firstname = result.getNString(result.findColumn("first_name"));
+			String lastname = result.getNString(result.findColumn("last_name"));
 
-			stmt.close();
-			con.close();
+			prof = new Professor(firstname + " " + lastname);
 
-			return retrieved;
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 
-		return null;
+		return prof;
 	}
 
-	@Override
-	public Class[] getAllClassesForProfessor(String professorName) {
-		String[] courses = null;
+	public Professor getProfessorById(String id) {
+		Professor prof = null;
+
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT professor_course.idc FROM professors, professor_course WHERE professors.idc = professor_course.idc AND professors.name = "
+			String sql = "SELECT * FROM professors WHERE professor.professor_id_pk = " + id; // the SQl here is
+																								// logically correct
+			// but the names of tables and rows
+			// and columns need to change
+			ResultSet result = stmt.executeQuery(sql);
+
+			String firstName = result.getNString(result.findColumn("first_name"));
+			String lastName = result.getNString(result.findColumn("last_name"));
+
+			prof = new Professor(firstName + " " + lastName);
+
+		} catch (SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+
+		return prof;
+	}
+
+	@Override
+	public Course[] getAllClassesForProfessor(String professorName) {
+		List<Course> courses = new ArrayList<>();
+		// establish connection
+		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
+
+			// Query
+			String sql = "SELECT professor_course.course_id FROM professors, professor_course WHERE professors.professors_id = professor_course.professor_id AND professors.name = "
 					+ professorName; // the SQl here is logically correct but the names of tables and rows and
 										// columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			// Parse Query into string array
 			while (result.next()) {
-				String entry = result.getString("courses");
-				courses = entry.split("\n");
-				for (int i = 0; i < courses.length; i++) {
-					System.out.println(courses[i]);
-				}
+				int rsmd = result.getMetaData().getColumnCount();
+
+				String courseid = result.getNString(result.findColumn("course_id"));
+
+				Course prof = this.getCourseById(courseid);
+
+				courses.add(prof);
+
 			}
 
-			stmt.close();
-			con.close();
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 
-		return courses;
+		return courses.toArray(new Course[0]);
 	}
 
-	@Override
-	public String getCourse(String course) {
-		Course courses = null;
+	private Course getCourseById(String courseid) {
+		Course course = null;
+
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT * FROM courses "; // the SQl here is logically correct but the names of tables and rows
-													// and
-			// columns need to change
+			String sql = "SELECT * FROM professors WHERE professor.professor_id_pk = " + courseid; // the SQl here is
+																									// logically correct
+			// but the names of tables and rows
+			// and columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			// Parse Query into string array
-			while (result.next()) {
-				String entry = result.getString("courses");
-				courses = entry;
-				for (int i = 0; i < courses.length; i++) {
-					System.out.println(courses[i]);
-				}
-			}
+			String title = result.getNString(result.findColumn("title"));
 
-			stmt.close();
-			con.close();
+			course = new Course(title);
+
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 
-		return courses;
+		return course;
+	}
+
+	@Override
+	public Course getCourse(String title) {
+		Course course = null;
+		// establish connection
+		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
+
+			// Query
+			String sql = "SELECT * FROM course WHERE course.title = " + title; // the SQl here is logically correct
+																				// but the names of tables and rows
+																				// and columns need to change
+			ResultSet result = stmt.executeQuery(sql);
+
+			String firstname = result.getNString(result.findColumn("title"));
+
+			course = new Course(title);
+
+		} catch (SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+
+		return course;
 	}
 }

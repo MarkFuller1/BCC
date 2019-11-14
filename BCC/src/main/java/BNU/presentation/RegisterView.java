@@ -13,6 +13,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import BNU.data.Course;
 import BNU.logic.RegisterController;
 
 public class RegisterView {
@@ -67,7 +69,7 @@ public class RegisterView {
 				.setFont(new Font("Segoe UI", Font.PLAIN, 26));
 
 		// classes taken list
-		controller.getModel().setClasses_taken(new JList<String>(controller.getDb().getAllClasses()));
+		controller.getModel().setClasses_taken(new JList<Course>(controller.getDb().getAllClasses()));//this will break
 		controller.getModel().getClasses_taken().setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		controller.getModel().setMenuScrollPane(controller.getModel().getClasses_taken());
 		controller.getPanel().add(controller.getModel().getMenuScrollPane()).setBounds(655, 302, 200, 150);

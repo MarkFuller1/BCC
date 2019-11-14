@@ -1,17 +1,24 @@
 package BNU.data;
 
 public class Course {
+	String title;
 	String professor;
 	String rating;
 	String numberOfReviews;
-	String[] courses;
 	
 	public Course(String professor, String rating, String numberOfReviews, String[] courses) {
 		super();
 		this.professor = professor;
 		this.rating = rating;
 		this.numberOfReviews = numberOfReviews;
-		this.courses = courses;
+	}
+	
+	public Course(String title){
+		this.title = title;
+	}
+	
+	public String getTitle() {
+		return this.title;
 	}
 	
 	public String getProfessor() {
