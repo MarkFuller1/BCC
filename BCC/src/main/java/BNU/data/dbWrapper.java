@@ -1,15 +1,15 @@
 package BNU.data;
 
 public interface dbWrapper {
-	String[] getAllProfessors();
+	Professor[] getAllProfessors();
 	
-	String[] getAllClasses();
+	Course[] getAllClasses();
 	
-	String[] getAllProfessorsForClass(String className);
+	Professor[] getAllProfessorsForClass(String className);
 
 	Professor getProfessor(String Prof);
 
-	String[] getAllClassesForProfessor(String professorName);
+	Course[] getAllClassesForProfessor(String professorName);
 
 	Course getCourse(String course);
 

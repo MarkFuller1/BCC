@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.FileHandler;
@@ -49,7 +50,7 @@ public class DatabaseApi implements dbWrapper {
 	}
 
 	@Override
-	public String[] getAllProfessors() {
+	public Professor[] getAllProfessors() {
 		String[] prof = null;
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
@@ -58,18 +59,21 @@ public class DatabaseApi implements dbWrapper {
 			String sql = "SELECT name FROM professors";
 			ResultSet result = stmt.executeQuery(sql);
 
-			// Parse Query into string array
+			// A result set is an object that holds the 2d array of info, but not in a 2d
+			// array
 			while (result.next()) {
-				String entry = result.getString("name");
-				prof = entry.split("\n");
-				for (int i = 0; i < prof.length; i++) {
-					System.out.println(prof[i]);
-				}
+				int rsmd = result.getMetaData().getColumnCount();
+				
+				String name = result.getNString(result.findColumn("name"));
+				String name = result.getNString(result.findColumn(""));
+
 			}
 
 			stmt.close();
 			con.close();
-		} catch (SQLException e) {
+		} catch (
+
+		SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
@@ -157,7 +161,7 @@ public class DatabaseApi implements dbWrapper {
 
 			stmt.close();
 			con.close();
-			
+
 			return retrieved;
 		} catch (SQLException e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -168,7 +172,7 @@ public class DatabaseApi implements dbWrapper {
 	}
 
 	@Override
-	public String[] getAllClassesForProfessor(String professorName) {
+	public Class[] getAllClassesForProfessor(String professorName) {
 		String[] courses = null;
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
@@ -199,20 +203,21 @@ public class DatabaseApi implements dbWrapper {
 	}
 
 	@Override
-	public Course getCourse(String course) {
-		String[] courses = null;
+	public String getCourse(String course) {
+		Course courses = null;
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT * FROM courses "; // the SQl here is logically correct but the names of tables and rows and
-										// columns need to change
+			String sql = "SELECT * FROM courses "; // the SQl here is logically correct but the names of tables and rows
+													// and
+			// columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
 			// Parse Query into string array
 			while (result.next()) {
 				String entry = result.getString("courses");
-				courses = entry.split("\n");
+				courses = entry;
 				for (int i = 0; i < courses.length; i++) {
 					System.out.println(courses[i]);
 				}

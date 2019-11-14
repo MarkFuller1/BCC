@@ -67,7 +67,7 @@ public class RegisterView {
 				.setFont(new Font("Segoe UI", Font.PLAIN, 26));
 
 		// classes taken list
-		controller.getModel().setClasses_taken(new JList<String>(controller.getDb().getPossibleClasses()));
+		controller.getModel().setClasses_taken(new JList<String>(controller.getDb().getAllClasses()));
 		controller.getModel().getClasses_taken().setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		controller.getModel().setMenuScrollPane(controller.getModel().getClasses_taken());
 		controller.getPanel().add(controller.getModel().getMenuScrollPane()).setBounds(655, 302, 200, 150);
