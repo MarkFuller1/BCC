@@ -12,95 +12,81 @@ import javax.swing.JPanel;
 import BNU.data.DatabaseMock;
 import BNU.data.RegisterModel;
 import BNU.data.dbWrapper;
-import BNU.presentation.LoginView;
 import BNU.presentation.RegisterView;
 
 public class RegisterController extends PageController {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
 
-	static RegisterView view;
-	static RegisterModel model = new RegisterModel();
-	static JPanel panel;
-	static dbWrapper db;
-	
-	
-	public RegisterController(){
+	RegisterView view;
+	RegisterModel model = new RegisterModel();
+	JPanel panel;
+	dbWrapper db;
+
+	public RegisterController() {
 		model = new RegisterModel();
 		panel = new JPanel();
 		view = new RegisterView();
 		db = new DatabaseMock();
-	}
-	@Override
-	public void actionPerformed(ActionEvent e){
+
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
-		} catch (SecurityException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (SecurityException | IOException e1) {
+			System.out.println("Logger failed to load in " + RegisterController.class.getName());
 		}
+
 		LOGGER.addHandler(fileHandler);
-		if(e.getActionCommand() == "register:createAccount"){
-			LOGGER.setLevel(Level.FINEST);
+		LOGGER.setLevel(Level.FINEST);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand() == "register:createAccount") {
 			LOGGER.info("Account Registered");
 			WindowBuilder.loadPage(new LoginController());
 		}
 	}
+
 	@Override
 	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		FileHandler fileHandler = null;
-		try {
-			fileHandler = new FileHandler("BCC.log", true);
-		} catch (SecurityException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		LOGGER.addHandler(fileHandler);
-		if(db == null) {
+		if (db == null) {
 			this.db = db;
 		}
-		try {
-			RegisterView.BuildRegisterView(mainFrame, this);
-			LOGGER.setLevel(Level.FINEST);
-			LOGGER.info("Building View");
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public static RegisterView getView() {
-		return view;
-	}
-	public static void setView(RegisterView view) {
-		RegisterController.view = view;
-	}
-	public static RegisterModel getModel() {
-		return model;
-	}
-	public static void setModel(RegisterModel model) {
-		RegisterController.model = model;
-	}
-	public static JPanel getPanel() {
-		return panel;
-	}
-	public static void setPanel(JPanel panel) {
-		RegisterController.panel = panel;
-	}
-	public static dbWrapper getDb() {
-		return db;
-	}
-	public static void setDb(dbWrapper db) {
-		RegisterController.db = db;
+
+		LOGGER.info("Building View");
+		RegisterView.BuildRegisterView(mainFrame, this);
 	}
 
+	public RegisterView getView() {
+		return view;
+	}
+
+	public void setView(RegisterView view) {
+		this.view = view;
+	}
+
+	public RegisterModel getModel() {
+		return model;
+	}
+
+	public void setModel(RegisterModel model) {
+		this.model = model;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+
+	public dbWrapper getDb() {
+		return db;
+	}
+
+	public void setDb(dbWrapper db) {
+		this.db = db;
+	}
 }
