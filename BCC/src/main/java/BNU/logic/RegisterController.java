@@ -27,7 +27,6 @@ public class RegisterController extends PageController {
 		model = new RegisterModel();
 		panel = new JPanel();
 		view = new RegisterView();
-		db = new DatabaseMock();
 
 		FileHandler fileHandler = null;
 		try {

@@ -26,7 +26,6 @@ public class MainController extends PageController {
 		model = new MainModel();
 		panel = new JPanel();
 		view = new MainView();
-		db = new DatabaseMock();
 
 		FileHandler fileHandler = null;
 		try {
@@ -41,7 +40,7 @@ public class MainController extends PageController {
 
 	@Override
 	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		
+		this.db = db;
 		LOGGER.info("Loading Main Page");
 		MainView.BuildMainView(mainFrame, this);
 	}

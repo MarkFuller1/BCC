@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
+import BNU.data.DatabaseApi;
 import BNU.data.DatabaseMock;
 import BNU.data.dbWrapper;
 
@@ -21,7 +22,7 @@ public class WindowBuilder {
 	public static File deck; 
 	
 	public WindowBuilder() {
-		db = new DatabaseMock();
+		db = new DatabaseApi();
 		//build the JFrame 
 		mainFrame = new JFrame("BCC");
 		//TODO: change this to SaveDatabase() on close 

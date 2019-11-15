@@ -75,7 +75,7 @@ public class MainView {
 		controller.getModel().getTxt_SearchClass().setBounds(41, 164, 205, 43);
 		controller.getModel().getWest_Panel().add(controller.getModel().getTxt_SearchClass());
 		
-		List<String> classes = Arrays.asList(controller.getDb().getAllClasses()).stream().map(Course::getTitle).collect(Collectors.toList());
+		List<String> classes = (List<String>)(List<?>)Arrays.asList(controller.getDb().getAllClasses()).stream().map(Course::getTitle).collect(Collectors.toList());
 		
 		controller.getModel().setCb_SearchClass(new JComboBox<String>(classes.toArray(new String[0])));
 		controller.getModel().getCb_SearchClass().setActionCommand("main:searchClass");
@@ -94,7 +94,7 @@ public class MainView {
 		controller.getModel().getTxt_SearchProfessor().setBounds(41, 164, 205, 43);
 		controller.getModel().getEast_Panel().add(controller.getModel().getTxt_SearchProfessor());
 		
-		List<String> profs = Arrays.asList(controller.getDb().getAllProfessors()).stream().map(Professor::getProfessor).collect(Collectors.toList());
+		List<String> profs = (List<String>)(List<?>)Arrays.asList(controller.getDb().getAllProfessors()).stream().map(Professor::getProfessor).collect(Collectors.toList());
 		
 		controller.getModel().setCb_SearchProfessor(new JComboBox<String>(profs.toArray(new String[0])));
 		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");

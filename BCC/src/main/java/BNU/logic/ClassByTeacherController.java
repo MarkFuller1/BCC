@@ -31,7 +31,6 @@ public class ClassByTeacherController extends PageController{
 		model = new ClassByTeacherModel();
 		panel = new JPanel();
 		view = new ClassByTeacherView();
-		db = new DatabaseMock();
 		this.professorName = professor;
 		
 		FileHandler fileHandler = null;
@@ -48,6 +47,7 @@ public class ClassByTeacherController extends PageController{
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+		this.db = db;
 		ClassByTeacherView.BuildTeachsersByClassView(mainFrame, this);
 	}
 	

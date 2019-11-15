@@ -1,14 +1,8 @@
 package BNU.data;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -39,9 +33,9 @@ public class DatabaseApi implements dbWrapper {
 				String port = "5432";
 				String jdbcUrl = "jdbc:postgresql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName
 						+ "&password=" + password;
-				LOGGER.fine("Establishing Connection");
+				LOGGER.info("Establishing Connection");
 				Connection con = DriverManager.getConnection(jdbcUrl);
-				LOGGER.fine("Remote connection successful.");
+				LOGGER.info("Remote connection successful.");
 				return con;
 			} catch (ClassNotFoundException e) {
 				LOGGER.warning(e.toString());
@@ -59,7 +53,7 @@ public class DatabaseApi implements dbWrapper {
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT * FROM professors";
+			String sql = "SELECT * FROM professor";
 			ResultSet result = stmt.executeQuery(sql);
 
 			// A result set is an object that holds the 2d array of info, but not in a 2d
@@ -68,8 +62,8 @@ public class DatabaseApi implements dbWrapper {
 			while (result.next()) {
 				int rsmd = result.getMetaData().getColumnCount();
 
-				String first = result.getNString(result.findColumn("first_name"));
-				String last = result.getNString(result.findColumn("last_name"));
+				String first = result.getString(result.findColumn("first_name"));
+				String last = result.getString(result.findColumn("last_name"));
 
 				proflist.add(new Professor(first + " " + last));
 
@@ -91,7 +85,7 @@ public class DatabaseApi implements dbWrapper {
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
-			String sql = "SELECT * FROM courses";
+			String sql = "SELECT * FROM course";
 			ResultSet result = stmt.executeQuery(sql);
 
 			// Parse Query into string array
@@ -100,7 +94,7 @@ public class DatabaseApi implements dbWrapper {
 
 				// tl;dr get the string at the column number(get the index of the column
 				// named("title"))
-				String title = result.getNString(result.findColumn("title"));
+				String title = result.getString(result.findColumn("title"));
 
 				courlist.add(new Course(title));
 
@@ -129,7 +123,7 @@ public class DatabaseApi implements dbWrapper {
 			while (result.next()) {
 				int rsmd = result.getMetaData().getColumnCount();
 
-				String professorid = result.getNString(result.findColumn("professor_id"));
+				String professorid = result.getString(result.findColumn("professor_id"));
 
 				Professor prof = this.getProfessor(professorid);
 
@@ -157,8 +151,8 @@ public class DatabaseApi implements dbWrapper {
 																					// and columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			String firstname = result.getNString(result.findColumn("first_name"));
-			String lastname = result.getNString(result.findColumn("last_name"));
+			String firstname = result.getString(result.findColumn("first_name"));
+			String lastname = result.getString(result.findColumn("last_name"));
 
 			prof = new Professor(firstname + " " + lastname);
 
@@ -183,8 +177,8 @@ public class DatabaseApi implements dbWrapper {
 			// and columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			String firstName = result.getNString(result.findColumn("first_name"));
-			String lastName = result.getNString(result.findColumn("last_name"));
+			String firstName = result.getString(result.findColumn("first_name"));
+			String lastName = result.getString(result.findColumn("last_name"));
 
 			prof = new Professor(firstName + " " + lastName);
 
@@ -211,7 +205,7 @@ public class DatabaseApi implements dbWrapper {
 			while (result.next()) {
 				int rsmd = result.getMetaData().getColumnCount();
 
-				String courseid = result.getNString(result.findColumn("course_id"));
+				String courseid = result.getString(result.findColumn("course_id"));
 
 				Course prof = this.getCourseById(courseid);
 
@@ -240,7 +234,7 @@ public class DatabaseApi implements dbWrapper {
 			// and columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			String title = result.getNString(result.findColumn("title"));
+			String title = result.getString(result.findColumn("title"));
 
 			course = new Course(title);
 
@@ -264,7 +258,7 @@ public class DatabaseApi implements dbWrapper {
 																				// and columns need to change
 			ResultSet result = stmt.executeQuery(sql);
 
-			String firstname = result.getNString(result.findColumn("title"));
+			String firstname = result.getString(result.findColumn("title"));
 
 			course = new Course(title);
 
