@@ -19,7 +19,7 @@ public class MainController extends PageController {
 	static MainView view;
 	static MainModel model = new MainModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
 
 	public MainController() {
@@ -40,7 +40,7 @@ public class MainController extends PageController {
 	}
 
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+	public void dispatchBuilder(JFrame mainFrame) {
 		
 		LOGGER.info("Loading Main Page");
 		MainView.BuildMainView(mainFrame, this);
@@ -50,9 +50,9 @@ public class MainController extends PageController {
 		return db;
 	}
 
-	public void setDb(DatabaseMock db) {
-		MainController.db = db;
-	}
+//	public void setDb(DatabaseMock db) {
+//		MainController.db = db;
+//	}
 
 	public JPanel getPanel() {
 		return panel;
