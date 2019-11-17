@@ -14,7 +14,7 @@ public class LoginController extends PageController {
 	static LoginView view;
 	static LoginModel model = new LoginModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 
 	public LoginController() {
 		model = new LoginModel();
@@ -23,10 +23,10 @@ public class LoginController extends PageController {
 	}
 
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		if (db == null) {
-			this.db = db;
-		}
+	public void dispatchBuilder(JFrame mainFrame) {
+//		if (db == null) {
+//			this.db = db;
+//		}
 
 		LoginView.BuildLoginView(mainFrame, this);
 
@@ -60,7 +60,10 @@ public class LoginController extends PageController {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "login:createAccount") {
 			System.out.println("login:createAccount Button Pressed");
+			//Sound
 			WindowBuilder.clip.stop();
+			
+			//if(LoginService.checkCredentials(view.))
 			WindowBuilder.loadPage(new RegisterController());
 		} else if (e.getActionCommand() == "login:Authorize") {
 			System.out.println("login:Authorize Button Pressed");

@@ -22,6 +22,7 @@ public class WindowBuilder {
 	
 	public WindowBuilder() {
 		db = new DatabaseMock();
+		PageController.db = db;
 		//build the JFrame 
 		mainFrame = new JFrame("BCC");
 		//TODO: change this to SaveDatabase() on close 
@@ -47,6 +48,6 @@ public class WindowBuilder {
 	}
 
 	public static void loadPage(PageController pageName) {
-		pageName.dispatchBuilder(mainFrame, db);
+		pageName.dispatchBuilder(mainFrame);
 	}
 }

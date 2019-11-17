@@ -21,7 +21,7 @@ public class RegisterController extends PageController {
 	RegisterView view;
 	RegisterModel model = new RegisterModel();
 	JPanel panel;
-	dbWrapper db;
+	//dbWrapper db;
 
 	public RegisterController() {
 		model = new RegisterModel();
@@ -49,10 +49,10 @@ public class RegisterController extends PageController {
 	}
 
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		if (db == null) {
-			this.db = db;
-		}
+	public void dispatchBuilder(JFrame mainFrame) {
+//		if (db == null) {
+//			this.db = db;
+//		}
 
 		LOGGER.info("Building View");
 		RegisterView.BuildRegisterView(mainFrame, this);
@@ -86,7 +86,7 @@ public class RegisterController extends PageController {
 		return db;
 	}
 
-	public void setDb(dbWrapper db) {
-		this.db = db;
-	}
+//	public void setDb(dbWrapper db) {
+//		this.db = db;
+//	}
 }
