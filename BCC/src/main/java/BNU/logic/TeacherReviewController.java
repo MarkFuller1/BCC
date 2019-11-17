@@ -13,7 +13,7 @@ public class TeacherReviewController extends PageController{
 	static TeacherReviewView view;
 	static TeacherReviewModel model = new TeacherReviewModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 	String teacherName;
 	String className;
 	
@@ -26,10 +26,10 @@ public class TeacherReviewController extends PageController{
 	}
 	
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		if(db == null) {
-			this.db = db;
-		}
+	public void dispatchBuilder(JFrame mainFrame) {
+//		if(db == null) {
+//			this.db = db;
+//		}
 		try {
 			TeacherReviewView.BuildTeacherReviewView(mainFrame, this);
 		} catch (SecurityException e) {
@@ -42,9 +42,9 @@ public class TeacherReviewController extends PageController{
 		return db;
 	}
 
-	public static void setDb(dbWrapper db) {
-		TeacherReviewController.db = db;
-	}
+//	public static void setDb(dbWrapper db) {
+//		TeacherReviewController.db = db;
+//	}
 
 	public String getTeacherName() {
 		return teacherName;

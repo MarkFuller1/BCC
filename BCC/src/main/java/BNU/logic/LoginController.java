@@ -14,7 +14,7 @@ public class LoginController extends PageController {
 	static LoginView view;
 	static LoginModel model = new LoginModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 
 	public LoginController() {
 		model = new LoginModel();
@@ -23,10 +23,10 @@ public class LoginController extends PageController {
 	}
 
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		if (db == null) {
-			this.db = db;
-		}
+	public void dispatchBuilder(JFrame mainFrame) {
+//		if (db == null) {
+//			this.db = db;
+//		}
 
 		LoginView.BuildLoginView(mainFrame, this);
 
