@@ -1,6 +1,8 @@
 package BNU.data;
 
 public interface dbWrapper {
+	boolean validateUser(String userName, String password); //new
+	
 	String[] getAllProfessors();
 	
 	String[] getAllClasses();

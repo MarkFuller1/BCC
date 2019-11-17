@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import BNU.data.dbWrapper;
 
 public abstract class PageController implements ActionListener{
-	public abstract void dispatchBuilder(JFrame mainFrame, dbWrapper db);
+	public static dbWrapper db;
+	public abstract void dispatchBuilder(JFrame mainFrame);
 	
 }

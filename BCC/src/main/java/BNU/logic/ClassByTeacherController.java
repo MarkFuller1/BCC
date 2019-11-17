@@ -19,7 +19,7 @@ public class ClassByTeacherController extends PageController{
 	static ClassByTeacherView view;
 	static ClassByTeacherModel model = new ClassByTeacherModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(ClassByTeacherController.class.getName());
 	
 	public String professorName;
@@ -47,7 +47,7 @@ public class ClassByTeacherController extends PageController{
 	}
 	
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
+	public void dispatchBuilder(JFrame mainFrame) {
 		ClassByTeacherView.BuildTeachsersByClassView(mainFrame, this);
 	}
 	
@@ -79,9 +79,9 @@ public class ClassByTeacherController extends PageController{
 		return db;
 	}
 
-	public void setDb(dbWrapper db) {
-		ClassByTeacherController.db = db;
-	}
+//	public void setDb(dbWrapper db) {
+//		ClassByTeacherController.db = db;
+//	}
 	public String getProfessorName() {
 		return professorName;
 	}

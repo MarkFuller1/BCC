@@ -17,7 +17,7 @@ public class MessageBoardController extends PageController{
 	static MessageBoardView view;
 	static MessageBoardModel model = new MessageBoardModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 	static private InputMessage im;
 	
 	public MessageBoardController(){
@@ -27,10 +27,10 @@ public class MessageBoardController extends PageController{
 	}
 	
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		if(db == null) {
-			this.db = db;
-		}
+	public void dispatchBuilder(JFrame mainFrame) {
+//		if(db == null) {
+//			this.db = db;
+//		}
 		try {
 			MessageBoardView.BuildMessageBoardView(mainFrame, this);
 		} catch (SecurityException e) {

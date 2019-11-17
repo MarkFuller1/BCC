@@ -225,6 +225,12 @@ public class DatabaseApi implements dbWrapper {
 			System.exit(0);
 		}
 
-		return courses;
+		return null;
+	}
+
+	@Override
+	public boolean validateUser(String userName, String password) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
