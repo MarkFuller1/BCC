@@ -14,7 +14,7 @@ public class UserReviewController extends PageController{
 	static UserReviewView view;
 	static UserReviewModel model = new UserReviewModel();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 	
 	public UserReviewController(){
 		model = new UserReviewModel();
@@ -23,10 +23,10 @@ public class UserReviewController extends PageController{
 	}
 	
 	@Override
-	public void dispatchBuilder(JFrame mainFrame, dbWrapper db) {
-		if(db == null) {
-			this.db = db;
-		}
+	public void dispatchBuilder(JFrame mainFrame) {
+//		if(db == null) {
+//			this.db = db;
+//		}
 		try {
 			UserReviewView.BuildUserReviewView(mainFrame, this);
 		} catch (SecurityException e) {

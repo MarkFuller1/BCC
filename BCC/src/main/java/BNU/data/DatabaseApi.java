@@ -225,6 +225,6 @@ public class DatabaseApi implements dbWrapper {
 			System.exit(0);
 		}
 
-		return courses;
+		return null;
 	}
 }
