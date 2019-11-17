@@ -60,7 +60,10 @@ public class LoginController extends PageController {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "login:createAccount") {
 			System.out.println("login:createAccount Button Pressed");
+			//Sound
 			WindowBuilder.clip.stop();
+			
+			//if(LoginService.checkCredentials(view.))
 			WindowBuilder.loadPage(new RegisterController());
 		} else if (e.getActionCommand() == "login:Authorize") {
 			System.out.println("login:Authorize Button Pressed");
