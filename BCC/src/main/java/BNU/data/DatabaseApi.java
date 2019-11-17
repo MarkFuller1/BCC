@@ -110,15 +110,20 @@ public class DatabaseApi implements dbWrapper {
 
 	@Override
 	public Professor[] getAllProfessorsForClass(String className) {
+		LOGGER.info("searching for professors for class: " + className);
 		List<Professor> proflist = new ArrayList<>();
 		// establish connection
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
 			// Query
 			String sql = "SELECT professor_course.professor_id FROM course, professor_course WHERE course.course_id_pk = professor_course.course_id AND course.title = "
-					+ className; // the SQl here is logically correct but the names of tables and rows and
+					+ className;
+			// the SQl here is logically correct but the names of tables and
+			// rows and
 			// columns need to change
 			ResultSet result = stmt.executeQuery(sql);
+
+			printResultSet(result);
 
 			while (result.next()) {
 				int rsmd = result.getMetaData().getColumnCount();
@@ -269,4 +274,28 @@ public class DatabaseApi implements dbWrapper {
 
 		return course;
 	}
+
+	private void printResultSet(ResultSet rs) {
+		ResultSetMetaData rsmd;
+		try {
+			rsmd = rs.getMetaData();
+			int columnsNumber;
+			columnsNumber = rsmd.getColumnCount();
+
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1)
+						System.out.print(",  ");
+					String columnValue = rs.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println("");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }
