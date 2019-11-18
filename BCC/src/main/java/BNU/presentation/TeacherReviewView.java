@@ -22,9 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import BNU.logic.LoginController;
+import BNU.logic.ReviewController;
 import BNU.logic.TeacherReviewController;
-import refactor.these.ReviewController;
-import refactor.these.ReviewModel2;
 
 public class TeacherReviewView {
 	static JButton butNavigation;
@@ -95,6 +94,13 @@ public class TeacherReviewView {
 		controller.getPanel().add(controller.getModel().getBtnBack()).setBounds(10, 11, 106, 41);
 		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getBtnBack().setActionCommand("teacher_review:back");
+		controller.getModel().getBtnBack().addActionListener(controller);
+		
+		//SetReview button
+		controller.getModel().setBtnBack(new JButton("Add Review"));
+		controller.getPanel().add(controller.getModel().getBtnBack()).setBounds(825, 11, 150, 41);
+		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getBtnBack().setActionCommand("teacher_review:add");
 		controller.getModel().getBtnBack().addActionListener(controller);
 		
 		// score score label
