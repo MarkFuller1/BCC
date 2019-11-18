@@ -11,14 +11,13 @@ import javax.swing.JPanel;
 import BNU.data.MessageBoardModel;
 import BNU.data.dbWrapper;
 import BNU.presentation.MessageBoardView;
-import refactor.these.InputMessage;
 
 public class MessageBoardController extends PageController{
 	static MessageBoardView view;
 	static MessageBoardModel model = new MessageBoardModel();
 	static JPanel panel;
 	//static dbWrapper db;
-	static private InputMessage im;
+	//static private InputMessage im;
 	
 	public MessageBoardController(){
 		model = new MessageBoardModel();

@@ -56,12 +56,12 @@ public class LoginView {
 
 		//text fields		
 		controller.getModel().setTxt_username(new JTextField());
-		controller.getPanel().add(controller.getModel().getTxt_username()).setBounds(452, 268, 187, 20);
+		controller.getPanel().add(controller.getModel().getTxt_username()).setBounds(443, 260, 187, 40);
 		controller.getModel().getTxt_username().setText("Enter Username");
 		controller.getModel().getTxt_username().setColumns(10);
 		
 		controller.getModel().setTxt_password(new JPasswordField());
-		controller.getPanel().add(controller.getModel().getTxt_password()).setBounds(453, 320, 186, 20);
+		controller.getPanel().add(controller.getModel().getTxt_password()).setBounds(443, 312, 186, 40);
 		controller.getModel().getTxt_password().setText("Enter Password");
 		controller.getModel().getTxt_password().setColumns(10);
 

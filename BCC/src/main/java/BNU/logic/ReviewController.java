@@ -1,4 +1,4 @@
-package refactor.these;
+package BNU.logic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,11 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BNU.data.ReviewModel2;
 import BNU.data.UserReviewModel;
 import BNU.data.dbWrapper;
 import BNU.logic.MessageBoardController;
 import BNU.logic.PageController;
 import BNU.logic.WindowBuilder;
+import BNU.presentation.ReviewView;
 import BNU.presentation.UserReviewView;
 
 public class ReviewController implements ActionListener {

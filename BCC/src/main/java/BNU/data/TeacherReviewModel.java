@@ -16,6 +16,7 @@ public class TeacherReviewModel {
 	private JLabel score;
 	private JLabel helpfulness;
 	private JButton btnBack;
+	private JButton addReview;
 	private JLabel teachingAbility;
 	private JLabel workload;
 	private JLabel scoreScore;
@@ -28,6 +29,14 @@ public class TeacherReviewModel {
 		
 	
 	
+	public JButton getAddReview() {
+		return addReview;
+	}
+
+	public void setAddReview(JButton addReview) {
+		this.addReview = addReview;
+	}
+
 	public JLabel getProfessor() {
 		return professor;
 	}
