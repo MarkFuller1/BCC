@@ -6,14 +6,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class MessageBoardModel {
-	private JLabel User;
+	
 	private JLabel UserName;
-	private JLabel lblClass;
-	private JLabel lblClassName;
-	private JLabel score;
-	private JLabel helpfulness;
 	private JButton btnBack;
 	private JButton btnMessage;
 	private JButton log_out;
@@ -22,29 +21,72 @@ public class MessageBoardModel {
 	private JLabel teachingAbility;
 	private JLabel workload;
 	private JLabel scoreScore;
+
+
 	private JLabel helpfulnessScore;
 	private JLabel teachingAbilityScore;
 	private JLabel workloadScore;
 	private JScrollPane scrollPane;
+	private JPanel user;
+	private JScrollPane userList;
 	private JPanel scrollPanePanel;
+	private JPanel big;
+	private JPanel search;
+	private JTextArea bar;
+	
+	
+	
+	
 
-		
 	
 	
+	public JPanel getSearch() {
+		return search;
+	}
+
+	public void setSearch(JPanel search) {
+		this.search = search;
+	}
+
+	public JTextArea getBar() {
+		return bar;
+	}
+
+	public void setBar(JTextArea bar) {
+		this.bar = bar;
+	}
+
+	public JPanel getUser() {
+		return user;
+	}
+
+	public void setUser(JPanel user) {
+		this.user = user;
+	}
+
+	public JPanel getBig() {
+		return big;
+	}
+
+	public void setBig(JPanel big) {
+		this.big = big;
+	}
+
+	public JScrollPane getUserList() {
+		return userList;
+	}
+
+	public void setUserList(JScrollPane userList) {
+		this.userList = userList;
+	}
+
 	public JButton getLog_out() {
 		return log_out;
 	}
 
+	
 	public void setLog_out(JButton log_out) {
 		this.log_out = log_out;
-	}
-
-	public JLabel getUser() {
-		return User;
-	}
-
-	public void setUser(JLabel User) {
-		this.User = User;
 	}
 
 	public JLabel getUserName() {
@@ -53,38 +95,6 @@ public class MessageBoardModel {
 
 	public void setUserName(JLabel UserName) {
 		this.UserName = UserName;
-	}
-
-	public JLabel getLblClass() {
-		return lblClass;
-	}
-
-	public void setLblClass(JLabel lblClass) {
-		this.lblClass = lblClass;
-	}
-
-	public JLabel getLblClassName() {
-		return lblClassName;
-	}
-
-	public void setLblClassName(JLabel lblClassName) {
-		this.lblClassName = lblClassName;
-	}
-
-	public JLabel getScore() {
-		return score;
-	}
-
-	public void setScore(JLabel score) {
-		this.score = score;
-	}
-
-	public JLabel getHelpfulness() {
-		return helpfulness;
-	}
-
-	public void setHelpfulness(JLabel helpfulness) {
-		this.helpfulness = helpfulness;
 	}
 
 	public JButton getBtnBack() {
