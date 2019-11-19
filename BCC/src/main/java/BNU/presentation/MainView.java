@@ -105,35 +105,6 @@ public class MainView {
 		controller.getPanel().add(controller.getModel().getEast_Panel(), BorderLayout.EAST);
 		
 		//build center panel
-		
-		// auto close connection
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql://127.0.0.1:5432/BCC", "postgres", "aspartame")) {
-
-            if (conn != null) {
-                System.out.println("Connected to the database!");
-            } else {
-                System.out.println("Failed to make connection!");
-            }
-		
-			PreparedStatement pst = conn.prepareStatement("SELECT * FROM Users");
-	        ResultSet rs = pst.executeQuery();
-		
-		    while (rs.next()) {
-		    
-		        System.out.print(rs.getString(1));
-		        System.out.print(": ");
-		        System.out.println(rs.getString(2));
-		    }
-		    
-        } catch (SQLException e) {
-            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-		
-
 		addImage(mainFrame, controller);
 
 		mainFrame.setContentPane(controller.getPanel());
