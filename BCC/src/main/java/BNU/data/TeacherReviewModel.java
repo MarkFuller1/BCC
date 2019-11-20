@@ -2,11 +2,15 @@ package BNU.data;
 
 
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
+import BNU.logic.ReviewController;
 
 public class TeacherReviewModel {
 	private JLabel professor;
@@ -25,10 +29,27 @@ public class TeacherReviewModel {
 	private JLabel workloadScore;
 	private JScrollPane scrollPane;
 	private JPanel scrollPanePanel;
+	private ArrayList<Review> reviews;
+	private ArrayList<ReviewController> RC;
+	
+	
+	
+	public ArrayList<ReviewController> getRC() {
+		return RC;
+	}
 
-		
-	
-	
+	public void setRC(ArrayList<ReviewController> rC) {
+		RC = rC;
+	}
+
+	public ArrayList<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(ArrayList<Review> reviews) {
+		this.reviews = reviews;
+	}
+
 	public JButton getAddReview() {
 		return addReview;
 	}

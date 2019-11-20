@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,9 +138,12 @@ public class TeacherReviewView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
+		controller.getModel().setReviews(controller.getDb().getReviews(null, null));
+		controller.getModel().setRC( new ArrayList<ReviewController>());
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < controller.getModel().getReviews().size(); i++) {
 			ReviewController rm1 = new ReviewController();
+			rm1.getModel().setReviews(controller.getModel().getReviews().get(i));
 			
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
@@ -147,6 +151,7 @@ public class TeacherReviewView {
 				rm1.dispatchBuilder();
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
+				controller.getModel().getRC().add(rm1);
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
 			}
 
