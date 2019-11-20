@@ -70,6 +70,7 @@ public class MessageBoardController extends PageController{
 		
 		}else if(e.getActionCommand() == "MessageBoard:Logout") {
 			System.out.println("MessageBoard:logout button pressed");
+			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}else if(e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");

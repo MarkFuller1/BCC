@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class DatabaseMock implements dbWrapper{
 	
+	
+	
+	
 	@Override
 	public String[] getAllProfessors() {
 		String [] professors = new String[3];
@@ -126,5 +129,25 @@ public class DatabaseMock implements dbWrapper{
 	public boolean validateUser(String userName, String password) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ArrayList<Message> getAllMessages(String sender, String receiver) {
+		ArrayList<Message> messages = new ArrayList<>();
+		
+		return messages;
+	}
+
+	@Override
+	public String[] getAllFlagged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getAllUserMessagers(String receiver) {
+		String [] users = null;
+		
+		return users;
 	}
 }
