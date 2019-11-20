@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import BNU.data.Message;
 import BNU.data.MessageModel;
 import BNU.logic.MessageBoardController;
 
@@ -82,7 +84,7 @@ public class MessageBoardView {
 		controller.getModel().getBig().setLayout(new GridBagLayout());
 		// setup for the gridbaglayout
 		GridBagConstraints g = new GridBagConstraints();
-		//g.insets = new Insets(1,1,1,1);
+		
 
 		//user 
 		controller.getModel().setUserList(new JScrollPane());
@@ -95,14 +97,21 @@ public class MessageBoardView {
 		
 		controller.getModel().getUserList().setPreferredSize(new Dimension(250, 675));
 		
-		for(int i = 0; i < 10; i++) {
-			JLabel j = new JLabel("Dennis Ritchie");
+		
+		controller.getModel().setReceiver(controller.getDb().getReceiver());
+		controller.getModel().setUsers(controller.getDb().getAllUserMessagers(controller.getModel().getReceiver()));
+		controller.getModel().setSender(controller.getModel().getUsers()[0]);
+		
+		for(int i = 0; i < controller.getModel().getUsers().length; i++) {
+			JButton j = new JButton(controller.getModel().getUsers()[i]);
+			j.setActionCommand("MessageBoard:getMessage");
+			j.addActionListener(controller);
 			j.setHorizontalAlignment(SwingConstants.CENTER);
-			j.setFont(new Font("Segoe UI", Font.PLAIN, 30));
+			j.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 			JPanel temp = new JPanel();
 			temp.setLayout(new FlowLayout());
-			temp.setSize(150,200);
-			temp.setVisible(true);
+			temp.setSize(130,180);
+			temp.setBorder(new LineBorder(Color.BLACK));
 			temp.add(j);
 			controller.getModel().getUser().add(temp);
 		}
@@ -121,21 +130,55 @@ public class MessageBoardView {
 		//main scroll pane panel
 		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.RED));
 		controller.getModel().setScrollPanePanel(new JPanel());
-		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
+		controller.getModel().getScrollPanePanel().setLayout(new GridBagLayout());
+		GridBagConstraints g1 = new GridBagConstraints();
+		g1.insets = new Insets(1,1,1,1);
 		
 		
-		for(int i = 0; i < 10; i++) {
-			MessageModel rm1 = new MessageModel();
-			rm1.createMessageItem();
-			if(rm1 == null) {
-				LOGGER.info("Review Record not populated correclty.");
-			}else {
-				rm1.getPanel().setBounds(0,i*200,704,200);
-				if(i == 9 || i == 7 || i == 6) {
-					rm1.getUserId().setText("Ken Thompson");
-					//rm1.setUserId(new JLabel("Reviewer1234"));
-				}
-				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
+		
+		//make the left for the sender
+		controller.getModel().setLeft(new JPanel());
+		controller.getModel().getLeft().setLayout(new BoxLayout(controller.getModel().getLeft(), BoxLayout.Y_AXIS));
+		controller.getModel().getLeft().setPreferredSize(new Dimension(335, 560));
+		g1.gridx = 0;
+		g1.gridy = 0;
+		controller.getModel().getScrollPanePanel().add(controller.getModel().getLeft(), g1);
+		
+		//make right for the receiver
+		controller.getModel().setRight(new JPanel());
+		controller.getModel().getRight().setLayout(new BoxLayout(controller.getModel().getRight(), BoxLayout.Y_AXIS));
+		controller.getModel().getRight().setPreferredSize(new Dimension(335, 560));
+		g1.gridx = 1;
+		g1.gridy = 0;
+		controller.getModel().getScrollPanePanel().add(controller.getModel().getRight(), g1);
+		
+		
+		controller.getModel().setMessages(controller.getDb().getAllMessages(controller.getModel().getSender(), controller.getModel().getReceiver()));
+	
+		
+		
+		
+		
+		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
+			Message m = controller.getModel().getMessages().get(i);
+			JPanel pan = new JPanel(), fake = new JPanel();
+			fake.setSize(330,150);
+			pan.setSize(330,150);
+			pan.setLayout(new FlowLayout());
+			JTextPane j = new JTextPane();
+			j.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+			j.setText(m.getText());
+			JLabel l = new JLabel(m.getSender());
+			pan.add(l);
+			pan.add(j);
+			
+			if(m.getSender() == controller.getModel().getSender()) {
+					controller.getModel().getRight().add(fake);
+					controller.getModel().getLeft().add(pan);
+			}
+			else {
+				controller.getModel().getRight().add(pan);
+				controller.getModel().getLeft().add(fake);
 			}
 
 		}

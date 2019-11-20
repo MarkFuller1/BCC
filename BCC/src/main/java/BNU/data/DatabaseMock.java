@@ -1,6 +1,8 @@
 package BNU.data;
 
 import java.awt.LayoutManager;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class DatabaseMock implements dbWrapper{
@@ -131,9 +133,29 @@ public class DatabaseMock implements dbWrapper{
 		return false;
 	}
 
+	//String text, Timestamp time, String sender, String receiver)
 	@Override
 	public ArrayList<Message> getAllMessages(String sender, String receiver) {
 		ArrayList<Message> messages = new ArrayList<>();
+		
+		String mess = "Hello there!";
+		String mess1 = "Hello there mi amigo!";
+		String mess2 = "Hello there! What was the class like";
+		String mess3 = "Hello there! Not too sure what class?";
+		String mess4 = "Hello there! CSI 1430 of course!";
+		String mess5 = "Hello there! Oh yea it was pretty easy";
+		String mess6 = "Hello there! WHo taught it?";
+		String mess7 = "Hello there! DR. Booth";
+		
+		messages.add(new Message(mess, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess1, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		messages.add(new Message(mess2, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess3, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		messages.add(new Message(mess4, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess5, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		messages.add(new Message(mess6, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess7, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		
 		
 		return messages;
 	}
@@ -143,10 +165,22 @@ public class DatabaseMock implements dbWrapper{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public String getReceiver() {
+		String u = "CR7";
+		return u;
+	}
+	
+	public String getSender() {
+		String u = "KCP";
+		return u;
+	}
+	
 
 	@Override
 	public String[] getAllUserMessagers(String receiver) {
-		String [] users = null;
+		String [] users = {"MarkFuller","KevinKulda", "ConnorWoodahl", "MO10", "CR7",
+				"Dr. Cerny", "Lebron", "Tarjan", "Edison", "Lincoln", "ChickHearn", "KCP", "D12"};
 		
 		return users;
 	}
