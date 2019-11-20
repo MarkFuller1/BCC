@@ -22,6 +22,10 @@ public interface dbWrapper {
 	
 	String[] getAllFlagged();
 	
+	String getReceiver();
+	
+	String getSender();
+	
 	String[] getAllUserMessagers(String receiver);
 
 }

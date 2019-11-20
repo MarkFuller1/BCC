@@ -4,10 +4,11 @@ package BNU.logic;
 
 import java.awt.event.ActionEvent;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BNU.data.DatabaseMock;
 import BNU.data.MessageBoardModel;
 import BNU.data.dbWrapper;
 import BNU.presentation.MessageBoardView;
@@ -16,13 +17,14 @@ public class MessageBoardController extends PageController{
 	static MessageBoardView view;
 	static MessageBoardModel model = new MessageBoardModel();
 	static JPanel panel;
-	//static dbWrapper db;
+	;
 	//static private InputMessage im;
 	
 	public MessageBoardController(){
 		model = new MessageBoardModel();
 		panel = new JPanel();
 		view = new MessageBoardView();
+		db = new DatabaseMock();
 	}
 	
 	@Override
@@ -36,6 +38,10 @@ public class MessageBoardController extends PageController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public dbWrapper getDb() {
+		return db;
 	}
 	
 	public JPanel getPanel() {
@@ -75,7 +81,13 @@ public class MessageBoardController extends PageController{
 		}else if(e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
 			//update message and db
+		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
+			System.out.println("MessageBoard:getMessage button pressed");
+			JButton j = (JButton) e.getSource();
+			this.getModel().setSender(j.getText());
+			//update messages
 		}
+		
 	}
 
 }

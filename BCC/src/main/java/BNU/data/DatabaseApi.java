@@ -282,4 +282,16 @@ public class DatabaseApi implements dbWrapper {
 		
 		return users;
 	}
+
+	@Override
+	public String getReceiver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSender() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
