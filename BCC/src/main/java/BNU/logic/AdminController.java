@@ -60,6 +60,7 @@ public class AdminController extends PageController{
 		}
 		else if(e.getActionCommand() == "Admin:logout"){
 			System.out.println("Admin:logout button pressed");
+			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
 	}
