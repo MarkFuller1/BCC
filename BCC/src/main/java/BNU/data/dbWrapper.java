@@ -27,5 +27,17 @@ public interface dbWrapper {
 	String getSender();
 	
 	String[] getAllUserMessagers(String receiver);
+	
+	void upvote();
+	
+	void downvote();
+	
+	void sendMessage(Message m);
+	
+	ArrayList<Review> getReviews(String prof, String c);
+	
+	Boolean isUpvoteValid();
+	
+	Boolean isDownvoteValid();
 
 }

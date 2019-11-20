@@ -100,7 +100,11 @@ public class MessageBoardView {
 		
 		controller.getModel().setReceiver(controller.getDb().getReceiver());
 		controller.getModel().setUsers(controller.getDb().getAllUserMessagers(controller.getModel().getReceiver()));
-		controller.getModel().setSender(controller.getModel().getUsers()[0]);
+		if(controller.getModel().getSender() == null) {
+			controller.getModel().setSender(controller.getModel().getUsers()[0]);
+			System.out.println("it was null!");
+		}
+		
 		
 		for(int i = 0; i < controller.getModel().getUsers().length; i++) {
 			JButton j = new JButton(controller.getModel().getUsers()[i]);
@@ -153,35 +157,7 @@ public class MessageBoardView {
 		controller.getModel().getScrollPanePanel().add(controller.getModel().getRight(), g1);
 		
 		
-		controller.getModel().setMessages(controller.getDb().getAllMessages(controller.getModel().getSender(), controller.getModel().getReceiver()));
-	
-		
-		
-		
-		
-		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
-			Message m = controller.getModel().getMessages().get(i);
-			JPanel pan = new JPanel(), fake = new JPanel();
-			fake.setSize(330,150);
-			pan.setSize(330,150);
-			pan.setLayout(new FlowLayout());
-			JTextPane j = new JTextPane();
-			j.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			j.setText(m.getText());
-			JLabel l = new JLabel(m.getSender());
-			pan.add(l);
-			pan.add(j);
-			
-			if(m.getSender() == controller.getModel().getSender()) {
-					controller.getModel().getRight().add(fake);
-					controller.getModel().getLeft().add(pan);
-			}
-			else {
-				controller.getModel().getRight().add(pan);
-				controller.getModel().getLeft().add(fake);
-			}
-
-		}
+		updateMessages(controller);
 
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
 		controller.getModel().getScrollPane().setPreferredSize(new Dimension(710, 580));
@@ -233,6 +209,34 @@ public class MessageBoardView {
 		mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
+	}
+	
+	public static void updateMessages(MessageBoardController controller) {
+		controller.getModel().setMessages(controller.getDb().getAllMessages(controller.getModel().getSender(), controller.getModel().getReceiver()));
+		
+		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
+			Message m = controller.getModel().getMessages().get(i);
+			JPanel pan = new JPanel(), fake = new JPanel();
+			fake.setSize(330,150);
+			pan.setSize(330,150);
+			pan.setLayout(new FlowLayout());
+			JTextPane j = new JTextPane();
+			j.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+			j.setText(m.getText());
+			JLabel l = new JLabel(m.getSender());
+			pan.add(l);
+			pan.add(j);
+			
+			if(m.getSender() == controller.getModel().getSender()) {
+					controller.getModel().getRight().add(fake);
+					controller.getModel().getLeft().add(pan);
+			}
+			else {
+				controller.getModel().getRight().add(pan);
+				controller.getModel().getLeft().add(fake);
+			}
+		}
+		
 	}
 }
 

@@ -294,4 +294,40 @@ public class DatabaseApi implements dbWrapper {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void upvote() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void downvote() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<Review> getReviews(String prof, String c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isUpvoteValid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean isDownvoteValid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void sendMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
 }
