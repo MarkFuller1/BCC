@@ -35,15 +35,20 @@ import javax.swing.border.LineBorder;
 
 import BNU.data.CourseProfessor;
 import BNU.data.DatabaseMock;
+import BNU.data.Professor;
 import BNU.data.dbWrapper;
 import BNU.logic.LoginController;
 import BNU.logic.TeachersByClassController;
+import BNU.logic.service.ClassByTeacherService;
+import BNU.logic.service.TeacherByClassService;
 import net.miginfocom.swing.MigLayout;
 
 public class TeachersByClassView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+	static TeacherByClassService tbcs = new TeacherByClassService();
+
 
 	public static void BuildTeachsersByClassView(JFrame mainFrame, TeachersByClassController controller) {
 		FileHandler fileHandler = null;
@@ -90,7 +95,7 @@ public class TeachersByClassView {
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector
-		controller.getModel().setClasses(buildTeacherPanels(Arrays.asList(controller.getDb().getAllProfessorsForClass(controller.getClassName())), controller));
+		controller.getModel().setClasses(buildTeacherPanels(tbcs.getAllTeachersByClassService(controller.getClassName()), controller));
 		
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -114,16 +119,26 @@ public class TeachersByClassView {
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JComponent> buildTeacherPanels(List<String> asList, TeachersByClassController controller) {
+	private static List<JComponent> buildTeacherPanels(String[] professorNames, TeachersByClassController controller) {
 		List<JComponent> panels = new ArrayList<>();
-		dbWrapper db = new DatabaseMock();
+		//dbWrapper db = new DatabaseMock();
+		Professor[] professors = tbcs.getAllProfessorsByCourseService(professorNames, controller.getClassName());
+		
+		for(Professor prof: professors) {
+			System.out.println(prof);
+ 			CourseProfessor obj = new CourseProfessor(prof);
+ 			obj.getSelect().addActionListener(controller);
+			panels.add(obj);
+		}
+		
+		/*
 		for(String prof: asList) {
 			System.out.println(prof);
  			CourseProfessor obj = new CourseProfessor(db.getProfessor(prof));
  			obj.getSelect().addActionListener(controller);
 			panels.add(obj);
 		}
-
+		*/
 		return panels;
 	}
 }

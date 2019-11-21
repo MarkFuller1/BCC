@@ -26,7 +26,7 @@ public class MainController extends PageController {
 		model = new MainModel();
 		panel = new JPanel();
 		view = new MainView();
-		db = new DatabaseMock();
+		db = new DatabaseMock(); 
 
 		FileHandler fileHandler = null;
 		try {
