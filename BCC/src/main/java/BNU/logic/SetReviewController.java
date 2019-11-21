@@ -33,6 +33,7 @@ public class SetReviewController extends PageController{
 		if(e.getActionCommand() == "SetReview:Submit"){
 			System.out.println("SetReview:Submit button pressed");
 			// update the data
+			WindowBuilder.loadPage(new UserReviewController());
 		}
 		else if(e.getActionCommand() == "SetReview:Back") {
 			System.out.println("SetReview:Back button pressed");
