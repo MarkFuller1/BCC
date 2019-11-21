@@ -1,6 +1,7 @@
 package BNU.logic;
 
 
+import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /*
@@ -14,6 +15,6 @@ public class Main
         //System.out.println( "In Main.Java!" );
         //we need this but not THIS -> UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        WindowBuilder window = new WindowBuilder();
+        WindowBuilder window = new WindowBuilder(); 
     }
 }
