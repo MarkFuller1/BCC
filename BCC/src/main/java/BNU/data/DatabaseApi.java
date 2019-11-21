@@ -233,4 +233,40 @@ public class DatabaseApi implements dbWrapper {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String[][] getAllCoursesByProf(String[] courses) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[][] getAllTeachersByCourse(String[] professorNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean submitCredentials(String userName, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String[][] getAllReviewsForTeacherClass(String professorName, String className) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getOverallProfessorRatings(String professorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[][] getAllReviewsForUser(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

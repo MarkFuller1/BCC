@@ -17,7 +17,7 @@ public class TeacherReviewController extends PageController{
 	String teacherName;
 	String className;
 	
-	public TeacherReviewController(String teacherName, String className){
+	public TeacherReviewController(String teacherName, String className){ 
 		model = new TeacherReviewModel();
 		panel = new JPanel();
 		view = new TeacherReviewView();

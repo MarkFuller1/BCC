@@ -31,7 +31,7 @@ public class MessageBoardView {
 	public static void BuildMessageBoardView(JFrame mainFrame, MessageBoardController controller) {
 		FileHandler fileHandler = null;
 		try {
-			fileHandler = new FileHandler("BCC.log", true);
+			fileHandler = new FileHandler("BCC.log", true); 
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

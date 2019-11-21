@@ -2,8 +2,29 @@ package BNU.data;
 
 import java.awt.LayoutManager;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 
 public class DatabaseMock implements dbWrapper{
+	
+	public static Map<String,String> userCreds = new HashMap<String,String>();;
+	
+	@Override
+	public boolean validateUser(String userName, String password) {
+		userCreds.put("aspartame", "aspartame");
+		boolean isValid = false;
+		if(userCreds.get(userName) != null && userCreds.get(userName).equals(password)){
+			isValid = true;
+		}
+		
+		// Originally what worked
+//		if(userName.compareToIgnoreCase("aspartame") == 0 && password.compareToIgnoreCase("aspartame") == 0) { 
+//			isValid = true;
+//		}
+		
+		return isValid;
+	}
 	
 	@Override
 	public String[] getAllProfessors() {
@@ -120,5 +141,111 @@ public class DatabaseMock implements dbWrapper{
 			
 		}
 		return null;
+	}
+	
+	@SuppressWarnings("null")
+	public String[][] getAllCoursesByProf(String[] courses){
+		String[][] courseObjs = new String[courses.length][3];
+		
+		courseObjs[0][0] = "Dr. Nikola Tesla";
+		courseObjs[0][1] = "99";
+		courseObjs[0][2] = "4";
+		
+		courseObjs[1][0] = "Dr. Thomas Edison";
+		courseObjs[1][1] = "99";
+		courseObjs[1][2] = "4";
+		
+		courseObjs[2][0] = "Dr. Alexander Grahm-Bell";
+		courseObjs[2][1] = "99";
+		courseObjs[2][2] = "4";
+		
+		return courseObjs;
+	}
+	
+	public String[][] getAllTeachersByCourse(String[] professorNames){
+		String[][] courseObjs = new String[professorNames.length][3];
+		
+		courseObjs[0][0] = "Dr. Nikola Tesla";
+		courseObjs[0][1] = "99";
+		courseObjs[0][2] = "4";
+		
+		courseObjs[1][0] = "Dr. Thomas Edison";
+		courseObjs[1][1] = "99";
+		courseObjs[1][2] = "4";
+		
+		courseObjs[2][0] = "Dr. Alexander Grahm-Bell";
+		courseObjs[2][1] = "99";
+		courseObjs[2][2] = "4";
+		
+		return courseObjs;
+	}
+
+	@Override
+	public boolean submitCredentials(String userName, String password) {
+		boolean submitted = false;
+		
+		if(userCreds.put(userName, password) == null) {
+			submitted = true;
+		}
+		
+		return submitted;
+	}
+	
+	public String[][] getAllReviewsForTeacherClass(String professorName,String className){
+		final int NUM_OF_REVIEWS = 10;		
+		//Vector<String[]> reviews = new Vector<String[]>();
+		String[][] strReviews = new String[NUM_OF_REVIEWS][3];
+
+		for(int i = 0; i < NUM_OF_REVIEWS; i++) {
+			strReviews[i][0] = "Perpetual motion, the action of a device that, once set in motion,\n"
+					+ " would continue in motion forever, with no additional energy required to maintain it.\n"
+					+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 
+					"Perpetual motion, although impossible to produce, has fascinated both inventors and the general\n"
+					+ " public for hundreds of years. The enormous appeal of perpetual motion resides in the promise of a\n"
+					+ " virtually free and limitless source of power. The fact that perpetual-motion machines cannot work\n"
+					+ " because they violate the laws of thermodynamics has not discouraged inventors and hucksters from\n"
+					+ " attempting to break, circumvent, or ignore those laws.";
+			strReviews[i][1] = "5";
+			strReviews[i][2] = "Steven Jobs";
+			
+		}
+		return strReviews;
+	}
+	
+	public String[] getOverallProfessorRatings(String professorName) {
+		
+		Map<String,String[]> profRatings = new HashMap<String,String[]>();
+		profRatings.put("Dr. Nikola Tesla", new String[]{"100","100","100","100"});
+		profRatings.put("Dr. Thomas Edison", new String[]{"90","90","90","90"});
+		profRatings.put("Dr. Alexander Grahm-Bell", new String[]{"80","80","80","80"});
+		
+		if(profRatings.containsKey(professorName)) {
+			return profRatings.get(professorName);
+		}
+		
+		return new String[]{"80","80","80","80"};
+	}
+
+	@Override
+	public String[][] getAllReviewsForUser(String userName) {
+		final int NUM_OF_REVIEWS = 10;		
+		//Vector<String[]> reviews = new Vector<String[]>();
+		String[][] strReviews = new String[NUM_OF_REVIEWS][4];
+
+		for(int i = 0; i < NUM_OF_REVIEWS; i++) {
+			strReviews[i][0] = "Perpetual motion, the action of a device that, once set in motion,\n"
+					+ " would continue in motion forever, with no additional energy required to maintain it.\n"
+					+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 
+					"Perpetual motion, although impossible to produce, has fascinated both inventors and the general\n"
+					+ " public for hundreds of years. The enormous appeal of perpetual motion resides in the promise of a\n"
+					+ " virtually free and limitless source of power. The fact that perpetual-motion machines cannot work\n"
+					+ " because they violate the laws of thermodynamics has not discouraged inventors and hucksters from\n"
+					+ " attempting to break, circumvent, or ignore those laws.";
+			strReviews[i][1] = "5";
+			strReviews[i][2] = "Steven Jobs";
+			strReviews[i][3] = "CSI 1430";
+			
+		}
+		return strReviews;
 	}
 }
