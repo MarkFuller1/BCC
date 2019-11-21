@@ -20,17 +20,21 @@ import javax.swing.border.LineBorder;
 
 import BNU.data.ReviewModel2;
 import BNU.logic.UserReviewController;
+import BNU.logic.service.UserReviewService;
+
 
 public class UserReviewView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(UserReviewController.class.getName());
+	static UserReviewService urs;
 
 	@SuppressWarnings("unused")
 	public static void BuildUserReviewView(JFrame mainFrame, UserReviewController controller) {
+		urs = new UserReviewService();
 		FileHandler fileHandler = null;
 		try {
-			fileHandler = new FileHandler("BCC.log", true);
+			fileHandler = new FileHandler("BCC.log", true); 
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,15 +96,19 @@ public class UserReviewView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
-		
+		//get Bill Gates from Singleton
+		String[][] reviews = urs.getReviewsForUser("Bill Gates");
+	
 		for(int i = 0; i < 10; i++) {
-			ReviewModel2 rm1 = new ReviewModel2();
-			rm1.createReviewItem();
-			if(rm1 == null) {
+			ReviewModel2 rm2 = new ReviewModel2();
+			
+			if(rm2 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
-				rm1.getPanel().setBounds(0,i*200,804,250);
-				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
+				//rm1.createReviewItem();
+				rm2.createReviewItem(reviews[i][0],reviews[i][1],reviews[i][2], reviews[i][3]);
+				rm2.getPanel().setBounds(0,i*200,804,250);
+				controller.getModel().getScrollPanePanel().add(rm2.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
 			}
 

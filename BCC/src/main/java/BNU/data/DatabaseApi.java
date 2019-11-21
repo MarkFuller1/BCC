@@ -25,7 +25,7 @@ public class DatabaseApi implements dbWrapper {
 		}
 	}
 
-	private static Connection getRemoteConnection() {
+	private static Connection getRemoteConnection() { 
 		if (System.getenv("RDS_HOSTNAME") != null) {
 			try {
 				Class.forName("org.postgresql.Driver");
@@ -236,6 +236,9 @@ public class DatabaseApi implements dbWrapper {
 	}
 
 	@Override
+
+	//public String[][] getAllCoursesByProf(String[] courses) {
+
 	public ArrayList<Message> getAllMessages(String sender, String receiver) {
 		ArrayList<Message> messages = new ArrayList<>();
 		
@@ -262,6 +265,7 @@ public class DatabaseApi implements dbWrapper {
 	}
 
 	@Override
+	//public String[][] getAllTeachersByCourse(String[] professorNames) {
 	public String[] getAllUserMessagers(String receiver) {
 		
 		String[] users = null;
@@ -285,11 +289,21 @@ public class DatabaseApi implements dbWrapper {
 
 	@Override
 	public String getReceiver() {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+
+	public boolean submitCredentials(String userName, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	//public String[][] getAllReviewsForTeacherClass(String professorName, String className) {
+
 	public String getSender() {
 		// TODO Auto-generated method stub
 		return null;
@@ -314,12 +328,22 @@ public class DatabaseApi implements dbWrapper {
 	}
 
 	@Override
+
+	//public String[] getOverallProfessorRatings(String professorName) {
+
 	public Boolean isUpvoteValid() {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+
+	public String[][] getAllReviewsForUser(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public Boolean isDownvoteValid() {
 		// TODO Auto-generated method stub
 		return null;
@@ -330,4 +354,31 @@ public class DatabaseApi implements dbWrapper {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public java.lang.String[][] getAllTeachersByCourse(java.lang.String[] professorNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public java.lang.String[][] getAllReviewsForTeacherClass(java.lang.String professorName,
+			java.lang.String className) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public java.lang.String[] getOverallProfessorRatings(java.lang.String professorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[][] getAllCoursesByProf(String[] courses) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

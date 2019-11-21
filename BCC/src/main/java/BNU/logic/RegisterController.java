@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import BNU.data.DatabaseMock;
 import BNU.data.RegisterModel;
 import BNU.data.dbWrapper;
+import BNU.logic.service.LoginService;
+import BNU.logic.service.RegisterService;
 import BNU.presentation.RegisterView;
 
 public class RegisterController extends PageController {
@@ -21,18 +23,20 @@ public class RegisterController extends PageController {
 	RegisterView view;
 	RegisterModel model = new RegisterModel();
 	JPanel panel;
+	static RegisterService rs;
 	//dbWrapper db;
 
 	public RegisterController() {
 		model = new RegisterModel();
 		panel = new JPanel();
 		view = new RegisterView();
-		db = new DatabaseMock();
+		rs = new RegisterService();
+		//db = new DatabaseMock();
 
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
-		} catch (SecurityException | IOException e1) {
+		} catch (SecurityException | IOException e1) { 
 			System.out.println("Logger failed to load in " + RegisterController.class.getName());
 		}
 
@@ -44,7 +48,25 @@ public class RegisterController extends PageController {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "register:createAccount") {
 			LOGGER.info("Account Registered");
-			WindowBuilder.loadPage(new LoginController());
+			
+			//WindowBuilder.loadPage(new LoginController());
+			
+			//Commented out to make easier access to application. Code is good.
+			if(!(rs.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText()))) {
+				if(rs.insertCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
+					LOGGER.info("Added " + model.getTxt_username().getText() + " to the system.");
+					WindowBuilder.loadPage(new LoginController());
+				}else { 
+					//potentially throw bad database error exception
+					LOGGER.severe("Cannot insert credentials into database to register user");
+					model.getTxt_username().setText("Enter Username Again");
+					model.getTxt_password().setText("Enter Password Again");
+				}
+			    
+			}else {
+				model.getTxt_username().setText("Enter Username Again");
+				model.getTxt_password().setText("Enter Password Again");
+			}
 		}
 	}
 

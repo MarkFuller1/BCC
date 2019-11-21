@@ -12,7 +12,7 @@ import BNU.presentation.UserReviewView;
 
 public class UserReviewController extends PageController{
 	static UserReviewView view;
-	static UserReviewModel model = new UserReviewModel();
+	static UserReviewModel model = new UserReviewModel(); 
 	static JPanel panel;
 	//static dbWrapper db;
 	

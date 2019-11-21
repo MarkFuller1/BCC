@@ -26,7 +26,7 @@ public class RegisterView {
 			LOGGER.addHandler(fileHandler);
 			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
-			System.out.println("Logger failed to load in " + RegisterView.class.getName());
+			System.out.println("Logger failed to load in " + RegisterView.class.getName()); 
 		}
 	}
 

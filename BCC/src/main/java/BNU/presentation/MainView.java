@@ -20,12 +20,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import BNU.logic.MainController;
+import BNU.logic.service.MainService;
 
 public class MainView {
 	static JButton butNavigation;
 	static JLabel labTitle;
+	static MainService ms;
 
+	@SuppressWarnings("unchecked")
 	public static void BuildMainView(JFrame mainFrame, MainController controller) {
+		ms = new MainService();
 
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(new BorderLayout(10, 10));
@@ -37,7 +41,7 @@ public class MainView {
 		controller.getModel().getBtn_Message().setActionCommand("main:profile");
 		controller.getModel().getBtn_Message().addActionListener(controller);
 		controller.getModel().getBtn_Message().setFont(new Font("Segoe UI", Font.BOLD, 18));;
-		controller.getModel().getBtn_Message().setBounds(10, 11, 106, 41);
+		controller.getModel().getBtn_Message().setBounds(10, 11, 106, 41); 
 		controller.getModel().getNorth_east_Panel().add(controller.getModel().getBtn_Message());
 		
 		// build log out button
@@ -69,7 +73,8 @@ public class MainView {
 		controller.getModel().getTxt_SearchClass().setBounds(41, 164, 205, 43);
 		controller.getModel().getWest_Panel().add(controller.getModel().getTxt_SearchClass());
 		
-		controller.getModel().setCb_SearchClass(new JComboBox(controller.getDb().getAllClasses()));
+		//controller.getModel().setCb_SearchClass(new JComboBox(controller.getDb().getAllClasses()));
+		controller.getModel().setCb_SearchClass(new JComboBox<String>(ms.getAllClassesOffered()));
 		controller.getModel().getCb_SearchClass().setActionCommand("main:searchClass");
 		controller.getModel().getCb_SearchClass().addActionListener(controller);
 		controller.getModel().getCb_SearchClass().setBounds(41, 218, 205, 43);
@@ -86,7 +91,8 @@ public class MainView {
 		controller.getModel().getTxt_SearchProfessor().setBounds(41, 164, 205, 43);
 		controller.getModel().getEast_Panel().add(controller.getModel().getTxt_SearchProfessor());
 		
-		controller.getModel().setCb_SearchProfessor(new JComboBox<String>(controller.getDb().getAllProfessors()));
+		//controller.getModel().setCb_SearchProfessor(new JComboBox<String>(controller.getDb().getAllProfessors()));
+		controller.getModel().setCb_SearchProfessor(new JComboBox<String>(ms.getAllProfs()));
 		controller.getModel().getCb_SearchProfessor().setActionCommand("main:searchProfessor");
 		controller.getModel().getCb_SearchProfessor().addActionListener(controller);
 		controller.getModel().getCb_SearchProfessor().setBounds(41, 218, 205, 43);
