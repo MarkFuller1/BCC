@@ -91,8 +91,10 @@ public class TeacherReviewController extends PageController{
 		if(e.getActionCommand() == "teacher_review:back"){
 			System.out.println("teacher_review:back button pressed");
 			WindowBuilder.loadPage(new MainController());
-		
-	}
+		}else if(e.getActionCommand() == "teacher_review:add"){
+			System.out.println("teacher_review:add Review button pressed");
+			WindowBuilder.loadPage(new SetReviewController());
+		}
 }
 
 }
