@@ -71,6 +71,7 @@ public class UserReviewController extends PageController{
 		}
 		else if(e.getActionCommand() == "UserReview:logout"){
 			System.out.println("UserReview:logout button pressed");
+			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
 	}

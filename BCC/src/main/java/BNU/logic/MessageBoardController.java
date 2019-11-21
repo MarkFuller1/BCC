@@ -3,11 +3,14 @@ package BNU.logic;
 
 
 import java.awt.event.ActionEvent;
+import java.sql.Timestamp;
 
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BNU.data.DatabaseMock;
+import BNU.data.Message;
 import BNU.data.MessageBoardModel;
 import BNU.data.dbWrapper;
 import BNU.presentation.MessageBoardView;
@@ -16,26 +19,30 @@ public class MessageBoardController extends PageController{
 	static MessageBoardView view;
 	static MessageBoardModel model = new MessageBoardModel();
 	static JPanel panel;
-	//static dbWrapper db;
+	public JFrame mainF;
+	
 	//static private InputMessage im;
 	
 	public MessageBoardController(){
 		model = new MessageBoardModel();
 		panel = new JPanel();
 		view = new MessageBoardView();
+		db = new DatabaseMock();
 	}
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
-//		if(db == null) {
-//			this.db = db;
-//		}
+		this.mainF = mainFrame;
 		try {
 			MessageBoardView.BuildMessageBoardView(mainFrame, this);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public dbWrapper getDb() {
+		return db;
 	}
 	
 	public JPanel getPanel() {
@@ -70,8 +77,22 @@ public class MessageBoardController extends PageController{
 		
 		}else if(e.getActionCommand() == "MessageBoard:Logout") {
 			System.out.println("MessageBoard:logout button pressed");
+			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
+		}else if(e.getActionCommand() == "MessageBoard:send") {
+			System.out.println("MessageBoard:send button pressed");
+			Message mess = new Message(this.getModel().getBar().getText(), new Timestamp(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
+			db.sendMessage(mess);
+			MessageBoardView.BuildMessageBoardView(this.mainF, this);
+			System.out.println("Message sent and without mock this should create a live update!");
+		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
+			System.out.println("MessageBoard:getMessage button pressed");
+			JButton j = (JButton) e.getSource();
+			this.getModel().setSender(j.getText());
+			MessageBoardView.BuildMessageBoardView(this.mainF, this);
+			
 		}
+		
 	}
 
 }
