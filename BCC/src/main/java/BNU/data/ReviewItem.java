@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
-import refactor.these.ReviewModel2;
 
 public class ReviewItem {
 		

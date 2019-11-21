@@ -121,4 +121,10 @@ public class DatabaseMock implements dbWrapper{
 		}
 		return null;
 	}
+
+	@Override
+	public boolean validateUser(String userName, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

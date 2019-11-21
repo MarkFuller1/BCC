@@ -1,4 +1,4 @@
-package refactor.these;
+package BNU.presentation;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import BNU.logic.ReviewController;
 import BNU.logic.UserReviewController;
 
 public class ReviewView {
