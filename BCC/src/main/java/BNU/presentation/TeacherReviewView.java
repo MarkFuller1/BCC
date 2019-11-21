@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,10 +23,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import BNU.logic.LoginController;
+import BNU.logic.ReviewController;
 import BNU.logic.TeacherReviewController;
 import BNU.logic.service.TeacherReviewViewService;
-import refactor.these.ReviewController;
-import refactor.these.ReviewModel2;
+
+
 
 public class TeacherReviewView {
 	static JButton butNavigation;
@@ -99,8 +101,17 @@ public class TeacherReviewView {
 		controller.getModel().getBtnBack().setActionCommand("teacher_review:back");
 		controller.getModel().getBtnBack().addActionListener(controller);
 		
+
 		String[] scores = new String[4];
 		scores = rs.getProfessorOverallRatings(controller.getTeacherName());
+
+		//SetReview button
+		controller.getModel().setBtnBack(new JButton("Add Review"));
+		controller.getPanel().add(controller.getModel().getBtnBack()).setBounds(825, 11, 150, 41);
+		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getBtnBack().setActionCommand("teacher_review:add");
+		controller.getModel().getBtnBack().addActionListener(controller);
+
 		
 		// score score label
 		//controller.getModel().setScoreScore(new JLabel("83"));
@@ -140,10 +151,15 @@ public class TeacherReviewView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
+
 		String[][] reviews = rs.getReviewsForTeacherClass(controller.getTeacherName(),controller.getClassName());
+
+		//controller.getModel().setReviews(controller.getDb().getReviews(null, null));
+		//controller.getModel().setRC( new ArrayList<ReviewController>());
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < reviews.length; i++) {
 			ReviewController rm1 = new ReviewController();
+			//rm1.getModel().setReviews(controller.getModel().getReviews().get(i));
 			
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
@@ -152,6 +168,7 @@ public class TeacherReviewView {
 				rm1.dispatchBuilder(reviews[i][0], reviews[i][1], reviews[i][2]);
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
+				//controller.getModel().getRC().add(rm1);
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
 			}
 

@@ -1,4 +1,4 @@
-package refactor.these;
+package BNU.presentation;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import BNU.logic.ReviewController;
 import BNU.logic.UserReviewController;
 
 public class ReviewView {
@@ -76,9 +77,11 @@ public class ReviewView {
 
 		// review score label
 		//String scr = getScoreForAReview(controller.getModel().get)
-		controller.getModel().setReviewScore(new JLabel("4"));
+		//controller.getModel().setReviewScore(new JLabel("4"));
 		
 		
+
+		controller.getModel().setReviewScore(new JLabel(controller.getModel().getReviews().getVotes().toString()));
 		controller.getModel().getReviewScore().setHorizontalAlignment(SwingConstants.CENTER);
 		controller.getModel().getReviewScore().setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		g.gridx = 0;
@@ -100,19 +103,13 @@ public class ReviewView {
 		controller.getModel().getTextPane().setEditable(false);
 		
 		
-		controller.getModel().getTextPane().setText("Perpetual motion, the action of a device that, once set in motion,\n"
-				+ " would continue in motion forever, with no additional energy required to maintain it.\n"
-				+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 
-				"Perpetual motion, although impossible to produce, has fascinated both inventors and the general\n"
-				+ " public for hundreds of years. The enormous appeal of perpetual motion resides in the promise of a\n"
-				+ " virtually free and limitless source of power. The fact that perpetual-motion machines cannot work\n"
-				+ " because they violate the laws of thermodynamics has not discouraged inventors and hucksters from\n"
-				+ " attempting to break, circumvent, or ignore those laws.");
+		controller.getModel().getTextPane().setText(controller.getModel().getReviews().getDescription());
+		
 		
 		controller.getModel().getReviewScrollPane().setViewportView(controller.getModel().getTextPane());
 		
 		// reviewer label
-		controller.getModel().setReviewerID(new JLabel("Steven Jobs"));
+		controller.getModel().setReviewerID(new JLabel(controller.getModel().getReviews().getUser()));
 		controller.getModel().getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		g.gridx = 0;
 		g.gridy = 0;

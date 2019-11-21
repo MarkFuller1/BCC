@@ -18,10 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
+import BNU.data.ReviewModel2;
 import BNU.logic.UserReviewController;
 import BNU.logic.service.UserReviewService;
-import refactor.these.ReviewController;
-import refactor.these.ReviewModel2;
+
 
 public class UserReviewView {
 	static JButton butNavigation;

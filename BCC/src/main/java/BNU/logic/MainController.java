@@ -94,6 +94,7 @@ public class MainController extends PageController {
 		}
 		else if(e.getActionCommand() == "main:logout"){
 			System.out.println("main:logout button pressed");
+			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
 
