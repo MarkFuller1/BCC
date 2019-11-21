@@ -1,11 +1,11 @@
-package refactor.these;
+package BNU.data;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,7 +25,14 @@ public class ReviewModel2 {
 	private JButton btnMessageReviewer;
 	private JPanel panel;
 	private JTextPane textPane;
+	private Review reviews;
 	
+	public Review getReviews() {
+		return reviews;
+	}
+	public void setReviews(Review reviews) {
+		this.reviews = reviews;
+	}
 	
 	public JButton getBtnUp() {
 		return btnUp;

@@ -16,5 +16,9 @@ public class Main
         //we need this but not THIS -> UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         WindowBuilder window = new WindowBuilder(); 
+        System.out.println( "In Main.Java!" );
+        //UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+       // WindowBuilder window = new WindowBuilder();
+
     }
 }

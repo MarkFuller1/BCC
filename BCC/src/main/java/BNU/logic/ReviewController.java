@@ -1,16 +1,20 @@
-package refactor.these;
+package BNU.logic;
 
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import BNU.data.ReviewModel2;
 import BNU.data.UserReviewModel;
 import BNU.data.dbWrapper;
 import BNU.logic.MessageBoardController;
 import BNU.logic.PageController;
 import BNU.logic.WindowBuilder;
+import BNU.presentation.ReviewView;
 import BNU.presentation.UserReviewView;
 
 public class ReviewController implements ActionListener {
@@ -67,10 +71,28 @@ public class ReviewController implements ActionListener {
 			WindowBuilder.loadPage(new MessageBoardController());
 		}
 		else if(e.getActionCommand() == "Review:downvote") {
-			//up the vote in the database
+			System.out.println("Review:downvote button pressed");
+			if(db.isDownvoteValid()) {
+				//db.downvote();
+				int total = this.getModel().getReviews().getVotes();
+				total --;
+				this.getModel().getReviews().setVotes(total);
+				this.getModel().getReviewScore().setText(getModel().getReviews().getVotes().toString());
+				this.getModel().getReviewScore().repaint();
+			}
+			
+			
 		}
 		else if(e.getActionCommand() == "Review:upvote") {
-			//up the vote in the database
+			System.out.println("Review:upvote button pressed");
+			if(db.isUpvoteValid()) {
+				//db.upvote();
+			int total = getModel().getReviews().getVotes();
+			total ++;
+			getModel().getReviews().setVotes(total);
+			getModel().getReviewScore().setText(getModel().getReviews().getVotes().toString());
+			getModel().getReviewScore().repaint();
+			}
 		}
 	}
 
