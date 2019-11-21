@@ -1,50 +1,138 @@
 package BNU.data;
 
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class MessageBoardModel {
-	private JLabel User;
+	
 	private JLabel UserName;
-	private JLabel lblClass;
-	private JLabel lblClassName;
-	private JLabel score;
-	private JLabel helpfulness;
 	private JButton btnBack;
 	private JButton btnMessage;
 	private JButton log_out;
+	private String sender;
 
-
-	private JLabel teachingAbility;
-	private JLabel workload;
-	private JLabel scoreScore;
-	private JLabel helpfulnessScore;
-	private JLabel teachingAbilityScore;
-	private JLabel workloadScore;
 	private JScrollPane scrollPane;
+	private JPanel user;
+	private JScrollPane userList;
 	private JPanel scrollPanePanel;
+	private JPanel left;
+	private JPanel right;
+	private JPanel big;
+	private JPanel search;
+	private JTextArea bar;
 
-		
+	private ArrayList<Message> messages;
+	private String receiver;
+	private String [] users;
 	
 	
+
+	
+	
+	public JPanel getLeft() {
+		return left;
+	}
+
+	public void setLeft(JPanel left) {
+		this.left = left;
+	}
+
+	public JPanel getRight() {
+		return right;
+	}
+
+	public void setRight(JPanel right) {
+		this.right = right;
+	}
+
+	public String getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+
+	public String[] getUsers() {
+		return users;
+	}
+
+	public void setUsers(String[] users) {
+		this.users = users;
+	}
+
+	public ArrayList<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
+	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public JPanel getSearch() {
+		return search;
+	}
+
+	public void setSearch(JPanel search) {
+		this.search = search;
+	}
+
+	public JTextArea getBar() {
+		return bar;
+	}
+
+	public void setBar(JTextArea bar) {
+		this.bar = bar;
+	}
+
+	public JPanel getUser() {
+		return user;
+	}
+
+	public void setUser(JPanel user) {
+		this.user = user;
+	}
+
+	public JPanel getBig() {
+		return big;
+	}
+
+	public void setBig(JPanel big) {
+		this.big = big;
+	}
+
+	public JScrollPane getUserList() {
+		return userList;
+	}
+
+	public void setUserList(JScrollPane userList) {
+		this.userList = userList;
+	}
+
 	public JButton getLog_out() {
 		return log_out;
 	}
 
+	
 	public void setLog_out(JButton log_out) {
 		this.log_out = log_out;
-	}
-
-	public JLabel getUser() {
-		return User;
-	}
-
-	public void setUser(JLabel User) {
-		this.User = User;
 	}
 
 	public JLabel getUserName() {
@@ -53,38 +141,6 @@ public class MessageBoardModel {
 
 	public void setUserName(JLabel UserName) {
 		this.UserName = UserName;
-	}
-
-	public JLabel getLblClass() {
-		return lblClass;
-	}
-
-	public void setLblClass(JLabel lblClass) {
-		this.lblClass = lblClass;
-	}
-
-	public JLabel getLblClassName() {
-		return lblClassName;
-	}
-
-	public void setLblClassName(JLabel lblClassName) {
-		this.lblClassName = lblClassName;
-	}
-
-	public JLabel getScore() {
-		return score;
-	}
-
-	public void setScore(JLabel score) {
-		this.score = score;
-	}
-
-	public JLabel getHelpfulness() {
-		return helpfulness;
-	}
-
-	public void setHelpfulness(JLabel helpfulness) {
-		this.helpfulness = helpfulness;
 	}
 
 	public JButton getBtnBack() {
@@ -100,53 +156,6 @@ public class MessageBoardModel {
 
 	public void setBtnMessage(JButton btnMessage) {
 		this.btnMessage = btnMessage;
-	}
-	public JLabel getTeachingAbility() {
-		return teachingAbility;
-	}
-
-	public void setTeachingAbility(JLabel teachingAbility) {
-		this.teachingAbility = teachingAbility;
-	}
-
-	public JLabel getWorkload() {
-		return workload;
-	}
-
-	public void setWorkload(JLabel workload) {
-		this.workload = workload;
-	}
-
-	public JLabel getScoreScore() {
-		return scoreScore;
-	}
-
-	public void setScoreScore(JLabel scoreScore) {
-		this.scoreScore = scoreScore;
-	}
-
-	public JLabel getHelpfulnessScore() {
-		return helpfulnessScore;
-	}
-
-	public void setHelpfulnessScore(JLabel helpfulnessScore) {
-		this.helpfulnessScore = helpfulnessScore;
-	}
-
-	public JLabel getTeachingAbilityScore() {
-		return teachingAbilityScore;
-	}
-
-	public void setTeachingAbilityScore(JLabel teachingAbilityScore) {
-		this.teachingAbilityScore = teachingAbilityScore;
-	}
-
-	public JLabel getWorkloadScore() {
-		return workloadScore;
-	}
-
-	public void setWorkloadScore(JLabel workloadScore) {
-		this.workloadScore = workloadScore;
 	}
 
 	public JScrollPane getScrollPane() {

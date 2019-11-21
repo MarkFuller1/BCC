@@ -1,6 +1,8 @@
 package BNU.data;
 
 import java.awt.LayoutManager;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Vector;
 
 public class DatabaseMock implements dbWrapper{
 	
+
 	public static Map<String,String> userCreds = new HashMap<String,String>();;
 	
 	@Override
@@ -25,6 +28,10 @@ public class DatabaseMock implements dbWrapper{
 		
 		return isValid;
 	}
+
+	
+	
+
 	
 	@Override
 	public String[] getAllProfessors() {
@@ -142,6 +149,7 @@ public class DatabaseMock implements dbWrapper{
 		}
 		return null;
 	}
+
 	
 	@SuppressWarnings("null")
 	public String[][] getAllCoursesByProf(String[] courses){
@@ -248,4 +256,121 @@ public class DatabaseMock implements dbWrapper{
 		}
 		return strReviews;
 	}
+
+	//String text, Timestamp time, String sender, String receiver)
+	@Override
+	public ArrayList<Message> getAllMessages(String sender, String receiver) {
+		ArrayList<Message> messages = new ArrayList<>();
+		
+		String mess = "Hello there!";
+		String mess1 = "Hello there mi amigo!";
+		String mess2 = "Hello there! What was the class like";
+		String mess3 = "Hello there! Not too sure what class?";
+		String mess4 = "Hello there! CSI 1430 of course!";
+		String mess5 = "Hello there! Oh yea it was pretty easy";
+		String mess6 = "Hello there! WHo taught it?";
+		String mess7 = "Hello there! DR. Booth";
+		
+		messages.add(new Message(mess, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess1, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		messages.add(new Message(mess2, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess3, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		messages.add(new Message(mess4, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess5, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		messages.add(new Message(mess6, new Timestamp(System.currentTimeMillis()), sender, receiver));
+		messages.add(new Message(mess7, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		
+		
+		return messages;
+	}
+
+	@Override
+	public String[] getAllFlagged() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public String getReceiver() {
+		String u = "You";
+		return u;
+	}
+	
+	public String getSender() {
+		String u = "KCP";
+		return u;
+	}
+	
+
+	@Override
+	public String[] getAllUserMessagers(String receiver) {
+		String [] users = {"MarkFuller","KevinKulda", "ConnorWoodahl", "MO10", "CR7",
+				"Dr. Cerny", "Lebron", "Tarjan", "Edison", "Lincoln", "ChickHearn", "KCP", "D12"};
+		
+		return users;
+	}
+
+	@Override
+	public void upvote() {
+		//update the database
+		
+	}
+
+	@Override
+	public void downvote() {
+		//update the database
+		
+	}
+
+	@Override
+	public ArrayList<Review> getReviews(String prof, String c) {
+		ArrayList<Review> revs = new ArrayList<>();
+		//String description, Timestamp time, String user, String professor, String class1
+		String des = "Perpetual motion, the action of a device that, once set in motion,\r\n" + 
+				" would continue in motion forever, with no additional energy required to maintain it.\r\n" + 
+				" Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\r\n" + 
+				"Perpetual motion, although impossible to produce, has fascinated both inventors and the general \r\n" + 
+				" public for hundreds of years. The enormous appeal of perpetual motion resides in the promise of a\r\n" + 
+				" virtually free and limitless source of power. The fact that perpetual-motion machines cannot\r\n" + 
+				" because they violate the laws of thermodynamics has not discouraged inventors and hucksters \r\n" + 
+				" attempting to break, circumvent, or ignore those laws.";
+		
+		
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3471"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3472"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3473"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3474"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3475"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3476"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 3477"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 1471"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 2472"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 4473"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 5474"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 6475"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 7476"));
+		revs.add(new Review(des, new Timestamp(System.currentTimeMillis()), "HAppyReviewer", "Dr. Cerny", "CSI 8477"));
+		
+		
+		
+		return revs;
+	}
+
+	@Override
+	public Boolean isUpvoteValid() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public Boolean isDownvoteValid() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public void sendMessage(Message m) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

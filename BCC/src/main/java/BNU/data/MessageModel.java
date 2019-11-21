@@ -92,23 +92,9 @@ public class MessageModel {
 		//MessageModel rm = new MessageModel();
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-		panel.setSize(804,200);
+		panel.setSize(604,200);
 		panel.setVisible(true);
-		/*
-		// up button
-		setBtnUp(new JButton("U"));
-		getBtnUp().setForeground(Color.BLUE);
-		getBtnUp().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		panel.add(getBtnUp());
-
-
-		// down button
-		setBtnDown(new JButton("D"));
-		getBtnDown().setForeground(Color.RED);
-		getBtnDown().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		panel.add(getBtnDown());
-		*/
-		
+	
 		
 		// Message score label
 		setUserId(new JLabel("Dennis Ritchie"));
@@ -124,17 +110,7 @@ public class MessageModel {
 		setTextPane(new JTextPane());
 		getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		getTextPane().setEditable(false);
-		/*
-		getTextPane().setText("Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n"
-				+ "Write a comment to another user here please. Write a comment to another user here please.\n");
-				*/
+		
 		getTextPane().setText("Perpetual motion, the action of a device that, once set in motion,\n"
 				+ " would continue in motion forever, with no additional energy required to maintain it.\n"
 				+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 

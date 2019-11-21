@@ -19,7 +19,6 @@ public class ClassByTeacherController extends PageController{
 	static ClassByTeacherView view;
 	static ClassByTeacherModel model = new ClassByTeacherModel();
 	static JPanel panel;
-	//static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(ClassByTeacherController.class.getName());
 	
 	public String professorName;

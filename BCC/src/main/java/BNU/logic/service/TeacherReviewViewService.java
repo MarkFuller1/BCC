@@ -1,6 +1,6 @@
 package BNU.logic.service;
 
-import refactor.these.ReviewController;
+import BNU.logic.ReviewController;
 
 public class TeacherReviewViewService {
 

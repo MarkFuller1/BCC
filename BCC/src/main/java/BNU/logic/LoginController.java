@@ -71,6 +71,7 @@ public class LoginController extends PageController {
 			WindowBuilder.loadPage(new RegisterController());
 		} else if (e.getActionCommand() == "login:Authorize") {
 			System.out.println("login:Authorize Button Pressed");
+
 			//Commented out to make easier access to application. Code is good.
 			//if(ls.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
 				WindowBuilder.loadPage(new MainController()); 
@@ -79,7 +80,13 @@ public class LoginController extends PageController {
 			//	model.getTxt_password().setText("Enter Password");
 			//}
 			
+
+			WindowBuilder.loadPage(new MainController());
+		} else if(e.getActionCommand() == "login:AuthorizeAdmin") {
+			WindowBuilder.loadPage(new AdminController());
+
 		}
+		
 
 	}
 
