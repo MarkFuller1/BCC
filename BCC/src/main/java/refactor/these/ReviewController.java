@@ -13,14 +13,14 @@ import BNU.logic.PageController;
 import BNU.logic.WindowBuilder;
 import BNU.presentation.UserReviewView;
 
-public class ReviewController implements ActionListener {
+public class ReviewController extends PageController implements ActionListener {
 	static ReviewView view;
 	static ReviewModel2 model = new ReviewModel2();
 	static JPanel panel;
-	static dbWrapper db;
+	//static dbWrapper db;
 	
 	public ReviewController() {
-		model = new ReviewModel2();
+		model = new ReviewModel2(); 
 		panel = new JPanel();
 		view = new ReviewView();
 	}
@@ -56,9 +56,9 @@ public class ReviewController implements ActionListener {
 		return db;
 	}
 
-	public static void setDb(dbWrapper db) {
-		ReviewController.db = db;
-	}
+//	public static void setDb(dbWrapper db) {
+//		ReviewController.db = db;
+//	}
 
 	
 	public void actionPerformed(ActionEvent e) {
@@ -81,6 +81,23 @@ public class ReviewController implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void dispatchBuilder(String content, String score, String reviewerID) {
+		try {
+			//ReviewView.BuildReviewView(this);
+			ReviewView.BuildReviewView(this, content, score, reviewerID);
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public void dispatchBuilder(JFrame mainFrame) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

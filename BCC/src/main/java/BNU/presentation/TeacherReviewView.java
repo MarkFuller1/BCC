@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 
 import BNU.logic.LoginController;
 import BNU.logic.TeacherReviewController;
+import BNU.logic.service.TeacherReviewViewService;
 import refactor.these.ReviewController;
 import refactor.these.ReviewModel2;
 
@@ -30,12 +31,13 @@ public class TeacherReviewView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(TeacherReviewController.class.getName());
+	static TeacherReviewViewService rs = new TeacherReviewViewService();
 
 	@SuppressWarnings("unused")
 	public static void BuildTeacherReviewView(JFrame mainFrame, TeacherReviewController controller) {
 		FileHandler fileHandler = null;
 		try {
-			fileHandler = new FileHandler("BCC.log", true);
+			fileHandler = new FileHandler("BCC.log", true); 
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,27 +99,34 @@ public class TeacherReviewView {
 		controller.getModel().getBtnBack().setActionCommand("teacher_review:back");
 		controller.getModel().getBtnBack().addActionListener(controller);
 		
+		String[] scores = new String[4];
+		scores = rs.getProfessorOverallRatings(controller.getTeacherName());
+		
 		// score score label
-		controller.getModel().setScoreScore(new JLabel("83"));
+		//controller.getModel().setScoreScore(new JLabel("83"));
+		controller.getModel().setScoreScore(new JLabel(scores[0]));
 		controller.getPanel().add(controller.getModel().getScoreScore()).setBounds(159, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getScoreScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getPanel().add(controller.getModel().getScoreScore()).setBackground(Color.YELLOW);
 		controller.getPanel().add(controller.getModel().getScoreScore()).setForeground(Color.GREEN);
 		
 		// helpfulness score label
-		controller.getModel().setHelpfulnessScore(new JLabel("50"));
+		//controller.getModel().setHelpfulnessScore(new JLabel("50"));
+		controller.getModel().setHelpfulnessScore(new JLabel(scores[1]));
 		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setBounds(367, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setForeground(Color.RED);
 		
 		// teaching ability score label
-		controller.getModel().setTeachingAbilityScore(new JLabel("99"));
+		//controller.getModel().setTeachingAbilityScore(new JLabel("99"));
+		controller.getModel().setTeachingAbilityScore(new JLabel(scores[2]));
 		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setBounds(580, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setForeground(Color.GREEN);
 		
 		// workload score label
-		controller.getModel().setWorkloadScore(new JLabel("45"));
+		//controller.getModel().setWorkloadScore(new JLabel("45"));
+		controller.getModel().setWorkloadScore(new JLabel(scores[3]));
 		controller.getPanel().add(controller.getModel().getWorkloadScore()).setBounds(760, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getWorkloadScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getPanel().add(controller.getModel().getWorkloadScore()).setForeground(Color.RED);
@@ -131,6 +140,7 @@ public class TeacherReviewView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
+		String[][] reviews = rs.getReviewsForTeacherClass(controller.getTeacherName(),controller.getClassName());
 		
 		for(int i = 0; i < 10; i++) {
 			ReviewController rm1 = new ReviewController();
@@ -138,7 +148,8 @@ public class TeacherReviewView {
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
-				rm1.dispatchBuilder();
+				//rm1.dispatchBuilder();
+				rm1.dispatchBuilder(reviews[i][0], reviews[i][1], reviews[i][2]);
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));

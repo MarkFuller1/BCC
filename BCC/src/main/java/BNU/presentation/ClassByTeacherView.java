@@ -33,19 +33,23 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import BNU.data.Course;
 import BNU.data.DatabaseMock;
 import BNU.data.ProfessorCourse;
 import BNU.data.dbWrapper;
 import BNU.logic.ClassByTeacherController;
 import BNU.logic.LoginController;
+import BNU.logic.service.ClassByTeacherService;
 import net.miginfocom.swing.MigLayout;
 
 public class ClassByTeacherView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+	static ClassByTeacherService cbts = new ClassByTeacherService();
 
 	public static void BuildTeachsersByClassView(JFrame mainFrame, ClassByTeacherController controller) {
+		
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
@@ -89,7 +93,7 @@ public class ClassByTeacherView {
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector
-		controller.getModel().setClasses(buildTeacherPanels(Arrays.asList(controller.getDb().getAllClassesForProfessor(controller.getProfessorName())), controller));
+		controller.getModel().setClasses(buildTeacherPanels(cbts.getAllClassesByTeacherService(controller.professorName), controller));
 		
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -113,16 +117,28 @@ public class ClassByTeacherView {
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JComponent> buildTeacherPanels(List<String> asList, ClassByTeacherController controller) {
+	private static List<JComponent> buildTeacherPanels(String[] courseNames, ClassByTeacherController controller) {
 		List<JComponent> panels = new ArrayList<>();
-		dbWrapper db = new DatabaseMock();
-		for(String course: asList) {
+		
+		Course[] courses = cbts.getAllCoursesByTeacherService(courseNames, controller.professorName);
+		for(Course course: courses) {
 			System.out.println(course);
- 			ProfessorCourse obj = new ProfessorCourse(db.getCourse(course));
+ 			ProfessorCourse obj = new ProfessorCourse(course);
  			obj.getSelect().setActionCommand("class:" + course);
  			obj.getSelect().addActionListener(controller);
 			panels.add(obj);
 		}
+		
+		//dbWrapper db = new DatabaseMock();
+		/*
+		for(String course: courseNames) {
+			System.out.println(course);
+ 			ProfessorCourse obj = new ProfessorCourse(controller.db.getCourse(course));
+ 			obj.getSelect().setActionCommand("class:" + course);
+ 			obj.getSelect().addActionListener(controller);
+			panels.add(obj);
+		}
+		*/
 
 		return panels;
 	}
