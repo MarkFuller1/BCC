@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import BNU.data.DatabaseMock;
 import BNU.data.MainModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.presentation.MainView;
 
 public class MainController extends PageController {
@@ -46,7 +46,7 @@ public class MainController extends PageController {
 		MainView.BuildMainView(mainFrame, this);
 	}
 
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 

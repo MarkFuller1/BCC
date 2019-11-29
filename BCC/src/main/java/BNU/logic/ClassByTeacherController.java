@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import BNU.data.ClassByTeacherModel;
 import BNU.data.DatabaseMock;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.presentation.ClassByTeacherView;
 
 public class ClassByTeacherController extends PageController{
@@ -74,7 +74,7 @@ public class ClassByTeacherController extends PageController{
 		ClassByTeacherController.panel = panel;
 	}
 
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import BNU.data.DatabaseMock;
 import BNU.data.RegisterModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.logic.service.LoginService;
 import BNU.logic.service.RegisterService;
 import BNU.presentation.RegisterView;
@@ -104,7 +104,7 @@ public class RegisterController extends PageController {
 		this.panel = panel;
 	}
 
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 

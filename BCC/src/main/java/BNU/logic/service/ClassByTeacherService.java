@@ -15,6 +15,7 @@ public class ClassByTeacherService {
 		
 	}
 	
+	//TODO: why does classNames need to be passed into the function?
 	public Course[] getAllCoursesByTeacherService(String[] classNames, String professorName) {
 		String[][] courseObjs = ClassByTeacherController.db.getAllCoursesByProf(classNames);
 		Course[] courses = new Course[classNames.length];
