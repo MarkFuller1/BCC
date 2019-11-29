@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class DatabaseMock implements dbWrapper{
+public class DatabaseMock implements AbstractDB{
 	
 
 	public static Map<String,String> userCreds = new HashMap<String,String>();;
