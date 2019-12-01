@@ -10,7 +10,24 @@ public class Review {
 	String user;
 	String Professor;
 	String Classes;
+	Integer teachingAbility;
+	Integer helpfulness;
+	Integer workload;
 	
+	
+	public Review(String description, Timestamp time, String user, String professor, 
+			String class1, Integer teachingAbility, Integer helpfulness, Integer workload) {
+		super();
+		this.description = description;
+		this.votes = 0;
+		this.time = time;
+		this.user = user;
+		Professor = professor;
+		Classes = class1;
+	    this.teachingAbility = teachingAbility;
+	    this.helpfulness = helpfulness;
+	    this.workload = workload;
+	}
 	
 	public Review(String description, Timestamp time, String user, String professor, String class1) {
 		super();
@@ -59,5 +76,37 @@ public class Review {
 	public void setUser(String user) {
 		this.user = user;
 	}
+
+	public Integer getTeachingAbility() {
+		return teachingAbility;
+	}
+
+	public void setTeachingAbility(Integer teachingAbility) {
+		this.teachingAbility = teachingAbility;
+	}
+
+	public Integer getHelpfulness() {
+		return helpfulness;
+	}
+
+	public void setHelpfulness(Integer helpfulness) {
+		this.helpfulness = helpfulness;
+	}
+
+	public Integer getWorkload() {
+		return workload;
+	}
+
+	public void setWorkload(Integer workload) {
+		this.workload = workload;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [description=" + description + ", time=" + time + ", user=" + user + ", Professor=" + Professor
+				+ ", Classes=" + Classes + ", teachingAbility=" + teachingAbility + ", helpfulness=" + helpfulness
+				+ ", workload=" + workload + "]";
+	}
+	
 	
 }

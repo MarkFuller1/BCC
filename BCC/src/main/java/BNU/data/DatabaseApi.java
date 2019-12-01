@@ -11,6 +11,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import BNU.singleton.SingletonSession;
+
 public class DatabaseApi implements dbWrapper {
 	private static final Logger LOGGER = Logger.getLogger(DatabaseApi.class.getName());
 
@@ -239,8 +241,9 @@ public class DatabaseApi implements dbWrapper {
 
 	//public String[][] getAllCoursesByProf(String[] courses) {
 
-	public ArrayList<Message> getAllMessages(String sender, String receiver) {
-		ArrayList<Message> messages = new ArrayList<>();
+	public String[][] getAllMessages(String sender, String receiver) {
+		//ArrayList<Message> messages = new ArrayList<>();
+		String[][] messages = null;
 		
 		try (Connection con = getRemoteConnection(); Statement stmt = con.createStatement()) {
 
@@ -289,9 +292,7 @@ public class DatabaseApi implements dbWrapper {
 
 	@Override
 	public String getReceiver() {
-
-		// TODO Auto-generated method stub
-		return null;
+		return SingletonSession.getInstance().getUserName();
 	}
 
 	@Override
@@ -379,6 +380,19 @@ public class DatabaseApi implements dbWrapper {
 	public String[][] getAllCoursesByProf(String[] courses) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setNewReview(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAdmin(String userName) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

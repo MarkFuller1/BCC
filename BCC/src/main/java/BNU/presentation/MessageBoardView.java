@@ -98,8 +98,8 @@ public class MessageBoardView {
 		controller.getModel().getUserList().setPreferredSize(new Dimension(250, 675));
 		
 		
-		controller.getModel().setReceiver(controller.getDb().getReceiver());
-		controller.getModel().setUsers(controller.getDb().getAllUserMessagers(controller.getModel().getReceiver()));
+		controller.getModel().setReceiver(controller.mbs.getReceiver());
+		controller.getModel().setUsers(controller.mbs.getAllMessagersToUser(controller.getModel().getReceiver()));
 		if(controller.getModel().getSender() == null) {
 			controller.getModel().setSender(controller.getModel().getUsers()[0]);
 			System.out.println("it was null!");
@@ -212,7 +212,7 @@ public class MessageBoardView {
 	}
 	
 	public static void updateMessages(MessageBoardController controller) {
-		controller.getModel().setMessages(controller.getDb().getAllMessages(controller.getModel().getSender(), controller.getModel().getReceiver()));
+		controller.getModel().setMessages(controller.mbs.getAllMessagesFromTo(controller.getModel().getSender(), controller.getModel().getReceiver()));
 		
 		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
 			Message m = controller.getModel().getMessages().get(i);

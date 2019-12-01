@@ -27,9 +27,6 @@ public class TeacherReviewController extends PageController{
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
-//		if(db == null) {
-//			this.db = db;
-//		}
 		try {
 			TeacherReviewView.BuildTeacherReviewView(mainFrame, this);
 		} catch (SecurityException e) {
@@ -41,10 +38,6 @@ public class TeacherReviewController extends PageController{
 	public static dbWrapper getDb() {
 		return db;
 	}
-
-//	public static void setDb(dbWrapper db) {
-//		TeacherReviewController.db = db;
-//	}
 
 	public String getTeacherName() {
 		return teacherName;
@@ -93,7 +86,7 @@ public class TeacherReviewController extends PageController{
 			WindowBuilder.loadPage(new MainController());
 		}else if(e.getActionCommand() == "teacher_review:add"){
 			System.out.println("teacher_review:add Review button pressed");
-			WindowBuilder.loadPage(new SetReviewController());
+			WindowBuilder.loadPage(new SetReviewController(this.teacherName, this.className));
 		}
 }
 

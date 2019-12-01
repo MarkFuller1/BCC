@@ -13,6 +13,7 @@ import BNU.data.DatabaseMock;
 import BNU.data.Message;
 import BNU.data.MessageBoardModel;
 import BNU.data.dbWrapper;
+import BNU.logic.service.MessageBoardService;
 import BNU.presentation.MessageBoardView;
 
 public class MessageBoardController extends PageController{
@@ -20,6 +21,7 @@ public class MessageBoardController extends PageController{
 	static MessageBoardModel model = new MessageBoardModel();
 	static JPanel panel;
 	public JFrame mainF;
+	public static MessageBoardService mbs;
 	
 	//static private InputMessage im;
 	
@@ -28,6 +30,7 @@ public class MessageBoardController extends PageController{
 		panel = new JPanel();
 		view = new MessageBoardView();
 		db = new DatabaseMock();
+		mbs = new MessageBoardService();
 	}
 	
 	@Override
@@ -82,7 +85,7 @@ public class MessageBoardController extends PageController{
 		}else if(e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
 			Message mess = new Message(this.getModel().getBar().getText(), new Timestamp(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
-			db.sendMessage(mess);
+			mbs.messageSend(mess);
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 			System.out.println("Message sent and without mock this should create a live update!");
 		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
