@@ -34,7 +34,7 @@ public interface dbWrapper {
 	String[][] getAllReviewsForUser(String userName);
 
 	// my added functions 
-	ArrayList<Message> getAllMessages(String sender, String receiver);
+	String[][] getAllMessages(String sender, String receiver);
 	
 	String[] getAllFlagged();
 	
@@ -55,6 +55,11 @@ public interface dbWrapper {
 	Boolean isUpvoteValid();
 	
 	Boolean isDownvoteValid();
+
+	void setNewReview(String userName, String professorName, String className, String content, String tA, String h,
+			String wL);
+
+	boolean isAdmin(String userName);
 
 
 }
