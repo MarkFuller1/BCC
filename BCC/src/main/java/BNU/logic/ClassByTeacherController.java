@@ -36,12 +36,13 @@ public class ClassByTeacherController extends PageController{
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
 			System.out.println("Logger Failed to init");
 			e.printStackTrace();
 		}
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
+		
 
 	}
 	

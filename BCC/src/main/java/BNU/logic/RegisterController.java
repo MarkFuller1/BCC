@@ -36,12 +36,11 @@ public class RegisterController extends PageController {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e1) { 
 			System.out.println("Logger failed to load in " + RegisterController.class.getName());
 		}
-
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
 	}
 
 	@Override
