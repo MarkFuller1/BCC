@@ -60,7 +60,7 @@ public class ReviewView {
 		g.gridy = 1;
 		controller.getPanel().add(controller.getModel().getBtnUp(), g);
 		controller.getModel().getBtnUp().addActionListener(controller);
-		controller.getModel().getBtnUp().setActionCommand("Review:upvote");
+		controller.getModel().getBtnUp().setActionCommand("Review:upvote" + controller.getModel().getCount().toString());
 		
 
 		
@@ -72,7 +72,7 @@ public class ReviewView {
 		g.gridy = 3;
 		controller.getPanel().add(controller.getModel().getBtnDown(), g);
 		controller.getModel().getBtnDown().addActionListener(controller);
-		controller.getModel().getBtnDown().setActionCommand("Review:downvote");
+		controller.getModel().getBtnDown().setActionCommand("Review:downvote" + controller.getModel().getCount().toString());
 		
 
 		// review score label
@@ -121,7 +121,7 @@ public class ReviewView {
 		g.fill = g.HORIZONTAL;
 		controller.getPanel().add(controller.getModel().getBtnMessageReviewer(), g);
 		controller.getModel().getBtnMessageReviewer().addActionListener(controller);
-		controller.getModel().getBtnMessageReviewer().setActionCommand("Review:message");
+		controller.getModel().getBtnMessageReviewer().setActionCommand("Review:message" + controller.getModel().getCount().toString());
 		
 	}
 	

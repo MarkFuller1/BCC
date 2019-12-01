@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
@@ -19,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -142,16 +146,18 @@ public class TeacherReviewView {
 		controller.getModel().setRC( new ArrayList<ReviewController>());
 		
 		for(int i = 0; i < controller.getModel().getReviews().size(); i++) {
-			ReviewController rm1 = new ReviewController();
-			rm1.getModel().setReviews(controller.getModel().getReviews().get(i));
 			
-			if(rm1 == null) {
+			controller.getModel().getRC().add( new ReviewController());
+			controller.getModel().getRC().get(i).getModel().setCount(i);
+			controller.getModel().getRC().get(i).getModel().setReviews(controller.getModel().getReviews().get(i));
+			controller.getModel().getRC().get(i).setTc(controller);
+			
+			if(controller.getModel().getRC().get(i) == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
-				rm1.dispatchBuilder();
-				rm1.getPanel().setBounds(0,i*200,804,250);
-				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
-				controller.getModel().getRC().add(rm1);
+				controller.getModel().getRC().get(i).dispatchBuilder();
+				controller.getModel().getRC().get(i).getPanel().setBounds(0,i*200,804,250);
+				controller.getModel().getScrollPanePanel().add(controller.getModel().getRC().get(i).getPanel());
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
 			}
 
@@ -164,4 +170,6 @@ public class TeacherReviewView {
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
 	}
+	
+	
 }

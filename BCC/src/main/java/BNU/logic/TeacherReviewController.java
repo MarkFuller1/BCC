@@ -85,7 +85,39 @@ public class TeacherReviewController extends PageController{
 	public void setModel(TeacherReviewModel model) {
 		TeacherReviewController.model = model;
 	}
+	
+	public void up(int n) {
+	//if(db.isUpvoteValid()) {
+		//db.upvote();
+	
+		ReviewController r = this.getModel().getRC().get(n);
+		
+		int total = r.getModel().getReviews().getVotes();
+		total ++;
+		r.getModel().getReviews().setVotes(total);
+		r.getModel().getReviewScore().setText(r.getModel().getReviews().getVotes().toString());
+		r.getModel().getReviewScore().repaint();
+		System.out.println(r.getModel().getReviews().getVotes());
+	//}
 
+	}
+	public void down(int n) {
+	//if(db.isDownvoteValid()) {
+		ReviewController r = this.getModel().getRC().get(n);
+		
+		int total = r.getModel().getReviews().getVotes();
+		total --;
+		r.getModel().getReviews().setVotes(total);
+		r.getModel().getReviewScore().setText(r.getModel().getReviews().getVotes().toString());
+		r.getModel().getReviewScore().repaint();
+		System.out.println(r.getModel().getReviews().getVotes());
+	//}
+	}
+	public void message(int n) {
+		// need to pass it with new message somehow
+		WindowBuilder.loadPage(new MessageBoardController());
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand() == "teacher_review:back"){

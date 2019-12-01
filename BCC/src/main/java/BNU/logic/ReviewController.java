@@ -22,6 +22,7 @@ public class ReviewController implements ActionListener {
 	static ReviewModel2 model = new ReviewModel2();
 	static JPanel panel;
 	static dbWrapper db;
+	static TeacherReviewController tc;
 	
 	public ReviewController() {
 		model = new ReviewModel2();
@@ -29,6 +30,12 @@ public class ReviewController implements ActionListener {
 		view = new ReviewView();
 	}
 
+	public static TeacherReviewController getTc() {
+		return tc;
+	}
+	public static void setTc(TeacherReviewController tc) {
+		ReviewController.tc = tc;
+	}
 
 	public static ReviewView getView() {
 		return view;
@@ -66,35 +73,50 @@ public class ReviewController implements ActionListener {
 
 	
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand() == "Review:message"){
-			System.out.println("Review:message button pressed");
-			WindowBuilder.loadPage(new MessageBoardController());
-		}
-		else if(e.getActionCommand() == "Review:downvote") {
-			System.out.println("Review:downvote button pressed");
-			if(db.isDownvoteValid()) {
-				//db.downvote();
-				int total = this.getModel().getReviews().getVotes();
-				total --;
-				this.getModel().getReviews().setVotes(total);
-				this.getModel().getReviewScore().setText(getModel().getReviews().getVotes().toString());
-				this.getModel().getReviewScore().repaint();
+		for(Integer i = 0; i < model.getCount(); i ++) {
+			if(e.getActionCommand().contains("Review:message"+ i.toString())){
+				System.out.println("Review:message" + i.toString() + " button pressed");
+				this.getTc().message(i);
+				
+				
+				
+				//WindowBuilder.loadPage(new MessageBoardController());
 			}
-			
-			
-		}
-		else if(e.getActionCommand() == "Review:upvote") {
-			System.out.println("Review:upvote button pressed");
-			if(db.isUpvoteValid()) {
-				//db.upvote();
-			int total = getModel().getReviews().getVotes();
-			total ++;
-			getModel().getReviews().setVotes(total);
-			getModel().getReviewScore().setText(getModel().getReviews().getVotes().toString());
-			getModel().getReviewScore().repaint();
+			else if(e.getActionCommand().contains("Review:downvote"+ i.toString())) {
+				System.out.println("Review:downvote" + i.toString() + " button pressed");
+				this.getTc().down(i);
+				
+				
+				
+				//if(db.isDownvoteValid()) {
+					//db.downvote();
+				
+//						int total = this.getModel().getReviews().getVotes();
+//						total --;
+//						this.getModel().getReviews().setVotes(total);
+//						this.getModel().getReviewScore().setText(this.getModel().getReviews().getVotes().toString());
+//						this.getModel().getReviewScore().repaint();
+				//}
+				
+				
+			}
+			else if(e.getActionCommand().contains("Review:upvote"+ i.toString())) {
+				System.out.println("Review:upvote" + i.toString() + " button pressed");
+				this.getTc().up(i);
+				//if(db.isUpvoteValid()) {
+					//db.upvote();
+				
+//						int total = this.getModel().getReviews().getVotes();
+//						total ++;
+//						this.getModel().getReviews().setVotes(total);
+//						this.getModel().getReviewScore().setText(this.getModel().getReviews().getVotes().toString());
+//						this.getModel().getReviewScore().repaint();
+				//}
 			}
 		}
+		
 	}
+	
 
 	public void dispatchBuilder() {
 		try {

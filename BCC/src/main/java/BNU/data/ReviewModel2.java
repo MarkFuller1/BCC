@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import BNU.logic.ReviewController;
+
 public class ReviewModel2 {
 	
 	private JButton btnUp;
@@ -26,6 +28,19 @@ public class ReviewModel2 {
 	private JPanel panel;
 	private JTextPane textPane;
 	private Review reviews;
+	private Integer count = 0;
+	
+	
+	public void incCount() {
+		this.count ++;
+	}
+	
+	public Integer getCount() {
+		return this.count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 	
 	public Review getReviews() {
 		return reviews;
