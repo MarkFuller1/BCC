@@ -134,16 +134,16 @@ public class ReviewView {
 		FileHandler fileHandler = null; 
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
+			LOGGER.info("Review obj loaded correctly");
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
-		LOGGER.info("Review obj loaded correctly");
+		
 		
 		// sets the panel
 		controller.setPanel(new JPanel());

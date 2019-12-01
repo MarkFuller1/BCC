@@ -4,14 +4,12 @@ public class Course {
 	String professor;
 	String rating;
 	String numberOfReviews;
-	String[] courses;
 	
-	public Course(String professor, String rating, String numberOfReviews, String[] courses) {
+	public Course(String professor, String rating, String numberOfReviews) {
 		super();
 		this.professor = professor;
 		this.rating = rating;
 		this.numberOfReviews = numberOfReviews;
-		this.courses = courses;
 	}
 	
 	public String getProfessor() {

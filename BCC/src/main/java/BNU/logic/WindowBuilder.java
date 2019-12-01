@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 
 import BNU.data.DatabaseMock;
 import BNU.data.AbstractDB;
+import BNU.data.DatabaseApi;
 
 public class WindowBuilder {
 	
@@ -21,7 +22,7 @@ public class WindowBuilder {
 	public static File deck; 
 	
 	public WindowBuilder() {
-		db = new DatabaseMock();
+		db = new DatabaseApi();
 		PageController.db = db;
 		//build the JFrame 
 		mainFrame = new JFrame("BCC");

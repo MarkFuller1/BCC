@@ -75,13 +75,13 @@ public class LoginController extends PageController {
 			//Commented out to make easier access to application. Code is good.
 			//if(ls.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
 				WindowBuilder.loadPage(new MainController()); 
-			//}else {
-			//	model.getTxt_username().setText("Enter Username");
-			//	model.getTxt_password().setText("Enter Password");
-			//}
+//			}else {
+//				model.getTxt_username().setText("Enter Username");
+//				model.getTxt_password().setText("Enter Password");
+//			}
 			
 
-			WindowBuilder.loadPage(new MainController());
+			
 		} else if(e.getActionCommand() == "login:AuthorizeAdmin") {
 			WindowBuilder.loadPage(new AdminController());
 

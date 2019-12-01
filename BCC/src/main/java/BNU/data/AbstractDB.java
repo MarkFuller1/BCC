@@ -11,21 +11,21 @@ public abstract class AbstractDB {
 
 	protected abstract Connection getRemoteConnection() throws DatabaseConnectionException;
 
-	protected abstract boolean validateUserImpl(String userName, String password);
+	protected abstract boolean validateUserImpl(String userName, String password) throws DatabaseOperationException;
 
-	protected abstract String[] getAllProfessorsImpl();
+	protected abstract String[] getAllProfessorsImpl() throws DatabaseOperationException;
 
-	protected abstract String[] getAllClassesImpl();
+	protected abstract String[] getAllClassesImpl() throws DatabaseOperationException;
 
-	protected abstract String[] getAllProfessorsForClassImpl(String className);
+	protected abstract String[] getAllProfessorsForClassImpl(String className) throws DatabaseOperationException;
 
-	protected abstract String[] getAllClassesForProfessorImpl(String prof);
+	protected abstract String[] getAllClassesForProfessorImpl(String prof) throws DatabaseOperationException;
 
-	protected abstract String[][] getAllCoursesByProfImpl();
+	protected abstract String[][] getAllCourseInfoByProfImpl(String profName) throws DatabaseOperationException;
 
-	protected abstract String[][] getAllTeachersByCourseImpl(String[] professorNames);
+	protected abstract String[][] getAllTeacherInfoByCourseImpl(String courseName) throws DatabaseOperationException;
 
-	protected abstract boolean submitCredentialsImpl();
+	protected abstract boolean submitCredentialsImpl(String userName, String password);
 
 	protected abstract String[][] getAllReviewsForTeacherClassImpl(String professorName, String className);
 
@@ -38,52 +38,91 @@ public abstract class AbstractDB {
 	protected abstract String getRecieverImpl();
 
 	protected abstract String getSenderImpl();
-	
+
 	protected abstract String[] getAllUserMessagersImpl(String receiver);
-	
+
 	protected abstract void upvoteImpl();
-	
+
 	protected abstract void downvoteImpl();
 
-	public final boolean validateUser(String userName, String password) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	protected abstract String[] getAllFlaggedImpl();
 
-		boolean res = validateUserImpl( userName, password);
+	public final boolean validateUser(String userName, String password) {
+		try {
 
-		con.close();
+			con = getRemoteConnection();
 
-		return res;
+			boolean res = validateUserImpl(userName, password);
 
+			if (con != null) {
+				con.close();
+			}
+
+			return res;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 
-	public final String[] getAllProfessors() throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[] getAllProfessors() {
+		try {
+			con = getRemoteConnection();
 
-		String[] profList = getAllProfessorsImpl();
+			String[] profList = getAllProfessorsImpl();
 
-		con.close();
+			if (con != null) {
+				if (con != null) {
+					con.close();
+					;
+				}
+			}
+			;
 
-		return profList;
+			return profList;
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public final String[] getAllClasses() throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[] getAllClasses() {
+		try {
+			con = getRemoteConnection();
 
-		String[] classList = getAllClassesImpl();
+			String[] classList = getAllClassesImpl();
 
-		con.close();
+			if (con != null) {
+				con.close();
+			}
 
-		return classList;
+			return classList;
+		} catch (SQLException | DatabaseConnectionException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new String[1];
+		}
 	}
 
-	public final String[] getAllProfessorsForClass(String className) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[] getAllProfessorsForClass(String className) {
+		try {
+			con = getRemoteConnection();
 
-		String[] profList = getAllProfessorsForClassImpl(className);
+			String[] profList = getAllProfessorsForClassImpl(className);
 
-		con.close();
+			if (con != null) {
 
-		return profList;
+			}
+
+			return profList;
+
+		} catch (DatabaseOperationException | DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 //	Professor getProfessor(String Prof) {
@@ -91,17 +130,26 @@ public abstract class AbstractDB {
 //		
 //		
 //		
-//		con.close();
+//		if(con != null) {if(con != null) {con.close();}};
 //	}
 
-	public final String[] getAllClassesForProfessor(String professorName) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[] getAllClassesForProfessor(String professorName) {
+		try {
+			con = getRemoteConnection();
 
-		String[] classList = getAllClassesForProfessorImpl(professorName);
+			String[] classList = getAllClassesForProfessorImpl(professorName);
 
-		con.close();
+			if (con != null) {
+				con.close();
+			}
 
-		return classList;
+			return classList;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 
@@ -109,120 +157,232 @@ public abstract class AbstractDB {
 //		return null;
 //	}
 
-	public final String[][] getAllCoursesByProf(String[] courseNames) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[][] getAllCoursesByProf(String courseNames) {
+		try {
+			con = getRemoteConnection();
 
-		String[][] courseslist = getAllCoursesByProfImpl();
+			String[][] courseslist = getAllCourseInfoByProfImpl(courseNames);
 
-		con.close();
+			if (con != null) {
+				con.close();
+			}
 
-		return courseslist;
+			return courseslist;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public final String[][] getAllTeachersByCourse(String[] professorNames) throws DatabaseConnectionException, SQLException {
-		con = getRemoteConnection();
+	public final String[][] getAllTeacherInfoByCourse(String professorNames) {
+		try {
+			con = getRemoteConnection();
 
-		String[][] teachersByCourse = getAllTeachersByCourseImpl(professorNames);
+			String[][] teachersByCourse = getAllTeacherInfoByCourseImpl(professorNames);
 
-		con.close();
+			if (con != null) {
+				con.close();
+			}
 
-		return teachersByCourse;
+			return teachersByCourse;
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
-	public final boolean submitCredentials(String userName, String password) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final boolean submitCredentials(String userName, String password) {
+		try {
+			con = getRemoteConnection();
 
-		boolean res = submitCredentialsImpl();
+			boolean res = submitCredentialsImpl(userName, password);
 
-		con.close();
+			if (con != null) {
+				con.close();
+			}
 
-		return res;
+			return res;
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	// return array of review content,score,reviewerID
-	public final String[][] getAllReviewsForTeacherClass(String professorName, String className) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[][] getAllReviewsForTeacherClass(String professorName, String className) {
+		try {
+			con = getRemoteConnection();
 
-		String[][] reviewList = getAllReviewsForTeacherClassImpl(professorName, className);
+			String[][] reviewList = getAllReviewsForTeacherClassImpl(professorName, className);
 
-		con.close();
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
 
-		return reviewList;
+			return reviewList;
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// return in this order: overall score, helpfulness, teaching ability, workload
-	public final String[] getOverallProfessorRatings(String professorName) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[] getOverallProfessorRatings(String professorName) {
+		try {
+			con = getRemoteConnection();
 
-		String[] profRating = getOverallProfessorRatingsImpl(professorName);
+			String[] profRating = getOverallProfessorRatingsImpl(professorName);
 
-		con.close();
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
 
-		return profRating;
+			return profRating;
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	// return review content, score, reviewerID, course name
-	public final String[][] getAllReviewsForUser(String userName) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[][] getAllReviewsForUser(String userName) {
+		try {
+			con = getRemoteConnection();
 
-		String[][] reviews = getAllReviewsForUserImpl(userName);
+			String[][] reviews = getAllReviewsForUserImpl(userName);
 
-		con.close();
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
 
-		return reviews;
+			return reviews;
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// my added functions
-	public final ArrayList<Message> getAllMessages(String sender, String receiver) throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final ArrayList<Message> getAllMessages(String sender, String receiver) {
+		try {
+			con = getRemoteConnection();
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Message[] reviews = getAllMessagesImpl(sender, receiver);
 
-		con.close();
+		try {
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return new ArrayList<Message>(Arrays.asList(reviews));
 	}
 
-	public final String[] getAllFlagged() throws SQLException, DatabaseConnectionException {
-		con = getRemoteConnection();
+	public final String[] getAllFlagged() {
+		try {
+			con = getRemoteConnection();
 
-		String[] flagged = getAllFlagged();
+			String[] flagged = getAllFlaggedImpl();
 
-		con.close();
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
 
-		return flagged;
+			return flagged;
+
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-//	public final String getReceiver() throws SQLException {
-//		con = getRemoteConnection();
-//
-//		String reciever = getRecieverImpl();
-//
-//		con.close();
-//
-//		return reciever;
-//	}
-//
+	public final String getReceiver() {
+		try {
+			con = getRemoteConnection();
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String reciever = getRecieverImpl();
+
+		try {
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return reciever;
+	}
+
 //	public final String getSender() throws SQLException {
 //		con = getRemoteConnection();
 //
 //		String sender = getSenderImpl();
 //
-//		con.close();
+//		if(con != null) {if(con != null) {con.close();}};
 //
 //		return sender;
 //	}
 //
-//	public final String[] getAllUserMessagers(String receiver) throws SQLException {
-//		con = getRemoteConnection();
-//
-//		String[] friends = getAllUserMessagersImpl(receiver);
-//
-//		con.close();
-//
-//		return friends;
-//	}
-//
+	public final String[] getAllUserMessagers(String receiver) {
+
+		try {
+			con = getRemoteConnection();
+
+			String[] friends = getAllUserMessagersImpl(receiver);
+			if (con != null) {
+				if (con != null) {
+					con.close();
+				}
+			}
+			;
+			return friends;
+
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 //	
 //
 //	public final void upvote() throws SQLException {
@@ -230,7 +390,7 @@ public abstract class AbstractDB {
 //
 //		upvoteImpl();
 //
-//		con.close();
+//		if(con != null) {if(con != null) {con.close();}};
 //	}
 //
 //	
@@ -240,17 +400,25 @@ public abstract class AbstractDB {
 //
 //		downvoteImpl();
 //
-//		con.close();
 //	}
 //
-//	public final void sendMessage(Message m) {
-//		
-//	}
+	public final void sendMessage(Message m) {
+
+	}
+
 //
-//	public final ArrayList<Review> getReviews(String prof, String c);
+	public final ArrayList<Review> getReviews(String prof, String c) {
+		return null;
+	}
+
 //
-//	public final Boolean isUpvoteValid();
+	public final Boolean isUpvoteValid() {
+		return true;
+	}
+
 //
-//	public final Boolean isDownvoteValid();
+	public final Boolean isDownvoteValid() {
+		return null;
+	}
 
 }

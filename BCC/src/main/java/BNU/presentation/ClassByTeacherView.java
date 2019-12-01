@@ -93,7 +93,7 @@ public class ClassByTeacherView {
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector
-		controller.getModel().setClasses(buildTeacherPanels(cbts.getAllClassesByTeacherService(controller.professorName), controller));
+		controller.getModel().setClasses(buildTeacherPanels(controller));
 		
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -117,10 +117,10 @@ public class ClassByTeacherView {
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JComponent> buildTeacherPanels(String[] courseNames, ClassByTeacherController controller) {
+	private static List<JComponent> buildTeacherPanels(ClassByTeacherController controller) {
 		List<JComponent> panels = new ArrayList<>();
 		
-		Course[] courses = cbts.getAllCoursesByTeacherService(courseNames, controller.professorName);
+		Course[] courses = cbts.getAllCoursesByTeacherService(controller.professorName);
 		for(Course course: courses) {
 			System.out.println(course);
  			ProfessorCourse obj = new ProfessorCourse(course);
