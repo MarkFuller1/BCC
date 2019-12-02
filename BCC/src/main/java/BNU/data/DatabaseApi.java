@@ -368,7 +368,7 @@ public class DatabaseApi extends AbstractDB {
 		// content score prof course name
 		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name  from review, professor, course Where user_name = \'" + userName + "\'  AND review.professor_id = professor.professor_id_pk AND review.course_id = course.course_id_pk";
 		ResultSet userReviews = null;
-		ArrayList<ArrayList<String>> reviews = new ArrayList<new ArrayList<>()>();
+		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
 
 		try (Statement stmt = con.createStatement()) {
 

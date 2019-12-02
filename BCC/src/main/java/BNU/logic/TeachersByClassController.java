@@ -23,7 +23,6 @@ public class TeachersByClassController extends PageController {
 	static TeachersByClassView view;
 	static TeachersByClassModel model = new TeachersByClassModel();
 	static JPanel panel;
-	//static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(TeachersByClassController.class.getName());
 
 	public String className;
@@ -34,19 +33,15 @@ public class TeachersByClassController extends PageController {
 		model = new TeachersByClassModel();
 		panel = new JPanel();
 		view = new TeachersByClassView();
-		//db = new DatabaseMock();
 		this.className = selectedClass;
 
-		FileHandler fileHandler = null;
 		try {
-			fileHandler = new FileHandler("BCC.log", true);
+			FileHandler fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
 			System.out.println("Logger Failed to init");
-			e.printStackTrace();
 		}
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
-
 	}
 
 	@Override

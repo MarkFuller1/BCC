@@ -54,12 +54,11 @@ public class TeachersByClassView {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
 			LOGGER.severe("Logger failed to load");
 		}
-
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
 
 		//build panel
 		controller.setPanel(new JPanel());
