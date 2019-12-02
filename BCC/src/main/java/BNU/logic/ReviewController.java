@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import BNU.data.ReviewModel2;
 import BNU.data.UserReviewModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.logic.MessageBoardController;
 import BNU.logic.PageController;
 import BNU.logic.WindowBuilder;
@@ -56,7 +56,7 @@ public class ReviewController extends PageController implements ActionListener {
 	}
 
 
-	public static dbWrapper getDb() {
+	public static AbstractDB getDb() {
 		return db;
 	}
 

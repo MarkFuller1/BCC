@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import BNU.data.ClassByTeacherModel;
 import BNU.data.DatabaseMock;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.presentation.ClassByTeacherView;
 
 public class ClassByTeacherController extends PageController{
@@ -36,12 +36,13 @@ public class ClassByTeacherController extends PageController{
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
 			System.out.println("Logger Failed to init");
 			e.printStackTrace();
 		}
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
+		
 
 	}
 	
@@ -74,7 +75,7 @@ public class ClassByTeacherController extends PageController{
 		ClassByTeacherController.panel = panel;
 	}
 
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 

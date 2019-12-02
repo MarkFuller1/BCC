@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import BNU.data.TeacherReviewModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.presentation.TeacherReviewView;
 
 public class TeacherReviewController extends PageController{
@@ -38,7 +38,7 @@ public class TeacherReviewController extends PageController{
 		}
 	}
 	
-	public static dbWrapper getDb() {
+	public static AbstractDB getDb() {
 		return db;
 	}
 
