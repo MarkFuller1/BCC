@@ -6,4 +6,5 @@
 BCC/BCC.log.*
 postgresdb/*
 BCC/.settings/*
-BCC/.settings/*
+.classpath
+
