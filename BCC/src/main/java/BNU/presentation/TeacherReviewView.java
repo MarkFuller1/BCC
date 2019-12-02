@@ -143,25 +143,30 @@ public class TeacherReviewView {
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
 		controller.getModel().setReviews(controller.getDb().getReviews(null, null));
-		controller.getModel().setRC( new ArrayList<ReviewController>());
+		ArrayList<ReviewController> ar1 = new ArrayList<ReviewController>();
 		
 		for(int i = 0; i < controller.getModel().getReviews().size(); i++) {
+			ReviewController w = new ReviewController();
+			w.getModel().setCount(i);
+			w.getModel().setReviews(controller.getModel().getReviews().get(i));
+			w.setTc(controller);
 			
-			controller.getModel().getRC().add( new ReviewController());
-			controller.getModel().getRC().get(i).getModel().setCount(i);
-			controller.getModel().getRC().get(i).getModel().setReviews(controller.getModel().getReviews().get(i));
-			controller.getModel().getRC().get(i).setTc(controller);
-			
-			if(controller.getModel().getRC().get(i) == null) {
-				LOGGER.info("Review Record not populated correclty.");
+			if(w == null) {
+				LOGGER.info("Review Record not populated correctly.");
 			}else {
-				controller.getModel().getRC().get(i).dispatchBuilder();
-				controller.getModel().getRC().get(i).getPanel().setBounds(0,i*200,804,250);
-				controller.getModel().getScrollPanePanel().add(controller.getModel().getRC().get(i).getPanel());
+				w.dispatchBuilder();
+				w.getPanel().setBounds(0,i*200,804,250);
+				controller.getModel().getScrollPanePanel().add(w.getPanel());
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
+				ar1.add(w);
 			}
-
 		}
+		
+		controller.getModel().setRC(ar1);
+		for(int i = 0; i < 14; i ++) {
+			System.out.println(controller.getModel().getRC().get(i).getModel().getReviews().getUser());
+		}
+		
 
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
 		controller.getPanel().add(controller.getModel().getScrollPane()).setBounds(40, 257, 900, 450);
@@ -171,5 +176,16 @@ public class TeacherReviewView {
 		mainFrame.setVisible(true);
 	}
 	
-	
+//	controller.getModel().getRC().add( new ReviewController());
+//	controller.getModel().getRC().get(i).getModel().setCount(i);
+//	controller.getModel().getRC().get(i).getModel().setReviews(controller.getModel().getReviews().get(i));
+//	controller.getModel().getRC().get(i).setTc(controller);
+//	
+//	if(controller.getModel().getRC().get(i) == null) {
+//		LOGGER.info("Review Record not populated correctly.");
+//	}else {
+//		controller.getModel().getRC().get(i).dispatchBuilder();
+//		controller.getModel().getRC().get(i).getPanel().setBounds(0,i*200,804,250);
+//		controller.getModel().getScrollPanePanel().add(controller.getModel().getRC().get(i).getPanel());
+//		controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
 }

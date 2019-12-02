@@ -22,12 +22,12 @@ import BNU.logic.ReviewController;
 import BNU.logic.UserReviewController;
 
 public class ReviewView {
-	static JButton butNavigation;
-	static JLabel labTitle;
+    JButton butNavigation;
+    JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(ReviewController.class.getName());
 
 	@SuppressWarnings("unused")
-	public static void BuildReviewView(ReviewController controller) {
+	public void BuildReviewView(ReviewController controller) {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
@@ -60,7 +60,7 @@ public class ReviewView {
 		g.gridy = 1;
 		controller.getPanel().add(controller.getModel().getBtnUp(), g);
 		controller.getModel().getBtnUp().addActionListener(controller);
-		controller.getModel().getBtnUp().setActionCommand("Review:upvote" + controller.getModel().getCount().toString());
+		controller.getModel().getBtnUp().setActionCommand("u" + controller.getModel().getCount().toString());
 		
 
 		
@@ -72,7 +72,7 @@ public class ReviewView {
 		g.gridy = 3;
 		controller.getPanel().add(controller.getModel().getBtnDown(), g);
 		controller.getModel().getBtnDown().addActionListener(controller);
-		controller.getModel().getBtnDown().setActionCommand("Review:downvote" + controller.getModel().getCount().toString());
+		controller.getModel().getBtnDown().setActionCommand("d" + controller.getModel().getCount().toString());
 		
 
 		// review score label
@@ -121,7 +121,7 @@ public class ReviewView {
 		g.fill = g.HORIZONTAL;
 		controller.getPanel().add(controller.getModel().getBtnMessageReviewer(), g);
 		controller.getModel().getBtnMessageReviewer().addActionListener(controller);
-		controller.getModel().getBtnMessageReviewer().setActionCommand("Review:message" + controller.getModel().getCount().toString());
+		controller.getModel().getBtnMessageReviewer().setActionCommand("m" + controller.getModel().getCount().toString());
 		
 	}
 	

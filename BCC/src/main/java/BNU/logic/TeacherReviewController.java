@@ -13,7 +13,6 @@ public class TeacherReviewController extends PageController{
 	static TeacherReviewView view;
 	static TeacherReviewModel model = new TeacherReviewModel();
 	static JPanel panel;
-	//static dbWrapper db;
 	String teacherName;
 	String className;
 	
@@ -38,13 +37,10 @@ public class TeacherReviewController extends PageController{
 		}
 	}
 	
-	public static dbWrapper getDb() {
+	public dbWrapper getDb() {
 		return db;
 	}
 
-//	public static void setDb(dbWrapper db) {
-//		TeacherReviewController.db = db;
-//	}
 
 	public String getTeacherName() {
 		return teacherName;
@@ -89,28 +85,26 @@ public class TeacherReviewController extends PageController{
 	public void up(int n) {
 	//if(db.isUpvoteValid()) {
 		//db.upvote();
-	
-		ReviewController r = this.getModel().getRC().get(n);
 		
-		int total = r.getModel().getReviews().getVotes();
+		int total = this.getModel().getRC().get(n).getModel().getReviews().getVotes();
 		total ++;
-		r.getModel().getReviews().setVotes(total);
-		r.getModel().getReviewScore().setText(r.getModel().getReviews().getVotes().toString());
-		r.getModel().getReviewScore().repaint();
-		System.out.println(r.getModel().getReviews().getVotes());
+		getModel().getRC().get(n).getModel().getReviews().setVotes(total);
+		getModel().getRC().get(n).getModel().getReviewScore().setText(getModel().getRC().get(n).getModel().getReviews().getVotes().toString());
+		getModel().getRC().get(n).getPanel().repaint();
+		
 	//}
 
 	}
 	public void down(int n) {
 	//if(db.isDownvoteValid()) {
-		ReviewController r = this.getModel().getRC().get(n);
 		
-		int total = r.getModel().getReviews().getVotes();
+		
+		int total = this.getModel().getRC().get(n).getModel().getReviews().getVotes();
 		total --;
-		r.getModel().getReviews().setVotes(total);
-		r.getModel().getReviewScore().setText(r.getModel().getReviews().getVotes().toString());
-		r.getModel().getReviewScore().repaint();
-		System.out.println(r.getModel().getReviews().getVotes());
+		this.getModel().getRC().get(n).getModel().getReviews().setVotes(total);
+		this.getModel().getRC().get(n).getModel().getReviewScore().setText(this.getModel().getRC().get(n).getModel().getReviews().getVotes().toString());
+		this.getModel().getRC().get(n).getModel().getReviewScore().repaint();
+		System.out.println(this.getModel().getRC().get(n).getModel().getReviews().getVotes());
 	//}
 	}
 	public void message(int n) {
