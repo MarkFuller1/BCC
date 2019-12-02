@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
@@ -98,15 +99,14 @@ public class ReviewView {
 		controller.getPanel().add(controller.getModel().getReviewScrollPane(), g);
 		
 		// text pane
-		controller.getModel().setTextPane(new JTextPane());
-		controller.getModel().getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		controller.getModel().getTextPane().setEditable(false);
+		controller.getModel().setTextArea(new JTextArea());
+		controller.getModel().getTextArea().setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		controller.getModel().getTextArea().setEditable(false);
+		
+		controller.getModel().getTextArea().setText(controller.getModel().getReviews().getDescription());
 		
 		
-		controller.getModel().getTextPane().setText(controller.getModel().getReviews().getDescription());
-		
-		
-		controller.getModel().getReviewScrollPane().setViewportView(controller.getModel().getTextPane());
+		controller.getModel().getReviewScrollPane().setViewportView(controller.getModel().getTextArea());
 		
 		// reviewer label
 		controller.getModel().setReviewerID(new JLabel(controller.getModel().getReviews().getUser()));
@@ -198,14 +198,14 @@ public class ReviewView {
 		controller.getPanel().add(controller.getModel().getReviewScrollPane(), g);
 		
 		// text pane
-		controller.getModel().setTextPane(new JTextPane());
-		controller.getModel().getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		controller.getModel().getTextPane().setEditable(false);
+		controller.getModel().setTextArea(new JTextArea());
+		controller.getModel().getTextArea().setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		controller.getModel().getTextArea().setEditable(false);
 		
 		
-		controller.getModel().getTextPane().setText(content);
+		controller.getModel().getTextArea().setText(content);
 		
-		controller.getModel().getReviewScrollPane().setViewportView(controller.getModel().getTextPane());
+		controller.getModel().getReviewScrollPane().setViewportView(controller.getModel().getTextArea());
 		
 		// reviewer label
 		controller.getModel().setReviewerID(new JLabel(reviewerID));

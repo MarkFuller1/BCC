@@ -1,14 +1,10 @@
 package BNU.data;
 
-import java.awt.LayoutManager;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 public class DatabaseMock extends AbstractDB {
 
@@ -129,9 +125,9 @@ public class DatabaseMock extends AbstractDB {
 		ArrayList<Course> courses = new ArrayList<>();
 		String[] profs = { "Dr. Nikola Tesla", "Dr. Thomas Edison", "Dr. Alexander Grahm-Bell" };
 
-		courses.add(new Course("Adventures in Multi-Threading", "99", "4", profs));
-		courses.add(new Course("Quantum Computing for Beginners", "99", "4", profs));
-		courses.add(new Course("Intro to GoLang", "99", "4", profs));
+		courses.add(new Course("Adventures in Multi-Threading", "99", "4"));
+		courses.add(new Course("Quantum Computing for Beginners", "99", "4"));
+		courses.add(new Course("Intro to GoLang", "99", "4"));
 
 		switch (course) {
 		case "Adventures in Multi-Threading":
@@ -146,8 +142,8 @@ public class DatabaseMock extends AbstractDB {
 	}
 
 	@SuppressWarnings("null")
-	public String[][] getAllCoursesByProfImpl(String[] courses) {
-		String[][] courseObjs = new String[courses.length][3];
+	public String[][] getAllCourseInfoByProfImpl(String prof) {
+		String[][] courseObjs = new String[3][3];
 
 		courseObjs[0][0] = "Dr. Nikola Tesla";
 		courseObjs[0][1] = "99";
@@ -164,8 +160,9 @@ public class DatabaseMock extends AbstractDB {
 		return courseObjs;
 	}
 
-	public String[][] getAllTeachersByCourseImpl(String[] professorNames) {
-		String[][] courseObjs = new String[professorNames.length][3];
+	@Override
+	public String[][] getAllTeacherInfoByCourseImpl(String courseName) {
+		String[][] courseObjs = new String[3][3];
 
 		courseObjs[0][0] = "Dr. Nikola Tesla";
 		courseObjs[0][1] = "99";
@@ -335,13 +332,6 @@ public class DatabaseMock extends AbstractDB {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	protected boolean submitCredentialsImpl() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	@Override
 	protected String getRecieverImpl() {
 		// TODO Auto-generated method stub
@@ -365,5 +355,4 @@ public class DatabaseMock extends AbstractDB {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

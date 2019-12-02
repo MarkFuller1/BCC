@@ -35,16 +35,16 @@ public class UserReviewView {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true); 
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
+			LOGGER.info("User Review page loaded correctly");
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Couldn't get lock for BCC.log");
 		}
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
-		LOGGER.info("User Review page loaded correctly");
+		
 
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(null);
@@ -97,7 +97,7 @@ public class UserReviewView {
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
 		//get Bill Gates from Singleton
-		String[][] reviews = urs.getReviewsForUser("Bill Gates");
+		String[][] reviews = urs.getReviewsForUser("ron"); // TODO: this needs to change
 	
 		for(int i = 0; i < 10; i++) {
 			ReviewModel2 rm2 = new ReviewModel2();
