@@ -266,11 +266,8 @@ public abstract class AbstractDB {
 			String[][] reviews = getAllReviewsForUserImpl(userName);
 
 			if (con != null) {
-				if (con != null) {
-					con.close();
-				}
+				con.close();
 			}
-			;
 
 			return reviews;
 		} catch (DatabaseConnectionException | SQLException e) {
