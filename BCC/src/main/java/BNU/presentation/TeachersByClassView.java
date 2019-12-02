@@ -36,7 +36,7 @@ import javax.swing.border.LineBorder;
 import BNU.data.CourseProfessor;
 import BNU.data.DatabaseMock;
 import BNU.data.Professor;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.logic.LoginController;
 import BNU.logic.TeachersByClassController;
 import BNU.logic.service.ClassByTeacherService;
@@ -95,7 +95,7 @@ public class TeachersByClassView {
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
 		
 		//build scroll-able class selector
-		controller.getModel().setClasses(buildTeacherPanels(tbcs.getAllTeachersByClassService(controller.getClassName()), controller));
+		controller.getModel().setClasses(buildTeacherPanels(controller));
 		
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -119,10 +119,10 @@ public class TeachersByClassView {
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JComponent> buildTeacherPanels(String[] professorNames, TeachersByClassController controller) {
+	private static List<JComponent> buildTeacherPanels(TeachersByClassController controller) {
 		List<JComponent> panels = new ArrayList<>();
 		//dbWrapper db = new DatabaseMock();
-		Professor[] professors = tbcs.getAllProfessorsByCourseService(professorNames, controller.getClassName());
+		Professor[] professors = tbcs.getAllProfessorsByCourseService(controller.getClassName());
 		
 		for(Professor prof: professors) {
 			System.out.println(prof);

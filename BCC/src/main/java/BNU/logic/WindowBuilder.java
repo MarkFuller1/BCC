@@ -11,17 +11,18 @@ import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 import BNU.data.DatabaseMock;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
+import BNU.data.DatabaseApi;
 
 public class WindowBuilder {
 	
 	public static JFrame mainFrame;
-	private static dbWrapper db;
+	private static AbstractDB db;
 	public static Clip clip; 
 	public static File deck; 
 	
 	public WindowBuilder() {
-		db = new DatabaseMock();
+		db = new DatabaseApi();
 		PageController.db = db;
 		//build the JFrame 
 		mainFrame = new JFrame("BCC");

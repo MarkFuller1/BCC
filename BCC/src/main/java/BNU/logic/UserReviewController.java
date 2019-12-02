@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import BNU.data.UserReviewModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.presentation.UserReviewView;
 
 public class UserReviewController extends PageController{

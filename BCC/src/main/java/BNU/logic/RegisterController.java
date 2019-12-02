@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import BNU.data.DatabaseMock;
 import BNU.data.RegisterModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.logic.service.LoginService;
 import BNU.logic.service.RegisterService;
 import BNU.presentation.RegisterView;
@@ -36,12 +36,11 @@ public class RegisterController extends PageController {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e1) { 
 			System.out.println("Logger failed to load in " + RegisterController.class.getName());
 		}
-
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
 	}
 
 	@Override
@@ -104,7 +103,7 @@ public class RegisterController extends PageController {
 		this.panel = panel;
 	}
 
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 
