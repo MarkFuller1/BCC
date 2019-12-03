@@ -10,7 +10,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import BNU.data.DatabaseConnectionException;
+import BNU.data.database.DatabaseConnectionException;
 import BNU.logic.LoginController;
 import BNU.logic.RegisterController;
 

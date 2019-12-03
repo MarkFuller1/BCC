@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.models;
 
 
 import javax.swing.JButton;

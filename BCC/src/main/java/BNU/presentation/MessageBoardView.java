@@ -30,7 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import BNU.data.Message;
-import BNU.data.MessageModel;
+import BNU.data.models.MessageModel;
 import BNU.logic.MessageBoardController;
 
 public class MessageBoardView {

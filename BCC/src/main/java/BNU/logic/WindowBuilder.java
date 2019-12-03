@@ -10,9 +10,9 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
-import BNU.data.DatabaseMock;
-import BNU.data.AbstractDB;
-import BNU.data.DatabaseApi;
+import BNU.data.database.AbstractDB;
+import BNU.data.database.DatabaseApi;
+import BNU.data.database.DatabaseMock;
 
 public class WindowBuilder {
 	

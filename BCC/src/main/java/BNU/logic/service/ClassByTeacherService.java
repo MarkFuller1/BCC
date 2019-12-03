@@ -8,8 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import BNU.data.Course;
-import BNU.data.DatabaseApi;
-import BNU.data.DatabaseConnectionException;
+import BNU.data.database.DatabaseApi;
+import BNU.data.database.DatabaseConnectionException;
 import BNU.logic.ClassByTeacherController;
 
 public class ClassByTeacherService {

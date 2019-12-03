@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.UserReviewModel;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.models.UserReviewModel;
 import BNU.presentation.UserReviewView;
 
 public class UserReviewController extends PageController{

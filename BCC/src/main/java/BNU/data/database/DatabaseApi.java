@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.database;
 
 import java.awt.List;
 import java.io.IOException;
