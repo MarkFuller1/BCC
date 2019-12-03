@@ -74,9 +74,10 @@ public class LoginController extends PageController {
 			System.out.println("login:Authorize Button Pressed");
 
 			//Commented out to make easier access to application. Code is good.
-			//if(ls.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
+			if(ls.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
 			    boolean isAdmin = ls.isUserAdmin(model.getTxt_username().getText());
 			    SingletonSession session = SingletonSession.getInstance(model.getTxt_username().getText(), isAdmin);
+			    
 			    System.out.println(SingletonSession.getInstance().getUserName());
 
 			    if(SingletonSession.getInstance().isAdmin()) {
@@ -86,10 +87,10 @@ public class LoginController extends PageController {
 			    	WindowBuilder.loadPage(new MainController()); 
 			    }
 				
-			//}else {
-			//	model.getTxt_username().setText("Enter Username");
-			//	model.getTxt_password().setText("Enter Password");
-			//}
+			}else {
+				model.getTxt_username().setText("Enter Username");
+				model.getTxt_password().setText("Enter Password");
+			}
 			
 
 			//WindowBuilder.loadPage(new MainController());
