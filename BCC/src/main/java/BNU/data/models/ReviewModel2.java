@@ -22,20 +22,34 @@ public class ReviewModel2 {
 	private JButton btnUp;
 	private JButton btnDown;
 	private JLabel reviewScore;
+	private Integer scores;
 	private JScrollPane reviewScrollPane;
 	private JLabel studentReview;
 	private JLabel reviewerID;
 	private JButton btnMessageReviewer;
 	private JPanel panel;
 	private JTextArea textArea;
-	private Review reviews;
+	//private Review reviews;
+	private Integer count;
 	
-	public Review getReviews() {
-		return reviews;
+	public Integer getScores() {
+		return scores;
 	}
-	public void setReviews(Review reviews) {
-		this.reviews = reviews;
+	public void setScores(Integer score) {
+		this.scores = score;
 	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+//	public Review getReviews() {
+//		return reviews;
+//	}
+//	public void setReviews(Review reviews) {
+//		this.reviews = reviews;
+//	}
 	
 	public JButton getBtnUp() {
 		return btnUp; 

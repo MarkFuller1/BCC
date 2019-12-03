@@ -154,22 +154,22 @@ public class TeacherReviewView {
 
 		String[][] reviews = rs.getReviewsForTeacherClass(controller.getTeacherName(),controller.getClassName());
 
-		//controller.getModel().setReviews(controller.getDb().getReviews(null, null));
-		//controller.getModel().setRC( new ArrayList<ReviewController>());
+		controller.getModel().setRC( new ArrayList<ReviewController>());
 		
 		for(int i = 0; i < reviews.length; i++) {
 			ReviewController rm1 = new ReviewController();
-			//rm1.getModel().setReviews(controller.getModel().getReviews().get(i));
+			rm1.setTc(controller);
+			rm1.getModel().setCount(i);
+			
 			
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
-				//rm1.dispatchBuilder();
 				rm1.dispatchBuilder(reviews[i][0], reviews[i][1], reviews[i][2]);
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
-				//controller.getModel().getRC().add(rm1);
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
+				controller.getModel().getRC().add(rm1);
 			}
 
 		}

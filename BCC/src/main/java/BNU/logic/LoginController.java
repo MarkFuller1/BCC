@@ -77,6 +77,7 @@ public class LoginController extends PageController {
 			if(ls.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
 			    boolean isAdmin = ls.isUserAdmin(model.getTxt_username().getText());
 			    SingletonSession session = SingletonSession.getInstance(model.getTxt_username().getText(), isAdmin);
+			    
 			    System.out.println(SingletonSession.getInstance().getUserName());
 
 			    if(SingletonSession.getInstance().isAdmin()) {
