@@ -32,6 +32,7 @@ import javax.swing.border.LineBorder;
 import BNU.data.Message;
 import BNU.data.models.MessageModel;
 import BNU.logic.MessageBoardController;
+import BNU.singleton.SingletonSession;
 
 public class MessageBoardView {
 	static JButton butNavigation;
@@ -212,7 +213,7 @@ public class MessageBoardView {
 	}
 	
 	public static void updateMessages(MessageBoardController controller) {
-		controller.getModel().setMessages(controller.mbs.getAllMessagesFromTo(controller.getModel().getSender(), controller.getModel().getReceiver()));
+		controller.getModel().setMessages(controller.mbs.getAllMessagersToUser(SingletonSession.getInstance().getUserName()));
 		
 		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
 			Message m = controller.getModel().getMessages().get(i);
