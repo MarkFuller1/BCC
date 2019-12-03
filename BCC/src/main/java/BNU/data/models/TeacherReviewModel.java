@@ -33,8 +33,6 @@ public class TeacherReviewModel {
 	private ArrayList<Review> reviews;
 	private ArrayList<ReviewController> RC;
 	
-	
-	
 	public ArrayList<ReviewController> getRC() {
 		return RC;
 	}
