@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.database;
 
 public class DatabaseOperationException extends Exception {
 

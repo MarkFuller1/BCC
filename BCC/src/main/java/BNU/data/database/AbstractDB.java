@@ -1,9 +1,12 @@
-package BNU.data;
+package BNU.data.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import BNU.data.Message;
+import BNU.data.Review;
 
 public abstract class AbstractDB {
 

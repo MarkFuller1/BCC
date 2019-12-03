@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.models;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

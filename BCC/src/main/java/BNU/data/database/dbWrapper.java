@@ -1,6 +1,11 @@
-package BNU.data;
+package BNU.data.database;
 
 import java.util.ArrayList;
+
+import BNU.data.Course;
+import BNU.data.Message;
+import BNU.data.Professor;
+import BNU.data.Review;
 
 public interface dbWrapper {
 	boolean validateUser(String userName, String password); //new

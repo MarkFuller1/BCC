@@ -9,11 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.DatabaseMock;
 import BNU.data.Message;
-import BNU.data.MessageBoardModel;
+import BNU.data.database.AbstractDB;
+import BNU.data.database.DatabaseMock;
+import BNU.data.models.MessageBoardModel;
 import BNU.logic.service.MessageBoardService;
-import BNU.data.AbstractDB;
 import BNU.presentation.MessageBoardView;
 
 public class MessageBoardController extends PageController{

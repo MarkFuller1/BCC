@@ -5,8 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.TeacherReviewModel;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.models.TeacherReviewModel;
 import BNU.presentation.TeacherReviewView;
 
 public class TeacherReviewController extends PageController{
