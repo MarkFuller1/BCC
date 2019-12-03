@@ -15,7 +15,7 @@ public class MessageBoardService {
 
 		public void messageSend(Message message, String from, String to) {
 			SmartProxy sp = new SmartProxy();
-			sp.sanatizeAndSendMessage(message, from, to, Long.toString(System.currentTimeMillis());
+			sp.sanatizeAndSendMessage(message, from, to, Long.toString(System.currentTimeMillis()));
 			//MessageBoardController.db.sendMessage(message);
 		}
 		
@@ -27,15 +27,14 @@ public class MessageBoardService {
 			
 			String[][] messages = MessageBoardController.db.getAllMessages(receiver);
 			
-			Message[] finalData;
 			
-			finalData = new Message[messages.length];
-
-			for (int i = 0; i < messages.length; i++) {
-			    finalData[i] = new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]);
+			ArrayList<Message> finalAr = new ArrayList<>();
+			
+			for(int i = 0 ;i < messages.length; i++) {
+				finalAr.add(new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]));
 			}
 			
-			return finalData;
+			return finalAr;
 		}
 		
 		public ArrayList<Message> getAllMessagesFromTo(String sender, String receiver){
