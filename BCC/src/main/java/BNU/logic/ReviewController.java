@@ -1,21 +1,14 @@
 package BNU.logic;
 
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import BNU.data.database.AbstractDB;
 import BNU.data.models.ReviewModel2;
-import BNU.data.models.UserReviewModel;
-import BNU.logic.MessageBoardController;
 import BNU.logic.PageController;
-import BNU.logic.WindowBuilder;
 import BNU.presentation.ReviewView;
-import BNU.presentation.UserReviewView;
 
 public class ReviewController extends PageController implements ActionListener {
 	 ReviewView view;
@@ -76,18 +69,12 @@ public class ReviewController extends PageController implements ActionListener {
 				System.out.println("upvote button" + i.toString() + "pressed");
 				this.getTc().up(i);
 			}
+      else if(e.getActionCommand().contentEquals("f"+i.toString())) {
+				System.out.println("flag button" + i.toString() + "pressed");
+				//flag function 
+			}
 		}
 	}
-
-
-//	public void dispatchBuilder() {
-//		try {
-//			ReviewView.BuildReviewView(this);
-//		} catch (SecurityException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
 	
 	public void dispatchBuilder(String content, String score, String reviewerID, String reviewID) {
 		try {
