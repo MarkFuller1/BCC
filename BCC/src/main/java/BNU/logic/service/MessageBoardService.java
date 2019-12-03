@@ -63,5 +63,10 @@ public class MessageBoardService {
 			
 			return messages;
 		}
+
+		public void sendMessage(String text, String sender, String receiver, BigInteger valueOf) {
+			// TODO Auto-generated method stub
+			
+		}
 	
 }
