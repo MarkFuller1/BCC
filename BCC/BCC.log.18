@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2019-11-10T04:42:22.600897700Z</date>
+  <millis>1573360942600</millis>
+  <nanos>897700</nanos>
+  <sequence>21</sequence>
+  <logger>BNU.logic.TeachersByClassController</logger>
+  <level>INFO</level>
+  <class>BNU.logic.TeachersByClassController</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>main:searchProfessor Button Pressed</message>
+</record>
+<record>
+  <date>2019-11-10T04:42:22.601895700Z</date>
+  <millis>1573360942601</millis>
+  <nanos>895700</nanos>
+  <sequence>22</sequence>
+  <logger>BNU.logic.TeachersByClassController</logger>
+  <level>INFO</level>
+  <class>BNU.logic.TeachersByClassController</class>
+  <method>actionPerformed</method>
+  <thread>17</thread>
+  <message>The teacher selected was: Dr. Nikola Tesla</message>
+</record>
+</log>
