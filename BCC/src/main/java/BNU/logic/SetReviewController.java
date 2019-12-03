@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.SetReviewModel;
+import BNU.data.models.SetReviewModel;
 import BNU.logic.service.SetReviewService;
 import BNU.presentation.SetReviewView;
 import BNU.singleton.SingletonSession;

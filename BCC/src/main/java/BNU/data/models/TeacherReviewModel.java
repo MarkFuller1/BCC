@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.models;
 
 
 
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
+import BNU.data.Review;
 import BNU.logic.ReviewController;
 
 public class TeacherReviewModel {

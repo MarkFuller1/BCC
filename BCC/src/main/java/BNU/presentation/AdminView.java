@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-import BNU.data.ReviewModel2;
+import BNU.data.models.ReviewModel2;
 import BNU.logic.AdminController;
 
 

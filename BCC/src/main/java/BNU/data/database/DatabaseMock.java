@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.database;
 
 import java.sql.Connection;
 import java.sql.Timestamp;
@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import BNU.data.Course;
+import BNU.data.Professor;
+import BNU.data.Review;
 import BNU.singleton.SingletonSession;
 
 

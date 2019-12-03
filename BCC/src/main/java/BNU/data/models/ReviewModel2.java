@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.models;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+
+import BNU.data.Review;
 
 public class ReviewModel2 { 
 	

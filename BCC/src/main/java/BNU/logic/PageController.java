@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
 
 public abstract class PageController implements ActionListener{
 	public static AbstractDB db;

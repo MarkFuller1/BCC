@@ -6,8 +6,8 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.LoginModel;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.models.LoginModel;
 import BNU.logic.service.LoginService;
 import BNU.presentation.LoginView;
 import BNU.singleton.SingletonSession;

@@ -34,9 +34,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import BNU.data.Course;
-import BNU.data.DatabaseMock;
 import BNU.data.ProfessorCourse;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.database.DatabaseMock;
 import BNU.logic.ClassByTeacherController;
 import BNU.logic.LoginController;
 import BNU.logic.service.ClassByTeacherService;

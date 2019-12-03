@@ -1,4 +1,4 @@
-package BNU.data;
+package BNU.data.models;
 
 
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+
+import BNU.data.Message;
 
 public class MessageBoardModel {
 	
