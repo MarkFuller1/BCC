@@ -322,6 +322,7 @@ public class DatabaseApi extends AbstractDB {
 				vals[i][0] = rs.getString("content");
 				vals[i][1] = rs.getString("score");
 				vals[i][2] = rs.getString("user_name");
+				vals[i][3] = rs.getString("review_id_pk");
 
 				i++;
 			}
@@ -603,4 +604,5 @@ public class DatabaseApi extends AbstractDB {
 		return false;
 	}
 
+	
 }
