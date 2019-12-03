@@ -3,6 +3,7 @@ package BNU.logic;
 
 
 import java.awt.event.ActionEvent;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import javax.swing.JButton;
@@ -84,8 +85,8 @@ public class MessageBoardController extends PageController{
 			WindowBuilder.loadPage(new LoginController());
 		}else if(e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
-			Message mess = new Message(this.getModel().getBar().getText(), new Timestamp(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
-			mbs.messageSend(mess);
+			Message mess = new Message(this.getModel().getBar().getText(), BigInteger.valueOf(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
+			mbs.messageSend(mess, /*from*/, /*to*/);
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 			System.out.println("Message sent and without mock this should create a live update!");
 		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
