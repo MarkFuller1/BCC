@@ -13,7 +13,6 @@ public class TeacherReviewController extends PageController{
 	static TeacherReviewView view;
 	static TeacherReviewModel model = new TeacherReviewModel();
 	static JPanel panel;
-	//static dbWrapper db;
 	String teacherName;
 	String className;
 	
@@ -78,6 +77,32 @@ public class TeacherReviewController extends PageController{
 	public void setModel(TeacherReviewModel model) {
 		TeacherReviewController.model = model;
 	}
+	
+	public void up(int n) {
+		//if(db == valid){
+			//db.upvote();
+			int total = this.getModel().getRC().get(n).getModel().getScores();
+			total ++;
+			this.getModel().getRC().get(n).getModel().setScores(total);
+			this.getModel().getRC().get(n).getModel().getReviewScore().setText(this.getModel().getRC().get(n).getModel().getScores().toString());
+			this.getModel().getRC().get(n).getPanel().repaint();
+		//}
+	}
+	public void down(int n) {
+		//if(db == valid){
+			//db.downvote();
+			int total = this.getModel().getRC().get(n).getModel().getScores();
+			total --;
+			this.getModel().getRC().get(n).getModel().setScores(total);
+			this.getModel().getRC().get(n).getModel().getReviewScore().setText(this.getModel().getRC().get(n).getModel().getScores().toString());
+			this.getModel().getRC().get(n).getPanel().repaint();
+		//}
+	}
+	public void message(int n) {
+		// need to figure out message here 
+		WindowBuilder.loadPage(new MessageBoardController());
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

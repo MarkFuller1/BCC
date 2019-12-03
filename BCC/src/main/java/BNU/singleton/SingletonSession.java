@@ -1,32 +1,31 @@
 package BNU.singleton;
 
+import BNU.logic.service.proxy.SmartProxy;
+
 public class SingletonSession {
 	static String userName;
 	static boolean isAdmin;
 	
-    private static final SingletonSession SINGLE_INSTANCE = new SingletonSession(userName, isAdmin);
+    private static final SingletonSession SINGLE_INSTANCE = new SingletonSession();
     
     private SingletonSession() {
-    	SingletonSession.userName = "plug";
-    	SingletonSession.isAdmin = false;
+    	SingletonSession.setUserName("plug");
+    	SingletonSession.setAdmin(false);
     }
 
     private SingletonSession(String userName, boolean isAdmin) {
-    	SingletonSession.userName = userName;
-    	SingletonSession.isAdmin = isAdmin;
+    	  SingletonSession.setUserName(userName);
+      	  SingletonSession.setAdmin(isAdmin);
     }
 
   public static SingletonSession getInstance() {
-
       return SINGLE_INSTANCE;
-
     }
   
   public static SingletonSession getInstance(String userName, boolean isAdmin) {
-  	  SingletonSession.userName = userName;
-  	  SingletonSession.isAdmin = isAdmin;
+  	  SingletonSession.setUserName(userName);
+  	  SingletonSession.setAdmin(isAdmin);
       return SINGLE_INSTANCE;
-
     }
 
 public static String getUserName() {
@@ -34,7 +33,9 @@ public static String getUserName() {
 }
 
 public static void setUserName(String userName) {
-	SingletonSession.userName = userName;
+	SmartProxy sp = new SmartProxy();
+	String cleanUN = sp.sanatizeInput(userName);
+	SingletonSession.userName = cleanUN;
 }
 
 public static boolean isAdmin() {
