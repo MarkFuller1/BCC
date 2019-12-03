@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
+
+import BNU.singleton.SingletonSession;
 
 
 public class DatabaseMock extends AbstractDB {
@@ -251,7 +254,7 @@ public class DatabaseMock extends AbstractDB {
 	// String text, Timestamp time, String sender, String receiver)
 	@Override
 	//public ArrayList<Message> getAllMessages(String sender, String receiver) {
-	public String[][] getAllMessages(String sender, String receiver) {
+	public String[][] getAllMessagesImpl(String sender, String receiver) {
 		//ArrayList<Message> messages = new ArrayList<>();
 		
 		String[][] msgs = new String[8][4];
@@ -400,6 +403,7 @@ public class DatabaseMock extends AbstractDB {
 		}
 		return true;//returning true instead of isAdmin to simplify development
 	}
+
 
 
 	
