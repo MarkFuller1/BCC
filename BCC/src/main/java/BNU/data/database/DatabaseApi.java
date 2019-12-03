@@ -3,6 +3,7 @@ package BNU.data.database;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -299,13 +300,11 @@ public class DatabaseApi extends AbstractDB {
 	protected String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) {
 		String[][] vals = null;
 		String firstLast[] = professorName.split(" ");
-		String query = "select content, (teaching_ability + workload + helpfulness) / 3 as score, user_name  " + 
-				"FROM review, professor, course  " + 
-				"WHERE professor.first_name = \'" + firstLast[0] + "\'  " + 
-				"AND professor.last_name = \'" + firstLast[1] + "\'  " + 
-				"AND professor_id = professor.professor_id_pk  " + 
-				"AND course.title = \'" + className + "\'  " + 
-				"AND review.course_id = course.course_id_pk";
+		String query = "select content, (teaching_ability + workload + helpfulness) / 3 as score, user_name  "
+				+ "FROM review, professor, course  " + "WHERE professor.first_name = \'" + firstLast[0] + "\'  "
+				+ "AND professor.last_name = \'" + firstLast[1] + "\'  "
+				+ "AND professor_id = professor.professor_id_pk  " + "AND course.title = \'" + className + "\'  "
+				+ "AND review.course_id = course.course_id_pk";
 
 		try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
@@ -374,7 +373,9 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected String[][] getAllReviewsForUserImpl(String userName) {
 		// content score prof course name
-		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name  from review, professor, course Where user_name = \'" + userName + "\'  AND review.professor_id = professor.professor_id_pk AND review.course_id = course.course_id_pk";
+		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name  from review, professor, course Where user_name = \'"
+				+ userName
+				+ "\'  AND review.professor_id = professor.professor_id_pk AND review.course_id = course.course_id_pk";
 		ResultSet userReviews = null;
 		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
 
@@ -386,7 +387,7 @@ public class DatabaseApi extends AbstractDB {
 
 			int i = 0;
 			while (userReviews.next()) {
-				
+
 				reviews.add(new ArrayList<String>());
 				reviews.get(i).add(0, userReviews.getString("content"));
 				reviews.get(i).add(1, userReviews.getString("avg"));
@@ -399,22 +400,22 @@ public class DatabaseApi extends AbstractDB {
 			LOGGER.warning(query);
 			e.printStackTrace();
 		}
-		
+
 		String[][] finalData;
-		
+
 		finalData = new String[reviews.size()][];
 
 		for (int i = 0; i < reviews.size(); i++) {
-		    ArrayList<String> row = reviews.get(i);
+			ArrayList<String> row = reviews.get(i);
 
-		    // Perform equivalent `toArray` operation
-		    String[] copy = new String[row.size()];
-		    for (int j = 0; j < row.size(); j++) {
-		        // Manually loop and set individually
-		        copy[j] = row.get(j);
-		    }
+			// Perform equivalent `toArray` operation
+			String[] copy = new String[row.size()];
+			for (int j = 0; j < row.size(); j++) {
+				// Manually loop and set individually
+				copy[j] = row.get(j);
+			}
 
-		    finalData[i] = copy;
+			finalData[i] = copy;
 		}
 		return finalData;
 	}
@@ -423,50 +424,50 @@ public class DatabaseApi extends AbstractDB {
 
 	protected String[][] getAllMessagesImpl(String receiver) {
 		// text timestamp sender reciever
-				String query = "select message.message, date_sent, from_user_name, to_user_name from message " + 
-						"where from_user_name = \'" + receiver + "\' OR to_user_name = \'" + receiver + "\'";
-				ResultSet userReviews = null;
-				ArrayList<ArrayList<String>> reviews = new ArrayList<>();
+		String query = "select message.message, date_sent, from_user_name, to_user_name from message "
+				+ "where from_user_name = \'" + receiver + "\' OR to_user_name = \'" + receiver + "\'";
+		ResultSet userReviews = null;
+		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
 
-				try (Statement stmt = con.createStatement()) {
+		try (Statement stmt = con.createStatement()) {
 
-					LOGGER.info(query);
-					// Query
-					userReviews = stmt.executeQuery(query);
+			LOGGER.info(query);
+			// Query
+			userReviews = stmt.executeQuery(query);
 
-					int i = 0;
-					while (userReviews.next()) {
-						
-						reviews.add(new ArrayList<String>());
-						reviews.get(i).add(0, userReviews.getString("message"));
-						reviews.get(i).add(1, userReviews.getString("date_sent"));
-						reviews.get(i).add(2, userReviews.getString("from_user_name"));
-						reviews.get(i).add(3, userReviews.getString("to_user_name"));
+			int i = 0;
+			while (userReviews.next()) {
 
-						i++;
-					}
-				} catch (Exception e) {
-					LOGGER.warning(query);
-					e.printStackTrace();
-				}
-				
-				String[][] finalData;
-				
-				finalData = new String[reviews.size()][];
+				reviews.add(new ArrayList<String>());
+				reviews.get(i).add(0, userReviews.getString("message"));
+				reviews.get(i).add(1, userReviews.getString("date_sent"));
+				reviews.get(i).add(2, userReviews.getString("from_user_name"));
+				reviews.get(i).add(3, userReviews.getString("to_user_name"));
 
-				for (int i = 0; i < reviews.size(); i++) {
-				    ArrayList<String> row = reviews.get(i);
+				i++;
+			}
+		} catch (Exception e) {
+			LOGGER.warning(query);
+			e.printStackTrace();
+		}
 
-				    // Perform equivalent `toArray` operation
-				    String[] copy = new String[row.size()];
-				    for (int j = 0; j < row.size(); j++) {
-				        // Manually loop and set individually
-				        copy[j] = row.get(j);
-				    }
+		String[][] finalData;
 
-				    finalData[i] = copy;
-				}
-				return finalData;
+		finalData = new String[reviews.size()][];
+
+		for (int i = 0; i < reviews.size(); i++) {
+			ArrayList<String> row = reviews.get(i);
+
+			// Perform equivalent `toArray` operation
+			String[] copy = new String[row.size()];
+			for (int j = 0; j < row.size(); j++) {
+				// Manually loop and set individually
+				copy[j] = row.get(j);
+			}
+
+			finalData[i] = copy;
+		}
+		return finalData;
 	}
 
 	@Override
@@ -505,8 +506,7 @@ public class DatabaseApi extends AbstractDB {
 		String getNames = "select title, professor.first_name, professor.last_name, review.teaching_ability + review.workload + review.helpfulness / 3 as avg "
 				+ "from review, professor, course " + "WHERE professor.first_name = \'" + firstLast[0] + "\'"
 				+ "AND professor.last_name =  \'" + firstLast[1] + "\'"
-				+ "AND professor.professor_id_pk = review.professor_id "
-				+ "AND review.course_id = course.course_id_pk";
+				+ "AND professor.professor_id_pk = review.professor_id " + "AND review.course_id = course.course_id_pk";
 		ResultSet rs = null;
 		String[][] finalVals = null;
 
@@ -570,7 +570,7 @@ public class DatabaseApi extends AbstractDB {
 	public void setNewReview(String userName, String professorName, String className, String content, String tA,
 			String h, String wL) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -582,60 +582,25 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
 		// name, rating, number of reviews
-				
-				String getNames = "insert into message (message_id_pk, from_user_name, to_user_name, message, date_sent)" + 
-						" values ( \'" + Integer.toString(new Random().nextInt()) + "\', \'" + from + "\', \'" + to + "\', \'" + m + "\')";
-				ResultSet rs = null;
-				String[][] finalVals = null;
 
-				try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+		String sendMessage = "insert into message (message_id_pk, from_user_name, to_user_name, message, date_sent)"
+				+ " values ( \'" + Integer.toString(new Random().nextInt()) + "\', \'" + from + "\', \'" + to + "\', \'"
+				+ m + "\')";
+		int rs = 0;
 
-					LOGGER.info(getNames);
-					// Query
-					rs = stmt.executeQuery(getNames);
+		try (PreparedStatement stmt = con.prepareStatement(sendMessage, Statement.RETURN_GENERATED_KEYS)) {
 
-					int rows = 0;
-					rs.last();
-					rows = rs.getRow();
-					rs.beforeFirst();
+			// Query
+			rs = stmt.executeUpdate();
+			
+			if (rs > 0) {
+				return true;
+			}
 
-					Map<String, ArrayList<Integer>> profRanking = new HashMap<>();
-
-					while (rs.next()) {
-						String key = rs.getString("title");
-
-						ArrayList<Integer> sum = profRanking.getOrDefault(key, new ArrayList<Integer>() {
-							{
-								add(0);
-								add(0);
-							}
-						});
-
-						sum.set(1, sum.get(1) + 1);
-						sum.set(0, rs.getInt("avg"));
-
-						profRanking.put(key, sum);
-
-					}
-
-					finalVals = new String[profRanking.size()][4];
-
-					int i = 0;
-					for (Entry<String, ArrayList<Integer>> x : profRanking.entrySet()) {
-						finalVals[i][0] = x.getKey();
-						finalVals[i][1] = Double.toString(x.getValue().get(0) / x.getValue().get(1));
-						finalVals[i][2] = Integer.toString(x.getValue().get(1));
-
-						i++;
-					}
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					LOGGER.warning("Query Failed: " + getNames);
-					throw new DatabaseOperationException(getNames);
-				}
-
-				return finalVals;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
