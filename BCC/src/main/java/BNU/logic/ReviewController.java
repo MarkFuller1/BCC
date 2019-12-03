@@ -80,14 +80,14 @@ public class ReviewController extends PageController implements ActionListener {
 	}
 
 
-	public void dispatchBuilder() {
-		try {
-			ReviewView.BuildReviewView(this);
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void dispatchBuilder() {
+//		try {
+//			ReviewView.BuildReviewView(this);
+//		} catch (SecurityException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public void dispatchBuilder(String content, String score, String reviewerID, String reviewID) {
 		try {
