@@ -20,6 +20,7 @@ import BNU.data.Review;
 public class ReviewModel2 { 
 	
 	private JButton btnUp;
+	private JButton flag;
 	private JButton btnDown;
 	private JLabel reviewScore;
 	private Integer scores;
@@ -29,9 +30,23 @@ public class ReviewModel2 {
 	private JButton btnMessageReviewer;
 	private JPanel panel;
 	private JTextArea textArea;
-	//private Review reviews;
 	private Integer count;
+	private String RID;
 	
+	
+	
+	public String getRID() {
+		return RID;
+	}
+	public void setRID(String rID) {
+		RID = rID;
+	}
+	public JButton getFlag() {
+		return flag;
+	}
+	public void setFlag(JButton flag) {
+		this.flag = flag;
+	}
 	public Integer getScores() {
 		return scores;
 	}
