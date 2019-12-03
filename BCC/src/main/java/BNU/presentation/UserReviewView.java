@@ -21,6 +21,7 @@ import javax.swing.border.LineBorder;
 import BNU.data.models.ReviewModel2;
 import BNU.logic.UserReviewController;
 import BNU.logic.service.UserReviewService;
+import BNU.singleton.SingletonSession;
 
 
 public class UserReviewView {
@@ -97,9 +98,9 @@ public class UserReviewView {
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
 		//get Bill Gates from Singleton
-		String[][] reviews = urs.getReviewsForUser("ron"); // TODO: this needs to change
+		String[][] reviews = urs.getReviewsForUser(SingletonSession.getInstance().getUserName()); // TODO: this needs to change
 	
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < reviews.length; i++) {
 			ReviewModel2 rm2 = new ReviewModel2();
 			
 			if(rm2 == null) {

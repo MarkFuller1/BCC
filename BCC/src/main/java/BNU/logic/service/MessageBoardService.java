@@ -1,5 +1,6 @@
 package BNU.logic.service;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -11,38 +12,41 @@ import BNU.singleton.SingletonSession;
 
 public class MessageBoardService {
 
-		public void messageSend(Message message) {
-			MessageBoardController.db.sendMessage(message);
+		public void messageSend(Message message, String from, String to) {
+			MessageBoardController.db.sendMessage(message, from, to, Long.toString(System.currentTimeMillis()));
 		}
 		
 		public String getReceiver() {
 			return SingletonSession.getInstance().getUserName();
 		}
 		
-		public String[] getAllMessagersToUser(String receiver) {
-			return MessageBoardController.db.getAllUserMessagers(receiver);
+		public ArrayList<Message> getAllMessagersToUser(String receiver) {
+			
+			String[][] messages = MessageBoardController.db.getAllMessages(receiver);
+			
+			Message[] finalData;
+			
+			finalData = new Message[messages.length];
+
+			for (int i = 0; i < messages.length; i++) {
+			    finalData[i] = new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]);
+			}
+			
+			return finalData;
 		}
 		
 		public ArrayList<Message> getAllMessagesFromTo(String sender, String receiver){
-			String[][] msgs = MessageBoardController.db.getAllMessages(sender, receiver);
+			String[][] msgs = MessageBoardController.db.getAllMessages(receiver);
 			
 			ArrayList<Message> messages = new ArrayList<>();
 			
 			for(int i = 0; i < msgs.length; i++) {
-				Timestamp timestamp = null; 
-				try {
-				    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-				    Date parsedDate = (Date) dateFormat.parse(msgs[i][1]);
-				    timestamp = new java.sql.Timestamp(parsedDate.getTime());
-				} catch(Exception e) { //this generic but you can control another types of exception
-				    // look the origin of excption 
-				}
-				if(i % 2 == 0) {
-					messages.add(new Message(msgs[i][0],timestamp,msgs[i][2],msgs[i][3]));
-				}else {
-					messages.add(new Message(msgs[i][0],timestamp,msgs[i][3],msgs[i][2]));
-				}
 				
+				if(i % 2 == 0) {
+					messages.add(new Message(msgs[i][0],new BigInteger("1"),msgs[i][2],msgs[i][3]));
+				}else {
+					messages.add(new Message(msgs[i][0],new BigInteger("1"),msgs[i][3],msgs[i][2]));
+				}
 			}
 
 			
