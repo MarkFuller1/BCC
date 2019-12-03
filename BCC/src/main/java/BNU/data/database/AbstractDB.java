@@ -36,7 +36,7 @@ public abstract class AbstractDB {
 
 	protected abstract String[][] getAllReviewsForUserImpl(String userName);
 
-	protected abstract String[][] getAllMessagesImpl(String sender, String receiver);
+	protected abstract String[][] getAllMessagesImpl(String receiver);
 
 	protected abstract String getRecieverImpl();
 
@@ -49,6 +49,9 @@ public abstract class AbstractDB {
 	protected abstract void downvoteImpl();
 
 	protected abstract String[] getAllFlaggedImpl();
+	
+	protected abstract Boolean sendMessageImpl(Message m, String from, String to, String date);
+
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -281,29 +284,20 @@ public abstract class AbstractDB {
 	}
 
 	// my added functions
-	public final String[][] getAllMessages(String sender, String receiver) {
+	public final String[][] getAllMessages(String receiver) {
 		try {
 			con = getRemoteConnection();
-		} catch (DatabaseConnectionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		String[][] reviews = getAllMessagesImpl(sender, receiver);
-        //String[][] getAllMessages(String sender, String receiver);
-		try {
+			String[][] reviews = getAllMessagesImpl(receiver);
 			if (con != null) {
-				if (con != null) {
-					con.close();
-				}
+				con.close();
 			}
-			;
-		} catch (SQLException e) {
+
+		} catch (SQLException | DatabaseConnectionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		//return new ArrayList<Message>(Arrays.asList(reviews));
 		return null;
 	}
 
@@ -403,9 +397,25 @@ public abstract class AbstractDB {
 //
 //	}
 //
-	public final void sendMessage(Message m) {
+	public final Boolean sendMessage(Message m, String from, String to, String date) {
+		try {
+			con = getRemoteConnection();
 
+			Boolean friends = sendMessageImpl(m, from, to, date);
+
+			if (con != null) {
+				con.close();
+			}
+
+			return friends;
+
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
+
 
 //
 	public final ArrayList<Review> getReviews(String prof, String c) {
@@ -421,15 +431,13 @@ public abstract class AbstractDB {
 	public final Boolean isDownvoteValid() {
 		return null;
 	}
-	
-	public void setNewReview(String userName, String professorName, String className, String content, String tA, String h,
-			String wL) {
-		
+
+	public void setNewReview(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) {
+
 	}
 
 	public boolean isAdmin(String userName) {
 		return false;
 	}
 }
-
-

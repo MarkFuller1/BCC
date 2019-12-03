@@ -1,15 +1,16 @@
 package BNU.data;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 public class Message {
 
 	String text;
-	Timestamp time;
+	BigInteger time;
 	String sender;
 	String receiver;
 	
-	public Message(String text, Timestamp time, String sender, String receiver) {
+	public Message(String text, BigInteger time, String sender, String receiver) {
 		super();
 		this.text = text;
 		this.time = time;
@@ -25,10 +26,10 @@ public class Message {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public Timestamp getTime() {
+	public BigInteger getTime() {
 		return time;
 	}
-	public void setTime(Timestamp time) {
+	public void setTime(BigInteger time) {
 		this.time = time;
 	}
 	public String getSender() {
