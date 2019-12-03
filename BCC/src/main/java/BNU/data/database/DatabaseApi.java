@@ -300,7 +300,7 @@ public class DatabaseApi extends AbstractDB {
 	protected String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) {
 		String[][] vals = null;
 		String firstLast[] = professorName.split(" ");
-		String query = "select content, (teaching_ability + workload + helpfulness) / 3 as score, user_name  "
+		String query = "select content, (teaching_ability + workload + helpfulness) / 3 as score, user_name, review_id_pk  "
 				+ "FROM review, professor, course  " + "WHERE professor.first_name = \'" + firstLast[0] + "\'  "
 				+ "AND professor.last_name = \'" + firstLast[1] + "\'  "
 				+ "AND professor_id = professor.professor_id_pk  " + "AND course.title = \'" + className + "\'  "
@@ -315,7 +315,7 @@ public class DatabaseApi extends AbstractDB {
 			rows = rs.getRow();
 			rs.beforeFirst();
 
-			vals = new String[rows][3];
+			vals = new String[rows][4];
 
 			int i = 0;
 			while (rs.next()) {

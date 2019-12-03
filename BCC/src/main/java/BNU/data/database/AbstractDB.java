@@ -49,9 +49,8 @@ public abstract class AbstractDB {
 	protected abstract void downvoteImpl();
 
 	protected abstract String[] getAllFlaggedImpl();
-	
-	protected abstract Boolean sendMessageImpl(Message m, String from, String to, String date);
 
+	protected abstract Boolean sendMessageImpl(Message m, String from, String to, String date);
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -378,25 +377,38 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-//	
-//
-//	public final void upvote() throws SQLException {
-//		con = getRemoteConnection();
-//
-//		upvoteImpl();
-//
-//		if(con != null) {if(con != null) {con.close();}};
-//	}
-//
-//	
-//
-//	public final void downvote() throws SQLException {
-//		con = getRemoteConnection();
-//
-//		downvoteImpl();
-//
-//	}
-//
+	public final void upvote() throws SQLException {
+		try {
+			con = getRemoteConnection();
+
+			upvoteImpl();
+
+			if (con != null) {
+				con.close();
+			}
+
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public final void downvote() throws SQLException {
+		try {
+			con = getRemoteConnection();
+
+			downvoteImpl();
+
+			if (con != null) {
+				con.close();
+			}
+
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public final Boolean sendMessage(Message m, String from, String to, String date) {
 		try {
 			con = getRemoteConnection();
@@ -416,20 +428,17 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-
 //
 	public final ArrayList<Review> getReviews(String prof, String c) {
 		return null;
 	}
 
-//
 	public final Boolean isUpvoteValid() {
 		return true;
 	}
 
-//
 	public final Boolean isDownvoteValid() {
-		return null;
+		return true;
 	}
 
 	public void setNewReview(String userName, String professorName, String className, String content, String tA,
