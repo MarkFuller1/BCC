@@ -165,7 +165,7 @@ public class TeacherReviewView {
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correclty.");
 			}else {
-				rm1.dispatchBuilder(reviews[i][0], reviews[i][1], reviews[i][2]);
+				rm1.dispatchBuilder(reviews[i][0], reviews[i][1], reviews[i][2], reviews[i][3]);
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));

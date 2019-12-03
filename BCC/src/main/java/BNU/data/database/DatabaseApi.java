@@ -297,7 +297,7 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) {
 		String[][] vals = null;
-		String query = "select review.content, (teaching_ability + workload + helpfulness) / 3 as score, user_name FROM review";
+		String query = "select review.content, (teaching_ability + workload + helpfulness) / 3 as score, user_name, review_id_pk FROM review";
 
 		try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
@@ -315,6 +315,7 @@ public class DatabaseApi extends AbstractDB {
 				vals[i][0] = rs.getString("content");
 				vals[i][1] = rs.getString("score");
 				vals[i][2] = rs.getString("user_name");
+				vals[i][3] = rs.getString("review_id_pk");
 
 				i++;
 			}
@@ -508,15 +509,10 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected String[][] getAllMessagesImpl(String receiver) {
+	protected String[][] getAllMessagesImpl(String sender, String receiver) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }
