@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import BNU.data.database.DatabaseConnectionException;
 import BNU.logic.LoginController;
 import BNU.logic.RegisterController;
+import BNU.logic.service.proxy.SmartProxy;
 
 public class RegisterService {
 
@@ -29,8 +30,13 @@ public class RegisterService {
 	}
 
 	public boolean checkCredentials(String userName, String password) {
+		SmartProxy sp = new SmartProxy();
 		boolean exists = false;
-		if (RegisterController.db.validateUser(userName, password)) {
+		//if (RegisterController.db.validateUser(userName, password)) {
+		//	exists = true;
+		//}
+		
+		if (sp.sanatizeAndCheckCreds(userName, password)) {
 			exists = true;
 		}
 		return exists;

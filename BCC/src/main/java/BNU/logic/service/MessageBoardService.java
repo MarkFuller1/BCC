@@ -7,12 +7,15 @@ import java.util.ArrayList;
 
 import BNU.data.Message;
 import BNU.logic.MessageBoardController;
+import BNU.logic.service.proxy.SmartProxy;
 import BNU.singleton.SingletonSession;
 
 public class MessageBoardService {
 
 		public void messageSend(Message message) {
-			MessageBoardController.db.sendMessage(message);
+			SmartProxy sp = new SmartProxy();
+			sp.sanatizeAndSendMessage(message);
+			//MessageBoardController.db.sendMessage(message);
 		}
 		
 		public String getReceiver() {
