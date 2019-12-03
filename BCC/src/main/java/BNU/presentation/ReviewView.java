@@ -110,9 +110,21 @@ public class ReviewView {
 		controller.getModel().getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		g.gridx = 0;
 		g.gridy = 0;
-		g.gridwidth = 2;
+		g.gridwidth = 1;
 		g.gridheight = 1;
 		controller.getPanel().add(controller.getModel().getReviewerID(), g);
+		
+		// flag button 
+		controller.getModel().setFlag(new JButton("Flag Comment"));
+		controller.getModel().getFlag().setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		g.gridx = 1;
+		g.gridy = 0;
+		g.gridwidth = 1;
+		g.fill = g.HORIZONTAL;
+		controller.getPanel().add(controller.getModel().getFlag(), g);
+		controller.getModel().getFlag().addActionListener(controller);
+		controller.getModel().getFlag().setActionCommand("f"+controller.getModel().getCount().toString());
+		
 		
 		// message button
 		controller.getModel().setBtnMessageReviewer(new JButton("Message Reviewer"));
