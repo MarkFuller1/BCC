@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.ClassByTeacherModel;
-import BNU.data.DatabaseMock;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.database.DatabaseMock;
+import BNU.data.models.ClassByTeacherModel;
 import BNU.presentation.ClassByTeacherView;
 
 public class ClassByTeacherController extends PageController{

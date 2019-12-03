@@ -6,8 +6,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import BNU.data.DatabaseConnectionException;
-import BNU.data.DatabaseOperationException;
+import BNU.data.database.DatabaseConnectionException;
+import BNU.data.database.DatabaseOperationException;
 import BNU.logic.MainController;
 
 public class MainService {

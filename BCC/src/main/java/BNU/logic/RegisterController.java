@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.DatabaseMock;
-import BNU.data.RegisterModel;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.database.DatabaseMock;
+import BNU.data.models.RegisterModel;
 import BNU.logic.service.LoginService;
 import BNU.logic.service.RegisterService;
 import BNU.presentation.RegisterView;

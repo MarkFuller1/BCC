@@ -8,9 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import BNU.data.ReviewModel2;
-import BNU.data.UserReviewModel;
-import BNU.data.AbstractDB;
+import BNU.data.database.AbstractDB;
+import BNU.data.models.ReviewModel2;
+import BNU.data.models.UserReviewModel;
 import BNU.logic.MessageBoardController;
 import BNU.logic.PageController;
 import BNU.logic.WindowBuilder;

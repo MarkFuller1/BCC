@@ -5,7 +5,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import BNU.data.DatabaseApi;
+import BNU.data.database.DatabaseApi;
 import BNU.logic.LoginController;//need this to get db
 
 public class LoginService {
