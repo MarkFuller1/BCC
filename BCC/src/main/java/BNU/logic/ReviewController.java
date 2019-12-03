@@ -105,10 +105,10 @@ public class ReviewController extends PageController implements ActionListener {
 		}
 	}
 	
-	public void dispatchBuilder(String content, String score, String reviewerID) {
+	public void dispatchBuilder(String content, String score, String reviewerID, String reviewID) {
 		try {
 			//ReviewView.BuildReviewView(this);
-			ReviewView.BuildReviewView(this, content, score, reviewerID);
+			ReviewView.BuildReviewView(this, content, score, reviewerID, reviewID);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
