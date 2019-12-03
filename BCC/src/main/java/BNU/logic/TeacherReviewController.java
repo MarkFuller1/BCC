@@ -79,7 +79,7 @@ public class TeacherReviewController extends PageController{
 	}
 	
 	public void up(int n) {
-		//if(db == valid){
+		//if(this.getDb().isUpvoteValid(this.getModel().getRC().get(n).getModel().getRID())){
 			//db.upvote();
 			int total = this.getModel().getRC().get(n).getModel().getScores();
 			total ++;
@@ -89,7 +89,7 @@ public class TeacherReviewController extends PageController{
 		//}
 	}
 	public void down(int n) {
-		//if(db == valid){
+		//if(this.getDb().isDownvoteValid(this.getModel().getRC().get(n).getModel().getRID())){
 			//db.downvote();
 			int total = this.getModel().getRC().get(n).getModel().getScores();
 			total --;
@@ -99,7 +99,8 @@ public class TeacherReviewController extends PageController{
 		//}
 	}
 	public void message(int n) {
-		// need to figure out message here 
+	// add user
+		//this.getDb().sendMessage("", "", this.getModel().getRC().get(n).getModel().getRID(), System.currentTimeMillis());
 		WindowBuilder.loadPage(new MessageBoardController());
 	}
 	

@@ -1,6 +1,7 @@
 package BNU.data.models;
 
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -31,6 +32,7 @@ public class MessageBoardModel {
 	private JPanel big;
 	private JPanel search;
 	private JTextArea bar;
+	private BigInteger time;
 
 	private ArrayList<Message> messages;
 	private String receiver;

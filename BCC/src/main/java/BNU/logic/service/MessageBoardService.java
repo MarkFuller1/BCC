@@ -13,9 +13,9 @@ import BNU.singleton.SingletonSession;
 
 public class MessageBoardService {
 
-		public void messageSend(Message message, String from, String to) {
+		public void messageSend(Message message) {
 			SmartProxy sp = new SmartProxy();
-			sp.sanatizeAndSendMessage(message, from, to, Long.toString(System.currentTimeMillis());
+			sp.sanatizeAndSendMessage(message, message.getSender(), message.getReceiver(), Long.toString(System.currentTimeMillis()));
 			//MessageBoardController.db.sendMessage(message);
 		}
 		
@@ -23,7 +23,7 @@ public class MessageBoardService {
 			return SingletonSession.getInstance().getUserName();
 		}
 		
-		public ArrayList<Message> getAllMessagersToUser(String receiver) {
+		public String[] getAllMessagersToUser(String receiver) {
 			
 			String[][] messages = MessageBoardController.db.getAllMessages(receiver);
 			
@@ -52,15 +52,6 @@ public class MessageBoardService {
 				}
 			}
 
-			
-//			messages.add(new Message(mess, new Timestamp(System.currentTimeMillis()), sender, receiver));
-//			messages.add(new Message(mess1, new Timestamp(System.currentTimeMillis()), receiver, sender));
-//			messages.add(new Message(mess2, new Timestamp(System.currentTimeMillis()), sender, receiver));
-//			messages.add(new Message(mess3, new Timestamp(System.currentTimeMillis()), receiver, sender));
-//			messages.add(new Message(mess4, new Timestamp(System.currentTimeMillis()), sender, receiver));
-//			messages.add(new Message(mess5, new Timestamp(System.currentTimeMillis()), receiver, sender));
-//			messages.add(new Message(mess6, new Timestamp(System.currentTimeMillis()), sender, receiver));
-//			messages.add(new Message(mess7, new Timestamp(System.currentTimeMillis()), receiver, sender));
 			
 			return messages;
 		}
