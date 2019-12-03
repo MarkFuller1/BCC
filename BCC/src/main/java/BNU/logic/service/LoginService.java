@@ -27,4 +27,13 @@ public class LoginService {
 		isValidated = LoginController.db.validateUser(userName, password);
 		return isValidated;
 	}
+	
+	public boolean isUserAdmin(String userName) {
+		boolean isAdmin = false;
+		//confirm how I should be getting the db
+		if(LoginController.db.isAdmin(userName)) {
+			isAdmin = true;
+		}
+		return isAdmin;
+	}
 }

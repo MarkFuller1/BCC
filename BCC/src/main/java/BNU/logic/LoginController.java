@@ -10,6 +10,7 @@ import BNU.data.LoginModel;
 import BNU.data.AbstractDB;
 import BNU.logic.service.LoginService;
 import BNU.presentation.LoginView;
+import BNU.singleton.SingletonSession;
 
 public class LoginController extends PageController {
 	static LoginView view;
@@ -74,17 +75,27 @@ public class LoginController extends PageController {
 
 			//Commented out to make easier access to application. Code is good.
 			//if(ls.checkCredentials(model.getTxt_username().getText(),model.getTxt_password().getText())) {
-				WindowBuilder.loadPage(new MainController()); 
-//			}else {
-//				model.getTxt_username().setText("Enter Username");
-//				model.getTxt_password().setText("Enter Password");
-//			}
+			    boolean isAdmin = ls.isUserAdmin(model.getTxt_username().getText());
+			    SingletonSession session = SingletonSession.getInstance(model.getTxt_username().getText(), isAdmin);
+			    System.out.println(SingletonSession.getInstance().getUserName());
+
+			    if(SingletonSession.getInstance().isAdmin()) {
+			    	WindowBuilder.loadPage(new AdminController());
+			    	System.out.println("is admin: true");
+			    }else {
+			    	WindowBuilder.loadPage(new MainController()); 
+			    }
+				
+			//}else {
+			//	model.getTxt_username().setText("Enter Username");
+			//	model.getTxt_password().setText("Enter Password");
+			//}
 			
 
-			
+			//WindowBuilder.loadPage(new MainController());
 		} else if(e.getActionCommand() == "login:AuthorizeAdmin") {
-			WindowBuilder.loadPage(new AdminController());
-
+			//WindowBuilder.loadPage(new AdminController());
+			System.out.println("admin logic is not in the submit button");
 		}
 		
 

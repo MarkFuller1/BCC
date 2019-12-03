@@ -29,7 +29,7 @@ public class SetReviewView {
 	private static final Logger LOGGER = Logger.getLogger(SetReviewController.class.getName());
 
 	@SuppressWarnings("unused")
-	public static void BuildSetReviewView(JFrame mainFrame, SetReviewController controller) {
+	public static void BuildSetReviewView(JFrame mainFrame, SetReviewController controller,String teacherName, String className) {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
@@ -55,16 +55,17 @@ public class SetReviewView {
 		controller.getModel().getBack().addActionListener(controller);
 		
 		//build back
-		String teacher = "Cindy Fry";
+		//String teacher = "Cindy Fry";
+		
 		// request teacher here
-		controller.getModel().setTeacher(new JLabel(teacher));
+		controller.getModel().setTeacher(new JLabel(teacherName));
 		controller.getPanel().add(controller.getModel().getTeacher()).setBounds(340, 11, 200, 41);
 		controller.getPanel().add(controller.getModel().getTeacher()).setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		
 		// build back
-		String lass = "CSI 1430";
+		//String lass = "CSI 1430";
 		// request teacher here
-		controller.getModel().setClassL(new JLabel(lass));
+		controller.getModel().setClassL(new JLabel(className));
 		controller.getPanel().add(controller.getModel().getClassL()).setBounds(540, 11, 200, 41);
 		controller.getPanel().add(controller.getModel().getClassL()).setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		
