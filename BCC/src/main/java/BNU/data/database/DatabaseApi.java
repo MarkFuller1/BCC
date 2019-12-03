@@ -1,15 +1,12 @@
 package BNU.data.database;
 
-import java.awt.List;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -17,6 +14,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import BNU.data.Message;
 import BNU.singleton.SingletonSession;
 
 public class DatabaseApi extends AbstractDB {
@@ -397,12 +395,7 @@ public class DatabaseApi extends AbstractDB {
 		return finalval;
 	}
 
-	@Override
-
-	protected String[][] getAllMessagesImpl(String sender, String receiver) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	protected String getRecieverImpl() {
@@ -512,6 +505,18 @@ public class DatabaseApi extends AbstractDB {
 	public boolean isAdmin(String userName) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
