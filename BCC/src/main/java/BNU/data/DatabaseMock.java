@@ -5,11 +5,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
+
+import BNU.singleton.SingletonSession;
+
 
 public class DatabaseMock extends AbstractDB {
 
 	public static Map<String, String> userCreds = new HashMap<String, String>();;
-
+    public static Vector<Review> reviewVect = new Vector<Review>();
 	@Override
 	public boolean validateUserImpl(String userName, String password) {
 		userCreds.put("aspartame", "aspartame");
@@ -249,28 +253,47 @@ public class DatabaseMock extends AbstractDB {
 
 	// String text, Timestamp time, String sender, String receiver)
 	@Override
-	public Message[] getAllMessagesImpl(String sender, String receiver) {
-		ArrayList<Message> messages = new ArrayList<>();
-
-		String mess = "Hello there!";
-		String mess1 = "Hello there mi amigo!";
-		String mess2 = "Hello there! What was the class like";
-		String mess3 = "Hello there! Not too sure what class?";
-		String mess4 = "Hello there! CSI 1430 of course!";
-		String mess5 = "Hello there! Oh yea it was pretty easy";
-		String mess6 = "Hello there! WHo taught it?";
-		String mess7 = "Hello there! DR. Booth";
-
-		messages.add(new Message(mess, new Timestamp(System.currentTimeMillis()), sender, receiver));
-		messages.add(new Message(mess1, new Timestamp(System.currentTimeMillis()), receiver, sender));
-		messages.add(new Message(mess2, new Timestamp(System.currentTimeMillis()), sender, receiver));
-		messages.add(new Message(mess3, new Timestamp(System.currentTimeMillis()), receiver, sender));
-		messages.add(new Message(mess4, new Timestamp(System.currentTimeMillis()), sender, receiver));
-		messages.add(new Message(mess5, new Timestamp(System.currentTimeMillis()), receiver, sender));
-		messages.add(new Message(mess6, new Timestamp(System.currentTimeMillis()), sender, receiver));
-		messages.add(new Message(mess7, new Timestamp(System.currentTimeMillis()), receiver, sender));
-
-		return (Message[]) messages.toArray();
+	//public ArrayList<Message> getAllMessages(String sender, String receiver) {
+	public String[][] getAllMessagesImpl(String sender, String receiver) {
+		//ArrayList<Message> messages = new ArrayList<>();
+		
+		String[][] msgs = new String[8][4];
+		
+		msgs[0][0] = "Hello there!";
+		msgs[1][0] = "Hello there mi amigo!";
+		msgs[2][0] = "Hello there! What was the class like";
+		msgs[3][0] = "Hello there! Not too sure what class?";
+		msgs[4][0] = "Hello there! CSI 1430 of course!";
+		msgs[5][0] = "Hello there! Oh yea it was pretty easy";
+		msgs[6][0] = "Hello there! WHo taught it?";
+		msgs[7][0] = "Hello there! DR. Booth";
+		
+		for(int i = 0; i < 8; i++) {
+			msgs[i][1] = new Timestamp(System.currentTimeMillis()).toString();
+			msgs[i][2] = sender;
+			msgs[i][3] = receiver;
+		}
+		
+		//String mess = "Hello there!";
+		//String mess1 = "Hello there mi amigo!";
+		//String mess2 = "Hello there! What was the class like";
+		//String mess3 = "Hello there! Not too sure what class?";
+		//String mess4 = "Hello there! CSI 1430 of course!";
+		//String mess5 = "Hello there! Oh yea it was pretty easy";
+		//String mess6 = "Hello there! WHo taught it?";
+		//String mess7 = "Hello there! DR. Booth";
+		
+//		messages.add(new Message(mess, new Timestamp(System.currentTimeMillis()), sender, receiver));
+//		messages.add(new Message(mess1, new Timestamp(System.currentTimeMillis()), receiver, sender));
+//		messages.add(new Message(mess2, new Timestamp(System.currentTimeMillis()), sender, receiver));
+//		messages.add(new Message(mess3, new Timestamp(System.currentTimeMillis()), receiver, sender));
+//		messages.add(new Message(mess4, new Timestamp(System.currentTimeMillis()), sender, receiver));
+//		messages.add(new Message(mess5, new Timestamp(System.currentTimeMillis()), receiver, sender));
+//		messages.add(new Message(mess6, new Timestamp(System.currentTimeMillis()), sender, receiver));
+//		messages.add(new Message(mess7, new Timestamp(System.currentTimeMillis()), receiver, sender));
+		
+		
+		return msgs;
 	}
 
 	public String[] getAllFlaggedImpl() {
@@ -279,8 +302,7 @@ public class DatabaseMock extends AbstractDB {
 	}
 
 	public String getReceiverImpl() {
-		String u = "You";
-		return u;
+		return SingletonSession.getInstance().getUserName();
 	}
 
 	public String getSender() {
@@ -355,4 +377,34 @@ public class DatabaseMock extends AbstractDB {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void setNewReview(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) {
+		Review rev = new Review(content, new Timestamp(System.currentTimeMillis()),userName, professorName,className, 
+				new Integer(tA), new Integer(h), new Integer(wL));
+		System.out.println(rev.toString());
+		reviewVect.add(rev);
+		
+		
+	}
+
+
+
+
+
+	@Override
+	public boolean isAdmin(String userName) {
+		boolean isAdmin = false;
+		if(userCreds.get(userName) != null ){
+			isAdmin = true;
+		}
+		return true;//returning true instead of isAdmin to simplify development
+	}
+
+
+
+	
 }

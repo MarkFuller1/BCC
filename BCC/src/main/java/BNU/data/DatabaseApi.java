@@ -17,6 +17,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import BNU.singleton.SingletonSession;
+
 public class DatabaseApi extends AbstractDB {
 	private static final Logger LOGGER = Logger.getLogger(DatabaseApi.class.getName());
 
@@ -368,7 +370,7 @@ public class DatabaseApi extends AbstractDB {
 		// content score prof course name
 		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name  from review, professor, course Where user_name = \'" + userName + "\'  AND review.professor_id = professor.professor_id_pk AND review.course_id = course.course_id_pk";
 		ResultSet userReviews = null;
-		ArrayList<ArrayList<String>> reviews = new ArrayList<new ArrayList<>()>();
+		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
 
 		try (Statement stmt = con.createStatement()) {
 
@@ -396,15 +398,15 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected Message[] getAllMessagesImpl(String sender, String receiver) {
+
+	protected String[][] getAllMessagesImpl(String sender, String receiver) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	protected String getRecieverImpl() {
-		// TODO Auto-generated method stub
-		return null;
+		return SingletonSession.getInstance().getUserName();
 	}
 
 	@Override
@@ -497,6 +499,19 @@ public class DatabaseApi extends AbstractDB {
 	protected String[] getAllFlaggedImpl() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setNewReview(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAdmin(String userName) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

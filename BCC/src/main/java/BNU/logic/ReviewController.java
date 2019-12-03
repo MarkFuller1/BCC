@@ -72,14 +72,14 @@ public class ReviewController extends PageController implements ActionListener {
 		}
 		else if(e.getActionCommand() == "Review:downvote") {
 			System.out.println("Review:downvote button pressed");
-			if(db.isDownvoteValid()) {
+			//if(db.isDownvoteValid()) {
 				//db.downvote();
 				int total = this.getModel().getReviews().getVotes();
 				total --;
 				this.getModel().getReviews().setVotes(total);
 				this.getModel().getReviewScore().setText(getModel().getReviews().getVotes().toString());
 				this.getModel().getReviewScore().repaint();
-			}
+			//}
 			
 			
 		}

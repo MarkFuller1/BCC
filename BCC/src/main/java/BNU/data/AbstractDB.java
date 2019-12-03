@@ -33,7 +33,7 @@ public abstract class AbstractDB {
 
 	protected abstract String[][] getAllReviewsForUserImpl(String userName);
 
-	protected abstract Message[] getAllMessagesImpl(String sender, String receiver);
+	protected abstract String[][] getAllMessagesImpl(String sender, String receiver);
 
 	protected abstract String getRecieverImpl();
 
@@ -278,7 +278,7 @@ public abstract class AbstractDB {
 	}
 
 	// my added functions
-	public final ArrayList<Message> getAllMessages(String sender, String receiver) {
+	public final String[][] getAllMessages(String sender, String receiver) {
 		try {
 			con = getRemoteConnection();
 		} catch (DatabaseConnectionException e) {
@@ -286,8 +286,8 @@ public abstract class AbstractDB {
 			e.printStackTrace();
 		}
 
-		Message[] reviews = getAllMessagesImpl(sender, receiver);
-
+		String[][] reviews = getAllMessagesImpl(sender, receiver);
+        //String[][] getAllMessages(String sender, String receiver);
 		try {
 			if (con != null) {
 				if (con != null) {
@@ -300,7 +300,8 @@ public abstract class AbstractDB {
 			e.printStackTrace();
 		}
 
-		return new ArrayList<Message>(Arrays.asList(reviews));
+		//return new ArrayList<Message>(Arrays.asList(reviews));
+		return null;
 	}
 
 	public final String[] getAllFlagged() {
@@ -417,5 +418,15 @@ public abstract class AbstractDB {
 	public final Boolean isDownvoteValid() {
 		return null;
 	}
+	
+	public void setNewReview(String userName, String professorName, String className, String content, String tA, String h,
+			String wL) {
+		
+	}
 
+	public boolean isAdmin(String userName) {
+		return false;
+	}
 }
+
+
