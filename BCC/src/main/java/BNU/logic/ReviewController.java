@@ -76,15 +76,18 @@ public class ReviewController extends PageController implements ActionListener {
 				System.out.println("upvote button" + i.toString() + "pressed");
 				this.getTc().up(i);
 			}
-			else if(e.getActionCommand().contentEquals("f"+i.toString())) {
+      else if(e.getActionCommand().contentEquals("f"+i.toString())) {
 				System.out.println("flag button" + i.toString() + "pressed");
 				//flag function 
 			}
 		}
 	}
-	public void dispatchBuilder(String content, String score, String reviewerID) {
+	
+	public void dispatchBuilder(String content, String score, String reviewerID, String reviewID) {
 		try {
-			ReviewView.BuildReviewView(this, content, score, reviewerID);
+			//ReviewView.BuildReviewView(this);
+			ReviewView.BuildReviewView(this, content, score, reviewerID, reviewID);
+
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,6 +99,4 @@ public class ReviewController extends PageController implements ActionListener {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 }
