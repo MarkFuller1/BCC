@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import BNU.data.DatabaseMock;
 import BNU.data.MainModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.presentation.MainView;
 
 public class MainController extends PageController {
@@ -19,34 +19,34 @@ public class MainController extends PageController {
 	static MainView view;
 	static MainModel model = new MainModel();
 	static JPanel panel;
-	//static dbWrapper db;
+	// static dbWrapper db;
 	private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
 
 	public MainController() {
 		model = new MainModel();
 		panel = new JPanel();
 		view = new MainView();
-		db = new DatabaseMock(); 
 
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
 			System.out.println("Logger Failed to load in " + MainController.class.getName());
-			e.printStackTrace();
+			
 		}
-		LOGGER.addHandler(fileHandler);
-		LOGGER.setLevel(Level.FINEST);
+		
 	}
 
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
-		
+
 		LOGGER.info("Loading Main Page");
 		MainView.BuildMainView(mainFrame, this);
 	}
 
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 
@@ -88,11 +88,10 @@ public class MainController extends PageController {
 			String selected = (String) this.getModel().getCb_SearchClass().getSelectedItem();
 			System.out.println("main:searchClass Button Pressed + Selected:" + selected);
 			WindowBuilder.loadPage(new TeachersByClassController(selected));
-		}else if (e.getActionCommand() == "main:profile" ) {
+		} else if (e.getActionCommand() == "main:profile") {
 			LOGGER.info("main:profile");
 			WindowBuilder.loadPage(new UserReviewController());
-		}
-		else if(e.getActionCommand() == "main:logout"){
+		} else if (e.getActionCommand() == "main:logout") {
 			System.out.println("main:logout button pressed");
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());

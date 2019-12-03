@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import BNU.data.DatabaseMock;
 import BNU.data.Message;
 import BNU.data.MessageBoardModel;
-import BNU.data.dbWrapper;
 import BNU.logic.service.MessageBoardService;
+import BNU.data.AbstractDB;
 import BNU.presentation.MessageBoardView;
 
 public class MessageBoardController extends PageController{
@@ -44,7 +44,7 @@ public class MessageBoardController extends PageController{
 		}
 	}
 	
-	public dbWrapper getDb() {
+	public AbstractDB getDb() {
 		return db;
 	}
 	

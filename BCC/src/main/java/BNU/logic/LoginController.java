@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import BNU.data.LoginModel;
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 import BNU.logic.service.LoginService;
 import BNU.presentation.LoginView;
 import BNU.singleton.SingletonSession;

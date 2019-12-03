@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
@@ -24,7 +25,7 @@ public class ReviewModel2 {
 	private JLabel reviewerID;
 	private JButton btnMessageReviewer;
 	private JPanel panel;
-	private JTextPane textPane;
+	private JTextArea textArea;
 	private Review reviews;
 	
 	public Review getReviews() {
@@ -82,11 +83,11 @@ public class ReviewModel2 {
 	public void setPanel(JPanel panel) {
 		this.panel = panel;
 	}
-	public JTextPane getTextPane() {
-		return textPane;
+	public JTextArea getTextArea() {
+		return textArea;
 	}
-	public void setTextPane(JTextPane textPane) {
-		this.textPane = textPane;
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
 	}
 	
 	
@@ -136,11 +137,11 @@ public class ReviewModel2 {
 		panel.add(getReviewScrollPane(), g);
 		
 		// text pane
-		setTextPane(new JTextPane());
-		getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		getTextPane().setEditable(false);
+		setTextArea(new JTextArea());
+		getTextArea().setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		getTextArea().setEditable(false);
 				
-		getTextPane().setText("Perpetual motion, the action of a device that, once set in motion,\n"
+		getTextArea().setText("Perpetual motion, the action of a device that, once set in motion,\n"
 				+ " would continue in motion forever, with no additional energy required to maintain it.\n"
 				+ " Such devices are impossible on grounds stated by the first and second laws of thermodynamics.\n" + 
 				"Perpetual motion, although impossible to produce, has fascinated both inventors and the general\n"
@@ -149,7 +150,7 @@ public class ReviewModel2 {
 				+ " because they violate the laws of thermodynamics has not discouraged inventors and hucksters from\n"
 				+ " attempting to break, circumvent, or ignore those laws.");
 		
-		getReviewScrollPane().setViewportView(getTextPane());
+		getReviewScrollPane().setViewportView(getTextArea());
 		
 		// reviewer label
 		setReviewerID(new JLabel("CSI 1430"));
@@ -216,10 +217,10 @@ public void createReviewItem(String content, String score, String professor, Str
 		panel.add(getReviewScrollPane(), g);
 		
 		// text pane
-		setTextPane(new JTextPane());
-		getTextPane().setFont(new Font("Segoe UI", Font.PLAIN, 12));
-		getTextPane().setEditable(false);
-		getTextPane().setText(content);
+		setTextArea(new JTextArea());
+		getTextArea().setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		getTextArea().setEditable(false);
+		getTextArea().setText(content);
 		/*
 		getTextPane().setText("Perpetual motion, the action of a device that, once set in motion,\n"
 				+ " would continue in motion forever, with no additional energy required to maintain it.\n"
@@ -231,7 +232,7 @@ public void createReviewItem(String content, String score, String professor, Str
 				+ " attempting to break, circumvent, or ignore those laws.");
 				*/
 		
-		getReviewScrollPane().setViewportView(getTextPane());
+		getReviewScrollPane().setViewportView(getTextArea());
 		
 		// reviewer label
 		setReviewerID(new JLabel(courseName));

@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import BNU.data.dbWrapper;
+import BNU.data.AbstractDB;
 
 public abstract class PageController implements ActionListener{
-	public static dbWrapper db;
+	public static AbstractDB db;
 	public abstract void dispatchBuilder(JFrame mainFrame);
 	
 }
