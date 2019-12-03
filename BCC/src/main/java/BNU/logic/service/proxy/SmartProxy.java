@@ -34,9 +34,9 @@ public class SmartProxy {
 		return isAdmin;
 	}
 	
-	public void sanatizeAndSendMessage(Message message) {
+	public void sanatizeAndSendMessage(Message message, String from, String to, String date) {
 		message.setText(sanatizeInput(message.getText()));
-		MessageBoardController.db.sendMessage(message);
+		MessageBoardController.db.sendMessage(message, from, to, date);
 	}
 	
 	public void sanatizeAndCreateReview(String userName,String professorName,String className,

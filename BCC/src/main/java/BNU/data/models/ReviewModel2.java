@@ -20,22 +20,51 @@ import BNU.data.Review;
 public class ReviewModel2 { 
 	
 	private JButton btnUp;
+	private JButton flag;
 	private JButton btnDown;
 	private JLabel reviewScore;
+	private Integer scores;
 	private JScrollPane reviewScrollPane;
 	private JLabel studentReview;
 	private JLabel reviewerID;
 	private JButton btnMessageReviewer;
 	private JPanel panel;
 	private JTextArea textArea;
-	private Review reviews;
+	private Integer count;
+	private String RID;
 	
-	public Review getReviews() {
-		return reviews;
+	
+	
+	public String getRID() {
+		return RID;
 	}
-	public void setReviews(Review reviews) {
-		this.reviews = reviews;
+	public void setRID(String rID) {
+		RID = rID;
 	}
+	public JButton getFlag() {
+		return flag;
+	}
+	public void setFlag(JButton flag) {
+		this.flag = flag;
+	}
+	public Integer getScores() {
+		return scores;
+	}
+	public void setScores(Integer score) {
+		this.scores = score;
+	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+//	public Review getReviews() {
+//		return reviews;
+//	}
+//	public void setReviews(Review reviews) {
+//		this.reviews = reviews;
+//	}
 	
 	public JButton getBtnUp() {
 		return btnUp; 
