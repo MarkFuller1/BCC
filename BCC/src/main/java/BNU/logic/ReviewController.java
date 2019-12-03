@@ -76,16 +76,10 @@ public class ReviewController extends PageController implements ActionListener {
 				System.out.println("upvote button" + i.toString() + "pressed");
 				this.getTc().up(i);
 			}
-		}
-	}
-
-
-	public void dispatchBuilder() {
-		try {
-			ReviewView.BuildReviewView(this);
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+      else if(e.getActionCommand().contentEquals("f"+i.toString())) {
+				System.out.println("flag button" + i.toString() + "pressed");
+				//flag function 
+			}
 		}
 	}
 	
