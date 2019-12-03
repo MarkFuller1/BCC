@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import BNU.data.Course;
+import BNU.data.Message;
 import BNU.data.Professor;
 import BNU.data.Review;
 import BNU.singleton.SingletonSession;
@@ -255,7 +256,7 @@ public class DatabaseMock extends AbstractDB {
 	}
 
 	// String text, Timestamp time, String sender, String receiver)
-	@Override
+	
 	//public ArrayList<Message> getAllMessages(String sender, String receiver) {
 	public String[][] getAllMessagesImpl(String sender, String receiver) {
 		//ArrayList<Message> messages = new ArrayList<>();
@@ -405,6 +406,19 @@ public class DatabaseMock extends AbstractDB {
 			isAdmin = true;
 		}
 		return true;//returning true instead of isAdmin to simplify development
+	}
+
+
+	@Override
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
