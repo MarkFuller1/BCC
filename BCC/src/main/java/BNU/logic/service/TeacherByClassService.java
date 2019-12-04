@@ -1,6 +1,8 @@
 package BNU.logic.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -37,10 +39,18 @@ public class TeacherByClassService {
 		String[][] professorObjs = null;
 		professorObjs = TeachersByClassController.db.getAllTeacherInfoByCourse(courseName);
 		Professor[] professors = new Professor[professorObjs.length];
-		String[] whyIsThisHere = null;
-
+		Double n, p;
+		Integer nc;
+		
 		for (int i = 0; i < professorObjs.length; i++) {
-			professors[i] = new Professor(professorObjs[i][0], professorObjs[i][1], professorObjs[i][2], whyIsThisHere);
+			
+			p = Double.parseDouble(professorObjs[i][1]);
+			Double temp = BigDecimal.valueOf(p)
+				    .setScale(1, RoundingMode.HALF_UP)
+				    .doubleValue();
+	        n = Double.parseDouble(professorObjs[i][2]);
+			nc = n.intValue();
+			professors[i] = new Professor(professorObjs[i][0], temp.toString(), nc.toString());
 		}
 
 		return professors;
