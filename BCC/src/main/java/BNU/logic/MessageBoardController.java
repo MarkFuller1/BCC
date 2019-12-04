@@ -2,8 +2,12 @@ package BNU.logic;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +15,7 @@ import javax.swing.JPanel;
 
 import BNU.data.Message;
 import BNU.data.database.AbstractDB;
+import BNU.data.database.DatabaseApi;
 import BNU.data.database.DatabaseMock;
 import BNU.data.models.MessageBoardModel;
 import BNU.logic.service.MessageBoardService;
@@ -23,7 +28,19 @@ public class MessageBoardController extends PageController {
 	static JPanel panel;
 	public JFrame mainF;
 	public static MessageBoardService mbs;
-	Runnable checkDbForNewMessages;
+	public static Thread checkDbForNewMessages;
+	private static final Logger LOGGER = Logger.getLogger(MessageBoardController.class.getName());
+
+	static {
+
+		try {
+			LOGGER.addHandler(new FileHandler("log.log"));
+			LOGGER.setLevel(Level.FINEST);
+		} catch (SecurityException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	// static private InputMessage im;
 
@@ -38,18 +55,17 @@ public class MessageBoardController extends PageController {
 	public void dispatchBuilder(JFrame mainFrame) {
 		this.mainF = mainFrame;
 		try {
-			Thread t = new Thread(new Runnable() {
+			checkDbForNewMessages = new Thread(new Runnable() {
 				public void run() {
 					try {
 						mbs.observer(MessageBoardController.this, SingletonSession.getInstance().getUserName());
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						LOGGER.info("Thread Stopped");
 					}
 				}
 			});
 
-			t.start();
+			checkDbForNewMessages.start();
 
 			MessageBoardView.BuildMessageBoardView(mainFrame, this);
 
@@ -89,7 +105,7 @@ public class MessageBoardController extends PageController {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+			MessageBoardController.checkDbForNewMessages.interrupt();;
 		if (e.getActionCommand() == "MessageBoard:back") {
 			System.out.println("MessageBoard:back button pressed");
 			WindowBuilder.loadPage(new UserReviewController());

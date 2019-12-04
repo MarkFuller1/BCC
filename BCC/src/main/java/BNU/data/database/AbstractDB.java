@@ -31,13 +31,13 @@ public abstract class AbstractDB {
 
 	protected abstract String[][] getAllTeacherInfoByCourseImpl(String courseName) throws DatabaseOperationException;
 
-	protected abstract boolean submitCredentialsImpl(String userName, String password);
+	protected abstract boolean submitCredentialsImpl(String userName, String password) throws DatabaseOperationException;
 
-	protected abstract String[][] getAllReviewsForTeacherClassImpl(String professorName, String className);
+	protected abstract String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) throws DatabaseOperationException;
 
-	protected abstract String[] getOverallProfessorRatingsImpl(String professorName);
+	protected abstract String[] getOverallProfessorRatingsImpl(String professorName) throws DatabaseOperationException;
 
-	protected abstract String[][] getAllReviewsForUserImpl(String userName);
+	protected abstract String[][] getAllReviewsForUserImpl(String userName) throws DatabaseOperationException;
 
 	// protected abstract String[][] getAllMessagesImpl(String receiver);
 
@@ -45,15 +45,15 @@ public abstract class AbstractDB {
 
 	protected abstract String getSenderImpl();
 
-	protected abstract String[] getAllUserMessagersImpl(String receiver) throws DatabaseConnectionException;
+	protected abstract String[] getAllUserMessagersImpl(String receiver) throws DatabaseOperationException;
 
-	protected abstract void upvoteImpl(String reviewId, String userId);
+	protected abstract void upvoteImpl(String reviewId, String userId) throws DatabaseOperationException;
 
-	protected abstract void downvoteImpl(String reviewID, String user);
+	protected abstract void downvoteImpl(String reviewID, String user) throws DatabaseOperationException;
 
 	protected abstract String[] getAllFlaggedImpl();
 
-	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i);
+	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i) throws DatabaseOperationException;
 
 	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
@@ -61,7 +61,7 @@ public abstract class AbstractDB {
 
 	protected abstract int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException;
 
-	protected abstract String[][] getAllMessagesImpl(String sender, String receiver);
+	protected abstract String[][] getAllMessagesImpl(String sender, String receiver) throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -218,7 +218,7 @@ public abstract class AbstractDB {
 			}
 
 			return res;
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -237,7 +237,7 @@ public abstract class AbstractDB {
 			}
 
 			return reviewList;
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -256,7 +256,7 @@ public abstract class AbstractDB {
 			}
 
 			return profRating;
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -276,7 +276,7 @@ public abstract class AbstractDB {
 			}
 
 			return reviews;
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -295,7 +295,7 @@ public abstract class AbstractDB {
 			}
 			return messages; // added
 
-		} catch (SQLException | DatabaseConnectionException e) {
+		} catch (SQLException | DatabaseConnectionException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -369,7 +369,7 @@ public abstract class AbstractDB {
 
 			return friends;
 
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -386,7 +386,7 @@ public abstract class AbstractDB {
 				con.close();
 			}
 
-		} catch (DatabaseConnectionException e) {
+		} catch (DatabaseConnectionException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -402,7 +402,7 @@ public abstract class AbstractDB {
 				con.close();
 			}
 
-		} catch (DatabaseConnectionException e) {
+		} catch (DatabaseConnectionException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -420,7 +420,7 @@ public abstract class AbstractDB {
 
 			return friends;
 
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
