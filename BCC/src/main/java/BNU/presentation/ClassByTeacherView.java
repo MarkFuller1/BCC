@@ -76,7 +76,7 @@ public class ClassByTeacherView {
 		
 
 		//build teachers label
-		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
+		controller.getModel().setLab_Teachers(new JLabel("Courses"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		controller.getModel().getLab_Teachers().setBounds(350, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Teachers());
@@ -102,7 +102,7 @@ public class ClassByTeacherView {
 		controller.getPanel().add(controller.getModel().getBtnBack());
 		
 		//build scroll-able class selector
-		controller.getModel().setClasses(buildTeacherPanels(controller));
+		controller.getModel().setClasses(buildClassPanels(controller));
 		
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -119,21 +119,21 @@ public class ClassByTeacherView {
 		controller.getModel().getScrollPane().setBounds(10, 321, 964, 429);
 		controller.getPanel().add(controller.getModel().getScrollPane());
 
-		LOGGER.info("Professor Selection page loaded correctly");
+		LOGGER.info("Class Selection page loaded correctly");
 
 		mainFrame.getContentPane().removeAll();
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
 	}
 
-	private static List<JComponent> buildTeacherPanels(ClassByTeacherController controller) {
+	private static List<JComponent> buildClassPanels(ClassByTeacherController controller) {
 		List<JComponent> panels = new ArrayList<>();
 		
-		Course[] courses = cbts.getAllCoursesByTeacherService(controller.professorName);
+		Course[] courses = cbts.getAllCoursesByTeacherService(controller.getProfessorName());
 		for(Course course: courses) {
 			System.out.println(course);
  			ProfessorCourse obj = new ProfessorCourse(course);
- 			obj.getSelect().setActionCommand("class:" + course);
+ 			obj.getSelect().setActionCommand("class:" + course.getCourse());
  			obj.getSelect().addActionListener(controller);
 			panels.add(obj);
 		}

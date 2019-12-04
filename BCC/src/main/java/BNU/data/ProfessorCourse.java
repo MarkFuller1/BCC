@@ -16,7 +16,7 @@ public class ProfessorCourse extends JPanel {
 
 	
 	public ProfessorCourse(Course course) {
-		this.professor = new JLabel(course.getProfessor());
+		this.professor = new JLabel(course.getCourse());
 		this.professor.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		this.professor.setBounds(70, 265, 143, 33);
 		this.rating = new JLabel(course.getRating());
@@ -26,7 +26,7 @@ public class ProfessorCourse extends JPanel {
 		this.numOfReviews.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 		this.numOfReviews.setBounds(70, 265, 143, 33);
 		this.select = new JButton("Select");
-		this.select.setActionCommand("professor:" + course.getProfessor());
+		this.select.setActionCommand("professor:" + course.getCourse());
 
 		this.compilePanel();
 	}
