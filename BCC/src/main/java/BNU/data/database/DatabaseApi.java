@@ -491,8 +491,27 @@ public class DatabaseApi extends AbstractDB {
 
 	@Override
 	protected void downvoteImpl() {
-		// TODO Auto-generated method stub
+		LOGGER.warning("");
+		String query = "INSERT INTO user_review (user_id, review_id) values (\'" + userId + "\', \'" + reviewId + "\')";
+		LOGGER.warning(query);
+		int rs = 0;
 
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+			// Query
+			rs = stmt.executeUpdate();
+
+			LOGGER.warning("incrementing score");
+			String updateScore = "UPDATE review SET score = score + 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
+
+			Statement state = con.createStatement();
+			state.executeQuery(updateScore);
+
+			state.close();
+
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+		}
 	}
 
 	@Override
