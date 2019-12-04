@@ -76,7 +76,7 @@ public class LoginController extends PageController {
 			    System.out.println(SingletonSession.getInstance().getUserName());
 			    
 			    //SingletonSession.getInstance().isAdmin()
-			    if(isAdmin) {
+			    if(isAdmin = false) {
 			    	System.out.println("is admin: true");
 			    	WindowBuilder.loadPage(new AdminController());
 			    	System.out.println("is admin: true");

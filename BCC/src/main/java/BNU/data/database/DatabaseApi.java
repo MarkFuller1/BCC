@@ -483,7 +483,7 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected String[] getAllUserMessagersImpl(String receiver) {
+	protected String[] getAllUserMessagersImpl(String receiver) throws DatabaseConnectionException {
 		// text timestamp sender reciever
 		String query = "select message.from_user_name from message " + "where to_user_name = \'" + receiver + "\'";
 		ResultSet userReviews = null;
@@ -503,8 +503,11 @@ public class DatabaseApi extends AbstractDB {
 				i++;
 			}
 		} catch (Exception e) {
-			LOGGER.warning(query);
-			e.printStackTrace();
+			con = getRemoteConnection();
+			return getAllUserMessagersImpl(receiver);
+				
+			//LOGGER.warning(query);
+			//e.printStackTrace();
 		}
 
 		String[] finalval = new String[names.size()];
@@ -724,7 +727,7 @@ public class DatabaseApi extends AbstractDB {
 		String check = "select count(message.message_id_pk) as num from message where message.from_user_name = \'"
 				+ user + "\' OR message.to_user_name = \'" + user + "\'";
 		int num = 0;
-		try (Statement stmt = con.createStatement();) {
+		try (Statement stmt = threadCon.createStatement();) {
 
 			// Query
 			ResultSet rs = stmt.executeQuery(check);
