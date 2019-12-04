@@ -31,7 +31,7 @@ public class ReviewView {
 	
 	
 	public static void BuildReviewView(ReviewController controller, String content, String score, String reviewerID, String reviewID) {
-		controller.getModel().setScores(Integer.parseInt(score));
+		controller.getModel().setRID(reviewID);
 		controller.getModel().setScores(Integer.parseInt(score));
 		
 		FileHandler fileHandler = null; 
