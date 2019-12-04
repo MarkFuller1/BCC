@@ -495,7 +495,22 @@ public abstract class AbstractDB {
 	}
 
 	
-	public final void deleteUserAccount(String userId) {
+	public void deleteUserAccount(String userId) {
 		return;
+	}
+
+	protected void upvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void downvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
