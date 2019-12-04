@@ -121,7 +121,6 @@ public class TeachersByClassView {
 
 	private static List<JComponent> buildTeacherPanels(TeachersByClassController controller) {
 		List<JComponent> panels = new ArrayList<>();
-		//dbWrapper db = new DatabaseMock();
 		Professor[] professors = tbcs.getAllProfessorsByCourseService(controller.getClassName());
 		
 		for(Professor prof: professors) {
@@ -131,14 +130,7 @@ public class TeachersByClassView {
 			panels.add(obj);
 		}
 		
-		/*
-		for(String prof: asList) {
-			System.out.println(prof);
- 			CourseProfessor obj = new CourseProfessor(db.getProfessor(prof));
- 			obj.getSelect().addActionListener(controller);
-			panels.add(obj);
-		}
-		*/
+		
 		return panels;
 	}
 }
