@@ -591,7 +591,7 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	public boolean isAdmin(String userName) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
