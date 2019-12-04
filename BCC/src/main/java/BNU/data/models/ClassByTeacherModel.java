@@ -28,7 +28,15 @@ public class ClassByTeacherModel {
 	//top pane extras
 	private JButton back;
 	private JTextField txt_Email;
+	private JButton btnBack;
 	
+	
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	public void setBtnBack(JButton btnBack) {
+		this.btnBack = btnBack;
+	}
 	
 	
 	

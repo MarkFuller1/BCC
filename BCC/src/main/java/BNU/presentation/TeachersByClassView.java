@@ -68,7 +68,7 @@ public class TeachersByClassView {
 		//build test title
 		controller.getModel().setTeacherP(new JPanel());
 		controller.getModel().getTeacherP().setPreferredSize(new Dimension(1000, 100));
-		controller.getModel().getTeacherP().setBounds(0,0,1000, 100);
+		controller.getModel().getTeacherP().setBounds(200,0,600, 100);
 		controller.getModel().getTeacherP().setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		controller.getModel().setTxt_Title(new JLabel(controller.getClassName()));
 		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.BOLD, 33));
@@ -76,6 +76,14 @@ public class TeachersByClassView {
 		controller.getPanel().add(controller.getModel().getTeacherP());
 		
 
+		//back button
+		controller.getModel().setBtnBack(new JButton("Back"));
+		controller.getPanel().add(controller.getModel().getBtnBack()).setBounds(10, 11, 106, 41);
+		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getBtnBack().setActionCommand("TByClass:back");
+		controller.getModel().getBtnBack().addActionListener(controller);
+		
+		
 		//build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
