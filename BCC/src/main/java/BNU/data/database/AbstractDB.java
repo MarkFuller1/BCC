@@ -289,14 +289,18 @@ public abstract class AbstractDB {
 	}
 
 	// my added functions
-	public final String[][] getAllMessages(String receiver) {
+	public final String[][] getAllMessages(String sender, String receiver) {
 		try {
 			con = getRemoteConnection();
+			
+			DatabaseMock dbm = new DatabaseMock();
 
-			String[][] reviews = getAllMessagesImpl(receiver);
+			//why is the Impl version being called here? See Mark.
+			String[][] messages = dbm.getAllMessagesImpl(sender, receiver);
 			if (con != null) {
 				con.close();
 			}
+			return messages; //added
 
 		} catch (SQLException | DatabaseConnectionException e) {
 			// TODO Auto-generated catch block
@@ -484,5 +488,20 @@ public abstract class AbstractDB {
 
 	public boolean isAdmin(String userName) {
 		return false;
+	}
+
+	protected void upvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected void downvoteImpl() {
+		// TODO Auto-generated method stub
+		
 	}
 }

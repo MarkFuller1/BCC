@@ -1,5 +1,6 @@
 package BNU.data.database;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import BNU.data.Course;
+import BNU.data.Message;
 import BNU.data.Professor;
 import BNU.data.Review;
 import BNU.singleton.SingletonSession;
@@ -95,9 +97,9 @@ public class DatabaseMock extends AbstractDB {
 		ArrayList<Professor> profs = new ArrayList<>();
 		String[] courses = { "Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang" };
 
-		profs.add(new Professor("Dr. Nikola Tesla", "99", "4", courses));
-		profs.add(new Professor("Dr. Thomas Edison", "99", "4", courses));
-		profs.add(new Professor("Dr. Alexander Grahm-Bell", "99", "4", courses));
+		profs.add(new Professor("Dr. Nikola Tesla", "99", "4"));
+		profs.add(new Professor("Dr. Thomas Edison", "99", "4"));
+		profs.add(new Professor("Dr. Alexander Grahm-Bell", "99", "4"));
 
 		switch (prof) {
 		case "Dr. Nikola Tesla":
@@ -255,7 +257,7 @@ public class DatabaseMock extends AbstractDB {
 	}
 
 	// String text, Timestamp time, String sender, String receiver)
-	@Override
+	
 	//public ArrayList<Message> getAllMessages(String sender, String receiver) {
 	public String[][] getAllMessagesImpl(String sender, String receiver) {
 		//ArrayList<Message> messages = new ArrayList<>();
@@ -405,6 +407,49 @@ public class DatabaseMock extends AbstractDB {
 			isAdmin = true;
 		}
 		return true;//returning true instead of isAdmin to simplify development
+	}
+
+
+	@Override
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void upvoteImpl(String reviewId, String userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Boolean sendMessageImpl(String string, String from, String to, BigInteger i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void downvoteImpl(String reviewID, String user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
