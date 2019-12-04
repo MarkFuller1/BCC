@@ -27,10 +27,10 @@ public class UserReviewService {
 		return UserReviewController.db.getAllReviewsForUser(userName);
 
 	}
-
-//	
-//	public String[] getProfessorOverallRatings(String professorName) {
-//		return UserReviewController.db.getOverallProfessorRatings(professorName);
-//	}
+	
+	public void deleteAccount(String user) {
+		UserReviewController.db.deleteUserAccount(user);
+	}
+	
 
 }

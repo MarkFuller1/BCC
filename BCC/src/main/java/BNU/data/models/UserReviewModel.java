@@ -16,14 +16,20 @@ public class UserReviewModel {
 	private JLabel score;
 	private JLabel helpfulness;
 	private JButton btnBack;
+	private JButton delete;
 	private JButton btnMessage;
 	private JButton log_out;
 	private JScrollPane scrollPane;
 	private JPanel scrollPanePanel;
 
-		
-	
-	
+	public JButton getDelete() {
+		return delete;
+	}
+
+	public void setDelete(JButton delete) {
+		this.delete = delete;
+	}
+
 	public JLabel getReviewH() {
 		return reviewH;
 	}
