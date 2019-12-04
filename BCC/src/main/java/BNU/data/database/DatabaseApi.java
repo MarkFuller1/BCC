@@ -719,6 +719,7 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
+
 	protected int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException {
 		String check = "select count(message.message_id_pk) as num from message where message.from_user_name = \'"
 				+ user + "\' OR message.to_user_name = \'" + user + "\'";
@@ -746,7 +747,8 @@ public class DatabaseApi extends AbstractDB {
 	protected String[][] getAllMessagesImpl(String sender, String receiver) {
 		// text timestamp sender reciever
 		String query = "select message.message, date_sent, from_user_name, to_user_name from message "
-				+ "where (from_user_name = \'" + sender + "\' OR from_user_name = \'" + receiver + "\') AND (to_user_name = \'" + sender + "\' OR to_user_name = \'" + receiver + "\')";
+				+ "where (from_user_name = \'" + sender + "\' OR from_user_name = \'" + receiver
+				+ "\') AND (to_user_name = \'" + sender + "\' OR to_user_name = \'" + receiver + "\')";
 		ResultSet userReviews = null;
 		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
 
@@ -790,4 +792,10 @@ public class DatabaseApi extends AbstractDB {
 		}
 		return finalData;
 	}
+
+	protected void deleteUserAccountImpl(String userId) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
