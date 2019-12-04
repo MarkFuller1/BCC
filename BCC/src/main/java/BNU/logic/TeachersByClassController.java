@@ -94,5 +94,9 @@ public class TeachersByClassController extends PageController {
 			LOGGER.info("The teacher selected was: " + teacherSelected);
 			WindowBuilder.loadPage(new TeacherReviewController(teacherSelected, this.className));
 		}
+		else if(e.getActionCommand().equals("TByClass:back")){
+			LOGGER.info("TeacherByClass back button selected");
+			WindowBuilder.loadPage(new MainController());
+		}
 	}
 }

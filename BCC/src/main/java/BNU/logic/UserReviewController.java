@@ -9,12 +9,12 @@ import javax.swing.JPanel;
 import BNU.data.database.AbstractDB;
 import BNU.data.models.UserReviewModel;
 import BNU.presentation.UserReviewView;
+import BNU.singleton.SingletonSession;
 
 public class UserReviewController extends PageController{
 	static UserReviewView view;
 	static UserReviewModel model = new UserReviewModel(); 
 	static JPanel panel;
-	//static dbWrapper db;
 	
 	public UserReviewController(){
 		model = new UserReviewModel();
@@ -24,9 +24,6 @@ public class UserReviewController extends PageController{
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
-//		if(db == null) {
-//			this.db = db;
-//		}
 		try {
 			UserReviewView.BuildUserReviewView(mainFrame, this);
 		} catch (SecurityException e) {
@@ -58,6 +55,10 @@ public class UserReviewController extends PageController{
 	public void setModel(UserReviewModel model) {
 		UserReviewController.model = model;
 	}
+	
+	public static AbstractDB getDb() {
+		return db;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -71,6 +72,12 @@ public class UserReviewController extends PageController{
 		}
 		else if(e.getActionCommand() == "UserReview:logout"){
 			System.out.println("UserReview:logout button pressed");
+			WindowBuilder.clip.stop();
+			WindowBuilder.loadPage(new LoginController());
+		}
+		else if(e.getActionCommand() == "UserReview:da"){
+			System.out.println("UserReview:deleteAccount button pressed");
+			getDb().deleteUserAccount(SingletonSession.getInstance().getUserName());
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
