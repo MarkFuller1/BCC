@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BNU.data.database.AbstractDB;
 import BNU.data.models.AdminModel;
 import BNU.presentation.AdminView;
 
@@ -26,6 +27,10 @@ public class AdminController extends PageController{
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static AbstractDB getDb() {
+		return db;
 	}
 	
 	public JPanel getPanel() {

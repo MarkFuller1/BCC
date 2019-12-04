@@ -78,10 +78,10 @@ public class AdminView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
-		/*
+		
 		for(int i = 0; i < 10; i++) {
 			ReviewModel2 rm1 = new ReviewModel2();
-			rm1.createReviewItem();
+			//rm1.createReviewItem();
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
@@ -91,7 +91,7 @@ public class AdminView {
 			}
 
 		}
-		*/
+		
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
 		controller.getPanel().add(controller.getModel().getScrollPane()).setBounds(40, 180, 900, 550);
 		
