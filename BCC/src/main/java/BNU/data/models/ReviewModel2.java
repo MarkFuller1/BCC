@@ -1,6 +1,7 @@
 package BNU.data.models;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +17,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import BNU.data.Review;
+import BNU.logic.UserReviewController;
 
 public class ReviewModel2 { 
 	
@@ -116,7 +118,7 @@ public class ReviewModel2 {
 	}
 	
 	
-public void createReviewItem(String content, String score, String professor, String courseName ) {  //Should take a database object as a parameter and populate this info using a record.
+public void createUserItem(String content, String score, String professor, String courseName, UserReviewController urc) {  //Should take a database object as a parameter and populate this info using a record.
 		
 		panel = new JPanel();
 		panel.setLayout(new GridBagLayout());
@@ -133,7 +135,7 @@ public void createReviewItem(String content, String score, String professor, Str
 		g.gridx = 0;
 		g.gridy = 3;
 		panel.add(getReviewScore(), g);
-
+		
 		// scroll pane
 		setReviewScrollPane(new JScrollPane());
 		reviewScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -149,9 +151,9 @@ public void createReviewItem(String content, String score, String professor, Str
 		getTextArea().setEditable(false);
 		getTextArea().setText(content);
 		
-		getTextArea().setColumns(65);
-		getTextArea().setRows(3);
-		getTextArea().setEditable(false);
+		getTextArea().setColumns(50);
+		getTextArea().setRows(5);
+		getTextArea().setEditable(true);
 		getTextArea().setLineWrap(true);
 		getTextArea().setWrapStyleWord(true);
 		
@@ -162,22 +164,97 @@ public void createReviewItem(String content, String score, String professor, Str
 		getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		g.gridx = 1;
 		g.gridy = 0;
-		g.gridwidth = 2;
+		g.gridwidth = 1;
 		g.gridheight = 1;
 		panel.add(getReviewerID(), g);
 		
 		JLabel Professor = new JLabel(professor);
 		Professor.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		g.gridx = 3;
+		g.gridx = 2;
 		g.gridy = 0;
-		g.gridwidth = 1;
-		g.gridheight = 1;
+		g.gridwidth = 2;
 		panel.add(Professor, g);
+		
+		// submit edits button
+		setBtnMessageReviewer(new JButton("Submit Edits"));
+		getBtnMessageReviewer().setForeground(Color.BLACK);
+		getBtnMessageReviewer().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		getBtnMessageReviewer().setPreferredSize(new Dimension(120, 100));
+		g.gridx = 4;
+		g.gridy = 1;
+		g.gridwidth = 1;
+		g.gridheight = 3;
+		panel.add(getBtnMessageReviewer(), g);
+		getBtnMessageReviewer().addActionListener(urc);
+		getBtnMessageReviewer().setActionCommand("ed"+this.getCount().toString());
 		
 		setPanel(panel);
 	
 		
 	}
 	
+
+public void createAdminItem(String content, String score, String professor, String courseName ) {  //Should take a database object as a parameter and populate this info using a record.
+	
+	panel = new JPanel();
+	panel.setLayout(new GridBagLayout());
+	GridBagConstraints g = new GridBagConstraints();
+	panel.setSize(804,200);
+	panel.setVisible(true);
+	
+	g.insets = new Insets(5,5,5,5);
+
+	// review score label
+	setReviewScore(new JLabel(score));
+	getReviewScore().setHorizontalAlignment(SwingConstants.CENTER);
+	getReviewScore().setFont(new Font("Segoe UI", Font.PLAIN, 30));
+	g.gridx = 0;
+	g.gridy = 3;
+	panel.add(getReviewScore(), g);
+
+	// scroll pane
+	setReviewScrollPane(new JScrollPane());
+	reviewScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	g.gridx = 1;
+	g.gridy = 1;
+	g.gridwidth = 3;
+	g.gridheight = 3;
+	panel.add(getReviewScrollPane(), g);
+	
+	// text pane
+	setTextArea(new JTextArea());
+	getTextArea().setFont(new Font("Segoe UI", Font.PLAIN, 12));
+	getTextArea().setEditable(false);
+	getTextArea().setText(content);
+	
+	getTextArea().setColumns(65);
+	getTextArea().setRows(3);
+	getTextArea().setEditable(true);
+	getTextArea().setLineWrap(true);
+	getTextArea().setWrapStyleWord(true);
+	
+	getReviewScrollPane().setViewportView(getTextArea());
+	
+	// reviewer label
+	setReviewerID(new JLabel(courseName));
+	getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
+	g.gridx = 1;
+	g.gridy = 0;
+	g.gridwidth = 2;
+	g.gridheight = 1;
+	panel.add(getReviewerID(), g);
+	
+	JLabel Professor = new JLabel(professor);
+	Professor.setFont(new Font("Segoe UI", Font.BOLD, 14));
+	g.gridx = 3;
+	g.gridy = 0;
+	g.gridwidth = 1;
+	g.gridheight = 1;
+	panel.add(Professor, g);
+	
+	setPanel(panel);
+
+	
+}
 	
 }

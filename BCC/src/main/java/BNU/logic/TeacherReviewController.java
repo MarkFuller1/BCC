@@ -104,7 +104,7 @@ public class TeacherReviewController extends PageController{
 	public void message(int n) {
 		Long l = System.currentTimeMillis();
 		BigInteger i = new BigInteger(l.toString());
-		db.sendMessage("", SingletonSession.getInstance().getUserName(), this.getModel().getRC().get(n).getModel().getRID(),i);
+		db.sendMessage("", SingletonSession.getInstance().getUserName(), this.getModel().getRC().get(n).getModel().getReviewerID().getText(),i);
 		WindowBuilder.loadPage(new MessageBoardController());
 	}
 	
