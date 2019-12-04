@@ -67,6 +67,10 @@ public class RegisterController extends PageController {
 				model.getTxt_password().setText("Enter Password Again");
 			}
 		}
+		else if(e.getActionCommand().equals("Register:back")){
+			LOGGER.info("Register back button selected");
+			WindowBuilder.loadPage(new LoginController());
+		}
 	}
 
 	@Override
