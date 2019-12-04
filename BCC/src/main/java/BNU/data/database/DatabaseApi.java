@@ -694,4 +694,10 @@ public class DatabaseApi extends AbstractDB {
 		return false;
 	}
 
+	@Override
+	protected void deleteUserAccountImpl(String userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
