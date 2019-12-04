@@ -54,19 +54,16 @@ public class SetReviewView {
 		controller.getModel().getBack().setActionCommand("SetReview:Back");
 		controller.getModel().getBack().addActionListener(controller);
 		
-		//build back
-		//String teacher = "Cindy Fry";
 		
 		// request teacher here
 		controller.getModel().setTeacher(new JLabel(teacherName));
-		controller.getPanel().add(controller.getModel().getTeacher()).setBounds(340, 11, 200, 41);
+		controller.getPanel().add(controller.getModel().getTeacher()).setBounds(250, 11, 250, 41);
 		controller.getPanel().add(controller.getModel().getTeacher()).setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		
-		// build back
-		//String lass = "CSI 1430";
+		
 		// request teacher here
 		controller.getModel().setClassL(new JLabel(className));
-		controller.getPanel().add(controller.getModel().getClassL()).setBounds(540, 11, 200, 41);
+		controller.getPanel().add(controller.getModel().getClassL()).setBounds(490, 11, 400, 41);
 		controller.getPanel().add(controller.getModel().getClassL()).setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		
 		// teaching ability

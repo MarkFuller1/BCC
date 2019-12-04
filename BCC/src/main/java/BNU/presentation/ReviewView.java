@@ -31,6 +31,7 @@ public class ReviewView {
 	
 	
 	public static void BuildReviewView(ReviewController controller, String content, String score, String reviewerID, String reviewID) {
+		controller.getModel().setRID(reviewID);
 		controller.getModel().setScores(Integer.parseInt(score));
 		
 		FileHandler fileHandler = null; 
@@ -98,10 +99,12 @@ public class ReviewView {
 		controller.getModel().setTextArea(new JTextArea());
 		controller.getModel().getTextArea().setFont(new Font("Segoe UI", Font.PLAIN, 12));
 		controller.getModel().getTextArea().setColumns(65);
+		controller.getModel().getTextArea().setRows(7);
 		controller.getModel().getTextArea().setEditable(false);
 		controller.getModel().getTextArea().setLineWrap(true);
 		controller.getModel().getTextArea().setWrapStyleWord(true);
 		controller.getModel().getTextArea().setText(content);
+		
 		
 		controller.getModel().getReviewScrollPane().setViewportView(controller.getModel().getTextArea());
 		
