@@ -440,6 +440,18 @@ public class DatabaseMock extends AbstractDB {
 		return null;
 	}
 
+	@Override
+	protected void downvoteImpl(String reviewID, String user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 	

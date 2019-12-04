@@ -499,4 +499,9 @@ public abstract class AbstractDB {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	protected void downvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
 }
