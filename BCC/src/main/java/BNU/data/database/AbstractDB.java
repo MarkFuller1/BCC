@@ -44,7 +44,7 @@ public abstract class AbstractDB {
 
 	protected abstract String[] getAllUserMessagersImpl(String receiver);
 
-	protected abstract void upvoteImpl();
+	protected abstract void upvoteImpl(String reviewId, String userId);
 
 	protected abstract void downvoteImpl();
 
