@@ -1,5 +1,6 @@
 package BNU.data.database;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public abstract class AbstractDB {
 
 	protected abstract String[] getAllFlaggedImpl();
 
-	protected abstract Boolean sendMessageImpl(Message m, String from, String to, String date);
+	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i);
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -377,7 +378,7 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-	public final void upvote() throws SQLException {
+	public final void upvote(String ReviewID, String user) throws SQLException {
 		try {
 			con = getRemoteConnection();
 
@@ -393,7 +394,7 @@ public abstract class AbstractDB {
 		}
 	}
 
-	public final void downvote() throws SQLException {
+	public final void downvote(String ReviewID, String user) throws SQLException {
 		try {
 			con = getRemoteConnection();
 
@@ -409,11 +410,11 @@ public abstract class AbstractDB {
 		}
 	}
 
-	public final Boolean sendMessage(Message m, String from, String to, String date) {
+	public final Boolean sendMessage(String string, String from, String to, BigInteger i) {
 		try {
 			con = getRemoteConnection();
 
-			Boolean friends = sendMessageImpl(m, from, to, date);
+			Boolean friends = sendMessageImpl(string, from, to, i);
 
 			if (con != null) {
 				con.close();
@@ -433,11 +434,11 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-	public final Boolean isUpvoteValid() {
+	public final Boolean isUpvoteValid(String ReviewID, String user) {
 		return true;
 	}
 
-	public final Boolean isDownvoteValid() {
+	public final Boolean isDownvoteValid(String ReviewID, String user) {
 		return true;
 	}
 
