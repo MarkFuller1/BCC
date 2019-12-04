@@ -51,7 +51,7 @@ public abstract class AbstractDB {
 
 	protected abstract void downvoteImpl(String reviewID, String user) throws DatabaseOperationException;
 
-	protected abstract String[] getAllFlaggedImpl();
+	protected abstract String[][] getAllFlaggedImpl();
 
 	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i) throws DatabaseOperationException;
 
@@ -303,11 +303,11 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-	public final String[] getAllFlagged() {
+	public final String[][] getAllFlagged() {
 		try {
 			con = getRemoteConnection();
 
-			String[] flagged = getAllFlaggedImpl();
+			String[][] flagged = getAllFlaggedImpl();
 
 			if (con != null) {
 				con.close();
