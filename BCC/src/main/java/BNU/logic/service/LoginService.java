@@ -26,7 +26,7 @@ public class LoginService {
 	public boolean checkCredentials(String userName, String password) {
 		SmartProxy sp = new SmartProxy();
 		boolean isValidated = false;
-		isValidated = LoginController.db.validateUser(userName, password);
+		//isValidated = LoginController.db.validateUser(userName, password);
 		isValidated = sp.sanatizeAndCheckCreds(userName,password);
 		return isValidated;
 	}
