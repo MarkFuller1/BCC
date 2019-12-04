@@ -56,7 +56,7 @@ public class UserReviewView {
 		controller.getPanel().add(controller.getModel().getUser()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		
 		//User name label
-		controller.getModel().setUserName(new JLabel("Bill Gates"));
+		controller.getModel().setUserName(new JLabel(SingletonSession.getInstance().getUserName()));
 		controller.getPanel().add(controller.getModel().getUserName()).setBounds(470, 13, 515, 41);
 		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		

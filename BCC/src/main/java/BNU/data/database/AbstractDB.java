@@ -1,7 +1,9 @@
 package BNU.data.database;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -44,14 +46,15 @@ public abstract class AbstractDB {
 
 	protected abstract String[] getAllUserMessagersImpl(String receiver);
 
-	protected abstract void upvoteImpl();
+	protected abstract void upvoteImpl(String reviewId, String userId);
 
 	protected abstract void downvoteImpl();
 
 	protected abstract String[] getAllFlaggedImpl();
-	
-	protected abstract Boolean sendMessageImpl(Message m, String from, String to, String date);
 
+	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i);
+	
+	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -378,30 +381,43 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-//	
-//
-//	public final void upvote() throws SQLException {
-//		con = getRemoteConnection();
-//
-//		upvoteImpl();
-//
-//		if(con != null) {if(con != null) {con.close();}};
-//	}
-//
-//	
-//
-//	public final void downvote() throws SQLException {
-//		con = getRemoteConnection();
-//
-//		downvoteImpl();
-//
-//	}
-//
-	public final Boolean sendMessage(Message m, String from, String to, String date) {
+	public final void upvote(String ReviewID, String user) throws SQLException {
 		try {
 			con = getRemoteConnection();
 
-			Boolean friends = sendMessageImpl(m, from, to, date);
+			upvoteImpl(ReviewID, user);
+
+			if (con != null) {
+				con.close();
+			}
+
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public final void downvote(String ReviewID, String user) throws SQLException {
+		try {
+			con = getRemoteConnection();
+
+			downvoteImpl();
+
+			if (con != null) {
+				con.close();
+			}
+
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public final Boolean sendMessage(String string, String from, String to, BigInteger i) {
+		try {
+			con = getRemoteConnection();
+
+			Boolean friends = sendMessageImpl(string, from, to, i);
 
 			if (con != null) {
 				con.close();
@@ -416,20 +432,32 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-
 //
 	public final ArrayList<Review> getReviews(String prof, String c) {
 		return null;
 	}
 
-//
-	public final Boolean isUpvoteValid() {
-		return true;
+	public final Boolean isUpvoteValid(String ReviewID, String user) {
+		try {
+			con = getRemoteConnection();
+
+			Boolean friends = isUpvoteValidImpl(ReviewID, user);
+
+			if (con != null) {
+				con.close();
+			}
+
+			return friends;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-//
-	public final Boolean isDownvoteValid() {
-		return null;
+	public final Boolean isDownvoteValid(String ReviewID, String user) {
+		return true;
 	}
 
 	public void setNewReview(String userName, String professorName, String className, String content, String tA,
