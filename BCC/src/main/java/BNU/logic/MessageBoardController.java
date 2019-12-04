@@ -1,7 +1,5 @@
 package BNU.logic;
 
-
-
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -18,41 +16,43 @@ import BNU.logic.service.MessageBoardService;
 import BNU.presentation.MessageBoardView;
 import BNU.singleton.SingletonSession;
 
-public class MessageBoardController extends PageController{
+public class MessageBoardController extends PageController {
 	static MessageBoardView view;
 	static MessageBoardModel model = new MessageBoardModel();
 	static JPanel panel;
 	public JFrame mainF;
 	public static MessageBoardService mbs;
 	Runnable checkDbForNewMessages;
-	
-	//static private InputMessage im;
-	
-	public MessageBoardController(){
+
+	// static private InputMessage im;
+
+	public MessageBoardController() {
 		model = new MessageBoardModel();
 		panel = new JPanel();
 		view = new MessageBoardView();
 		db = new DatabaseMock();
 		mbs = new MessageBoardService();
 	}
-	
+
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
 		this.mainF = mainFrame;
 		try {
 			MessageBoardView.BuildMessageBoardView(mainFrame, this);
-			
-			checkDbForNewMessages = () -> { mbs.observer(SingletonSession.getInstance().getUserName()); };
+
+			checkDbForNewMessages = () -> {
+				mbs.observer(this, SingletonSession.getInstance().getUserName());
+			};
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	public AbstractDB getDb() {
 		return db;
 	}
-	
+
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -60,7 +60,7 @@ public class MessageBoardController extends PageController{
 	public void setPanel(JPanel panel) {
 		MessageBoardController.panel = panel;
 	}
-	
+
 	public MessageBoardView getView() {
 		return view;
 	}
@@ -79,29 +79,31 @@ public class MessageBoardController extends PageController{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getActionCommand() == "MessageBoard:back"){
+
+		if (e.getActionCommand() == "MessageBoard:back") {
 			System.out.println("MessageBoard:back button pressed");
 			WindowBuilder.loadPage(new UserReviewController());
-		
-		}else if(e.getActionCommand() == "MessageBoard:Logout") {
+
+		} else if (e.getActionCommand() == "MessageBoard:Logout") {
 			System.out.println("MessageBoard:logout button pressed");
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
-		}else if(e.getActionCommand() == "MessageBoard:send") {
+		} else if (e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
-			Message mess = new Message(this.getModel().getBar().getText(), BigInteger.valueOf(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
-			mbs.messageSend(mess, this.getModel().getSender(), this.getModel().getReceiver());
+			Message mess = new Message(this.getModel().getBar().getText(),
+					BigInteger.valueOf(System.currentTimeMillis()), this.getModel().getReceiver(),
+					this.getModel().getSender());
+			mbs.messageSend(mess.getText(), this.getModel().getSender(), this.getModel().getReceiver());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 			System.out.println("Message sent and without mock this should create a live update!");
-		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
+		} else if (e.getActionCommand() == "MessageBoard:getMessage") {
 			System.out.println("MessageBoard:getMessage button pressed");
 			JButton j = (JButton) e.getSource();
 			this.getModel().setSender(j.getText());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
-			
+
 		}
-		
+
 	}
 
 }
