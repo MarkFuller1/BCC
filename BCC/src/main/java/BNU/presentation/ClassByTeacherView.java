@@ -49,7 +49,7 @@ public class ClassByTeacherView {
 	static ClassByTeacherService cbts = new ClassByTeacherService();
 
 	public static void BuildTeachsersByClassView(JFrame mainFrame, ClassByTeacherController controller) {
-		
+
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
@@ -60,61 +60,61 @@ public class ClassByTeacherView {
 		LOGGER.addHandler(fileHandler);
 		LOGGER.setLevel(Level.FINEST);
 
-		//build panel
+		// build panel
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(null);
 
-		//build test title
+		// build test title
 		controller.getModel().setTeacherP(new JPanel());
 		controller.getModel().getTeacherP().setPreferredSize(new Dimension(1000, 100));
-		controller.getModel().getTeacherP().setBounds(200,0,600, 100);
+		controller.getModel().getTeacherP().setBounds(200, 0, 600, 100);
 		controller.getModel().getTeacherP().setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		controller.getModel().setTxt_Title(new JLabel(controller.getProfessorName()));
 		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.BOLD, 33));
 		controller.getModel().getTeacherP().add(controller.getModel().getTxt_Title());
 		controller.getPanel().add(controller.getModel().getTeacherP());
-		
 
-		//build teachers label
+		// build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Courses"));
 		controller.getModel().getLab_Teachers().setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		controller.getModel().getLab_Teachers().setBounds(350, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Teachers());
 
-		//build ratings table
+		// build ratings table
 		controller.getModel().setLab_Ratings(new JLabel("Ratings"));
 		controller.getModel().getLab_Ratings().setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		controller.getModel().getLab_Ratings().setBounds(600, 265, 143, 33);
 		controller.getPanel().add(controller.getModel().getLab_Ratings());
-		
-		//build number of reviews
+
+		// build number of reviews
 		controller.getModel().setLab_NumOfReviews(new JLabel("Number Of Reviews"));
 		controller.getModel().getLab_NumOfReviews().setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		controller.getModel().getLab_NumOfReviews().setBounds(750, 265, 185, 33);
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
-		
-		//back button
+
+		// back button
 		controller.getModel().setBtnBack(new JButton("Back"));
 		controller.getModel().getBtnBack().setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getBtnBack().setBounds(10, 11, 106, 41);
 		controller.getModel().getBtnBack().setActionCommand("CByTeacher:back");
 		controller.getModel().getBtnBack().addActionListener(controller);
 		controller.getPanel().add(controller.getModel().getBtnBack());
-		
-		//build scroll-able class selector
+
+		// build scroll-able class selector
 		controller.getModel().setClasses(buildClassPanels(controller));
-		
+
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		controller.getModel().getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.BLACK));
 		controller.getModel().setScrollPanePanel(new JPanel());
-		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
-		
+		controller.getModel().getScrollPanePanel()
+				.setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
+
 		for (JComponent panel : controller.getModel().getClasses()) {
 			controller.getModel().getScrollPanePanel().add(panel);
 		}
-		
+
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel());
 		controller.getModel().getScrollPane().setBounds(10, 321, 964, 429);
 		controller.getPanel().add(controller.getModel().getScrollPane());
@@ -128,13 +128,14 @@ public class ClassByTeacherView {
 
 	private static List<JComponent> buildClassPanels(ClassByTeacherController controller) {
 		List<JComponent> panels = new ArrayList<>();
-		
+
 		Course[] courses = cbts.getAllCoursesByTeacherService(controller.getProfessorName());
-		for(Course course: courses) {
+		for (Course course : courses) {
 			System.out.println(course);
- 			ProfessorCourse obj = new ProfessorCourse(course);
- 			obj.getSelect().setActionCommand("class:" + course.getCourse());
- 			obj.getSelect().addActionListener(controller);
+			ProfessorCourse obj = new ProfessorCourse(course);
+
+			obj.getSelect().setActionCommand("class:" + course.getCourse());
+			obj.getSelect().addActionListener(controller);
 			panels.add(obj);
 		}
 
