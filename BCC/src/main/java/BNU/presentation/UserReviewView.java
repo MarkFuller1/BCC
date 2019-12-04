@@ -56,7 +56,7 @@ public class UserReviewView {
 		controller.getPanel().add(controller.getModel().getUser()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		
 		//User name label
-		controller.getModel().setUserName(new JLabel("Bill Gates"));
+		controller.getModel().setUserName(new JLabel(SingletonSession.getInstance().getUserName().toString()));
 		controller.getPanel().add(controller.getModel().getUserName()).setBounds(470, 13, 515, 41);
 		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		
@@ -93,7 +93,7 @@ public class UserReviewView {
 		controller.getModel().getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		//main scroll pane panel
-		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.RED));
+		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.BLUE));
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
@@ -106,7 +106,6 @@ public class UserReviewView {
 			if(rm2 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
-				//rm1.createReviewItem();
 				rm2.createReviewItem(reviews[i][0],reviews[i][1],reviews[i][2], reviews[i][3]);
 				rm2.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm2.getPanel());	
