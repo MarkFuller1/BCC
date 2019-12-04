@@ -1,6 +1,8 @@
 package BNU.logic;
 
 import java.awt.event.ActionEvent;
+import java.math.BigInteger;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,6 +10,7 @@ import javax.swing.JPanel;
 import BNU.data.database.AbstractDB;
 import BNU.data.models.TeacherReviewModel;
 import BNU.presentation.TeacherReviewView;
+import BNU.singleton.SingletonSession;
 
 public class TeacherReviewController extends PageController{
 	static TeacherReviewView view;
@@ -78,28 +81,30 @@ public class TeacherReviewController extends PageController{
 		TeacherReviewController.model = model;
 	}
 	
-	public void up(int n) {
-		//if(db == valid){
-			//db.upvote();
+	public void up(int n) throws SQLException {
+		if(db.isUpvoteValid(this.getModel().getRC().get(n).getModel().getRID(),  SingletonSession.getInstance().getUserName())){
+			db.upvote(this.getModel().getRC().get(n).getModel().getRID(), SingletonSession.getInstance().getUserName());
 			int total = this.getModel().getRC().get(n).getModel().getScores();
 			total ++;
 			this.getModel().getRC().get(n).getModel().setScores(total);
 			this.getModel().getRC().get(n).getModel().getReviewScore().setText(this.getModel().getRC().get(n).getModel().getScores().toString());
 			this.getModel().getRC().get(n).getPanel().repaint();
-		//}
+		}
 	}
-	public void down(int n) {
-		//if(db == valid){
-			//db.downvote();
+	public void down(int n) throws SQLException {
+		if(db.isUpvoteValid(this.getModel().getRC().get(n).getModel().getRID(), SingletonSession.getInstance().getUserName())){
+			db.downvote(this.getModel().getRC().get(n).getModel().getRID(), SingletonSession.getInstance().getUserName());
 			int total = this.getModel().getRC().get(n).getModel().getScores();
 			total --;
 			this.getModel().getRC().get(n).getModel().setScores(total);
 			this.getModel().getRC().get(n).getModel().getReviewScore().setText(this.getModel().getRC().get(n).getModel().getScores().toString());
 			this.getModel().getRC().get(n).getPanel().repaint();
-		//}
+		}
 	}
 	public void message(int n) {
-		// need to figure out message here 
+		Long l = System.currentTimeMillis();
+		BigInteger i = new BigInteger(l.toString());
+		db.sendMessage("", SingletonSession.getInstance().getUserName(), this.getModel().getRC().get(n).getModel().getRID(),i);
 		WindowBuilder.loadPage(new MessageBoardController());
 	}
 	
