@@ -452,6 +452,18 @@ public class DatabaseMock extends AbstractDB {
 		return null;
 	}
 
+	//@Override
+	//protected void deleteUserAccount(String userId) {
+		// TODO Auto-generated method stub
+		
+	//}
+
+	@Override
+	protected void deleteUserAccountImpl(String userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 	

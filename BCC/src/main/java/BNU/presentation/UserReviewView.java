@@ -52,11 +52,11 @@ public class UserReviewView {
 		
 		//User label
 		controller.getModel().setUser(new JLabel("User:"));
-		controller.getPanel().add(controller.getModel().getUser()).setBounds(400, 13, 130, 41);
+		controller.getPanel().add(controller.getModel().getUser()).setBounds(390, 13, 130, 41);
 		controller.getPanel().add(controller.getModel().getUser()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		
 		//User name label
-		controller.getModel().setUserName(new JLabel(SingletonSession.getInstance().getUserName()));
+		controller.getModel().setUserName(new JLabel(SingletonSession.getInstance().getUserName().toString()));
 		controller.getPanel().add(controller.getModel().getUserName()).setBounds(470, 13, 515, 41);
 		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		
@@ -71,6 +71,13 @@ public class UserReviewView {
 		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getBtnBack().setActionCommand("UserReview:back");
 		controller.getModel().getBtnBack().addActionListener(controller);
+		
+		//back button
+		controller.getModel().setDelete(new JButton("Delete Account"));
+		controller.getPanel().add(controller.getModel().getDelete()).setBounds(125, 11, 190, 41);
+		controller.getPanel().add(controller.getModel().getDelete()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getDelete().setActionCommand("UserReview:da");
+		controller.getModel().getDelete().addActionListener(controller);
 		
 		//message button
 		controller.getModel().setBtnMessage(new JButton("Messages"));
@@ -93,7 +100,7 @@ public class UserReviewView {
 		controller.getModel().getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		//main scroll pane panel
-		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.RED));
+		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.BLUE));
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
@@ -106,7 +113,6 @@ public class UserReviewView {
 			if(rm2 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
-				//rm1.createReviewItem();
 				rm2.createReviewItem(reviews[i][0],reviews[i][1],reviews[i][2], reviews[i][3]);
 				rm2.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm2.getPanel());	

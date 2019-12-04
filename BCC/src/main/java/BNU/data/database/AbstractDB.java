@@ -14,6 +14,8 @@ public abstract class AbstractDB {
 
 	protected abstract Connection getRemoteConnection() throws DatabaseConnectionException;
 
+	protected abstract void deleteUserAccountImpl(String userId);
+
 	protected abstract boolean validateUserImpl(String userName, String password) throws DatabaseOperationException;
 
 	protected abstract String[] getAllProfessorsImpl() throws DatabaseOperationException;
@@ -493,6 +495,7 @@ public abstract class AbstractDB {
 			e.printStackTrace();
 		}
 		return 0;
+
 	}
 
 }

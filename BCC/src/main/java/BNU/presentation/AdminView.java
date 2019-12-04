@@ -81,7 +81,7 @@ public class AdminView {
 		
 		for(int i = 0; i < 10; i++) {
 			ReviewModel2 rm1 = new ReviewModel2();
-			rm1.createReviewItem();
+			//rm1.createReviewItem();
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
