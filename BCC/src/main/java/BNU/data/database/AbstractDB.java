@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import BNU.data.Review;
+import BNU.singleton.SingletonSession;
 
 public abstract class AbstractDB {
 
@@ -496,6 +497,22 @@ public abstract class AbstractDB {
 		}
 		return 0;
 
+	}
+
+	public final void deleteUserAccount(String user) {
+		try {
+			con = getRemoteConnection();
+
+			deleteUserAccountImpl(user);
+
+			if (con != null) {
+				con.close();
+			}
+
+		} catch (DatabaseConnectionException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
