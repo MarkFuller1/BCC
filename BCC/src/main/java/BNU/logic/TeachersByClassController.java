@@ -34,7 +34,6 @@ public class TeachersByClassController extends PageController {
 		model = new TeachersByClassModel();
 		panel = new JPanel();
 		view = new TeachersByClassView();
-		//db = new DatabaseMock();
 		this.className = selectedClass;
 
 		FileHandler fileHandler = null;
@@ -81,10 +80,6 @@ public class TeachersByClassController extends PageController {
 	public AbstractDB getDb() {
 		return db;
 	}
-
-//	public void setDb(dbWrapper db) {
-//		TeachersByClassController.db = db;
-//	}
 
 	public String getClassName() {
 		return className;
