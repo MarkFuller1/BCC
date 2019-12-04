@@ -1,6 +1,7 @@
 package BNU.data.models;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -135,16 +136,6 @@ public void createUserItem(String content, String score, String professor, Strin
 		g.gridy = 3;
 		panel.add(getReviewScore(), g);
 		
-		// submit edits button
-		setBtnMessageReviewer(new JButton("Submit Edits"));
-		getBtnMessageReviewer().setForeground(Color.BLACK);
-		getBtnMessageReviewer().setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		g.gridx = 0;
-		g.gridy = 0;
-		panel.add(getBtnMessageReviewer(), g);
-		getBtnMessageReviewer().addActionListener(urc);
-		getBtnMessageReviewer().setActionCommand("ed"+this.getCount().toString());
-
 		// scroll pane
 		setReviewScrollPane(new JScrollPane());
 		reviewScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -173,17 +164,29 @@ public void createUserItem(String content, String score, String professor, Strin
 		getReviewerID().setFont(new Font("Segoe UI", Font.BOLD, 14));
 		g.gridx = 1;
 		g.gridy = 0;
-		g.gridwidth = 2;
+		g.gridwidth = 1;
 		g.gridheight = 1;
 		panel.add(getReviewerID(), g);
 		
 		JLabel Professor = new JLabel(professor);
 		Professor.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		g.gridx = 3;
+		g.gridx = 2;
 		g.gridy = 0;
-		g.gridwidth = 1;
-		g.gridheight = 1;
+		g.gridwidth = 2;
 		panel.add(Professor, g);
+		
+		// submit edits button
+		setBtnMessageReviewer(new JButton("Submit Edits"));
+		getBtnMessageReviewer().setForeground(Color.BLACK);
+		getBtnMessageReviewer().setFont(new Font("Segoe UI", Font.BOLD, 14));
+		getBtnMessageReviewer().setPreferredSize(new Dimension(120, 100));
+		g.gridx = 4;
+		g.gridy = 1;
+		g.gridwidth = 1;
+		g.gridheight = 3;
+		panel.add(getBtnMessageReviewer(), g);
+		getBtnMessageReviewer().addActionListener(urc);
+		getBtnMessageReviewer().setActionCommand("ed"+this.getCount().toString());
 		
 		setPanel(panel);
 	
