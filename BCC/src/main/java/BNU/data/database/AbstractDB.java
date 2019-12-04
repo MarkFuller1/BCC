@@ -3,6 +3,7 @@ package BNU.data.database;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -52,6 +53,8 @@ public abstract class AbstractDB {
 	protected abstract String[] getAllFlaggedImpl();
 
 	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i);
+	
+	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -382,7 +385,7 @@ public abstract class AbstractDB {
 		try {
 			con = getRemoteConnection();
 
-			upvoteImpl();
+			upvoteImpl(ReviewID, user);
 
 			if (con != null) {
 				con.close();
@@ -435,7 +438,22 @@ public abstract class AbstractDB {
 	}
 
 	public final Boolean isUpvoteValid(String ReviewID, String user) {
-		return true;
+		try {
+			con = getRemoteConnection();
+
+			Boolean friends = isUpvoteValidImpl(ReviewID, user);
+
+			if (con != null) {
+				con.close();
+			}
+
+			return friends;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public final Boolean isDownvoteValid(String ReviewID, String user) {

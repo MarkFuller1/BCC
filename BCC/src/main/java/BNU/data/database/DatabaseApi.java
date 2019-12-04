@@ -1,6 +1,7 @@
 package BNU.data.database;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -575,19 +576,45 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+	protected void upvoteImpl(String reviewId, String userId) {
+		LOGGER.warning("");
+		String query = "INSERT INTO user_review (user_id, review_id) values (\'" + userId + "\', \'" + reviewId + "\')";
+		LOGGER.warning(query);
+		int rs = 0;
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+			// Query
+			rs = stmt.executeUpdate();
+
+			LOGGER.warning("incrementing score");
+			String updateScore = "UPDATE review SET score = score + 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
+
+			Statement state = con.createStatement();
+			state.executeQuery(updateScore);
+
+			state.close();
+
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+		}
+
+	}
+
+	@Override
+	protected Boolean sendMessageImpl(String m, String from, String to, BigInteger i) {
 		// name, rating, number of reviews
 
 		String sendMessage = "insert into message (message_id_pk, from_user_name, to_user_name, message, date_sent)"
 				+ " values ( \'" + Integer.toString(new Random().nextInt()) + "\', \'" + from + "\', \'" + to + "\', \'"
-				+ m + "\')";
+				+ m + "\', \'" + i.toString() + "\')";
 		int rs = 0;
 
 		try (PreparedStatement stmt = con.prepareStatement(sendMessage, Statement.RETURN_GENERATED_KEYS)) {
 
 			// Query
 			rs = stmt.executeUpdate();
-			
+
 			if (rs > 0) {
 				return true;
 			}
@@ -599,10 +626,28 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected void upvoteImpl(String reviewId, String userId) {
-		String query = "SELECT * from user_review where user_id = \'" + userId + "\' AND review_id = \'" + reviewId + "\'";
-		
+	protected Boolean isUpvoteValidImpl(String reviewId, String userId) throws DatabaseOperationException {
+		LOGGER.warning(reviewId + " " + userId);
+		String check = "select * from user_review, users WHERE user_review.review_id = \'" + reviewId
+				+ "\' AND users.user_name = \'" + userId + "\'";
+
+		try (Statement stmt = con.createStatement();) {
+
+			// Query
+			ResultSet rs = stmt.executeQuery(check);
+
+			if (rs.next()) {
+				return false;
+			}
+
+		} catch (
+
+		SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			throw new DatabaseOperationException(check);
+		}
+
+		return true;
 	}
 
-	
 }
