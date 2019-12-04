@@ -92,7 +92,7 @@ public class TeacherReviewController extends PageController{
 		}
 	}
 	public void down(int n) throws SQLException {
-		if(db.isUpvoteValid(this.getModel().getRC().get(n).getModel().getRID(), SingletonSession.getInstance().getUserName())){
+		if(db.isDownvoteValid(this.getModel().getRC().get(n).getModel().getRID(), SingletonSession.getInstance().getUserName())){
 			db.downvote(this.getModel().getRC().get(n).getModel().getRID(), SingletonSession.getInstance().getUserName());
 			int total = this.getModel().getRC().get(n).getModel().getScores();
 			total --;

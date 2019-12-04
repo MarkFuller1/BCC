@@ -3,6 +3,7 @@ package BNU.data.database;
 import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,13 +46,17 @@ public abstract class AbstractDB {
 
 	protected abstract String[] getAllUserMessagersImpl(String receiver);
 
-	protected abstract void upvoteImpl();
+	protected abstract void upvoteImpl(String reviewId, String userId);
 
-	protected abstract void downvoteImpl();
+	protected abstract void downvoteImpl(String reviewID, String user);
 
 	protected abstract String[] getAllFlaggedImpl();
 
 	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i);
+
+	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
+
+	protected abstract Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -284,14 +289,18 @@ public abstract class AbstractDB {
 	}
 
 	// my added functions
-	public final String[][] getAllMessages(String receiver) {
+	public final String[][] getAllMessages(String sender, String receiver) {
 		try {
 			con = getRemoteConnection();
+			
+			DatabaseMock dbm = new DatabaseMock();
 
-			String[][] reviews = getAllMessagesImpl(receiver);
+			//why is the Impl version being called here? See Mark.
+			String[][] messages = dbm.getAllMessagesImpl(sender, receiver);
 			if (con != null) {
 				con.close();
 			}
+			return messages; //added
 
 		} catch (SQLException | DatabaseConnectionException e) {
 			// TODO Auto-generated catch block
@@ -382,7 +391,7 @@ public abstract class AbstractDB {
 		try {
 			con = getRemoteConnection();
 
-			upvoteImpl();
+			upvoteImpl(ReviewID, user);
 
 			if (con != null) {
 				con.close();
@@ -398,7 +407,7 @@ public abstract class AbstractDB {
 		try {
 			con = getRemoteConnection();
 
-			downvoteImpl();
+			downvoteImpl( ReviewID,  user);
 
 			if (con != null) {
 				con.close();
@@ -435,11 +444,41 @@ public abstract class AbstractDB {
 	}
 
 	public final Boolean isUpvoteValid(String ReviewID, String user) {
-		return true;
+		try {
+			con = getRemoteConnection();
+
+			Boolean friends = isUpvoteValidImpl(ReviewID, user);
+
+			if (con != null) {
+				con.close();
+			}
+
+			return friends;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public final Boolean isDownvoteValid(String ReviewID, String user) {
-		return true;
+		try {
+			con = getRemoteConnection();
+
+			Boolean friends = isDownvoteValidImpl(ReviewID, user);
+
+			if (con != null) {
+				con.close();
+			}
+
+			return friends;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public void setNewReview(String userName, String professorName, String className, String content, String tA,
@@ -449,5 +488,20 @@ public abstract class AbstractDB {
 
 	public boolean isAdmin(String userName) {
 		return false;
+	}
+
+	protected void upvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected void downvoteImpl() {
+		// TODO Auto-generated method stub
+		
 	}
 }
