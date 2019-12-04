@@ -40,7 +40,7 @@ public class RegisterView {
 
 		// title label
 		controller.getModel().setLab_Title(new JLabel("Make an Account"));
-		controller.getPanel().add(controller.getModel().getLab_Title()).setBounds(398, 28, 249, 38);
+		controller.getPanel().add(controller.getModel().getLab_Title()).setBounds(398, 28, 349, 38);
 		controller.getPanel().add(controller.getModel().getLab_Title()).setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		
 		//back button
@@ -52,7 +52,7 @@ public class RegisterView {
 
 		// username label
 		controller.getModel().setLab_Username(new JLabel("Username:"));
-		controller.getPanel().add(controller.getModel().getLab_Username()).setBounds(25, 300, 126, 48);
+		controller.getPanel().add(controller.getModel().getLab_Username()).setBounds(25, 300, 146, 48);
 		controller.getPanel().add(controller.getModel().getLab_Username())
 				.setFont(new Font("Segoe UI", Font.PLAIN, 26));
 
@@ -69,7 +69,7 @@ public class RegisterView {
 
 		// Possible classes taken label
 		controller.getModel().setClasses_possible(new JLabel("Add Classes Taken"));
-		controller.getPanel().add(controller.getModel().getClasses_possible()).setBounds(650, 252, 214, 35);
+		controller.getPanel().add(controller.getModel().getClasses_possible()).setBounds(620, 252, 274, 35);
 		controller.getPanel().add(controller.getModel().getClasses_possible())
 				.setFont(new Font("Segoe UI", Font.PLAIN, 26));
 
