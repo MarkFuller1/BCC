@@ -28,12 +28,7 @@ public class LoginController extends PageController {
 
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
-//		if (db == null) {
-//			this.db = db;
-//		}
-
 		LoginView.BuildLoginView(mainFrame, this);
-
 	}
 
 	public JPanel getPanel() {
@@ -79,11 +74,14 @@ public class LoginController extends PageController {
 			    SingletonSession session = SingletonSession.getInstance(model.getTxt_username().getText(), isAdmin);
 			    
 			    System.out.println(SingletonSession.getInstance().getUserName());
-
-			    if(SingletonSession.getInstance().isAdmin()) {
+			    
+			    //SingletonSession.getInstance().isAdmin()
+			    if(isAdmin) {
+			    	System.out.println("is admin: true");
 			    	WindowBuilder.loadPage(new AdminController());
 			    	System.out.println("is admin: true");
 			    }else {
+			    	System.out.println("is admin: false");
 			    	WindowBuilder.loadPage(new MainController()); 
 			    }
 				
