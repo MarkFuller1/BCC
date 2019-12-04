@@ -25,6 +25,15 @@ public class RegisterModel {
 	private JTextField txt_password;
 	private JList classes_taken;
 	private JScrollPane menuScrollPane;
+		private JButton btnBack;
+	
+	
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	public void setBtnBack(JButton btnBack) {
+		this.btnBack = btnBack;
+	}
 	
 	public JLabel getNew_info() {
 		return new_info;
