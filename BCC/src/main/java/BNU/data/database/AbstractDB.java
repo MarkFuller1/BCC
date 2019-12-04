@@ -485,8 +485,8 @@ public abstract class AbstractDB {
 
 			int num = getNumberOfMessagesForUserImpl(user);
 
-			if (con != null) {
-				con.close();
+			if (threadCon != null) {
+				threadCon.close();
 			}
 
 			return num;
