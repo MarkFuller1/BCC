@@ -28,13 +28,13 @@ public class ReviewModel2 {
 	private JLabel studentReview;
 	private JLabel reviewerID;
 	private JButton btnMessageReviewer;
+	private JButton editB;
 	private JPanel panel;
 	private JTextArea textArea;
 	private Integer count;
 	private String RID;
 	
-	
-	
+	            
 	public String getRID() {
 		return RID;
 	}
@@ -115,6 +115,13 @@ public class ReviewModel2 {
 		this.textArea = textArea;
 	}
 	
+	public JButton getEditB() {
+		return editB;
+	}
+	public void setEditB(JButton editB) {
+		this.editB = editB;
+	}
+	
 	
 public void createReviewItem(String content, String score, String professor, String courseName ) {  //Should take a database object as a parameter and populate this info using a record.
 		
@@ -133,6 +140,7 @@ public void createReviewItem(String content, String score, String professor, Str
 		g.gridx = 0;
 		g.gridy = 3;
 		panel.add(getReviewScore(), g);
+		
 
 		// scroll pane
 		setReviewScrollPane(new JScrollPane());
@@ -151,7 +159,7 @@ public void createReviewItem(String content, String score, String professor, Str
 		
 		getTextArea().setColumns(65);
 		getTextArea().setRows(3);
-		getTextArea().setEditable(false);
+		getTextArea().setEditable(true);
 		getTextArea().setLineWrap(true);
 		getTextArea().setWrapStyleWord(true);
 		
