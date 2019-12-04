@@ -68,5 +68,18 @@ public class MessageBoardService {
 			// TODO Auto-generated method stub
 			
 		}
+
+		public void observer(String user) {
+			int old = MessageBoardController.db.getNumberOfMessagesForUser(user);
+			
+			while(true) {
+				int temp;
+				if(temp = MessageBoardController.db.getNumberOfMessagesForUser(user) > old) {
+					MessageBoardController.db.dispatchBuilder(e.mainF);
+					old = temp;
+					Thread.sleep(3);
+				}
+			}
+		}
 	
 }

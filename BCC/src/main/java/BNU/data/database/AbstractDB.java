@@ -57,6 +57,8 @@ public abstract class AbstractDB {
 	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
 	protected abstract Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException;
+	
+	protected abstract int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -485,4 +487,25 @@ public abstract class AbstractDB {
 	public boolean isAdmin(String userName) {
 		return false;
 	}
+
+	public int getNumberOfMessagesForUser(String user) {
+		try {
+			con = getRemoteConnection();
+
+			int num = getNumberOfMessagesForUserImpl(user);
+
+			if (con != null) {
+				con.close();
+			}
+
+			return num;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	
 }

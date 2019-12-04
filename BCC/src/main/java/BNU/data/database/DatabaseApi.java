@@ -492,7 +492,8 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected void downvoteImpl(String reviewId, String userId) {
 		LOGGER.warning("");
-		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId + "\'";
+		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId
+				+ "\'";
 		LOGGER.warning(query);
 		int rs = 0;
 
@@ -694,4 +695,27 @@ public class DatabaseApi extends AbstractDB {
 		return false;
 	}
 
+	@Override
+	protected int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException {
+		String check = "select count(message.message_id_pk) as num from message where message.from_user_name = \'"
+				+ user + "\' OR message.to_user_name = \'" + user + "\'";
+		int num = 0;
+		try (Statement stmt = con.createStatement();) {
+
+			// Query
+			ResultSet rs = stmt.executeQuery(check);
+
+			if (rs.next()) {
+				num = rs.getInt("num");
+			}
+
+			return num;
+
+		} catch (
+
+		SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			throw new DatabaseOperationException(check);
+		}
+	}
 }
