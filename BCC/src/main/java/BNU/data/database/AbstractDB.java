@@ -15,7 +15,9 @@ public abstract class AbstractDB {
 	Connection con;
 
 	protected abstract Connection getRemoteConnection() throws DatabaseConnectionException;
-
+	
+	protected abstract void deleteUserAccountImpl(String userId);
+	
 	protected abstract boolean validateUserImpl(String userName, String password) throws DatabaseOperationException;
 
 	protected abstract String[] getAllProfessorsImpl() throws DatabaseOperationException;
@@ -48,6 +50,7 @@ public abstract class AbstractDB {
 
 	protected abstract void upvoteImpl(String reviewId, String userId);
 
+	
 	protected abstract void downvoteImpl(String reviewID, String user);
 
 	protected abstract String[] getAllFlaggedImpl();
@@ -57,6 +60,7 @@ public abstract class AbstractDB {
 	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
 	protected abstract Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException;
+	
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -490,18 +494,8 @@ public abstract class AbstractDB {
 		return false;
 	}
 
-	protected void upvoteImpl() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	protected void downvoteImpl() {
-		// TODO Auto-generated method stub
-		
+	
+	public final void deleteUserAccount(String userId) {
+		return;
 	}
 }

@@ -42,6 +42,13 @@ public class RegisterView {
 		controller.getModel().setLab_Title(new JLabel("Make an Account"));
 		controller.getPanel().add(controller.getModel().getLab_Title()).setBounds(398, 28, 249, 38);
 		controller.getPanel().add(controller.getModel().getLab_Title()).setFont(new Font("Segoe UI", Font.PLAIN, 30));
+		
+		//back button
+		controller.getModel().setBtnBack(new JButton("Back"));
+		controller.getPanel().add(controller.getModel().getBtnBack()).setBounds(10, 11, 106, 41);
+		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getBtnBack().setActionCommand("Register:back");
+		controller.getModel().getBtnBack().addActionListener(controller);
 
 		// username label
 		controller.getModel().setLab_Username(new JLabel("Username:"));

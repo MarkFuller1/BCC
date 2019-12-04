@@ -67,12 +67,13 @@ public class ClassByTeacherView {
 		//build test title
 		controller.getModel().setTeacherP(new JPanel());
 		controller.getModel().getTeacherP().setPreferredSize(new Dimension(1000, 100));
-		controller.getModel().getTeacherP().setBounds(0,0,1000, 100);
+		controller.getModel().getTeacherP().setBounds(200,0,600, 100);
 		controller.getModel().getTeacherP().setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		controller.getModel().setTxt_Title(new JLabel(controller.getProfessorName()));
 		controller.getModel().getTxt_Title().setFont(new Font("Segoe UI", Font.BOLD, 33));
 		controller.getModel().getTeacherP().add(controller.getModel().getTxt_Title());
 		controller.getPanel().add(controller.getModel().getTeacherP());
+		
 
 		//build teachers label
 		controller.getModel().setLab_Teachers(new JLabel("Teachers"));
@@ -91,6 +92,14 @@ public class ClassByTeacherView {
 		controller.getModel().getLab_NumOfReviews().setFont(new Font("Segoe UI", Font.PLAIN, 19));
 		controller.getModel().getLab_NumOfReviews().setBounds(750, 265, 185, 33);
 		controller.getPanel().add(controller.getModel().getLab_NumOfReviews());
+		
+		//back button
+		controller.getModel().setBtnBack(new JButton("Back"));
+		controller.getModel().getBtnBack().setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getBtnBack().setBounds(10, 11, 106, 41);
+		controller.getModel().getBtnBack().setActionCommand("CByTeacher:back");
+		controller.getModel().getBtnBack().addActionListener(controller);
+		controller.getPanel().add(controller.getModel().getBtnBack());
 		
 		//build scroll-able class selector
 		controller.getModel().setClasses(buildTeacherPanels(controller));
@@ -128,17 +137,6 @@ public class ClassByTeacherView {
  			obj.getSelect().addActionListener(controller);
 			panels.add(obj);
 		}
-		
-		//dbWrapper db = new DatabaseMock();
-		/*
-		for(String course: courseNames) {
-			System.out.println(course);
- 			ProfessorCourse obj = new ProfessorCourse(controller.db.getCourse(course));
- 			obj.getSelect().setActionCommand("class:" + course);
- 			obj.getSelect().addActionListener(controller);
-			panels.add(obj);
-		}
-		*/
 
 		return panels;
 	}
