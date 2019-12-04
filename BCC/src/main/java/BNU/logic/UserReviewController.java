@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import BNU.data.database.AbstractDB;
 import BNU.data.models.UserReviewModel;
+import BNU.logic.service.UserReviewService;
 import BNU.presentation.UserReviewView;
 import BNU.singleton.SingletonSession;
 
@@ -15,6 +16,7 @@ public class UserReviewController extends PageController{
 	static UserReviewView view;
 	static UserReviewModel model = new UserReviewModel(); 
 	static JPanel panel;
+	static UserReviewService urs;
 	
 	public UserReviewController(){
 		model = new UserReviewModel();
@@ -32,6 +34,12 @@ public class UserReviewController extends PageController{
 		}
 	}
 	
+	
+	
+	public static UserReviewService getUrs() {
+		return urs;
+	}
+
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -77,7 +85,7 @@ public class UserReviewController extends PageController{
 		}
 		else if(e.getActionCommand() == "UserReview:da"){
 			System.out.println("UserReview:deleteAccount button pressed");
-			getDb().deleteUserAccount(SingletonSession.getInstance().getUserName());
+			getUrs().deleteAccount(SingletonSession.getInstance().getUserName());
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
@@ -86,7 +94,8 @@ public class UserReviewController extends PageController{
 			for(Integer i = 0; i < getModel().getCounter(); i ++) {
 				if(e.getActionCommand().contentEquals("ed"+i.toString())){
 					System.out.println("Review number " + i.toString());
-					// submit text edits with reviewID
+					
+					getUrs().changeReview(getModel().getReviews().get(i).getRID(), getModel().getReviews().get(i).getTextArea().getText());
 				}
 			}
 		}

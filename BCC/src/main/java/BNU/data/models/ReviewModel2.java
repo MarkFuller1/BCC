@@ -17,6 +17,7 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import BNU.data.Review;
+import BNU.logic.AdminController;
 import BNU.logic.UserReviewController;
 
 public class ReviewModel2 { 
@@ -194,7 +195,7 @@ public void createUserItem(String content, String score, String professor, Strin
 	}
 	
 
-public void createAdminItem(String content, String score, String professor, String courseName ) {  //Should take a database object as a parameter and populate this info using a record.
+public void createAdminItem(String professor, String courseName, String content, AdminController ac ) {  //Should take a database object as a parameter and populate this info using a record.
 	
 	panel = new JPanel();
 	panel.setLayout(new GridBagLayout());
@@ -203,14 +204,27 @@ public void createAdminItem(String content, String score, String professor, Stri
 	panel.setVisible(true);
 	
 	g.insets = new Insets(5,5,5,5);
-
-	// review score label
-	setReviewScore(new JLabel(score));
-	getReviewScore().setHorizontalAlignment(SwingConstants.CENTER);
-	getReviewScore().setFont(new Font("Segoe UI", Font.PLAIN, 30));
+	
+	// up button
+	setBtnUp(new JButton("Approve"));
+	getBtnUp().setForeground(Color.GREEN);
+	getBtnUp().setFont(new Font("Segoe UI", Font.PLAIN, 18));
+	g.gridx = 0;
+	g.gridy = 1;
+	panel.add(getBtnUp(), g);
+	getBtnUp().addActionListener(ac);
+	getBtnUp().setActionCommand("approve"+getCount().toString());
+	
+	// down button
+	setBtnDown(new JButton("Remove"));
+	getBtnDown().setForeground(Color.RED);
+	getBtnDown().setFont(new Font("Segoe UI", Font.PLAIN, 18));
 	g.gridx = 0;
 	g.gridy = 3;
-	panel.add(getReviewScore(), g);
+	panel.add(getBtnDown(), g);
+	getBtnDown().addActionListener(ac);
+	getBtnDown().setActionCommand("delete"+getCount().toString());
+
 
 	// scroll pane
 	setReviewScrollPane(new JScrollPane());
@@ -229,7 +243,7 @@ public void createAdminItem(String content, String score, String professor, Stri
 	
 	getTextArea().setColumns(65);
 	getTextArea().setRows(3);
-	getTextArea().setEditable(true);
+	getTextArea().setEditable(false);
 	getTextArea().setLineWrap(true);
 	getTextArea().setWrapStyleWord(true);
 	
