@@ -1,5 +1,6 @@
 package BNU.logic;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -30,7 +31,6 @@ public class MessageBoardController extends PageController {
 		model = new MessageBoardModel();
 		panel = new JPanel();
 		view = new MessageBoardView();
-		db = new DatabaseMock();
 		mbs = new MessageBoardService();
 	}
 
@@ -38,11 +38,16 @@ public class MessageBoardController extends PageController {
 	public void dispatchBuilder(JFrame mainFrame) {
 		this.mainF = mainFrame;
 		try {
+			Thread t = new Thread(new Runnable() {
+				public void run() {
+					mbs.observer(MessageBoardController.this, SingletonSession.getInstance().getUserName());
+				}
+			});
+
+			t.start();
+
 			MessageBoardView.BuildMessageBoardView(mainFrame, this);
 
-			checkDbForNewMessages = () -> {
-				mbs.observer(this, SingletonSession.getInstance().getUserName());
-			};
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,9 +96,8 @@ public class MessageBoardController extends PageController {
 		} else if (e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
 			Message mess = new Message(this.getModel().getBar().getText(),
-					BigInteger.valueOf(System.currentTimeMillis()), this.getModel().getReceiver(),
-					this.getModel().getSender());
-			mbs.messageSend(mess.getText(), this.getModel().getSender(), this.getModel().getReceiver());
+					BigInteger.valueOf(System.currentTimeMillis()),this.getModel().getSender(), this.getModel().getReceiver());
+			mbs.messageSend(mess.getText(), this.getModel().getReceiver(), this.getModel().getSender());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 			System.out.println("Message sent and without mock this should create a live update!");
 		} else if (e.getActionCommand() == "MessageBoard:getMessage") {
@@ -102,6 +106,11 @@ public class MessageBoardController extends PageController {
 			this.getModel().setSender(j.getText());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 
+			//System.out.println(this.getModel().getReceiver());
+			//System.out.println(this.getModel().getSender());
+			//MessageBoardView.updateMessages(this, this.getModel().getReceiver());
+			
+			
 		}
 
 	}

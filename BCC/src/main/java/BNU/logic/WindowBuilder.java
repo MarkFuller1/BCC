@@ -23,7 +23,6 @@ public class WindowBuilder {
 	
 	public WindowBuilder() {
 		db = new DatabaseApi();
-		//db = new DatabaseMock();
 		PageController.db = db;
 		//build the JFrame 
 		mainFrame = new JFrame("BCC");
