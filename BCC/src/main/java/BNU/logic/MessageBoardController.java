@@ -87,7 +87,7 @@ public class MessageBoardController extends PageController{
 		}else if(e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
 			Message mess = new Message(this.getModel().getBar().getText(), BigInteger.valueOf(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
-			mbs.messageSend(mess, this.getModel().getSender(), this.getModel().getReceiver());
+			mbs.messageSend(mess.getText(), this.getModel().getSender(), this.getModel().getReceiver());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 			System.out.println("Message sent and without mock this should create a live update!");
 		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
