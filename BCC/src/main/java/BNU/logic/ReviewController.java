@@ -2,6 +2,7 @@ package BNU.logic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -56,18 +57,28 @@ public class ReviewController extends PageController implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		for(Integer i = 0; i < model.getCount(); i++) {
+		for(Integer i = 0; i <= model.getCount(); i++) {
 			if(e.getActionCommand().contentEquals("m"+i.toString())) {
 				System.out.println("message button" + i.toString() + "pressed");
 				this.getTc().message(i);
 			}
 			else if(e.getActionCommand().contentEquals("d"+i.toString())) {
 				System.out.println("downvote button" + i.toString() + "pressed");
-				this.getTc().down(i);
+				try {
+					this.getTc().down(i);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else if(e.getActionCommand().contentEquals("u"+i.toString())) {
 				System.out.println("upvote button" + i.toString() + "pressed");
-				this.getTc().up(i);
+				try {
+					this.getTc().up(i);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
       else if(e.getActionCommand().contentEquals("f"+i.toString())) {
 				System.out.println("flag button" + i.toString() + "pressed");
