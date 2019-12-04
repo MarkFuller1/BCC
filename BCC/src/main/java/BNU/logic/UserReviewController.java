@@ -81,6 +81,15 @@ public class UserReviewController extends PageController{
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
+		else if(e.getActionCommand().contains("ed")) {
+			System.out.println("UserReview:edit button pressed");
+			for(Integer i = 0; i < getModel().getCounter(); i ++) {
+				if(e.getActionCommand().contentEquals("ed"+i.toString())){
+					System.out.println("Review number " + i.toString());
+					// submit text edits with reviewID
+				}
+			}
+		}
 	}
 
 }

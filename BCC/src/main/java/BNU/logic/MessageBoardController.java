@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import BNU.data.Message;
@@ -126,12 +127,7 @@ public class MessageBoardController extends PageController {
 			JButton j = (JButton) e.getSource();
 			this.getModel().setSender(j.getText());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
-
-			//System.out.println(this.getModel().getReceiver());
-			//System.out.println(this.getModel().getSender());
 			//MessageBoardView.updateMessages(this, this.getModel().getReceiver());
-			
-			
 		}
 
 	}
