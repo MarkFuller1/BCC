@@ -16,6 +16,7 @@ import BNU.data.database.DatabaseMock;
 import BNU.data.models.MessageBoardModel;
 import BNU.logic.service.MessageBoardService;
 import BNU.presentation.MessageBoardView;
+import BNU.singleton.SingletonSession;
 
 public class MessageBoardController extends PageController{
 	static MessageBoardView view;
@@ -86,7 +87,7 @@ public class MessageBoardController extends PageController{
 		}else if(e.getActionCommand() == "MessageBoard:send") {
 			System.out.println("MessageBoard:send button pressed");
 			Message mess = new Message(this.getModel().getBar().getText(), BigInteger.valueOf(System.currentTimeMillis()), this.getModel().getReceiver() ,this.getModel().getSender() );
-			mbs.messageSend(mess, this.getModel().getSender(), this.getModel().getReceiver());
+			mbs.messageSend(mess.getText(), this.getModel().getSender(), this.getModel().getReceiver());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
 			System.out.println("Message sent and without mock this should create a live update!");
 		}else if(e.getActionCommand() == "MessageBoard:getMessage") {
@@ -94,6 +95,10 @@ public class MessageBoardController extends PageController{
 			JButton j = (JButton) e.getSource();
 			this.getModel().setSender(j.getText());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
+			//System.out.println(this.getModel().getReceiver());
+			//System.out.println(this.getModel().getSender());
+			//MessageBoardView.updateMessages(this, this.getModel().getReceiver());
+			
 			
 		}
 		
