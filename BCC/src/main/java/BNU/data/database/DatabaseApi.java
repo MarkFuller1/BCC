@@ -17,7 +17,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import BNU.data.Message;
 import BNU.singleton.SingletonSession;
 
 public class DatabaseApi extends AbstractDB {
@@ -422,55 +421,55 @@ public class DatabaseApi extends AbstractDB {
 		return finalData;
 	}
 
-	@Override
+	// @Override
 
-	protected String[][] getAllMessagesImpl(String receiver) {
-		// text timestamp sender reciever
-		String query = "select message.message, date_sent, from_user_name, to_user_name from message "
-				+ "where from_user_name = \'" + receiver + "\' OR to_user_name = \'" + receiver + "\'";
-		ResultSet userReviews = null;
-		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
-
-		try (Statement stmt = con.createStatement()) {
-
-			LOGGER.info(query);
-			// Query
-			userReviews = stmt.executeQuery(query);
-
-			int i = 0;
-			while (userReviews.next()) {
-
-				reviews.add(new ArrayList<String>());
-				reviews.get(i).add(0, userReviews.getString("message"));
-				reviews.get(i).add(1, userReviews.getString("date_sent"));
-				reviews.get(i).add(2, userReviews.getString("from_user_name"));
-				reviews.get(i).add(3, userReviews.getString("to_user_name"));
-
-				i++;
-			}
-		} catch (Exception e) {
-			LOGGER.warning(query);
-			e.printStackTrace();
-		}
-
-		String[][] finalData;
-
-		finalData = new String[reviews.size()][];
-
-		for (int i = 0; i < reviews.size(); i++) {
-			ArrayList<String> row = reviews.get(i);
-
-			// Perform equivalent `toArray` operation
-			String[] copy = new String[row.size()];
-			for (int j = 0; j < row.size(); j++) {
-				// Manually loop and set individually
-				copy[j] = row.get(j);
-			}
-
-			finalData[i] = copy;
-		}
-		return finalData;
-	}
+//	protected String[][] getAllMessagesImpl(String receiver) {
+////		// text timestamp sender reciever
+////		String query = "select message.message, date_sent, from_user_name, to_user_name from message "
+////				+ "where from_user_name = \'" + receiver + "\' OR to_user_name = \'" + receiver + "\'";
+////		ResultSet userReviews = null;
+////		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
+////
+////		try (Statement stmt = con.createStatement()) {
+////
+////			LOGGER.info(query);
+////			// Query
+////			userReviews = stmt.executeQuery(query);
+////
+////			int i = 0;
+////			while (userReviews.next()) {
+////
+////				reviews.add(new ArrayList<String>());
+////				reviews.get(i).add(0, userReviews.getString("message"));
+////				reviews.get(i).add(1, userReviews.getString("date_sent"));
+////				reviews.get(i).add(2, userReviews.getString("from_user_name"));
+////				reviews.get(i).add(3, userReviews.getString("to_user_name"));
+////
+////				i++;
+////			}
+////		} catch (Exception e) {
+////			LOGGER.warning(query);
+////			e.printStackTrace();
+////		}
+////
+////		String[][] finalData;
+////
+////		finalData = new String[reviews.size()][];
+////
+////		for (int i = 0; i < reviews.size(); i++) {
+////			ArrayList<String> row = reviews.get(i);
+////
+////			// Perform equivalent `toArray` operation
+////			String[] copy = new String[row.size()];
+////			for (int j = 0; j < row.size(); j++) {
+////				// Manually loop and set individually
+////				copy[j] = row.get(j);
+////			}
+////
+////			finalData[i] = copy;
+////		}
+////		return finalData;
+//	}
 
 	@Override
 	protected String getRecieverImpl() {
@@ -485,14 +484,39 @@ public class DatabaseApi extends AbstractDB {
 
 	@Override
 	protected String[] getAllUserMessagersImpl(String receiver) {
-		// TODO Auto-generated method stub
-		return null;
+		// text timestamp sender reciever
+		String query = "select message.from_user_name from message " + "where to_user_name = \'" + receiver + "\'";
+		ResultSet userReviews = null;
+		ArrayList<String> names = new ArrayList<>();
+
+		try (Statement stmt = con.createStatement()) {
+
+			LOGGER.info(query);
+			// Query
+			userReviews = stmt.executeQuery(query);
+
+			int i = 0;
+			while (userReviews.next()) {
+
+				names.add(userReviews.getString("from_user_name"));
+
+				i++;
+			}
+		} catch (Exception e) {
+			LOGGER.warning(query);
+			e.printStackTrace();
+		}
+
+		String[] finalval = new String[names.size()];
+		finalval = names.toArray(finalval);
+		return finalval;
 	}
 
 	@Override
 	protected void downvoteImpl(String reviewId, String userId) {
 		LOGGER.warning("");
-		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId + "\'";
+		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId
+				+ "\'";
 		LOGGER.warning(query);
 		int rs = 0;
 
@@ -629,7 +653,7 @@ public class DatabaseApi extends AbstractDB {
 				+ m + "\', \'" + i.toString() + "\')";
 		int rs = 0;
 
-		try (PreparedStatement stmt = con.prepareStatement(sendMessage, Statement.RETURN_GENERATED_KEYS)) {
+		try (PreparedStatement stmt = con.prepareStatement(sendMessage)) {
 
 			// Query
 			rs = stmt.executeUpdate();
@@ -695,9 +719,83 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
+
+	protected int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException {
+		String check = "select count(message.message_id_pk) as num from message where message.from_user_name = \'"
+				+ user + "\' OR message.to_user_name = \'" + user + "\'";
+		int num = 0;
+		try (Statement stmt = con.createStatement();) {
+
+			// Query
+			ResultSet rs = stmt.executeQuery(check);
+
+			if (rs.next()) {
+				num = rs.getInt("num");
+			}
+
+			return num;
+
+		} catch (
+
+		SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			throw new DatabaseOperationException(check);
+		}
+	}
+
+	@Override
+	protected String[][] getAllMessagesImpl(String sender, String receiver) {
+		// text timestamp sender reciever
+		String query = "select message.message, date_sent, from_user_name, to_user_name from message "
+				+ "where (from_user_name = \'" + sender + "\' OR from_user_name = \'" + receiver
+				+ "\') AND (to_user_name = \'" + sender + "\' OR to_user_name = \'" + receiver + "\')";
+		ResultSet userReviews = null;
+		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
+
+		try (Statement stmt = con.createStatement()) {
+
+			LOGGER.info(query);
+			// Query
+			userReviews = stmt.executeQuery(query);
+
+			int i = 0;
+			while (userReviews.next()) {
+
+				reviews.add(new ArrayList<String>());
+				reviews.get(i).add(0, userReviews.getString("message"));
+				reviews.get(i).add(1, userReviews.getString("date_sent"));
+				reviews.get(i).add(2, userReviews.getString("from_user_name"));
+				reviews.get(i).add(3, userReviews.getString("to_user_name"));
+
+				i++;
+			}
+		} catch (Exception e) {
+			LOGGER.warning(query);
+			e.printStackTrace();
+		}
+
+		String[][] finalData;
+
+		finalData = new String[reviews.size()][];
+
+		for (int i = 0; i < reviews.size(); i++) {
+			ArrayList<String> row = reviews.get(i);
+
+			// Perform equivalent `toArray` operation
+			String[] copy = new String[row.size()];
+			for (int j = 0; j < row.size(); j++) {
+				// Manually loop and set individually
+				copy[j] = row.get(j);
+			}
+
+			finalData[i] = copy;
+		}
+		return finalData;
+	}
+
 	protected void deleteUserAccountImpl(String userId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
