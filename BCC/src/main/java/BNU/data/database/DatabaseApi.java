@@ -300,7 +300,7 @@ public class DatabaseApi extends AbstractDB {
 	protected String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) {
 		String[][] vals = null;
 		String firstLast[] = professorName.split(" ");
-		String query = "select content, (teaching_ability + workload + helpfulness) / 3 as score, user_name, review_id_pk  "
+		String query = "select content, review.score as score, user_name, review_id_pk  "
 				+ "FROM review, professor, course  " + "WHERE professor.first_name = \'" + firstLast[0] + "\'  "
 				+ "AND professor.last_name = \'" + firstLast[1] + "\'  "
 				+ "AND professor_id = professor.professor_id_pk  " + "AND course.title = \'" + className + "\'  "
@@ -489,12 +489,6 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected void upvoteImpl() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected void downvoteImpl() {
 		// TODO Auto-generated method stub
 
@@ -602,6 +596,12 @@ public class DatabaseApi extends AbstractDB {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	protected void upvoteImpl(String reviewId, String userId) {
+		String query = "SELECT * from user_review where user_id = \'" + userId + "\' AND review_id = \'" + reviewId + "\'";
+		
 	}
 
 	
