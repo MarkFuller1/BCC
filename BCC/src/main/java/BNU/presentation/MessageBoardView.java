@@ -158,7 +158,7 @@ public class MessageBoardView {
 		controller.getModel().getScrollPanePanel().add(controller.getModel().getRight(), g1);
 		
 		
-		updateMessages(controller);
+		updateMessages(controller, controller.getModel().getSender());
 
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
 		controller.getModel().getScrollPane().setPreferredSize(new Dimension(710, 580));
@@ -211,12 +211,16 @@ public class MessageBoardView {
 		mainFrame.setContentPane(controller.getPanel());
 		mainFrame.setVisible(true);
 	}
-	
-	public static void updateMessages(MessageBoardController controller) {
+
+	public static void updateMessages(MessageBoardController controller, String receiver) {
 		//controller.getModel().setMessages(controller.mbs.getAllMessagersToUser(SingletonSession.getInstance().getUserName()));
 		
 		//Do we need all message between two users here or for just the user?
-		controller.getModel().setMessages(controller.mbs.getAllMessagesFromTo(SingletonSession.getInstance().getUserName(), controller.getModel().getReceiver()));
+		if(receiver.equals(null)){
+			controller.getModel().setMessages(controller.mbs.getAllMessagesFromTo(SingletonSession.getInstance().getUserName(), controller.getModel().getReceiver()));
+		}else {
+			controller.getModel().setMessages(controller.mbs.getAllMessagesFromTo(SingletonSession.getInstance().getUserName(), receiver));
+		}
 		
 		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
 			Message m = controller.getModel().getMessages().get(i);
