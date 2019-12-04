@@ -77,7 +77,7 @@ public class MessageBoardService {
 				old = temp;
 
 			}
-			Thread.sleep(300);
+			Thread.sleep(3000);
 		}
 	}
 

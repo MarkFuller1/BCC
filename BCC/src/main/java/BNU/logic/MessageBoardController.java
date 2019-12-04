@@ -40,7 +40,12 @@ public class MessageBoardController extends PageController {
 		try {
 			Thread t = new Thread(new Runnable() {
 				public void run() {
-					mbs.observer(MessageBoardController.this, SingletonSession.getInstance().getUserName());
+					try {
+						mbs.observer(MessageBoardController.this, SingletonSession.getInstance().getUserName());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			});
 
