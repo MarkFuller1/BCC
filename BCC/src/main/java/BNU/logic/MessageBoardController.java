@@ -95,6 +95,10 @@ public class MessageBoardController extends PageController{
 			JButton j = (JButton) e.getSource();
 			this.getModel().setSender(j.getText());
 			MessageBoardView.BuildMessageBoardView(this.mainF, this);
+			//System.out.println(this.getModel().getReceiver());
+			//System.out.println(this.getModel().getSender());
+			//MessageBoardView.updateMessages(this, this.getModel().getReceiver());
+			
 			
 		}
 		
