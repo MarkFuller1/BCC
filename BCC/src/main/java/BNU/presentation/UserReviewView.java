@@ -52,7 +52,7 @@ public class UserReviewView {
 		
 		//User label
 		controller.getModel().setUser(new JLabel("User:"));
-		controller.getPanel().add(controller.getModel().getUser()).setBounds(400, 13, 130, 41);
+		controller.getPanel().add(controller.getModel().getUser()).setBounds(390, 13, 130, 41);
 		controller.getPanel().add(controller.getModel().getUser()).setFont(new Font("Segoe UI", Font.BOLD, 25));
 		
 		//User name label
@@ -71,6 +71,13 @@ public class UserReviewView {
 		controller.getPanel().add(controller.getModel().getBtnBack()).setFont(new Font("Segoe UI", Font.BOLD, 18));
 		controller.getModel().getBtnBack().setActionCommand("UserReview:back");
 		controller.getModel().getBtnBack().addActionListener(controller);
+		
+		//back button
+		controller.getModel().setDelete(new JButton("Delete Account"));
+		controller.getPanel().add(controller.getModel().getDelete()).setBounds(125, 11, 190, 41);
+		controller.getPanel().add(controller.getModel().getDelete()).setFont(new Font("Segoe UI", Font.BOLD, 18));
+		controller.getModel().getDelete().setActionCommand("UserReview:da");
+		controller.getModel().getDelete().addActionListener(controller);
 		
 		//message button
 		controller.getModel().setBtnMessage(new JButton("Messages"));

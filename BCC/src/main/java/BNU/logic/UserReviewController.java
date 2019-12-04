@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import BNU.data.database.AbstractDB;
 import BNU.data.models.UserReviewModel;
 import BNU.presentation.UserReviewView;
+import BNU.singleton.SingletonSession;
 
 public class UserReviewController extends PageController{
 	static UserReviewView view;
@@ -54,6 +55,10 @@ public class UserReviewController extends PageController{
 	public void setModel(UserReviewModel model) {
 		UserReviewController.model = model;
 	}
+	
+	public static AbstractDB getDb() {
+		return db;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -67,6 +72,12 @@ public class UserReviewController extends PageController{
 		}
 		else if(e.getActionCommand() == "UserReview:logout"){
 			System.out.println("UserReview:logout button pressed");
+			WindowBuilder.clip.stop();
+			WindowBuilder.loadPage(new LoginController());
+		}
+		else if(e.getActionCommand() == "UserReview:da"){
+			System.out.println("UserReview:deleteAccount button pressed");
+			getDb().deleteUserAccount(SingletonSession.getInstance().getUserName());
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
