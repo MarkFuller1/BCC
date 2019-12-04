@@ -213,7 +213,10 @@ public class MessageBoardView {
 	}
 	
 	public static void updateMessages(MessageBoardController controller) {
-		controller.getModel().setMessages(controller.mbs.getAllMessagersToUser(SingletonSession.getInstance().getUserName()));
+		//controller.getModel().setMessages(controller.mbs.getAllMessagersToUser(SingletonSession.getInstance().getUserName()));
+		
+		//Do we need all message between two users here or for just the user?
+		controller.getModel().setMessages(controller.mbs.getAllMessagesFromTo(SingletonSession.getInstance().getUserName(), controller.getModel().getReceiver()));
 		
 		for(int i = 0; i < controller.getModel().getMessages().size(); i++) {
 			Message m = controller.getModel().getMessages().get(i);
@@ -236,7 +239,7 @@ public class MessageBoardView {
 				controller.getModel().getRight().add(pan);
 				controller.getModel().getLeft().add(fake);
 			}
-		}
+		}	
 		
 	}
 }

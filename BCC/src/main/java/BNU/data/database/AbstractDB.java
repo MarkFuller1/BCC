@@ -284,14 +284,18 @@ public abstract class AbstractDB {
 	}
 
 	// my added functions
-	public final String[][] getAllMessages(String receiver) {
+	public final String[][] getAllMessages(String sender, String receiver) {
 		try {
 			con = getRemoteConnection();
+			
+			DatabaseMock dbm = new DatabaseMock();
 
-			String[][] reviews = getAllMessagesImpl(receiver);
+			//why is the Impl version being called here? See Mark.
+			String[][] messages = dbm.getAllMessagesImpl(sender, receiver);
 			if (con != null) {
 				con.close();
 			}
+			return messages; //added
 
 		} catch (SQLException | DatabaseConnectionException e) {
 			// TODO Auto-generated catch block

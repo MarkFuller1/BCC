@@ -23,22 +23,22 @@ public class MessageBoardService {
 			return SingletonSession.getInstance().getUserName();
 		}
 		
-		public ArrayList<Message> getAllMessagersToUser(String receiver) {
+		public /*ArrayList<Message>*/ String[] getAllMessagersToUser(String receiver) {
 			
-			String[][] messages = MessageBoardController.db.getAllMessages(receiver);
+			String[] messages = MessageBoardController.db.getAllUserMessagers(receiver);
 			
 			
-			ArrayList<Message> finalAr = new ArrayList<>();
+//			ArrayList<Message> finalAr = new ArrayList<>();
+//			
+//			for(int i = 0 ;i < messages.length; i++) {
+//				finalAr.add(new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]));
+//			}
 			
-			for(int i = 0 ;i < messages.length; i++) {
-				finalAr.add(new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]));
-			}
-			
-			return finalAr;
+			return messages;
 		}
 		
 		public ArrayList<Message> getAllMessagesFromTo(String sender, String receiver){
-			String[][] msgs = MessageBoardController.db.getAllMessages(receiver);
+			String[][] msgs = MessageBoardController.db.getAllMessages(sender,receiver);
 			
 			ArrayList<Message> messages = new ArrayList<>();
 			
