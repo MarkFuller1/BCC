@@ -45,7 +45,7 @@ public abstract class AbstractDB {
 
 	protected abstract String getSenderImpl();
 
-	protected abstract String[] getAllUserMessagersImpl(String receiver);
+	protected abstract String[] getAllUserMessagersImpl(String receiver) throws DatabaseConnectionException;
 
 	protected abstract void upvoteImpl(String reviewId, String userId);
 
