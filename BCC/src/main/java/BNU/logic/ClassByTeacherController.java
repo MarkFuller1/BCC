@@ -30,7 +30,6 @@ public class ClassByTeacherController extends PageController{
 		model = new ClassByTeacherModel();
 		panel = new JPanel();
 		view = new ClassByTeacherView();
-		//db = new DatabaseMock();
 		this.professorName = professor;
 		
 		FileHandler fileHandler = null;
@@ -79,9 +78,6 @@ public class ClassByTeacherController extends PageController{
 		return db;
 	}
 
-//	public void setDb(dbWrapper db) {
-//		ClassByTeacherController.db = db;
-//	}
 	public String getProfessorName() {
 		return professorName;
 	}
@@ -106,9 +102,9 @@ public class ClassByTeacherController extends PageController{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().contains("class:")){
 			String classSelected = e.getActionCommand();
-			classSelected = classSelected.substring(12);
+			classSelected = classSelected.substring(6);
 			LOGGER.info("The class selected was: " + classSelected);
-			WindowBuilder.loadPage(new TeacherReviewController(this.getProfessorName(), classSelected));
+			WindowBuilder.loadPage(new TeacherReviewController(this.professorName, classSelected));
 		}
 	}
 }
