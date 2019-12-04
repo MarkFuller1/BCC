@@ -34,7 +34,6 @@ public class TeachersByClassController extends PageController {
 		model = new TeachersByClassModel();
 		panel = new JPanel();
 		view = new TeachersByClassView();
-		//db = new DatabaseMock();
 		this.className = selectedClass;
 
 		FileHandler fileHandler = null;

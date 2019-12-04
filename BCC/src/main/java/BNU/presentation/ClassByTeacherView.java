@@ -129,7 +129,6 @@ public class ClassByTeacherView {
 			panels.add(obj);
 		}
 		
-		//dbWrapper db = new DatabaseMock();
 		/*
 		for(String course: courseNames) {
 			System.out.println(course);

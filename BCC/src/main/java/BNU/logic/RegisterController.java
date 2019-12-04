@@ -31,7 +31,6 @@ public class RegisterController extends PageController {
 		panel = new JPanel();
 		view = new RegisterView();
 		rs = new RegisterService();
-		//db = new DatabaseMock();
 
 		FileHandler fileHandler = null;
 		try {
