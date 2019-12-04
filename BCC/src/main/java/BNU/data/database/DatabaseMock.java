@@ -1,5 +1,6 @@
 package BNU.data.database;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -96,9 +97,9 @@ public class DatabaseMock extends AbstractDB {
 		ArrayList<Professor> profs = new ArrayList<>();
 		String[] courses = { "Adventures in Multi-Threading", "Quantum Computing for Beginners", "Intro to GoLang" };
 
-		profs.add(new Professor("Dr. Nikola Tesla", "99", "4", courses));
-		profs.add(new Professor("Dr. Thomas Edison", "99", "4", courses));
-		profs.add(new Professor("Dr. Alexander Grahm-Bell", "99", "4", courses));
+		profs.add(new Professor("Dr. Nikola Tesla", "99", "4"));
+		profs.add(new Professor("Dr. Thomas Edison", "99", "4"));
+		profs.add(new Professor("Dr. Alexander Grahm-Bell", "99", "4"));
 
 		switch (prof) {
 		case "Dr. Nikola Tesla":
@@ -417,6 +418,24 @@ public class DatabaseMock extends AbstractDB {
 
 	@Override
 	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void upvoteImpl(String reviewId, String userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Boolean sendMessageImpl(String string, String from, String to, BigInteger i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException {
 		// TODO Auto-generated method stub
 		return null;
 	}

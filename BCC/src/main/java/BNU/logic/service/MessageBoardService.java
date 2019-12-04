@@ -13,9 +13,10 @@ import BNU.singleton.SingletonSession;
 
 public class MessageBoardService {
 
-		public void messageSend(Message message, String from, String to) {
+		public void messageSend(String message, String from, String to) {
 			SmartProxy sp = new SmartProxy();
-			sp.sanatizeAndSendMessage(message, from, to, Long.toString(System.currentTimeMillis()));
+			BigInteger i = BigInteger.valueOf(System.currentTimeMillis());
+			sp.sanatizeAndSendMessage(message, from, to, i);
 			//MessageBoardController.db.sendMessage(message);
 		}
 		

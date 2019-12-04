@@ -1,5 +1,7 @@
 package BNU.logic.service.proxy;
 
+import java.math.BigInteger;
+
 import BNU.data.Message;
 import BNU.logic.LoginController;
 import BNU.logic.MessageBoardController;
@@ -34,8 +36,8 @@ public class SmartProxy {
 		return isAdmin;
 	}
 	
-	public void sanatizeAndSendMessage(Message message, String from, String to, String date) {
-		message.setText(sanatizeInput(message.getText()));
+	public void sanatizeAndSendMessage(String message, String from, String to, BigInteger date) {
+		message = sanatizeInput(message);
 		MessageBoardController.db.sendMessage(message, from, to, date);
 	}
 	
