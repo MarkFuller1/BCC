@@ -490,9 +490,9 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected void downvoteImpl() {
+	protected void downvoteImpl(String reviewId, String userId) {
 		LOGGER.warning("");
-		String query = "INSERT INTO user_review (user_id, review_id) values (\'" + userId + "\', \'" + reviewId + "\')";
+		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId + "\'";
 		LOGGER.warning(query);
 		int rs = 0;
 
@@ -501,8 +501,8 @@ public class DatabaseApi extends AbstractDB {
 			// Query
 			rs = stmt.executeUpdate();
 
-			LOGGER.warning("incrementing score");
-			String updateScore = "UPDATE review SET score = score + 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
+			LOGGER.warning("decrementing score");
+			String updateScore = "UPDATE review SET score = score - 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
 
 			Statement state = con.createStatement();
 			state.executeQuery(updateScore);
@@ -667,6 +667,31 @@ public class DatabaseApi extends AbstractDB {
 		}
 
 		return true;
+	}
+
+	@Override
+	protected Boolean isDownvoteValidImpl(String reviewId, String userId) throws DatabaseOperationException {
+		LOGGER.warning(reviewId + " " + userId);
+		String check = "select * from user_review, users WHERE user_review.review_id = \'" + reviewId
+				+ "\' AND users.user_name = \'" + userId + "\'";
+
+		try (Statement stmt = con.createStatement();) {
+
+			// Query
+			ResultSet rs = stmt.executeQuery(check);
+
+			if (rs.next()) {
+				return true;
+			}
+
+		} catch (
+
+		SQLException e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			throw new DatabaseOperationException(check);
+		}
+
+		return false;
 	}
 
 }
