@@ -16,6 +16,7 @@ import BNU.data.database.DatabaseMock;
 import BNU.data.models.MessageBoardModel;
 import BNU.logic.service.MessageBoardService;
 import BNU.presentation.MessageBoardView;
+import BNU.singleton.SingletonSession;
 
 public class MessageBoardController extends PageController{
 	static MessageBoardView view;
@@ -23,6 +24,7 @@ public class MessageBoardController extends PageController{
 	static JPanel panel;
 	public JFrame mainF;
 	public static MessageBoardService mbs;
+	Runnable checkDbForNewMessages;
 	
 	//static private InputMessage im;
 	
@@ -39,6 +41,8 @@ public class MessageBoardController extends PageController{
 		this.mainF = mainFrame;
 		try {
 			MessageBoardView.BuildMessageBoardView(mainFrame, this);
+			
+			checkDbForNewMessages = () -> { mbs.observer(SingletonSession.getInstance().getUserName()); };
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,6 +79,7 @@ public class MessageBoardController extends PageController{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getActionCommand() == "MessageBoard:back"){
 			System.out.println("MessageBoard:back button pressed");
 			WindowBuilder.loadPage(new UserReviewController());
