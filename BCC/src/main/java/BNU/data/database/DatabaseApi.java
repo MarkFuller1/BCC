@@ -358,7 +358,7 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected String[][] getAllReviewsForUserImpl(String userName) throws DatabaseOperationException {
 		// content score prof course name
-		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name  from review, professor, course Where user_name = \'"
+		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name, review_id_pk  from review, professor, course Where user_name = \'"
 				+ userName
 				+ "\'  AND review.professor_id = professor.professor_id_pk AND review.course_id = course.course_id_pk";
 		ResultSet userReviews = null;
@@ -378,6 +378,7 @@ public class DatabaseApi extends AbstractDB {
 				reviews.get(i).add(1, userReviews.getString("avg"));
 				reviews.get(i).add(2, userReviews.getString("first_name") + " " + userReviews.getString("last_name"));
 				reviews.get(i).add(3, userReviews.getString("title"));
+				reviews.get(i).add(4, userReviews.getString("review_id_pk"));
 
 				i++;
 			}
@@ -846,14 +847,8 @@ public class DatabaseApi extends AbstractDB {
 		return finalData;
 	}
 
-	protected void deleteUserAccountImpl(String userId) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void flagReviewImpl(String reviewId) throws DatabaseOperationException {
-		String query = "update review " + "set is_flagged = true " + "where review_id_pk = \'" + reviewId + "\'";
+	protected void deleteUserAccountImpl(String userId) throws DatabaseOperationException {
+		String query = "delete from user where user.user_id_pk = \'" + userId + "\'";
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 			int rs = stmt.executeUpdate(query);
@@ -870,10 +865,50 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected void deleteReviewImpl(String reviewId) throws DatabaseOperationException {
-		String query = "delte from review where review_review_id_pk = \'" + reviewId + "\'";
+	protected void flagReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "update review " + "set is_flagged = true " + "where review_id_pk = \'" + reviewId + "\'";
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+			LOGGER.info(query);
+			int rs = stmt.executeUpdate(query);
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+	}
+
+	@Override
+	protected void deleteReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "delete from review where review.review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			LOGGER.info(query);
+			int rs = stmt.executeUpdate(query);
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+	}
+
+	@Override
+	protected void removeFlagOnReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "update review " + "set is_flagged = false " + "where review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			LOGGER.info(query);
 			int rs = stmt.executeUpdate(query);
 
 			if (rs != 1) {

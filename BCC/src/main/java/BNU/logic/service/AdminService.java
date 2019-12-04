@@ -26,15 +26,15 @@ public class AdminService {
 	public String[][] getAllFlagged() {
 		return AdminController.getDb().getAllFlagged();
 	}
-	
+
 	// this is for deleting review when admin deems the review as inappropriate
-	public void deleteReview(String reviewID) {
-		//AdminController.getDb(). delete comment here?
+	public void deleteReview(String reviewId) {
+		AdminController.getDb().deleteReivew(reviewId);
 	}
-	
+
 	// this is for keeping review and removing the flag status
-	public void removeFlagOnReview(String reviewID) {
-		//AdminController.getDb(). delete flag status here?
+	public void removeFlagOnReview(String reviewId) {
+		AdminController.getDb().removeFlagOnReview(reviewId);
 	}
-	
+
 }

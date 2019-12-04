@@ -16,8 +16,6 @@ public abstract class AbstractDB {
 
 	protected abstract String getRecieverImpl();
 
-	protected abstract void deleteUserAccountImpl(String userId);
-
 	protected abstract String[] getAllClassesImpl() throws DatabaseOperationException;
 
 	protected abstract String[][] getAllFlaggedImpl() throws DatabaseOperationException;
@@ -31,6 +29,10 @@ public abstract class AbstractDB {
 	protected abstract void flagReviewImpl(String reviewId) throws DatabaseOperationException;
 
 	protected abstract void deleteReviewImpl(String reviewId) throws DatabaseOperationException;
+
+	protected abstract void deleteUserAccountImpl(String userId) throws DatabaseOperationException;
+
+	protected abstract void removeFlagOnReviewImpl(String reviewId) throws DatabaseOperationException;
 
 	protected abstract void upvoteImpl(String reviewId, String userId) throws DatabaseOperationException;
 
@@ -77,7 +79,7 @@ public abstract class AbstractDB {
 			boolean res = validateUserImpl(userName, password);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -97,7 +99,7 @@ public abstract class AbstractDB {
 			String[] profList = getAllProfessorsImpl();
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -117,7 +119,7 @@ public abstract class AbstractDB {
 			String[] classList = getAllClassesImpl();
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -137,7 +139,7 @@ public abstract class AbstractDB {
 			String[] profList = getAllProfessorsForClassImpl(className);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -158,7 +160,7 @@ public abstract class AbstractDB {
 			String[] classList = getAllClassesForProfessorImpl(professorName);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -180,7 +182,7 @@ public abstract class AbstractDB {
 			String[][] courseslist = getAllCourseInfoByProfImpl(courseNames);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -201,7 +203,7 @@ public abstract class AbstractDB {
 			String[][] teachersByCourse = getAllTeacherInfoByCourseImpl(professorNames);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -222,7 +224,7 @@ public abstract class AbstractDB {
 			boolean res = submitCredentialsImpl(userName, password);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -243,7 +245,7 @@ public abstract class AbstractDB {
 			String[][] reviewList = getAllReviewsForTeacherClassImpl(professorName, className);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -264,7 +266,7 @@ public abstract class AbstractDB {
 			String[] profRating = getOverallProfessorRatingsImpl(professorName);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -286,7 +288,7 @@ public abstract class AbstractDB {
 			String[][] reviews = getAllReviewsForUserImpl(userName);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -307,7 +309,7 @@ public abstract class AbstractDB {
 			// why is the Impl version being called here? See Mark.
 			String[][] messages = getAllMessagesImpl(sender, receiver);
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -328,7 +330,7 @@ public abstract class AbstractDB {
 			String[][] flagged = getAllFlaggedImpl();
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -349,7 +351,7 @@ public abstract class AbstractDB {
 			flagReviewImpl(reviewId);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -367,7 +369,7 @@ public abstract class AbstractDB {
 			deleteReviewImpl(reviewId);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 			}
 
@@ -389,7 +391,7 @@ public abstract class AbstractDB {
 		try {
 			if (con != null) {
 				if (con != null) {
-					con.commit();
+					;
 					con.close();
 
 				}
@@ -411,7 +413,7 @@ public abstract class AbstractDB {
 			String[] friends = getAllUserMessagersImpl(receiver);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -432,7 +434,7 @@ public abstract class AbstractDB {
 			upvoteImpl(ReviewID, user);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -450,7 +452,7 @@ public abstract class AbstractDB {
 			downvoteImpl(ReviewID, user);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -468,7 +470,7 @@ public abstract class AbstractDB {
 			Boolean friends = sendMessageImpl(string, from, to, i);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -493,7 +495,7 @@ public abstract class AbstractDB {
 			Boolean friends = isUpvoteValidImpl(ReviewID, user);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -514,7 +516,7 @@ public abstract class AbstractDB {
 			Boolean friends = isDownvoteValidImpl(ReviewID, user);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
@@ -535,13 +537,12 @@ public abstract class AbstractDB {
 
 	public boolean isAdmin(String userName) {
 		try {
-			threadCon = getRemoteConnection();
+			con = getRemoteConnection();
 
 			boolean yes = isAdminImpl(userName);
 
-			if (threadCon != null) {
-				threadCon.commit();
-				threadCon.close();
+			if (con != null) {
+				con.close();
 			}
 
 			return yes;
@@ -560,7 +561,6 @@ public abstract class AbstractDB {
 			int num = getNumberOfMessagesForUserImpl(user);
 
 			if (threadCon != null) {
-				threadCon.commit();
 				threadCon.close();
 
 			}
@@ -581,12 +581,30 @@ public abstract class AbstractDB {
 			deleteUserAccountImpl(user);
 
 			if (con != null) {
-				con.commit();
+				;
 				con.close();
 
 			}
 
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void removeFlagOnReview(String reviewId) {
+		try {
+			con = getRemoteConnection();
+
+			removeFlagOnReviewImpl(reviewId);
+
+			if (con != null) {
+				;
+				con.close();
+
+			}
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
