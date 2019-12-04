@@ -70,18 +70,16 @@ public class RegisterView {
 		controller.getModel().setClasses_taken(new JList<String>(controller.getDb().getAllClasses()));
 		controller.getModel().getClasses_taken().setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		controller.getModel().setMenuScrollPane(controller.getModel().getClasses_taken());
-		controller.getPanel().add(controller.getModel().getMenuScrollPane()).setBounds(655, 302, 200, 150);
+		controller.getPanel().add(controller.getModel().getMenuScrollPane()).setBounds(555, 302, 380, 250);
 
 		// text fields
 		controller.getModel().setTxt_username(new JTextField());
 		controller.getPanel().add(controller.getModel().getTxt_username()).setBounds(170, 305, 282, 48);
-		controller.getModel().getTxt_username().setText("Enter Username");
 		controller.getModel().getTxt_username().setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		controller.getModel().getTxt_username().setColumns(10);
 
 		controller.getModel().setTxt_password(new JPasswordField());
 		controller.getPanel().add(controller.getModel().getTxt_password()).setBounds(170, 409, 282, 40);
-		controller.getModel().getTxt_password().setText("Enter Password");
 		controller.getModel().getTxt_password().setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		controller.getModel().getTxt_password().setColumns(10);
 
