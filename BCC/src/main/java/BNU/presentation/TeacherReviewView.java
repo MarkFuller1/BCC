@@ -114,40 +114,44 @@ public class TeacherReviewView {
 
 		
 		// score score label
-		//controller.getModel().setScoreScore(new JLabel("83"));
-		controller.getModel().setScoreScore(new JLabel(scores[0]));
+		Double u = Double.parseDouble(scores[0]);
+		Integer conv = u.intValue();
+		controller.getModel().setScoreScore(new JLabel(conv.toString()));
 		controller.getPanel().add(controller.getModel().getScoreScore()).setBounds(159, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getScoreScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getScoreScore()).setBackground(Color.YELLOW);
-		controller.getPanel().add(controller.getModel().getScoreScore()).setForeground(Color.GREEN);
+		controller.getPanel().add(controller.getModel().getScoreScore()).setBackground(Color.BLUE);
+		controller.getPanel().add(controller.getModel().getScoreScore()).setForeground(Color.BLUE);
 		
 		// helpfulness score label
-		//controller.getModel().setHelpfulnessScore(new JLabel("50"));
-		controller.getModel().setHelpfulnessScore(new JLabel(scores[1]));
+		u = Double.parseDouble(scores[1]);
+	    conv = u.intValue();
+		controller.getModel().setHelpfulnessScore(new JLabel(conv.toString()));
 		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setBounds(367, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setForeground(Color.RED);
+		controller.getPanel().add(controller.getModel().getHelpfulnessScore()).setForeground(Color.BLUE);
 		
 		// teaching ability score label
-		//controller.getModel().setTeachingAbilityScore(new JLabel("99"));
-		controller.getModel().setTeachingAbilityScore(new JLabel(scores[2]));
+		u = Double.parseDouble(scores[2]);
+		 conv = u.intValue();
+		controller.getModel().setTeachingAbilityScore(new JLabel(conv.toString()));
 		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setBounds(580, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setForeground(Color.GREEN);
+		controller.getPanel().add(controller.getModel().getTeachingAbilityScore()).setForeground(Color.BLUE);
 		
 		// workload score label
-		//controller.getModel().setWorkloadScore(new JLabel("45"));
-		controller.getModel().setWorkloadScore(new JLabel(scores[3]));
+		u= Double.parseDouble(scores[3]);
+		 conv = u.intValue();
+		controller.getModel().setWorkloadScore(new JLabel(conv.toString()));
 		controller.getPanel().add(controller.getModel().getWorkloadScore()).setBounds(760, 173, 56, 41);
 		controller.getPanel().add(controller.getModel().getWorkloadScore()).setFont(new Font("Segoe UI", Font.BOLD, 18));
-		controller.getPanel().add(controller.getModel().getWorkloadScore()).setForeground(Color.RED);
+		controller.getPanel().add(controller.getModel().getWorkloadScore()).setForeground(Color.BLUE);
 		
 		//main scroll pane 
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		//main scroll pane panel
-		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.RED));
+		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.BLUE));
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
