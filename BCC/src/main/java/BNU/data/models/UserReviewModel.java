@@ -20,7 +20,16 @@ public class UserReviewModel {
 	private JButton btnMessage;
 	private JButton log_out;
 	private JScrollPane scrollPane;
+	private Integer counter;
 	private JPanel scrollPanePanel;
+
+	public Integer getCounter() {
+		return counter;
+	}
+
+	public void setCounter(Integer counter) {
+		this.counter = counter;
+	}
 
 	public JButton getDelete() {
 		return delete;

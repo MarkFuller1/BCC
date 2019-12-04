@@ -469,7 +469,8 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected String[] getAllUserMessagersImpl(String receiver) throws DatabaseOperationException {
 		// text timestamp sender reciever
-		String query = "select message.from_user_name from message " + "where to_user_name = \'" + receiver + "\'";
+		String query = "select message.from_user_name, message.to_user_name from message " + "where to_user_name = \'"
+				+ receiver + "\' OR message.from_user_name = \'" + receiver + "\'";
 		ResultSet userReviews = null;
 		ArrayList<String> names = new ArrayList<>();
 
@@ -483,6 +484,7 @@ public class DatabaseApi extends AbstractDB {
 			while (userReviews.next()) {
 
 				names.add(userReviews.getString("from_user_name"));
+				names.add(userReviews.getString("to_user_name"));
 
 				i++;
 			}
@@ -867,4 +869,21 @@ public class DatabaseApi extends AbstractDB {
 		}
 	}
 
+	@Override
+	protected void deleteReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "delte from review where review_review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			int rs = stmt.executeUpdate(query);
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+	}
 }

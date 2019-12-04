@@ -104,16 +104,17 @@ public class UserReviewView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
-		//get Bill Gates from Singleton
+		//gets reviews
 		String[][] reviews = urs.getReviewsForUser(SingletonSession.getInstance().getUserName()); // TODO: this needs to change
-	
+		controller.getModel().setCounter(reviews.length);
 		for(int i = 0; i < reviews.length; i++) {
 			ReviewModel2 rm2 = new ReviewModel2();
+			rm2.setCount(i);
 			
 			if(rm2 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
-				rm2.createReviewItem(reviews[i][0],reviews[i][1],reviews[i][2], reviews[i][3]);
+				rm2.createUserItem(reviews[i][0],reviews[i][1],reviews[i][2], reviews[i][3], controller);
 				rm2.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm2.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
