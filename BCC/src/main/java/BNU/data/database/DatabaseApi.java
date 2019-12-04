@@ -485,7 +485,7 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected String[] getAllUserMessagersImpl(String receiver) throws DatabaseConnectionException {
 		// text timestamp sender reciever
-		String query = "select message.from_user_name from message " + "where to_user_name = \'" + receiver + "\'";
+		String query = "select message.from_user_name, message.to_user_name from message " + "where to_user_name = \'" + receiver + "\' OR message.from_user_name = \'" + receiver + "\'";
 		ResultSet userReviews = null;
 		ArrayList<String> names = new ArrayList<>();
 
@@ -499,6 +499,7 @@ public class DatabaseApi extends AbstractDB {
 			while (userReviews.next()) {
 
 				names.add(userReviews.getString("from_user_name"));
+				names.add(userReviews.getString("to_user_name"));
 
 				i++;
 			}
