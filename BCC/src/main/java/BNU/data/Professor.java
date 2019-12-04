@@ -6,14 +6,12 @@ public class Professor {
 	String professor;
 	String rating;
 	String numberOfReviews;
-	String[] courses;
 	
-	public Professor(String professor, String rating, String numberOfReviews, String[] courses) {
+	public Professor(String professor, String rating, String numberOfReviews) {
 		super();
 		this.professor = professor;
 		this.rating = rating;
 		this.numberOfReviews = numberOfReviews;
-		this.courses = courses;
 	}
 	
 	public Professor(ResultSet entry) {
