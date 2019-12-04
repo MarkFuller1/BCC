@@ -6,62 +6,68 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import BNU.data.Review;
-import BNU.singleton.SingletonSession;
 
 public abstract class AbstractDB {
 
 	Connection con;
 	Connection threadCon;
 
-	protected abstract Connection getRemoteConnection() throws DatabaseConnectionException;
-
-	protected abstract void deleteUserAccountImpl(String userId);
-
-	protected abstract boolean validateUserImpl(String userName, String password) throws DatabaseOperationException;
-
-	protected abstract String[] getAllProfessorsImpl() throws DatabaseOperationException;
-
-	protected abstract String[] getAllClassesImpl() throws DatabaseOperationException;
-
-	protected abstract String[] getAllProfessorsForClassImpl(String className) throws DatabaseOperationException;
-
-	protected abstract String[] getAllClassesForProfessorImpl(String prof) throws DatabaseOperationException;
-
-	protected abstract String[][] getAllCourseInfoByProfImpl(String profName) throws DatabaseOperationException;
-
-	protected abstract String[][] getAllTeacherInfoByCourseImpl(String courseName) throws DatabaseOperationException;
-
-	protected abstract boolean submitCredentialsImpl(String userName, String password) throws DatabaseOperationException;
-
-	protected abstract String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) throws DatabaseOperationException;
-
-	protected abstract String[] getOverallProfessorRatingsImpl(String professorName) throws DatabaseOperationException;
-
-	protected abstract String[][] getAllReviewsForUserImpl(String userName) throws DatabaseOperationException;
-
-	// protected abstract String[][] getAllMessagesImpl(String receiver);
+	protected abstract String getSenderImpl();
 
 	protected abstract String getRecieverImpl();
 
-	protected abstract String getSenderImpl();
+	protected abstract void deleteUserAccountImpl(String userId);
 
-	protected abstract String[] getAllUserMessagersImpl(String receiver) throws DatabaseOperationException;
+	protected abstract String[] getAllClassesImpl() throws DatabaseOperationException;
+
+	protected abstract String[][] getAllFlaggedImpl() throws DatabaseOperationException;
+
+	protected abstract String[] getAllProfessorsImpl() throws DatabaseOperationException;
+
+	protected abstract Connection getRemoteConnection() throws DatabaseConnectionException;
+
+	protected abstract boolean isAdminImpl(String userName) throws DatabaseOperationException;
+
+	protected abstract void flagReviewImpl(String reviewId) throws DatabaseOperationException;
+
+	protected abstract void deleteReviewImpl(String reviewId) throws DatabaseOperationException;
 
 	protected abstract void upvoteImpl(String reviewId, String userId) throws DatabaseOperationException;
 
 	protected abstract void downvoteImpl(String reviewID, String user) throws DatabaseOperationException;
 
-	protected abstract String[] getAllFlaggedImpl();
+	protected abstract int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException;
 
-	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i) throws DatabaseOperationException;
+	protected abstract String[] getAllUserMessagersImpl(String receiver) throws DatabaseOperationException;
+
+	protected abstract String[] getAllClassesForProfessorImpl(String prof) throws DatabaseOperationException;
+
+	protected abstract String[][] getAllReviewsForUserImpl(String userName) throws DatabaseOperationException;
+
+	protected abstract String[][] getAllCourseInfoByProfImpl(String profName) throws DatabaseOperationException;
+
+	protected abstract String[] getAllProfessorsForClassImpl(String className) throws DatabaseOperationException;
 
 	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
 	protected abstract Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException;
 
-	protected abstract int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException;
+	protected abstract boolean validateUserImpl(String userName, String password) throws DatabaseOperationException;
+
+	protected abstract String[][] getAllTeacherInfoByCourseImpl(String courseName) throws DatabaseOperationException;
+
+	protected abstract String[] getOverallProfessorRatingsImpl(String professorName) throws DatabaseOperationException;
 
 	protected abstract String[][] getAllMessagesImpl(String sender, String receiver) throws DatabaseOperationException;
+
+	protected abstract boolean submitCredentialsImpl(String userName, String password)
+			throws DatabaseOperationException;
+
+	protected abstract Boolean sendMessageImpl(String string, String from, String to, BigInteger i)
+			throws DatabaseOperationException;
+
+	protected abstract String[][] getAllReviewsForTeacherClassImpl(String professorName, String className)
+			throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
 		try {
@@ -71,7 +77,9 @@ public abstract class AbstractDB {
 			boolean res = validateUserImpl(userName, password);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return res;
@@ -89,7 +97,9 @@ public abstract class AbstractDB {
 			String[] profList = getAllProfessorsImpl();
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return profList;
@@ -107,7 +117,9 @@ public abstract class AbstractDB {
 			String[] classList = getAllClassesImpl();
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return classList;
@@ -125,7 +137,9 @@ public abstract class AbstractDB {
 			String[] profList = getAllProfessorsForClassImpl(className);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return profList;
@@ -137,14 +151,6 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-//	Professor getProfessor(String Prof) {
-//		con = getRemoteConnection();
-//		
-//		
-//		
-//		if(con != null) {if(con != null) {con.close();}};
-//	}
-
 	public final String[] getAllClassesForProfessor(String professorName) {
 		try {
 			con = getRemoteConnection();
@@ -152,7 +158,9 @@ public abstract class AbstractDB {
 			String[] classList = getAllClassesForProfessorImpl(professorName);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return classList;
@@ -165,10 +173,6 @@ public abstract class AbstractDB {
 
 	}
 
-//	Course getCourse(String course) {
-//		return null;
-//	}
-
 	public final String[][] getAllCoursesByProf(String courseNames) {
 		try {
 			con = getRemoteConnection();
@@ -176,7 +180,9 @@ public abstract class AbstractDB {
 			String[][] courseslist = getAllCourseInfoByProfImpl(courseNames);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return courseslist;
@@ -195,7 +201,9 @@ public abstract class AbstractDB {
 			String[][] teachersByCourse = getAllTeacherInfoByCourseImpl(professorNames);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return teachersByCourse;
@@ -214,7 +222,9 @@ public abstract class AbstractDB {
 			boolean res = submitCredentialsImpl(userName, password);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return res;
@@ -233,7 +243,9 @@ public abstract class AbstractDB {
 			String[][] reviewList = getAllReviewsForTeacherClassImpl(professorName, className);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return reviewList;
@@ -252,7 +264,9 @@ public abstract class AbstractDB {
 			String[] profRating = getOverallProfessorRatingsImpl(professorName);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return profRating;
@@ -272,7 +286,9 @@ public abstract class AbstractDB {
 			String[][] reviews = getAllReviewsForUserImpl(userName);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return reviews;
@@ -291,7 +307,9 @@ public abstract class AbstractDB {
 			// why is the Impl version being called here? See Mark.
 			String[][] messages = getAllMessagesImpl(sender, receiver);
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 			return messages; // added
 
@@ -303,23 +321,60 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-	public final String[] getAllFlagged() {
+	public final String[][] getAllFlagged() {
 		try {
 			con = getRemoteConnection();
 
-			String[] flagged = getAllFlaggedImpl();
+			String[][] flagged = getAllFlaggedImpl();
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return flagged;
 
-		} catch (DatabaseConnectionException | SQLException e) {
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public final void flagReview(String reviewId) {
+		try {
+			con = getRemoteConnection();
+
+			flagReviewImpl(reviewId);
+
+			if (con != null) {
+				con.commit();
+				con.close();
+
+			}
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public final void deleteReivew(String reviewId) {
+		try {
+			con = getRemoteConnection();
+
+			deleteReviewImpl(reviewId);
+
+			if (con != null) {
+				con.commit();
+				con.close();
+			}
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public final String getReceiver() {
@@ -334,7 +389,9 @@ public abstract class AbstractDB {
 		try {
 			if (con != null) {
 				if (con != null) {
+					con.commit();
 					con.close();
+
 				}
 			}
 			;
@@ -346,16 +403,6 @@ public abstract class AbstractDB {
 		return reciever;
 	}
 
-//	public final String getSender() throws SQLException {
-//		con = getRemoteConnection();
-//
-//		String sender = getSenderImpl();
-//
-//		if(con != null) {if(con != null) {con.close();}};
-//
-//		return sender;
-//	}
-//
 	public final String[] getAllUserMessagers(String receiver) {
 
 		try {
@@ -364,7 +411,9 @@ public abstract class AbstractDB {
 			String[] friends = getAllUserMessagersImpl(receiver);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return friends;
@@ -383,7 +432,9 @@ public abstract class AbstractDB {
 			upvoteImpl(ReviewID, user);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 		} catch (DatabaseConnectionException | DatabaseOperationException e) {
@@ -399,7 +450,9 @@ public abstract class AbstractDB {
 			downvoteImpl(ReviewID, user);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 		} catch (DatabaseConnectionException | DatabaseOperationException e) {
@@ -415,7 +468,9 @@ public abstract class AbstractDB {
 			Boolean friends = sendMessageImpl(string, from, to, i);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return friends;
@@ -427,7 +482,6 @@ public abstract class AbstractDB {
 		return null;
 	}
 
-//
 	public final ArrayList<Review> getReviews(String prof, String c) {
 		return null;
 	}
@@ -439,7 +493,9 @@ public abstract class AbstractDB {
 			Boolean friends = isUpvoteValidImpl(ReviewID, user);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return friends;
@@ -458,7 +514,9 @@ public abstract class AbstractDB {
 			Boolean friends = isDownvoteValidImpl(ReviewID, user);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 			return friends;
@@ -476,6 +534,22 @@ public abstract class AbstractDB {
 	}
 
 	public boolean isAdmin(String userName) {
+		try {
+			threadCon = getRemoteConnection();
+
+			boolean yes = isAdminImpl(userName);
+
+			if (threadCon != null) {
+				threadCon.commit();
+				threadCon.close();
+			}
+
+			return yes;
+
+		} catch (DatabaseConnectionException | SQLException | DatabaseOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
@@ -486,7 +560,9 @@ public abstract class AbstractDB {
 			int num = getNumberOfMessagesForUserImpl(user);
 
 			if (threadCon != null) {
+				threadCon.commit();
 				threadCon.close();
+
 			}
 
 			return num;
@@ -496,7 +572,6 @@ public abstract class AbstractDB {
 			e.printStackTrace();
 		}
 		return 0;
-
 	}
 
 	public final void deleteUserAccount(String user) {
@@ -506,7 +581,9 @@ public abstract class AbstractDB {
 			deleteUserAccountImpl(user);
 
 			if (con != null) {
+				con.commit();
 				con.close();
+
 			}
 
 		} catch (DatabaseConnectionException | SQLException e) {
@@ -514,5 +591,4 @@ public abstract class AbstractDB {
 			e.printStackTrace();
 		}
 	}
-
 }

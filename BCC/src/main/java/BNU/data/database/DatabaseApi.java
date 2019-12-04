@@ -587,9 +587,48 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected String[] getAllFlaggedImpl() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String[][] getAllFlaggedImpl() throws DatabaseOperationException {
+		String query = "select * from review, professor, course where is_flagged = true AND professor.professor_id_pk = review.professor_id AND course.course_id_pk = review.course_id";
+		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
+
+		try (Statement stmt = con.createStatement()) {
+
+			LOGGER.info(query);
+			ResultSet userReviews = stmt.executeQuery(query);
+
+			int i = 0;
+			while (userReviews.next()) {
+
+				reviews.add(new ArrayList<String>());
+				reviews.get(i).add(0, userReviews.getString("content"));
+				reviews.get(i).add(1, userReviews.getString("title"));
+				reviews.get(i).add(2, userReviews.getString("first_name") + " " + userReviews.getString("last_name"));
+				reviews.get(i).add(3, userReviews.getString("user_name"));
+
+				i++;
+			}
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+
+		String[][] finalData;
+
+		finalData = new String[reviews.size()][];
+
+		for (int i = 0; i < reviews.size(); i++) {
+			ArrayList<String> row = reviews.get(i);
+
+			// Perform equivalent `toArray` operation
+			String[] copy = new String[row.size()];
+			for (int j = 0; j < row.size(); j++) {
+				// Manually loop and set individually
+				copy[j] = row.get(j);
+			}
+
+			finalData[i] = copy;
+		}
+		return finalData;
 	}
 
 	@Override
@@ -600,9 +639,27 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	public boolean isAdmin(String userName) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean isAdminImpl(String userName) throws DatabaseOperationException {
+		LOGGER.warning("");
+		String query = "SELECT is_admin FROM users WHERE user_name = \'" + userName + "\'";
+		ResultSet rs = null;
+
+		try (Statement stmt = con.createStatement()) {
+
+			// Query
+			rs = stmt.executeQuery(query);
+
+			if (rs.next()) {
+				return rs.getBoolean("is_admin");
+			}
+
+			LOGGER.warning(query);
+
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+		return false;
 	}
 
 	@Override
@@ -790,6 +847,24 @@ public class DatabaseApi extends AbstractDB {
 	protected void deleteUserAccountImpl(String userId) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void flagReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "update review " + "set is_flagged = true " + "where review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			int rs = stmt.executeUpdate(query);
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
 	}
 
 }
