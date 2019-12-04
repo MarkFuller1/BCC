@@ -9,8 +9,8 @@ public class SingletonSession {
     private static final SingletonSession SINGLE_INSTANCE = new SingletonSession();
     
     private SingletonSession() {
-    	SingletonSession.setUserName("plug");
-    	SingletonSession.setAdmin(false);
+    	//SingletonSession.setUserName("plug");
+    	//SingletonSession.setAdmin(false);
     }
 
     private SingletonSession(String userName, boolean isAdmin) {
