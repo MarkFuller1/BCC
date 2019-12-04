@@ -57,7 +57,7 @@ public abstract class AbstractDB {
 	protected abstract Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException;
 
 	protected abstract Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException;
-	
+
 	protected abstract int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException;
 
 	public final boolean validateUser(String userName, String password) {
@@ -291,14 +291,18 @@ public abstract class AbstractDB {
 	}
 
 	// my added functions
-	public final String[][] getAllMessages(String receiver) {
+	public final String[][] getAllMessages(String sender, String receiver) {
 		try {
 			con = getRemoteConnection();
 
-			String[][] reviews = getAllMessagesImpl(receiver);
+			DatabaseMock dbm = new DatabaseMock();
+
+			// why is the Impl version being called here? See Mark.
+			String[][] messages = dbm.getAllMessagesImpl(sender, receiver);
 			if (con != null) {
 				con.close();
 			}
+			return messages; // added
 
 		} catch (SQLException | DatabaseConnectionException e) {
 			// TODO Auto-generated catch block
@@ -405,7 +409,7 @@ public abstract class AbstractDB {
 		try {
 			con = getRemoteConnection();
 
-			downvoteImpl( ReviewID,  user);
+			downvoteImpl(ReviewID, user);
 
 			if (con != null) {
 				con.close();
@@ -507,5 +511,4 @@ public abstract class AbstractDB {
 		return 0;
 	}
 
-	
 }

@@ -13,9 +13,10 @@ import BNU.singleton.SingletonSession;
 
 public class MessageBoardService {
 
-		public void messageSend(Message message, String from, String to) {
+		public void messageSend(String message, String from, String to) {
 			SmartProxy sp = new SmartProxy();
-			sp.sanatizeAndSendMessage(message, from, to, Long.toString(System.currentTimeMillis()));
+			BigInteger i = BigInteger.valueOf(System.currentTimeMillis());
+			sp.sanatizeAndSendMessage(message, from, to, i);
 			//MessageBoardController.db.sendMessage(message);
 		}
 		
@@ -23,22 +24,22 @@ public class MessageBoardService {
 			return SingletonSession.getInstance().getUserName();
 		}
 		
-		public ArrayList<Message> getAllMessagersToUser(String receiver) {
+		public /*ArrayList<Message>*/ String[] getAllMessagersToUser(String receiver) {
 			
-			String[][] messages = MessageBoardController.db.getAllMessages(receiver);
+			String[] messages = MessageBoardController.db.getAllUserMessagers(receiver);
 			
 			
-			ArrayList<Message> finalAr = new ArrayList<>();
+//			ArrayList<Message> finalAr = new ArrayList<>();
+//			
+//			for(int i = 0 ;i < messages.length; i++) {
+//				finalAr.add(new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]));
+//			}
 			
-			for(int i = 0 ;i < messages.length; i++) {
-				finalAr.add(new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]));
-			}
-			
-			return finalAr;
+			return messages;
 		}
 		
 		public ArrayList<Message> getAllMessagesFromTo(String sender, String receiver){
-			String[][] msgs = MessageBoardController.db.getAllMessages(receiver);
+			String[][] msgs = MessageBoardController.db.getAllMessages(sender,receiver);
 			
 			ArrayList<Message> messages = new ArrayList<>();
 			
@@ -69,15 +70,21 @@ public class MessageBoardService {
 			
 		}
 
-		public void observer(String user) {
-			int old = MessageBoardController.db.getNumberOfMessagesForUser(user);
+		public void observer(MessageBoardController mbc, String user) {
+			int old = mbc.db.getNumberOfMessagesForUser(user);
 			
 			while(true) {
 				int temp;
-				if(temp = MessageBoardController.db.getNumberOfMessagesForUser(user) > old) {
-					MessageBoardController.db.dispatchBuilder(e.mainF);
+				if((temp = mbc.db.getNumberOfMessagesForUser(user)) > old) {
+					mbc.dispatchBuilder( mbc.mainF);
 					old = temp;
-					Thread.sleep(3);
+					
+					try {
+						Thread.sleep(3);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
