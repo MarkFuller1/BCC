@@ -3,7 +3,9 @@ package BNU.logic;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import BNU.data.database.AbstractDB;
@@ -17,6 +19,7 @@ public class UserReviewController extends PageController{
 	static UserReviewModel model = new UserReviewModel(); 
 	static JPanel panel;
 	static UserReviewService urs;
+	JFrame mainF;
 	
 	public UserReviewController(){
 		model = new UserReviewModel();
@@ -26,8 +29,9 @@ public class UserReviewController extends PageController{
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
+		this.mainF = mainFrame;
 		try {
-			UserReviewView.BuildUserReviewView(mainFrame, this);
+			UserReviewView.BuildUserReviewView(this.mainF, this);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -86,6 +90,11 @@ public class UserReviewController extends PageController{
 		else if(e.getActionCommand() == "UserReview:da"){
 			System.out.println("UserReview:deleteAccount button pressed");
 			new UserReviewService().deleteAccount(SingletonSession.getInstance().getUserName());
+			JDialog d = new JDialog(this.mainF, "Deletion Confirmation");
+            JLabel l = new JLabel("              Your account has been successfully deleted!"); 
+            d.add(l); 
+            d.setBounds(290, 290, 400, 200);
+            d.setVisible(true); 
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
