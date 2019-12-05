@@ -9,11 +9,6 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,7 +27,6 @@ public class MainView {
 	static JLabel labTitle;
 	static MainService ms;
 
-	@SuppressWarnings("unchecked")
 	public static void BuildMainView(JFrame mainFrame, MainController controller) {
 		ms = new MainService();
 

@@ -46,6 +46,8 @@ public class MessageBoardView {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +55,6 @@ public class MessageBoardView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		LOGGER.addHandler(fileHandler);
 		LOGGER.setLevel(Level.FINEST);
 		LOGGER.info("User Review page loaded correctly");
 
