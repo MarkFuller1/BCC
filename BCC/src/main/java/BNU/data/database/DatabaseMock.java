@@ -413,7 +413,7 @@ public class DatabaseMock extends AbstractDB {
 	@Override
 	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
@@ -431,13 +431,13 @@ public class DatabaseMock extends AbstractDB {
 	@Override
 	protected Boolean sendMessageImpl(String string, String from, String to, BigInteger i) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
 	protected Boolean isUpvoteValidImpl(String userId, String reviewId) throws DatabaseOperationException {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
@@ -449,7 +449,7 @@ public class DatabaseMock extends AbstractDB {
 	@Override
 	protected Boolean isDownvoteValidImpl(String reviewID, String user) throws DatabaseOperationException {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	//@Override

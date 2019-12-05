@@ -36,6 +36,8 @@ public class AdminView {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true);
+			LOGGER.addHandler(fileHandler);
+
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,7 +45,6 @@ public class AdminView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		LOGGER.addHandler(fileHandler);
 		LOGGER.setLevel(Level.FINEST);
 		LOGGER.info(" Review page loaded correctly");
 

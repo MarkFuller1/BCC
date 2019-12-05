@@ -40,6 +40,7 @@ public class TeacherReviewView {
 		FileHandler fileHandler = null;
 		try {
 			fileHandler = new FileHandler("BCC.log", true); 
+			LOGGER.addHandler(fileHandler);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,7 +48,7 @@ public class TeacherReviewView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		LOGGER.addHandler(fileHandler);
+
 		LOGGER.setLevel(Level.FINEST);
 		LOGGER.info("Teacher Review page loaded correctly");
 
