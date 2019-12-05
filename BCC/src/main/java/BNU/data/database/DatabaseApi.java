@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Random;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.security.SecureRandom;
 
 import BNU.singleton.SingletonSession;
 
@@ -28,7 +28,6 @@ public class DatabaseApi extends AbstractDB {
 			LOGGER.addHandler(new FileHandler("database.log"));
 			LOGGER.setLevel(Level.FINEST);
 		} catch (SecurityException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -199,6 +198,7 @@ public class DatabaseApi extends AbstractDB {
 		return finalval;
 	}
 
+	@SuppressWarnings("serial")
 	@Override
 	protected String[][] getAllTeacherInfoByCourseImpl(String course) throws DatabaseOperationException {
 		// name, rating, number of reviews
@@ -319,6 +319,7 @@ public class DatabaseApi extends AbstractDB {
 		return vals;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected String[] getOverallProfessorRatingsImpl(String professorName) throws DatabaseOperationException {
 		// name, rating, number of reviews
@@ -456,6 +457,7 @@ public class DatabaseApi extends AbstractDB {
 ////		return finalData;
 //	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	protected String getRecieverImpl() {
 		return SingletonSession.getInstance().getUserName();
@@ -467,6 +469,7 @@ public class DatabaseApi extends AbstractDB {
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected String[] getAllUserMessagersImpl(String receiver) throws DatabaseOperationException {
 		// text timestamp sender reciever
@@ -502,6 +505,7 @@ public class DatabaseApi extends AbstractDB {
 		return finalval;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void downvoteImpl(String reviewId, String userId) throws DatabaseOperationException {
 		LOGGER.warning("");
@@ -546,6 +550,9 @@ public class DatabaseApi extends AbstractDB {
 
 			Statement state = con.createStatement();
 			ResultSet worked = state.executeQuery(updateScore);
+			if(worked != null) {
+				LOGGER.info("query successful");
+			}
 
 			state.close();
 
@@ -555,6 +562,7 @@ public class DatabaseApi extends AbstractDB {
 		}
 	}
 
+	@SuppressWarnings({ "unused", "serial" })
 	@Override
 	protected String[][] getAllCourseInfoByProfImpl(String profName) throws DatabaseOperationException {
 		// name, rating, number of reviews
@@ -685,6 +693,7 @@ public class DatabaseApi extends AbstractDB {
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void upvoteImpl(String reviewId, String userId) throws DatabaseOperationException {
 		LOGGER.warning("");
@@ -726,6 +735,9 @@ public class DatabaseApi extends AbstractDB {
 
 			Statement state = con.createStatement();
 			ResultSet worked = state.executeQuery(updateScore);
+			if(worked != null) {
+				LOGGER.info("query worked");
+			}
 
 			state.close();
 
@@ -742,7 +754,7 @@ public class DatabaseApi extends AbstractDB {
 		// name, rating, number of reviews
 
 		String sendMessage = "insert into message (message_id_pk, from_user_name, to_user_name, message, date_sent)"
-				+ " values ( \'" + Integer.toString(new Random().nextInt()) + "\', \'" + from + "\', \'" + to + "\', \'"
+				+ " values ( \'" + Integer.toString(new SecureRandom().nextInt()) + "\', \'" + from + "\', \'" + to + "\', \'"
 				+ m + "\', \'" + i.toString() + "\')";
 		int rs = 0;
 
@@ -901,7 +913,7 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	protected void deleteUserAccountImpl(String userId) throws DatabaseOperationException {
-		String query = "update users set user_name = \'deleted\' where user_name = \'" + userId + "\'";
+		String query = "update users set user_name = \'deleted" + Math.random() * 1000 + "\' where user_name = \'" + userId + "\'";
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 			int rs = stmt.executeUpdate();
@@ -994,6 +1006,7 @@ public class DatabaseApi extends AbstractDB {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void setNewReviewImpl(String userName, String professorName, String className, String content, String tA,
 			String h, String wL) throws DatabaseOperationException {

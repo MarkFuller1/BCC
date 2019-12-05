@@ -1,28 +1,39 @@
 package BNU.logic;
 
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import BNU.data.Message;
 import BNU.data.database.AbstractDB;
-import BNU.data.database.DatabaseApi;
-import BNU.data.database.DatabaseMock;
 import BNU.data.models.MessageBoardModel;
 import BNU.logic.service.MessageBoardService;
 import BNU.presentation.MessageBoardView;
 import BNU.singleton.SingletonSession;
 
+/**
+ * 
+ * @author Kevin
+ * 
+ * LAZY LOADING GoF Design Pattern
+ * 
+ * This controller reveals how the message board follows the lazy
+ * loading design pattern. Specifically, it follows the lazy 
+ * initialization implementation because the program waits to load
+ * messages between the user and another user until the user
+ * selects who is the other party in the conversation. In contrast,
+ * the program could load all the data at once and store it in case
+ * the user wants to look at all threads of messages. By lazily 
+ * initializing the message board model, however, we improve memory use
+ * and processing speed.
+ */
 public class MessageBoardController extends PageController {
 	static MessageBoardView view;
 	static MessageBoardModel model = new MessageBoardModel();

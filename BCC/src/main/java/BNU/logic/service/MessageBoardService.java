@@ -15,6 +15,24 @@ import BNU.logic.service.proxy.SmartProxy;
 import BNU.presentation.MessageBoardView;
 import BNU.singleton.SingletonSession;
 
+/**
+ * 
+ * @author Kevin
+ * 
+ * OBSERVER GoF Design Pattern
+ * Behavioral
+ * 
+ * This class follows the observer design pattern because it 
+ * establishes a one-to-many relationship where the program
+ * observes the message board to notify a user if they
+ * receive a message. When a user is on the message board
+ * viewing a message thread, this observer will constantly 
+ * check to see if the message thread must be updated. The subject
+ * is the other user sending the message and the observer
+ * essentially monitors this user because it is dependent 
+ * on their behavior. The purpose of this observer is to 
+ * create real-time messaging between two users.
+ */
 public class MessageBoardService {
 
 	public void messageSend(String message, String from, String to) {

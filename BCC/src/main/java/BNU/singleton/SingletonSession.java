@@ -2,6 +2,21 @@ package BNU.singleton;
 
 import BNU.logic.service.proxy.SmartProxy;
 
+/**
+ * 
+ * @author Kevin
+ * 
+ * Singleton GoF Design Pattern
+ * Creational
+ * 
+ * This class follows the singleton design pattern because only one instance
+ * of it will exist. The existence of only one object is controlled by the 
+ * private constructor. This program uses this singleton as a session
+ * monitor to track which user is logged into the application and whether that
+ * user is an admin. This is useful because the program will need to know
+ * in certain instances who the user is and whether they are an admin. 
+ */
+
 public class SingletonSession {
 	static String userName;
 	static boolean isAdmin;
@@ -9,8 +24,6 @@ public class SingletonSession {
     private static final SingletonSession SINGLE_INSTANCE = new SingletonSession();
     
     private SingletonSession() {
-    	//SingletonSession.setUserName("plug");
-    	//SingletonSession.setAdmin(false);
     }
 
     private SingletonSession(String userName, boolean isAdmin) {

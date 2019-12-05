@@ -8,9 +8,7 @@ import javax.swing.JPanel;
 import BNU.data.database.AbstractDB;
 import BNU.data.models.AdminModel;
 import BNU.logic.service.AdminService;
-import BNU.logic.service.UserReviewService;
 import BNU.presentation.AdminView;
-import BNU.presentation.MessageBoardView;
 
 public class AdminController extends PageController{
 	static AdminView view;
