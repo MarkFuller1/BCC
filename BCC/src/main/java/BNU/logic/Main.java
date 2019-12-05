@@ -9,7 +9,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Main 
 {
-    public static void main( String[] args ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
+    @SuppressWarnings("unused")
+	public static void main( String[] args ) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException
     {
 
         //System.out.println( "In Main.Java!" );

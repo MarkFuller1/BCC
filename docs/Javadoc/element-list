@@ -1,0 +1,8 @@
+BNU.data
+BNU.data.database
+BNU.data.models
+BNU.logic
+BNU.logic.service
+BNU.logic.service.proxy
+BNU.presentation
+BNU.singleton
