@@ -9,6 +9,17 @@ import BNU.data.Message;
 import BNU.data.Review;
 
 public abstract class AbstractDB {
+	
+	// Design Pattern Held here - Template Method
+	
+	
+	// All the methods with final in this class, that are then calling
+	// methods within DatabaseApi to do the implementation, are Template Methods.
+	// For example public final void deleteUserAccount() is a template method
+	// as it calls the deleteUserAccountImpl() (in DatabaseApi, which is this class's child class), 
+	// to do the actual implementation of the function.
+	
+	
 
 	Connection con;
 	Connection threadCon;
