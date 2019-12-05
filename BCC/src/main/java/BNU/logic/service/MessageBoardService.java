@@ -41,7 +41,7 @@ public class MessageBoardService {
 		return messages;
 	}
 
-	private static String[] removeDuplicates(String[] origArray) {
+	public String[] removeDuplicates(String[] origArray) {
 
 		return new HashSet<String>(Arrays.asList(origArray)).toArray(new String[0]);
 	}

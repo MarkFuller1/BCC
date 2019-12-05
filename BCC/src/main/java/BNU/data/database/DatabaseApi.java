@@ -636,13 +636,6 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	public void setNewReview(String userName, String professorName, String className, String content, String tA,
-			String h, String wL) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public boolean isAdminImpl(String userName) throws DatabaseOperationException {
 		LOGGER.warning("");
 		String query = "SELECT is_admin FROM users WHERE user_name = \'" + userName + "\'";
@@ -921,5 +914,73 @@ public class DatabaseApi extends AbstractDB {
 			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(query);
 		}
+	}
+
+	@Override
+	protected void editReviewImpl(String reviewId, String text) throws DatabaseOperationException {
+		String query = "update review set content = \'" + text + "\' where review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			LOGGER.info(query);
+			int rs = stmt.executeUpdate();
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+	}
+
+	@Override
+	protected void setNewReviewImpl(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) throws DatabaseOperationException {
+
+		int score = (Integer.parseInt(tA) + Integer.parseInt(h) + Integer.parseInt(wL)) / 3;
+
+		String[] vals = convertProfNameAndClassName(professorName, className);
+
+		String qurey = "insert into review (review_id_pk, professor_id, course_id, user_name, review_date, is_flagged, content, teaching_ability, workload, helpfulness, score)"
+				+ "values (\'" + Math.random() * 10000 + "\', \'" + vals[0] + "\', \'" + vals[1] + "\', \'" + userName
+				+ "\', \'" + System.currentTimeMillis() + "\', \'" + false + "\', \'" + content + "\', \'" + tA
+				+ "\', \'" + wL + "\', \'" + h + "\', \'" + score + "\')";
+
+		try (Statement stmet = con.createStatement()) {
+			LOGGER.info(qurey);
+			int rs = stmet.executeUpdate(qurey);
+
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(qurey);
+		}
+	}
+
+	private String[] convertProfNameAndClassName(String professorName, String className) {
+		String[] firstLast = professorName.split(" ");
+
+		String query = "select * from professor, course where professor.first_name = \'" + firstLast[0]
+				+ "\' AND professor.last_name = \'" + firstLast[1] + "\' AND course.title = \'" + className + "\'";
+
+		try (Statement stmt = con.createStatement()) {
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			String[] res = new String[2];
+
+			if (rs.next()) {
+				res[0] = rs.getString("professor_id_pk");
+				res[1] = rs.getString("course_id_pk");
+			}
+
+			return res;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new String[2];
 	}
 }
