@@ -29,7 +29,7 @@ public class UserReviewService {
 	}
 	
 	public void deleteAccount(String user) {
-		UserReviewController.db.deleteUserAccount(user);
+		//UserReviewController.db.deleteUserAccount(user);
 	}
 	
 

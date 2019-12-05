@@ -464,6 +464,12 @@ public class DatabaseMock extends AbstractDB {
 		
 	}
 
+	@Override
+	protected int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 	
