@@ -1,7 +1,9 @@
 package BNU.presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -81,12 +83,17 @@ public class MessageBoardView {
 		// setup for the gridbaglayout
 		GridBagConstraints g = new GridBagConstraints();
 
+		// User name label
+		controller.getModel().setUserName(new JLabel(controller.getModel().getSender()));
+		controller.getPanel().add(controller.getModel().getUserName()).setBounds(472, 9, 515, 41);
+		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
+
 		// user
 		controller.getModel().setUserList(new JScrollPane());
 		controller.getModel().getUserList().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		// user scroll pane panel
-		controller.getModel().getUserList().setViewportBorder(new LineBorder(Color.BLUE));
+		controller.getModel().getUserList().setViewportBorder(new LineBorder(Color.BLACK));
 		controller.getModel().setUser(new JPanel());
 		controller.getModel().getUser().setLayout(new BoxLayout(controller.getModel().getUser(), BoxLayout.Y_AXIS));
 
@@ -98,7 +105,7 @@ public class MessageBoardView {
 			controller.getModel().setSender(controller.getModel().getUsers()[0]);
 			System.out.println("it was null!");
 		}
-		
+
 		for (int i = 0; i < controller.getModel().getUsers().length; i++) {
 			JButton j = new JButton(controller.getModel().getUsers()[i]);
 			j.setActionCommand("MessageBoard:getMessage");
@@ -123,37 +130,16 @@ public class MessageBoardView {
 		// main scroll pane
 		controller.getModel().setScrollPane(new JScrollPane());
 		controller.getModel().getScrollPane().setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		controller.getModel().getScrollPane().setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		// main scroll pane panel
-		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.RED));
+		controller.getModel().getScrollPane().setViewportBorder(new LineBorder(Color.BLACK));
 		controller.getModel().setScrollPanePanel(new JPanel());
-		controller.getModel().getScrollPanePanel().setLayout(new GridBagLayout());
+		controller.getModel().getScrollPanePanel()
+				.setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		GridBagConstraints g1 = new GridBagConstraints();
 		g1.insets = new Insets(1, 1, 1, 1);
 
-		// make the left for the sender
-		controller.getModel().setLeft(new JPanel());
-		controller.getModel().getLeft().setLayout(new BoxLayout(controller.getModel().getLeft(), BoxLayout.Y_AXIS));
-		controller.getModel().getLeft().setPreferredSize(new Dimension(335, 560));
-		g1.gridx = 0;
-		g1.gridy = 0;
-		controller.getModel().getScrollPanePanel().add(controller.getModel().getLeft(), g1);
-
-		// make right for the receiver
-		controller.getModel().setRight(new JPanel());
-		controller.getModel().getRight().setLayout(new BoxLayout(controller.getModel().getRight(), BoxLayout.Y_AXIS));
-		controller.getModel().getRight().setPreferredSize(new Dimension(335, 560));
-		g1.gridx = 1;
-		g1.gridy = 0;
-		controller.getModel().getScrollPanePanel().add(controller.getModel().getRight(), g1);
-
-		// User name label
-		controller.getModel().setUserName(new JLabel(controller.getModel().getSender()));
-		controller.getPanel().add(controller.getModel().getUserName()).setBounds(472, 9, 515, 41);
-		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
-
-		
-		
 		updateMessages(controller, controller.getModel().getSender());
 
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
@@ -205,34 +191,47 @@ public class MessageBoardView {
 	}
 
 	public static void updateMessages(MessageBoardController controller, String receiver) {
-		// controller.getModel().setMessages(controller.mbs.getAllMessagersToUser(SingletonSession.getInstance().getUserName()));
-
-		// Do we need all message between two users here or for just the user?
 
 		controller.getModel().setMessages(
 				controller.mbs.getAllMessagesFromTo(SingletonSession.getInstance().getUserName(), receiver));
 
+//		GridBagConstraints g1 = new GridBagConstraints();
+//		g1.insets = new Insets(1, 1, 1, 1);
+
 		for (int i = 0; i < controller.getModel().getMessages().size(); i++) {
 			Message m = controller.getModel().getMessages().get(i);
-			JPanel pan = new JPanel(), fake = new JPanel();
-			fake.setSize(330, 150);
-			pan.setSize(330, 150);
-			pan.setLayout(new FlowLayout());
+			JPanel itemPanel = new JPanel();
+			itemPanel.setLayout(new BorderLayout());
+			itemPanel.setSize(700, 80);
+
 			JTextPane j = new JTextPane();
-			j.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-			j.setText(m.getText());
-			JLabel l = new JLabel(m.getSender());
-			pan.add(l);
-			pan.add(j);
+			j.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+			// j.setOpaque(false);
+			j.setText(m.getSender() + ":\n" + m.getText());
+
+			JTextArea jt = new JTextArea();
+			jt.setColumns(m.getText().length() < 30 ? m.getText().length() : 30);
+			jt.setRows(1);
+			jt.setEditable(false);
+			jt.setLineWrap(true);
+			jt.setWrapStyleWord(true);
+			jt.setText(m.getText());
+			jt.setForeground(new Color (41, 66, 94));
+			jt.setBackground(controller.getPanel().getBackground());
+			jt.setBorder(new RoundBorder(20));
+			jt.setBackground(new Color(126, 185, 252));
 
 			if (!m.getSender().equals(SingletonSession.getInstance().getUserName())) {
-				controller.getModel().getRight().add(fake);
-				controller.getModel().getLeft().add(pan);
+				// pan on left
+
+				itemPanel.add(jt, BorderLayout.WEST);
+				controller.getModel().getScrollPanePanel().add(itemPanel);
 			} else {
-				controller.getModel().getRight().add(pan);
-				controller.getModel().getLeft().add(fake);
+				itemPanel.add(jt, BorderLayout.EAST);
+				controller.getModel().getScrollPanePanel().add(itemPanel);
 			}
 		}
 
 	}
+
 }
