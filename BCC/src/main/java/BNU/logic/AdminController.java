@@ -85,7 +85,7 @@ public class AdminController extends PageController{
 			for(Integer i = 0; i < getModel().getCounter(); i ++) {
 				if(e.getActionCommand().contentEquals("delete"+i.toString())){
 					System.out.println("delete button " + i.toString());
-					getAc().deleteReview(getModel().getReviews().get(i).getRID());
+					new AdminService().deleteReview(getModel().getReviews().get(i).getRID());
 				}
 			}
 		}
@@ -93,7 +93,7 @@ public class AdminController extends PageController{
 			for(Integer i = 0; i < getModel().getCounter(); i ++) {
 				if(e.getActionCommand().contentEquals("approve"+i.toString())){
 					System.out.println("approve button " + i.toString());
-					getAc().removeFlagOnReview(getModel().getReviews().get(i).getRID());
+					new AdminService().removeFlagOnReview(getModel().getReviews().get(i).getRID());
 				}
 			}
 		}

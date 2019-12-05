@@ -27,6 +27,7 @@ public class TeacherReviewController extends PageController{
 		view = new TeacherReviewView();
 		this.teacherName = teacherName;
 		this.className = className;
+		this.rs = new TeacherReviewViewService();
 	}
 	
 	@Override

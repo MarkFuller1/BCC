@@ -83,7 +83,7 @@ public class AdminView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
-		String[][] reviews = as.getAllFlagged();
+		String[][] reviews = new AdminService().getAllFlagged();
 		controller.getModel().setCounter(reviews.length);
 		controller.getModel().setReviews( new ArrayList<ReviewModel2>());
 		

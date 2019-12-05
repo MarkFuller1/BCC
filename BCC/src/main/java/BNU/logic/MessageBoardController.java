@@ -106,12 +106,14 @@ public class MessageBoardController extends PageController {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-			MessageBoardController.checkDbForNewMessages.interrupt();;
+			
 		if (e.getActionCommand() == "MessageBoard:back") {
+			MessageBoardController.checkDbForNewMessages.interrupt();
 			System.out.println("MessageBoard:back button pressed");
 			WindowBuilder.loadPage(new UserReviewController());
 
 		} else if (e.getActionCommand() == "MessageBoard:Logout") {
+			MessageBoardController.checkDbForNewMessages.interrupt();
 			System.out.println("MessageBoard:logout button pressed");
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());

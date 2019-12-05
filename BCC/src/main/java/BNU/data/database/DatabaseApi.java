@@ -603,10 +603,11 @@ public class DatabaseApi extends AbstractDB {
 			while (userReviews.next()) {
 
 				reviews.add(new ArrayList<String>());
-				reviews.get(i).add(0, userReviews.getString("content"));
-				reviews.get(i).add(1, userReviews.getString("title"));
+				reviews.get(i).add(0, userReviews.getString("review_id_pk"));
+				reviews.get(i).add(1, userReviews.getString("user_name"));
 				reviews.get(i).add(2, userReviews.getString("first_name") + " " + userReviews.getString("last_name"));
-				reviews.get(i).add(3, userReviews.getString("user_name"));
+				reviews.get(i).add(3, userReviews.getString("title"));
+				reviews.get(i).add(4, userReviews.getString("content"));
 
 				i++;
 			}
@@ -848,10 +849,10 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	protected void deleteUserAccountImpl(String userId) throws DatabaseOperationException {
-		String query = "delete from user where user.user_id_pk = \'" + userId + "\'";
+		String query = "delete from users where users.user_name = \'" + userId + "\'";
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
-			int rs = stmt.executeUpdate(query);
+			int rs = stmt.executeUpdate();
 
 			if (rs != 1) {
 				con.rollback();
@@ -871,7 +872,7 @@ public class DatabaseApi extends AbstractDB {
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 
 			LOGGER.info(query);
-			int rs = stmt.executeUpdate(query);
+			int rs = stmt.executeUpdate();
 
 			if (rs != 1) {
 				con.rollback();
@@ -890,7 +891,7 @@ public class DatabaseApi extends AbstractDB {
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 			LOGGER.info(query);
-			int rs = stmt.executeUpdate(query);
+			int rs = stmt.executeUpdate();
 
 			if (rs != 1) {
 				con.rollback();
@@ -909,7 +910,7 @@ public class DatabaseApi extends AbstractDB {
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 			LOGGER.info(query);
-			int rs = stmt.executeUpdate(query);
+			int rs = stmt.executeUpdate();
 
 			if (rs != 1) {
 				con.rollback();
