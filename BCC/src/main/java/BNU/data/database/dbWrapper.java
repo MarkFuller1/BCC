@@ -7,6 +7,22 @@ import BNU.data.Message;
 import BNU.data.Professor;
 import BNU.data.Review;
 
+/**
+ * 
+ * @author Kevin
+ * 
+ * FACADE GoF Design Pattern
+ * Structural
+ * 
+ * This class follows the facade design pattern. This class works as
+ * a facad because it hides the complexity of the database
+ * implementation from the program. Using this facade, the program
+ * does not need to know all the detail regarding CRUD operation
+ * involving the database. The program simply needs to know what
+ * these methods return and trust the methods to do the secret
+ * backend work.
+ */
+
 public interface dbWrapper {
 	boolean validateUser(String userName, String password); //new
 	

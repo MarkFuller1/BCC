@@ -6,12 +6,16 @@ import java.math.BigInteger;
  * 
  * @author Kevin
  * 
- * Proxy GoF Design Pattern
+ * PROXY GoF Design Pattern
  * Structural
  * 
  * This class follows the proxy design pattern. This class works as
  * a proxy because it is used in place of another class to add 
- * functionality. The services
+ * functionality. The controllers think they are talking directly with
+ * the services but they are talking with this proxy in some instances
+ * instead. This is a smart proxy because it is designed to add a layer
+ * of security. This proxy is intended to sanatize input from the user
+ * to prevent SQL Injection attacks.
  */
 
 import BNU.logic.LoginController;
