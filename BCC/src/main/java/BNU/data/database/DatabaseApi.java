@@ -842,7 +842,7 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	protected void deleteUserAccountImpl(String userId) throws DatabaseOperationException {
-		String query = "update users set user_name = \'deleted\' where user_name = \'" + userId + "\'";
+		String query = "update users set user_name = \'deleted" + Math.random() * 10000 + "\' where user_name = \'" + userId + "\'";
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
 			int rs = stmt.executeUpdate();
