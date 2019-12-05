@@ -37,7 +37,7 @@ public class UserReviewService {
 	// changeReview has two parameters and should fulfill our use case 
 	// of editing a review text which is the new text being passed
 	public void changeReview(String reviewID, String text) {
-		//UserReviewController.db submit reviewID and new text here
+		UserReviewController.db.editReview(reviewID, text);
 	}
 
 }
