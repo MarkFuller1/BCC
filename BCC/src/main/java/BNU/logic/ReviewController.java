@@ -82,7 +82,7 @@ public class ReviewController extends PageController implements ActionListener {
 			}
       else if(e.getActionCommand().contentEquals("f"+i.toString())) {
 				System.out.println("flag button" + i.toString() + "pressed");
-				//flag function 
+				this.getTc().flag(model.getRID());
 			}
 		}
 	}

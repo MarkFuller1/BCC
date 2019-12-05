@@ -33,24 +33,6 @@ public class DatabaseApi extends AbstractDB {
 		}
 	}
 
-	private final ResultSet executeStatement(String query) throws DatabaseOperationException {
-		ResultSet result = null;
-		// establish connection
-		try (Statement stmt = con.createStatement()) {
-
-			// Query
-			result = stmt.executeQuery(query);
-
-			// stmt.close();
-
-		} catch (SQLException e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			throw new DatabaseOperationException(query);
-		}
-
-		return result;
-	}
-
 	@Override
 	protected Connection getRemoteConnection() throws DatabaseConnectionException {
 
@@ -85,6 +67,7 @@ public class DatabaseApi extends AbstractDB {
 		try (Statement stmt = con.createStatement();) {
 
 			// Query
+			LOGGER.info(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 
 			if (rs.next()) {
@@ -111,6 +94,7 @@ public class DatabaseApi extends AbstractDB {
 		try (Statement stmt = con.createStatement()) {
 
 			// Query
+			LOGGER.info(sql);
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -120,8 +104,7 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-			LOGGER.warning("Query Failed: " + sql);
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(sql);
 		}
 
@@ -140,6 +123,7 @@ public class DatabaseApi extends AbstractDB {
 		try (Statement stmt = con.createStatement()) {
 
 			// Query
+			LOGGER.info(sql);
 			rs = stmt.executeQuery(sql);
 
 			// stmt.close();
@@ -153,7 +137,7 @@ public class DatabaseApi extends AbstractDB {
 			return finalval;
 
 		} catch (SQLException e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(sql);
 		}
 	}
@@ -169,8 +153,8 @@ public class DatabaseApi extends AbstractDB {
 
 		try (Statement stmt = con.createStatement()) {
 
-			LOGGER.info(sql);
 			// Query
+			LOGGER.info(sql);
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -178,8 +162,7 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			LOGGER.warning("Query Failed: " + sql);
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(sql);
 		}
 
@@ -198,8 +181,8 @@ public class DatabaseApi extends AbstractDB {
 
 		try (Statement stmt = con.createStatement()) {
 
-			LOGGER.info(sql);
 			// Query
+			LOGGER.info(sql);
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
@@ -207,8 +190,7 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			LOGGER.warning("Query Failed: " + sql);
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(sql);
 		}
 
@@ -230,8 +212,8 @@ public class DatabaseApi extends AbstractDB {
 
 		try (Statement stmt = con.createStatement()) {
 
-			LOGGER.info(getNames);
 			// Query
+			LOGGER.info(getNames);
 			namesrs = stmt.executeQuery(getNames);
 
 			Map<String, ArrayList<Integer>> profRanking = new HashMap<>();
@@ -273,8 +255,7 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			LOGGER.warning("Query Failed: " + getNames);
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(getNames);
 		}
 
@@ -282,22 +263,24 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected boolean submitCredentialsImpl(String userName, String password) {
+	protected boolean submitCredentialsImpl(String userName, String password) throws DatabaseOperationException {
 		String qurey = "insert into users (user_name, password)" + "values (\'" + userName + "\', \'" + password
 				+ "\')";
 
 		try (Statement stmet = con.createStatement()) {
+			LOGGER.info(qurey);
 			int rs = stmet.executeUpdate(qurey);
 
 			return rs > 0;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(qurey);
 		}
-		return false;
 	}
 
 	@Override
-	protected String[][] getAllReviewsForTeacherClassImpl(String professorName, String className) {
+	protected String[][] getAllReviewsForTeacherClassImpl(String professorName, String className)
+			throws DatabaseOperationException {
 		String[][] vals = null;
 		String firstLast[] = professorName.split(" ");
 		String query = "select content, review.score as score, user_name, review_id_pk  "
@@ -308,6 +291,7 @@ public class DatabaseApi extends AbstractDB {
 
 		try (Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
+			LOGGER.info(query);
 			ResultSet rs = stmt.executeQuery(query);
 
 			int rows = 0;
@@ -328,15 +312,15 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (Exception e) {
-			LOGGER.warning(query);
-			e.printStackTrace();
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
 		}
 
 		return vals;
 	}
 
 	@Override
-	protected String[] getOverallProfessorRatingsImpl(String professorName) {
+	protected String[] getOverallProfessorRatingsImpl(String professorName) throws DatabaseOperationException {
 		// name, rating, number of reviews
 		String[] firstLast = professorName.split(" ");
 		String[] result = new String[4];
@@ -365,16 +349,16 @@ public class DatabaseApi extends AbstractDB {
 				result[3] = namesrs.getString("h");
 			}
 		} catch (Exception e) {
-			LOGGER.warning(getNames);
-			e.printStackTrace();
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(getNames);
 		}
 		return result;
 	}
 
 	@Override
-	protected String[][] getAllReviewsForUserImpl(String userName) {
+	protected String[][] getAllReviewsForUserImpl(String userName) throws DatabaseOperationException {
 		// content score prof course name
-		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name  from review, professor, course Where user_name = \'"
+		String query = "select content, (teaching_ability + helpfulness + workload) / 3 as avg,  course.title, first_name, last_name, review_id_pk  from review, professor, course Where user_name = \'"
 				+ userName
 				+ "\'  AND review.professor_id = professor.professor_id_pk AND review.course_id = course.course_id_pk";
 		ResultSet userReviews = null;
@@ -394,12 +378,13 @@ public class DatabaseApi extends AbstractDB {
 				reviews.get(i).add(1, userReviews.getString("avg"));
 				reviews.get(i).add(2, userReviews.getString("first_name") + " " + userReviews.getString("last_name"));
 				reviews.get(i).add(3, userReviews.getString("title"));
+				reviews.get(i).add(4, userReviews.getString("review_id_pk"));
 
 				i++;
 			}
 		} catch (Exception e) {
-			LOGGER.warning(query);
-			e.printStackTrace();
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
 		}
 
 		String[][] finalData;
@@ -483,9 +468,10 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected String[] getAllUserMessagersImpl(String receiver) {
+	protected String[] getAllUserMessagersImpl(String receiver) throws DatabaseOperationException {
 		// text timestamp sender reciever
-		String query = "select message.from_user_name from message " + "where to_user_name = \'" + receiver + "\'";
+		String query = "select message.from_user_name, message.to_user_name from message " + "where to_user_name = \'"
+				+ receiver + "\' OR message.from_user_name = \'" + receiver + "\'";
 		ResultSet userReviews = null;
 		ArrayList<String> names = new ArrayList<>();
 
@@ -499,12 +485,16 @@ public class DatabaseApi extends AbstractDB {
 			while (userReviews.next()) {
 
 				names.add(userReviews.getString("from_user_name"));
+				names.add(userReviews.getString("to_user_name"));
 
 				i++;
 			}
 		} catch (Exception e) {
-			LOGGER.warning(query);
-			e.printStackTrace();
+//			con = getRemoteConnection();
+//			return getAllUserMessagersImpl(receiver);
+
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
 		}
 
 		String[] finalval = new String[names.size()];
@@ -513,7 +503,7 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected void downvoteImpl(String reviewId, String userId) {
+	protected void downvoteImpl(String reviewId, String userId) throws DatabaseOperationException {
 		LOGGER.warning("");
 		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId
 				+ "\'";
@@ -535,6 +525,7 @@ public class DatabaseApi extends AbstractDB {
 
 		} catch (Exception e) {
 			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
 		}
 	}
 
@@ -591,8 +582,7 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			LOGGER.warning("Query Failed: " + getNames);
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(getNames);
 		}
 
@@ -600,9 +590,49 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	protected String[] getAllFlaggedImpl() {
-		// TODO Auto-generated method stub
-		return null;
+	protected String[][] getAllFlaggedImpl() throws DatabaseOperationException {
+		String query = "select * from review, professor, course where is_flagged = true AND professor.professor_id_pk = review.professor_id AND course.course_id_pk = review.course_id";
+		ArrayList<ArrayList<String>> reviews = new ArrayList<>();
+
+		try (Statement stmt = con.createStatement()) {
+
+			LOGGER.info(query);
+			ResultSet userReviews = stmt.executeQuery(query);
+
+			int i = 0;
+			while (userReviews.next()) {
+
+				reviews.add(new ArrayList<String>());
+				reviews.get(i).add(0, userReviews.getString("review_id_pk"));
+				reviews.get(i).add(1, userReviews.getString("user_name"));
+				reviews.get(i).add(2, userReviews.getString("first_name") + " " + userReviews.getString("last_name"));
+				reviews.get(i).add(3, userReviews.getString("title"));
+				reviews.get(i).add(4, userReviews.getString("content"));
+
+				i++;
+			}
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+
+		String[][] finalData;
+
+		finalData = new String[reviews.size()][];
+
+		for (int i = 0; i < reviews.size(); i++) {
+			ArrayList<String> row = reviews.get(i);
+
+			// Perform equivalent `toArray` operation
+			String[] copy = new String[row.size()];
+			for (int j = 0; j < row.size(); j++) {
+				// Manually loop and set individually
+				copy[j] = row.get(j);
+			}
+
+			finalData[i] = copy;
+		}
+		return finalData;
 	}
 
 	@Override
@@ -613,16 +643,35 @@ public class DatabaseApi extends AbstractDB {
 	}
 
 	@Override
-	public boolean isAdmin(String userName) {
-		// TODO Auto-generated method stub
-		return true;
+	public boolean isAdminImpl(String userName) throws DatabaseOperationException {
+		LOGGER.warning("");
+		String query = "SELECT is_admin FROM users WHERE user_name = \'" + userName + "\'";
+		ResultSet rs = null;
+
+		try (Statement stmt = con.createStatement()) {
+
+			// Query
+			rs = stmt.executeQuery(query);
+
+			if (rs.next()) {
+				return rs.getBoolean("is_admin");
+			}
+
+			LOGGER.warning(query);
+
+		} catch (Exception e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+		return false;
 	}
 
 	@Override
-	protected void upvoteImpl(String reviewId, String userId) {
+	protected void upvoteImpl(String reviewId, String userId) throws DatabaseOperationException {
 		LOGGER.warning("");
 		String query = "INSERT INTO user_review (user_id, review_id) values (\'" + userId + "\', \'" + reviewId + "\')";
-		LOGGER.warning(query);
+		String updateScore = "UPDATE review SET score = score + 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
+		LOGGER.info(query + "\n" + updateScore);
 		int rs = 0;
 
 		try (PreparedStatement stmt = con.prepareStatement(query)) {
@@ -631,7 +680,6 @@ public class DatabaseApi extends AbstractDB {
 			rs = stmt.executeUpdate();
 
 			LOGGER.warning("incrementing score");
-			String updateScore = "UPDATE review SET score = score + 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
 
 			Statement state = con.createStatement();
 			state.executeQuery(updateScore);
@@ -640,12 +688,14 @@ public class DatabaseApi extends AbstractDB {
 
 		} catch (Exception e) {
 			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query + "\n" + updateScore);
 		}
 
 	}
 
 	@Override
-	protected Boolean sendMessageImpl(String m, String from, String to, BigInteger i) {
+	protected Boolean sendMessageImpl(String m, String from, String to, BigInteger i)
+			throws DatabaseOperationException {
 		// name, rating, number of reviews
 
 		String sendMessage = "insert into message (message_id_pk, from_user_name, to_user_name, message, date_sent)"
@@ -656,6 +706,7 @@ public class DatabaseApi extends AbstractDB {
 		try (PreparedStatement stmt = con.prepareStatement(sendMessage)) {
 
 			// Query
+			LOGGER.info(sendMessage);
 			rs = stmt.executeUpdate();
 
 			if (rs > 0) {
@@ -663,7 +714,8 @@ public class DatabaseApi extends AbstractDB {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(sendMessage);
 		}
 		return false;
 	}
@@ -677,6 +729,7 @@ public class DatabaseApi extends AbstractDB {
 		try (Statement stmt = con.createStatement();) {
 
 			// Query
+			LOGGER.info(check);
 			ResultSet rs = stmt.executeQuery(check);
 
 			if (rs.next()) {
@@ -686,7 +739,7 @@ public class DatabaseApi extends AbstractDB {
 		} catch (
 
 		SQLException e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(check);
 		}
 
@@ -702,6 +755,7 @@ public class DatabaseApi extends AbstractDB {
 		try (Statement stmt = con.createStatement();) {
 
 			// Query
+			LOGGER.info(check);
 			ResultSet rs = stmt.executeQuery(check);
 
 			if (rs.next()) {
@@ -711,7 +765,7 @@ public class DatabaseApi extends AbstractDB {
 		} catch (
 
 		SQLException e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(check);
 		}
 
@@ -724,9 +778,10 @@ public class DatabaseApi extends AbstractDB {
 		String check = "select count(message.message_id_pk) as num from message where message.from_user_name = \'"
 				+ user + "\' OR message.to_user_name = \'" + user + "\'";
 		int num = 0;
-		try (Statement stmt = con.createStatement();) {
+		try (Statement stmt = threadCon.createStatement();) {
 
 			// Query
+			LOGGER.info(check);
 			ResultSet rs = stmt.executeQuery(check);
 
 			if (rs.next()) {
@@ -738,13 +793,13 @@ public class DatabaseApi extends AbstractDB {
 		} catch (
 
 		SQLException e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(check);
 		}
 	}
 
 	@Override
-	protected String[][] getAllMessagesImpl(String sender, String receiver) {
+	protected String[][] getAllMessagesImpl(String sender, String receiver) throws DatabaseOperationException {
 		// text timestamp sender reciever
 		String query = "select message.message, date_sent, from_user_name, to_user_name from message "
 				+ "where (from_user_name = \'" + sender + "\' OR from_user_name = \'" + receiver
@@ -770,8 +825,8 @@ public class DatabaseApi extends AbstractDB {
 				i++;
 			}
 		} catch (Exception e) {
-			LOGGER.warning(query);
-			e.printStackTrace();
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
 		}
 
 		String[][] finalData;
@@ -793,15 +848,78 @@ public class DatabaseApi extends AbstractDB {
 		return finalData;
 	}
 
-	protected void deleteUserAccountImpl(String userId) {
-		// TODO Auto-generated method stub
+	protected void deleteUserAccountImpl(String userId) throws DatabaseOperationException {
+		String query = "delete from users where users.user_name = \'" + userId + "\'";
 
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			int rs = stmt.executeUpdate();
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
 	}
 
 	@Override
-	protected String[][] getAllMessagesImpl(String receiver) {
-		// TODO Auto-generated method stub
-		return null;
+	protected void flagReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "update review " + "set is_flagged = true " + "where review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+
+			LOGGER.info(query);
+			int rs = stmt.executeUpdate();
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
 	}
 
+	@Override
+	protected void deleteReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "delete from review where review.review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			LOGGER.info(query);
+			int rs = stmt.executeUpdate();
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+	}
+
+	@Override
+	protected void removeFlagOnReviewImpl(String reviewId) throws DatabaseOperationException {
+		String query = "update review " + "set is_flagged = false " + "where review_id_pk = \'" + reviewId + "\'";
+
+		try (PreparedStatement stmt = con.prepareStatement(query)) {
+			LOGGER.info(query);
+			int rs = stmt.executeUpdate();
+
+			if (rs != 1) {
+				con.rollback();
+				throw new DatabaseOperationException(query);
+			}
+
+		} catch (SQLException e) {
+			LOGGER.warning(e.getMessage());
+			throw new DatabaseOperationException(query);
+		}
+	}
 }

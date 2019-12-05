@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import BNU.data.database.AbstractDB;
 import BNU.data.models.TeacherReviewModel;
+import BNU.logic.service.TeacherReviewViewService;
 import BNU.presentation.TeacherReviewView;
 import BNU.singleton.SingletonSession;
 
@@ -18,6 +19,7 @@ public class TeacherReviewController extends PageController{
 	static JPanel panel;
 	String teacherName;
 	String className;
+	static TeacherReviewViewService rs;
 	
 	public TeacherReviewController(String teacherName, String className){ 
 		model = new TeacherReviewModel();
@@ -25,6 +27,7 @@ public class TeacherReviewController extends PageController{
 		view = new TeacherReviewView();
 		this.teacherName = teacherName;
 		this.className = className;
+		this.rs = new TeacherReviewViewService();
 	}
 	
 	@Override
@@ -37,6 +40,17 @@ public class TeacherReviewController extends PageController{
 		}
 	}
 	
+	
+	
+	
+	public static TeacherReviewViewService getRs() {
+		return rs;
+	}
+
+	public static void setRs(TeacherReviewViewService rs) {
+		TeacherReviewController.rs = rs;
+	}
+
 	public static AbstractDB getDb() {
 		return db;
 	}
@@ -104,7 +118,7 @@ public class TeacherReviewController extends PageController{
 	public void message(int n) {
 		Long l = System.currentTimeMillis();
 		BigInteger i = new BigInteger(l.toString());
-		db.sendMessage("", SingletonSession.getInstance().getUserName(), this.getModel().getRC().get(n).getModel().getRID(),i);
+		db.sendMessage("", SingletonSession.getInstance().getUserName(), this.getModel().getRC().get(n).getModel().getReviewerID().getText(),i);
 		WindowBuilder.loadPage(new MessageBoardController());
 	}
 	
@@ -120,5 +134,9 @@ public class TeacherReviewController extends PageController{
 			WindowBuilder.loadPage(new SetReviewController(this.teacherName, this.className));
 		}
 }
+
+	public void flag(String rid) {
+		getRs().flagComment(rid);
+	}
 
 }
