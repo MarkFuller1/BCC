@@ -798,4 +798,10 @@ public class DatabaseApi extends AbstractDB {
 
 	}
 
+	@Override
+	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
