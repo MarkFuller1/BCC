@@ -610,4 +610,24 @@ public abstract class AbstractDB {
 			e.printStackTrace();
 		}
 	}
+
+	protected void downvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void upvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
