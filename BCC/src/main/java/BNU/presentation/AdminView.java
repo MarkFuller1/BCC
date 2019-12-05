@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,12 +20,16 @@ import javax.swing.border.LineBorder;
 
 import BNU.data.models.ReviewModel2;
 import BNU.logic.AdminController;
+import BNU.logic.ReviewController;
+import BNU.logic.service.AdminService;
+import BNU.logic.service.UserReviewService;
 
 
 public class AdminView {
 	static JButton butNavigation;
 	static JLabel labTitle;
 	private static final Logger LOGGER = Logger.getLogger(AdminController.class.getName());
+	static AdminService as;
 
 	@SuppressWarnings("unused")
 	public static void BuildAdminView(JFrame mainFrame, AdminController controller) {
@@ -78,16 +83,23 @@ public class AdminView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel().setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
 		
+		String[][] reviews = as.getAllFlagged();
+		controller.getModel().setCounter(reviews.length);
+		controller.getModel().setReviews( new ArrayList<ReviewModel2>());
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < reviews.length; i++) {
 			ReviewModel2 rm1 = new ReviewModel2();
-			//rm1.createReviewItem();
+			rm1.setCount(i);
+			rm1.setRID(reviews[i][0]);
+			// data might not match up
+			rm1.createAdminItem(reviews[i][2],reviews[i][3],reviews[i][4], controller);
 			if(rm1 == null) {
 				LOGGER.info("Review Record not populated correctly.");
 			}else {
 				rm1.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm1.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
+				controller.getModel().getReviews().add(rm1);
 			}
 
 		}

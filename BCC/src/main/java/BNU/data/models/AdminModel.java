@@ -1,5 +1,7 @@
 package BNU.data.models;
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -19,7 +21,25 @@ public class AdminModel {
 
 	private JScrollPane scrollPane;
 	private JPanel scrollPanePanel;
+	private Integer counter;
+	private ArrayList<ReviewModel2> reviews;
+
+	public ArrayList<ReviewModel2> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(ArrayList<ReviewModel2> reviews) {
+		this.reviews = reviews;
+	}
 	
+	public Integer getCounter() {
+		return counter;
+	}
+
+	public void setCounter(Integer counter) {
+		this.counter = counter;
+	}
+
 	public JLabel getReviewH() {
 		return reviewH;
 	}

@@ -1,11 +1,15 @@
 package BNU.data.models;
 
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+
+import BNU.data.Review;
 
 public class UserReviewModel {
 	private JLabel User;
@@ -22,6 +26,15 @@ public class UserReviewModel {
 	private JScrollPane scrollPane;
 	private Integer counter;
 	private JPanel scrollPanePanel;
+	private ArrayList<ReviewModel2> reviews;
+
+	public ArrayList<ReviewModel2> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(ArrayList<ReviewModel2> reviews) {
+		this.reviews = reviews;
+	}
 
 	public Integer getCounter() {
 		return counter;

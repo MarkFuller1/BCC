@@ -110,6 +110,7 @@ public class UserReviewView {
 		for(int i = 0; i < reviews.length; i++) {
 			ReviewModel2 rm2 = new ReviewModel2();
 			rm2.setCount(i);
+			rm2.setRID(reviews[i][4]);
 			
 			if(rm2 == null) {
 				LOGGER.info("Review Record not populated correctly.");
@@ -118,6 +119,7 @@ public class UserReviewView {
 				rm2.getPanel().setBounds(0,i*200,804,250);
 				controller.getModel().getScrollPanePanel().add(rm2.getPanel());	
 				controller.getModel().getScrollPanePanel().add(Box.createRigidArea(new Dimension(0,15)));
+				controller.getModel().getReviews().add(rm2);
 			}
 
 		}
