@@ -137,18 +137,18 @@ public class MessageBoardView {
 		controller.getModel().setScrollPanePanel(new JPanel());
 		controller.getModel().getScrollPanePanel()
 				.setLayout(new BoxLayout(controller.getModel().getScrollPanePanel(), BoxLayout.Y_AXIS));
+		controller.getModel().getScrollPane().setPreferredSize(new Dimension(710, 580));
 		GridBagConstraints g1 = new GridBagConstraints();
 		g1.insets = new Insets(1, 1, 1, 1);
 
-		updateMessages(controller, controller.getModel().getSender());
-
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
-		controller.getModel().getScrollPane().setPreferredSize(new Dimension(710, 580));
 		g.gridx = 1;
 		g.gridy = 0;
 		g.gridwidth = 4;
 		g.gridheight = 5;
 		controller.getModel().getBig().add(controller.getModel().getScrollPane(), g);
+
+		updateMessages(controller, controller.getModel().getSender());
 
 		// implement message bar
 		controller.getModel().setSearch(new JPanel());
@@ -195,35 +195,26 @@ public class MessageBoardView {
 		controller.getModel().setMessages(
 				controller.mbs.getAllMessagesFromTo(SingletonSession.getInstance().getUserName(), receiver));
 
-//		GridBagConstraints g1 = new GridBagConstraints();
-//		g1.insets = new Insets(1, 1, 1, 1);
-
 		for (int i = 0; i < controller.getModel().getMessages().size(); i++) {
 			Message m = controller.getModel().getMessages().get(i);
 			JPanel itemPanel = new JPanel();
 			itemPanel.setLayout(new BorderLayout());
-			itemPanel.setSize(700, 80);
-
-			JTextPane j = new JTextPane();
-			j.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-			// j.setOpaque(false);
-			j.setText(m.getSender() + ":\n" + m.getText());
+			itemPanel.setSize(200, 100);
 
 			JTextArea jt = new JTextArea();
+			jt.setPreferredSize(new Dimension(10, m.getText().length() / 100 * 38));
 			jt.setColumns(m.getText().length() < 30 ? m.getText().length() : 30);
 			jt.setRows(1);
 			jt.setEditable(false);
 			jt.setLineWrap(true);
 			jt.setWrapStyleWord(true);
 			jt.setText(m.getText());
-			jt.setForeground(new Color (41, 66, 94));
+			jt.setForeground(new Color(41, 66, 94));
 			jt.setBackground(controller.getPanel().getBackground());
 			jt.setBorder(new RoundBorder(20));
 			jt.setBackground(new Color(126, 185, 252));
 
 			if (!m.getSender().equals(SingletonSession.getInstance().getUserName())) {
-				// pan on left
-
 				itemPanel.add(jt, BorderLayout.WEST);
 				controller.getModel().getScrollPanePanel().add(itemPanel);
 			} else {
