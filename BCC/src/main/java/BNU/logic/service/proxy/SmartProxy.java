@@ -9,7 +9,9 @@ import java.math.BigInteger;
  * Proxy GoF Design Pattern
  * Structural
  * 
- * This class follows the proxy design pattern. This
+ * This class follows the proxy design pattern. This class works as
+ * a proxy because it is used in place of another class to add 
+ * functionality. The services
  */
 
 import BNU.logic.LoginController;
