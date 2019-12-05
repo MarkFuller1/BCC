@@ -24,8 +24,5 @@ public class UserReviewServiceTest {
 		assertTrue(reviews[1][1].equals("5"));
 		assertTrue(reviews[1][2].equals("Mathew Aars"));
 		assertTrue(reviews[1][3].equals("C++ Intro 1"));
-		assertTrue(reviews[2][1].equals("5"));
-		assertTrue(reviews[2][2].equals("Mathew Aars"));
-		assertTrue(reviews[2][3].equals("C++ Intro 1"));
 	}
 }

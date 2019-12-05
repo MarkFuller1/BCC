@@ -40,7 +40,7 @@ public class LoginServiceTest {
 	public void testisUserAdminBadCreds() throws Exception {
 		LoginService ls = new LoginService();
 		boolean isNotAdmin = ls.isUserAdmin("user1");
-		assertTrue(isNotAdmin);
+		assertFalse(isNotAdmin);
 
 	}
 }
