@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"BNU.data.database"},{"l":"BNU.data.models"},{"l":"BNU.logic.service"},{"l":"BNU.logic.service.proxy"},{"l":"BNU.presentation"},{"l":"BNU.singleton"}]

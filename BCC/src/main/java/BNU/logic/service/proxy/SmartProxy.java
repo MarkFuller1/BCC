@@ -2,7 +2,16 @@ package BNU.logic.service.proxy;
 
 import java.math.BigInteger;
 
-import BNU.data.Message;
+/**
+ * 
+ * @author Kevin
+ * 
+ * Proxy GoF Design Pattern
+ * Structural
+ * 
+ * This class follows the proxy design pattern. This
+ */
+
 import BNU.logic.LoginController;
 import BNU.logic.MessageBoardController;
 import BNU.logic.ReviewController;
