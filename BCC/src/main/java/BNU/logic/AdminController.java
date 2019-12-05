@@ -10,11 +10,13 @@ import BNU.data.models.AdminModel;
 import BNU.logic.service.AdminService;
 import BNU.logic.service.UserReviewService;
 import BNU.presentation.AdminView;
+import BNU.presentation.MessageBoardView;
 
 public class AdminController extends PageController{
 	static AdminView view;
 	static AdminModel model = new AdminModel();
 	static JPanel panel;
+	public JFrame mainF;
 	static AdminService ac;
 	
 	public AdminController(){
@@ -25,6 +27,7 @@ public class AdminController extends PageController{
 	
 	@Override
 	public void dispatchBuilder(JFrame mainFrame) {
+		this.mainF = mainFrame;
 		try {
 			AdminView.BuildAdminView(mainFrame, this);
 		} catch (SecurityException e) {
@@ -86,6 +89,7 @@ public class AdminController extends PageController{
 				if(e.getActionCommand().contentEquals("delete"+i.toString())){
 					System.out.println("delete button " + i.toString());
 					new AdminService().deleteReview(getModel().getReviews().get(i).getRID());
+					AdminView.BuildAdminView(this.mainF, this);
 				}
 			}
 		}
@@ -94,6 +98,7 @@ public class AdminController extends PageController{
 				if(e.getActionCommand().contentEquals("approve"+i.toString())){
 					System.out.println("approve button " + i.toString());
 					new AdminService().removeFlagOnReview(getModel().getReviews().get(i).getRID());
+					AdminView.BuildAdminView(this.mainF, this);
 				}
 			}
 		}

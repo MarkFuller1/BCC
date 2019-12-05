@@ -494,6 +494,19 @@ public class DatabaseMock extends AbstractDB {
 		
 	}
 
+	@Override
+	protected void editReviewImpl(String reviewId, String text) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setNewReviewImpl(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 	
