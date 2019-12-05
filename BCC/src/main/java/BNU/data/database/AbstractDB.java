@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import BNU.data.Message;
 import BNU.data.Review;
 
 public abstract class AbstractDB {
@@ -624,6 +625,25 @@ public abstract class AbstractDB {
 		}
 	}
 
+	protected void downvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void upvoteImpl() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	protected String[][] getAllMessagesImpl(String receiver) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	public void editReview(String reviewId, String text) {
 		try {
 			con = getRemoteConnection();
