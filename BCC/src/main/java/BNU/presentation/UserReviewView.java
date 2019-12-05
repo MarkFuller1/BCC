@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -107,6 +108,8 @@ public class UserReviewView {
 		//gets reviews
 		String[][] reviews = urs.getReviewsForUser(SingletonSession.getInstance().getUserName()); // TODO: this needs to change
 		controller.getModel().setCounter(reviews.length);
+		
+		controller.getModel().setReviews(new ArrayList<ReviewModel2>());
 		for(int i = 0; i < reviews.length; i++) {
 			ReviewModel2 rm2 = new ReviewModel2();
 			rm2.setCount(i);

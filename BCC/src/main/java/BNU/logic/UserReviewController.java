@@ -85,7 +85,7 @@ public class UserReviewController extends PageController{
 		}
 		else if(e.getActionCommand() == "UserReview:da"){
 			System.out.println("UserReview:deleteAccount button pressed");
-			getUrs().deleteAccount(SingletonSession.getInstance().getUserName());
+			new UserReviewService().deleteAccount(SingletonSession.getInstance().getUserName());
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
