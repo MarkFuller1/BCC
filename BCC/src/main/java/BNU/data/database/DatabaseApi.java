@@ -505,18 +505,44 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected void downvoteImpl(String reviewId, String userId) throws DatabaseOperationException {
 		LOGGER.warning("");
-		String query = "DELETE FROM user_review WHERE user_id = \'" + userId + "\' and review_id = \'" + reviewId
+//		String query = "INSERT INTO user_review (user_id, review_id, up_dn) values (\'" + userId + "\', \'" + reviewId
+//				+ "\', \'" + -1 + "\') ON conflict (user_id, review_id) do update set up_dn = excluded.up_dn - 1";
+		LOGGER.warning("");
+		boolean update = false;
+//		String query = "INSERT INTO user_review (user_id, review_id, up_dn) values (\'" + userId + "\', \'" + reviewId + "\', \'" + 1 + "\') "
+//				+ "ON conflict (user_id, review_id) do begin if(excluded.up_dn < 1) then update set up_dn = excluded.up_dn + 1; end if;";
+		String query = "SELECT * from user_review WHERE user_id = \'" + userId + "\' AND review_id = \'" + reviewId
 				+ "\'";
-		LOGGER.warning(query);
-		int rs = 0;
+		String updateQ = null;
+		String updateScore = "UPDATE review SET score = score - 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
+		LOGGER.info(query + "\n" + updateScore);
 
-		try (PreparedStatement stmt = con.prepareStatement(query)) {
+		try (Statement stmt = con.createStatement()) {
 
 			// Query
-			rs = stmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery(query);
 
-			LOGGER.warning("decrementing score");
-			String updateScore = "UPDATE review SET score = score - 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
+			if (rs.next()) {
+				int val;
+				if ((val = rs.getInt("up_dn")) > -1) {
+					update = true;
+					updateQ = "update user_review set up_dn = " + (val - 1) + " where user_id = \'" + userId
+							+ "\' AND review_id = \'" + reviewId + "\'";
+				}
+			} else {
+				update = true;
+				updateQ = "insert into user_review (user_id, review_id, up_dn) values (\'" + userId + "\', \'"
+						+ reviewId + "\', -1)";
+			}
+
+			if (update) {
+				PreparedStatement st = con.prepareStatement(updateQ);
+
+				int val = st.executeUpdate();
+				st.close();
+			}
+
+			LOGGER.warning("incrementing score");
 
 			Statement state = con.createStatement();
 			ResultSet worked = state.executeQuery(updateScore);
@@ -525,7 +551,7 @@ public class DatabaseApi extends AbstractDB {
 
 		} catch (Exception e) {
 			LOGGER.warning(e.getMessage());
-			throw new DatabaseOperationException(query);
+			throw new DatabaseOperationException(query + "\n" + updateQ + "\n" + updateScore);
 		}
 	}
 
@@ -662,15 +688,39 @@ public class DatabaseApi extends AbstractDB {
 	@Override
 	protected void upvoteImpl(String reviewId, String userId) throws DatabaseOperationException {
 		LOGGER.warning("");
-		String query = "INSERT INTO user_review (user_id, review_id) values (\'" + userId + "\', \'" + reviewId + "\')";
+		boolean update = false;
+//		String query = "INSERT INTO user_review (user_id, review_id, up_dn) values (\'" + userId + "\', \'" + reviewId + "\', \'" + 1 + "\') "
+//				+ "ON conflict (user_id, review_id) do begin if(excluded.up_dn < 1) then update set up_dn = excluded.up_dn + 1; end if;";
+		String query = "SELECT * from user_review WHERE user_id = \'" + userId + "\' AND review_id = \'" + reviewId
+				+ "\'";
+		String updateQ = null;
 		String updateScore = "UPDATE review SET score = score + 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
 		LOGGER.info(query + "\n" + updateScore);
-		int rs = 0;
 
-		try (PreparedStatement stmt = con.prepareStatement(query)) {
+		try (Statement stmt = con.createStatement()) {
 
 			// Query
-			rs = stmt.executeUpdate();
+			ResultSet rs = stmt.executeQuery(query);
+
+			if (rs.next()) {
+				int val;
+				if ((val = rs.getInt("up_dn")) < 1) {
+					update = true;
+					updateQ = "update user_review set up_dn = " + (val + 1) + " where user_id = \'" + userId
+							+ "\' AND review_id = \'" + reviewId + "\'";
+				}
+			} else {
+				update = true;
+				updateQ = "insert into user_review (user_id, review_id, up_dn) values (\'" + userId + "\', \'"
+						+ reviewId + "\', 1)";
+			}
+
+			if (update) {
+				PreparedStatement st = con.prepareStatement(updateQ);
+
+				int val = st.executeUpdate();
+				st.close();
+			}
 
 			LOGGER.warning("incrementing score");
 
@@ -681,7 +731,7 @@ public class DatabaseApi extends AbstractDB {
 
 		} catch (Exception e) {
 			LOGGER.warning(e.getMessage());
-			throw new DatabaseOperationException(query + "\n" + updateScore);
+			throw new DatabaseOperationException(query + "\n" + updateQ + "\n" + updateScore);
 		}
 
 	}
@@ -726,7 +776,13 @@ public class DatabaseApi extends AbstractDB {
 			ResultSet rs = stmt.executeQuery(check);
 
 			if (rs.next()) {
-				return false;
+				if (rs.getInt("up_dn") < 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return true;
 			}
 
 		} catch (
@@ -735,8 +791,6 @@ public class DatabaseApi extends AbstractDB {
 			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(check);
 		}
-
-		return true;
 	}
 
 	@Override
@@ -752,6 +806,13 @@ public class DatabaseApi extends AbstractDB {
 			ResultSet rs = stmt.executeQuery(check);
 
 			if (rs.next()) {
+				if (rs.getInt("up_dn") > -1) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			{
 				return true;
 			}
 
@@ -761,8 +822,6 @@ public class DatabaseApi extends AbstractDB {
 			LOGGER.warning(e.getMessage());
 			throw new DatabaseOperationException(check);
 		}
-
-		return false;
 	}
 
 	@Override
