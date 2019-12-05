@@ -37,6 +37,12 @@ public class MessageBoardService {
 //			for(int i = 0 ;i < messages.length; i++) {
 //				finalAr.add(new Message(messages[i][0], new BigInteger(messages[i][1]), messages[i][2], messages[i][3]));
 //			}
+		
+		ArrayList<String> removed = new ArrayList<String>(Arrays.asList(messages));
+		
+		removed.remove(SingletonSession.getInstance().getUserName());
+		String[] finalval = new String[removed.size()];
+		messages = removed.toArray(finalval);
 
 		return messages;
 	}

@@ -100,7 +100,11 @@ public class MessageBoardView {
 		controller.getModel().getUserList().setPreferredSize(new Dimension(250, 675));
 
 		controller.getModel().setReceiver(controller.mbs.getReceiver());
-		controller.getModel().setUsers(controller.mbs.getAllMessagersToUser(controller.getModel().getReceiver()));
+		String[] usres = controller.mbs.getAllMessagersToUser(controller.getModel().getReceiver());
+		for(String s: usres) {
+			System.out.println(s);
+		}
+		controller.getModel().setUsers(usres);
 		if (controller.getModel().getSender() == null) {
 			controller.getModel().setSender(controller.getModel().getUsers()[0]);
 			System.out.println("it was null!");
