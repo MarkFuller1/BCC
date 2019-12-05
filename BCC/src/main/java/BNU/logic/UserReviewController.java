@@ -95,7 +95,7 @@ public class UserReviewController extends PageController{
 				if(e.getActionCommand().contentEquals("ed"+i.toString())){
 					System.out.println("Review number " + i.toString());
 					
-					getUrs().changeReview(getModel().getReviews().get(i).getRID(), getModel().getReviews().get(i).getTextArea().getText());
+					new UserReviewService().changeReview(getModel().getReviews().get(i).getRID(), getModel().getReviews().get(i).getTextArea().getText());
 				}
 			}
 		}
