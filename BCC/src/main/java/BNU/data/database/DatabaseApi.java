@@ -519,7 +519,7 @@ public class DatabaseApi extends AbstractDB {
 			String updateScore = "UPDATE review SET score = score - 1 WHERE review.review_id_pk = \'" + reviewId + "\'";
 
 			Statement state = con.createStatement();
-			state.executeQuery(updateScore);
+			ResultSet worked = state.executeQuery(updateScore);
 
 			state.close();
 
@@ -675,7 +675,7 @@ public class DatabaseApi extends AbstractDB {
 			LOGGER.warning("incrementing score");
 
 			Statement state = con.createStatement();
-			state.executeQuery(updateScore);
+			ResultSet worked = state.executeQuery(updateScore);
 
 			state.close();
 

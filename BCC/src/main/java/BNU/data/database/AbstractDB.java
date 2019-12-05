@@ -484,7 +484,7 @@ public abstract class AbstractDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 	public final ArrayList<Review> getReviews(String prof, String c) {
@@ -509,7 +509,7 @@ public abstract class AbstractDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 	public final Boolean isDownvoteValid(String ReviewID, String user) {
@@ -530,7 +530,7 @@ public abstract class AbstractDB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 	public void setNewReview(String userName, String professorName, String className, String content, String tA,
@@ -637,7 +637,7 @@ public abstract class AbstractDB {
 
 	protected Boolean sendMessageImpl(Message m, String from, String to, String date) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	protected String[][] getAllMessagesImpl(String receiver) {
