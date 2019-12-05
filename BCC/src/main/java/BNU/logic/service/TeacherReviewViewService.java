@@ -31,4 +31,8 @@ private static final Logger LOGGER = Logger.getLogger(TeacherReviewViewService.c
 	public String[] getProfessorOverallRatings(String professorName) {
 		return ReviewController.db.getOverallProfessorRatings(professorName);
 	}
+	
+	public void flagComment(String reviewId) {
+		ReviewController.db.flagReview(reviewId);
+	}
 }

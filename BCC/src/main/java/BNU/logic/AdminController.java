@@ -5,13 +5,17 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BNU.data.database.AbstractDB;
 import BNU.data.models.AdminModel;
+import BNU.logic.service.AdminService;
+import BNU.logic.service.UserReviewService;
 import BNU.presentation.AdminView;
 
 public class AdminController extends PageController{
 	static AdminView view;
 	static AdminModel model = new AdminModel();
 	static JPanel panel;
+	static AdminService ac;
 	
 	public AdminController(){
 		model = new AdminModel();
@@ -26,6 +30,20 @@ public class AdminController extends PageController{
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	public static AdminService getAc() {
+		return ac;
+	}
+
+	public static void setAc(AdminService ac) {
+		AdminController.ac = ac;
+	}
+
+	public static AbstractDB getDb() {
+		return db;
 	}
 	
 	public JPanel getPanel() {
@@ -63,5 +81,22 @@ public class AdminController extends PageController{
 			WindowBuilder.clip.stop();
 			WindowBuilder.loadPage(new LoginController());
 		}
+		else if(e.getActionCommand().contains("delete")){
+			for(Integer i = 0; i < getModel().getCounter(); i ++) {
+				if(e.getActionCommand().contentEquals("delete"+i.toString())){
+					System.out.println("delete button " + i.toString());
+					new AdminService().deleteReview(getModel().getReviews().get(i).getRID());
+				}
+			}
+		}
+		else if(e.getActionCommand().contains("approve")){
+			for(Integer i = 0; i < getModel().getCounter(); i ++) {
+				if(e.getActionCommand().contentEquals("approve"+i.toString())){
+					System.out.println("approve button " + i.toString());
+					new AdminService().removeFlagOnReview(getModel().getReviews().get(i).getRID());
+				}
+			}
+		}
+		
 	}
 }

@@ -58,11 +58,6 @@ public class MessageBoardView {
 		controller.setPanel(new JPanel());
 		controller.getPanel().setLayout(null);
 
-		// User name label
-		controller.getModel().setUserName(new JLabel("MessageBoard"));
-		controller.getPanel().add(controller.getModel().getUserName()).setBounds(427, 9, 515, 41);
-		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
-
 		// back button
 		controller.getModel().setBtnBack(new JButton("Back"));
 		controller.getPanel().add(controller.getModel().getBtnBack()).setBounds(10, 11, 106, 41);
@@ -103,7 +98,7 @@ public class MessageBoardView {
 			controller.getModel().setSender(controller.getModel().getUsers()[0]);
 			System.out.println("it was null!");
 		}
-
+		
 		for (int i = 0; i < controller.getModel().getUsers().length; i++) {
 			JButton j = new JButton(controller.getModel().getUsers()[i]);
 			j.setActionCommand("MessageBoard:getMessage");
@@ -152,6 +147,13 @@ public class MessageBoardView {
 		g1.gridy = 0;
 		controller.getModel().getScrollPanePanel().add(controller.getModel().getRight(), g1);
 
+		// User name label
+		controller.getModel().setUserName(new JLabel(controller.getModel().getSender()));
+		controller.getPanel().add(controller.getModel().getUserName()).setBounds(472, 9, 515, 41);
+		controller.getPanel().add(controller.getModel().getUserName()).setFont(new Font("Segoe UI", Font.PLAIN, 25));
+
+		
+		
 		updateMessages(controller, controller.getModel().getSender());
 
 		controller.getModel().getScrollPane().getViewport().add(controller.getModel().getScrollPanePanel(), null);
