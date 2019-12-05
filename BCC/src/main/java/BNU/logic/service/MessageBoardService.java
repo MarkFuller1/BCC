@@ -56,6 +56,8 @@ public class MessageBoardService {
 		}
 
 		Collections.sort(messages, new CustomComparator());
+		
+		messages.remove(SingletonSession.getInstance().getUserName());
 
 		return messages;
 	}
