@@ -21,8 +21,8 @@ public class SmartProxy {
 		boolean isValidated = false;
 		String cleanUN = sanatizeInput(userName);
 		String cleanPW = sanatizeInput(password);
-		System.out.println(cleanUN + " " + cleanPW);
 		isValidated = LoginController.db.validateUser(cleanUN, cleanPW);
+		System.out.println(cleanUN + " " + cleanPW);
 		return isValidated;
 	}
 	

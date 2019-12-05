@@ -31,13 +31,13 @@ public class UserReviewService {
 	//associated with the user to deleted therefore we dont have to 
 	//delete all comments and upvotes associated with this account
 	public void deleteAccount(String user) {
-		UserReviewController.db.deleteUserAccount(user);
+		//UserReviewController.db.deleteUserAccount(user);
 	}
 	
 	// changeReview has two parameters and should fulfill our use case 
 	// of editing a review text which is the new text being passed
 	public void changeReview(String reviewID, String text) {
-		//UserReviewController.db submit reviewID and new text here
+		UserReviewController.db.editReview(reviewID, text);
 	}
 
 }

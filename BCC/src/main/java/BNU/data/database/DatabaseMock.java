@@ -301,7 +301,7 @@ public class DatabaseMock extends AbstractDB {
 		return msgs;
 	}
 
-	public String[] getAllFlaggedImpl() {
+	public String[][] getAllFlaggedImpl() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -460,6 +460,49 @@ public class DatabaseMock extends AbstractDB {
 
 	@Override
 	protected void deleteUserAccountImpl(String userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getNumberOfMessagesForUserImpl(String user) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected boolean isAdminImpl(String userName) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	protected void flagReviewImpl(String reviewId) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void deleteReviewImpl(String reviewId) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void removeFlagOnReviewImpl(String reviewId) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void editReviewImpl(String reviewId, String text) throws DatabaseOperationException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setNewReviewImpl(String userName, String professorName, String className, String content, String tA,
+			String h, String wL) throws DatabaseOperationException {
 		// TODO Auto-generated method stub
 		
 	}
