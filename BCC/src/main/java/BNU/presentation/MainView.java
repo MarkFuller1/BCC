@@ -112,7 +112,7 @@ public class MainView {
 	private static void addImage(JFrame mainFrame, MainController controller) {
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(MainView.class.getClass().getResource("/mainImage.png"));
+			image = ImageIO.read(new File("mainImage.png"));
 		} catch (IOException e) {
 			System.out.println("image not loaded");
 			e.printStackTrace();
