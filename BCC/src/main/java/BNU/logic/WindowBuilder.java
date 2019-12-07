@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import BNU.data.database.AbstractDB;
 import BNU.data.database.DatabaseApi;
 import BNU.data.database.DatabaseMock;
+import BNU.presentation.LoginView;
 
 public class WindowBuilder {
 	
@@ -44,7 +45,7 @@ public class WindowBuilder {
 	}
 	
 	private void addFavicon() throws IOException {
-		 BufferedImage image = ImageIO.read(new File("favicon1.png"));
+		 BufferedImage image = ImageIO.read(WindowBuilder.class.getClass().getResource("/favicon1.png"));
          mainFrame.setIconImage(image);
 	}
 
