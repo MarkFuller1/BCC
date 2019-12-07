@@ -81,12 +81,11 @@ public class LoginView {
 
 		// String songFile = "resources" + File.separator + "DeckTheHalls_wav
 		// (2019_01_14 02_55_16 UTC).AU";
-		//WindowBuilder.deck = LoginView.class.getClass().getResource("/resource/DeckTheHalls_wav (2019_01_14 02_55_16 UTC).AU");
-		//WindowBuilder.deck = new File("DeckTheHalls_wav (2019_01_14 02_55_16 UTC).AU");
+		WindowBuilder.deck = new File("DeckTheHalls_wav (2019_01_14 02_55_16 UTC).AU");
 
 		try {
 			WindowBuilder.clip = AudioSystem.getClip();
-			WindowBuilder.clip.open(AudioSystem.getAudioInputStream(LoginView.class.getClass().getResource("/DeckTheHalls_wav (2019_01_14 02_55_16 UTC).AU")));
+			WindowBuilder.clip.open(AudioSystem.getAudioInputStream(WindowBuilder.deck));
 			WindowBuilder.clip.start();
 
 		} catch (Exception e) {
