@@ -44,7 +44,7 @@ public class WindowBuilder {
 	}
 	
 	private void addFavicon() throws IOException {
-		 BufferedImage image = ImageIO.read(new File("resources" + File.separator + "favicon1.png"));
+		 BufferedImage image = ImageIO.read(new File("favicon1.png"));
          mainFrame.setIconImage(image);
 	}
 
